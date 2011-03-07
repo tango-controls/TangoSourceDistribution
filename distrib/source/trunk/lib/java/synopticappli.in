@@ -1,0 +1,37 @@
+#!@SHELL@
+#---------------------------------------------------------
+#
+#---------------------------------------------------------
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+LIB_DIR=@DATADIR@/java;	    export LIB_DIR
+APP_DIR=@DATADIR@/java;	    export APP_DIR
+
+#--------------------------------------------------------------------------
+#       Set the Class Path for Tango, ATK and Simple Synoptic Appli in ATK
+#--------------------------------------------------------------------------
+
+
+TANGO=$LIB_DIR/TangORB.jar
+
+TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
+ATKPANEL=$APP_DIR/atkpanel.jar
+
+APPLI_PACKAGE=fr.esrf.tangoatk.widget.jdraw;	export APPLI_PACKAGE
+APPLI_MAIN_CLASS=SimpleSynopticAppli; export APPLI_MAIN_CLASS
+
+CLASSPATH=$TACO:$TANGO:$TANGOATK:$ATKPANEL
+export CLASSPATH
+echo "CLASSPATH=$CLASSPATH"
+
+
+#---------------------------------------------------------
+#       Start the synoptic appli process
+#---------------------------------------------------------
+#
+
+@JAVA@ -mx128m -DTANGO_HOST=$TANGO_HOST $APPLI_PACKAGE.$APPLI_MAIN_CLASS $*
+
