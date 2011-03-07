@@ -1,0 +1,50 @@
+#!@SHELL@
+#
+#	This file start the notify daemon
+#	used to manage the TANGO events
+#
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+case `uname -s` in
+SunOS)  KILLALL=pkill
+	;;
+*) KILLALL=killall
+	;;
+esac
+
+
+BIN_DIR=@prefix@/bin
+
+ulimit -s 2048
+
+#------------------------------------------------------------
+# Start notify daemon and then write export info in database
+#------------------------------------------------------------
+NB=`ps -ef |grep notifd| grep -v grep | wc -l`
+export NB
+
+
+if [ $NB = 1 ] 
+then
+	$KILLALL -9 notifd
+fi
+
+
+echo "TANGO_HOST=$TANGO_HOST"
+echo "Starting notifd....."
+$BIN_DIR/notifd -n  -DDeadFilterInterval=300  1>/dev/null 2>/tmp/notifd.err &
+
+
+#---- Sleep a bit before write IOR in database
+sleep 3
+$BIN_DIR/notifd2db
+
+echo "ulimit has been set to:"
+ulimit -s
+
+chmod  777 /tmp/notifd.err
+chmod  777 /tmp/rdichan.ior
+chmod  777 /tmp/rdifact.ior
