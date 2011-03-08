@@ -127,6 +127,14 @@ rm -f lib/cpp/server/ntservice.cpp
 
 rm -f lib/idl/idl2cpp
 
+rm -Rf lib/cpp/log4tango/autom4te.cache
+rm -f lib/cpp/log4tango/log4tango.spec.in
+rm -f lib/cpp/log4tango/make-install.sh
+rm -Rf lib/cpp/log4tango/msvc6
+rm -Rf lib/cpp/log4tango/msvc7
+rm -Rf lib/cpp/log4tango/msvc8
+rm -Rf lib/cpp/log4tango/msvc9
+
 #
 #	utils directories
 #
