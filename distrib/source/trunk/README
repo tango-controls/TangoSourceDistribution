@@ -1,8 +1,8 @@
-		TANGO source code release version 7.2.5 - README
+		TANGO source code release version 7.2.6 - README
 		=================================================
 			Jens Meyer (meyer@esrf.fr) - Emmanuel Taurel (taurel@esrf.fr)
 			-------------------------------------------------------------
-			        15/02/2011
+			        15/03/2011
 
 
 TABLE OF CONTENTS
@@ -29,7 +29,7 @@ toolkit for building object oriented control systems based on CORBA.
 TANGO is a joint effort of the ESRF, ELETTRA, ALBA, DESY and SOLEIL synchrotron 
 radiation sources.
 
-This source code release is based on the latest version of TANGO 7 (7.2.5)
+This source code release is based on the latest version of TANGO 7 (7.2.6)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
@@ -218,7 +218,7 @@ ready to be installed.
 Example:								
         
 		Source code location:   ../..
-        Version:                7.2.5
+        Version:                7.2.6
         Compiler:               /opt/SUNWspro/bin/cc,
 
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.1.4/solaris9_CC
@@ -560,21 +560,23 @@ documentation, news and to download add-on packages.
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
 
-Changed between Tango distribution 7.2.1 and 7.2.5
+Changed between Tango distribution 7.2.1 and 7.2.6
 ---------------------------------------------------
 
-- Updated C++ library to						Release 7.2.5
-- Updated Jive to								Release 4.18
+- Updated C++ library to						Release 7.2.6
+- Updated Jive to								Release 4.19
 - Updated LogViewer	to							Release 1.2.3
-- Updated Pogo to								Release 7.1.0
-- Updated Astor to							    Release 5.4.0
+- Updated Pogo to								Release 7.2.1
+- Updated Astor to							    Release 5.4.1
 - Updated notifd2db to							Release 1.12
-- Updated tango_admin to 						Release 1.6
+- Updated tango_admin to 						Release 1.7
 - Updated DbServer to							Release 4.10
-- Updated TangORB to							Release 7.4.2
+- Updated TangORB to							Release 7.4.3
 - Updated ATK to 								Release 4.2.10
-- Updated Starter to							Release 5.0
+- Updated Starter to							Release 5.2
 - Updated TangoTest to							Release 1.4.5
+- Updated TangoAccessControl to					Release 2.3
+- Updated AccessControl to						Release 2.3
 
 - SourceForge bug 3158150: Architecture issue in configure.in
 - SourceForge bug 3152384: Db Server crash when reading timing attributes

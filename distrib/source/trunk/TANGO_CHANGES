@@ -1,17 +1,23 @@
 TANGO history file
 
-01/2011        *******************************************************
+03/2011        *******************************************************
                *                                                     *
-               *  Tango release 7.2.5 : Changes since version 7.2.1  *
+               *  Tango release 7.2.6 : Changes since version 7.2.1  *
                *                                                     *
                *******************************************************
 
 
-Note: Tango 7.2.2 to 7.2.4 have never been officially released.
+Note: Tango 7.2.2 to 7.2.5 have never been officially released outside ESRF.
 
 - Replace the deprecated gethosybyname() and gethostbyaddr()calls. This allows running Tango on
   OS like Ubuntu 10.10 with the default /etc/hosts file
 - Optimize database call retries number during device server startup sequence.
+- Added a DeviceProxy::get_access_right() method
+- Add a check on empty device name in DeviceProxy ctor methods
+- Add a encoded_format.h file for DevEncoded string definition
+- Reset SIGINT and SIGQUIT to their default behavior during DS startup sequence.
+This is needed in case of Tango class using signals and started as background process by a shell
+script
 
 Bug fixes
 ---------
@@ -22,12 +28,15 @@ Bugs recorded in SourceForge
 - 3118520 : Windows: DS freeze when using event
 - 3119664 : Windows: Stream inserter for DeviceAttribute fails
 - 3122125 : Windows: DS crash at exit
+- 3165232 : TAC and multi TANGO_HOST
+- 3206383 : Double free in DeviceProxy::read_attributes()
 
 Other bugs
 
 - Two bugs related to controlled access on the database device
 - Wrong synchronisation for periodic and archive (periodic part) events with non constant attribute
   reading time
+- TAC and re-connection (all commands allowed after a re-connection!!)
 
 
 11/2010        *******************************************************

@@ -1,4 +1,4 @@
-
+SUBDIRS = AccessControl
 
 dist-hook:
 	cp -R $(top_srcdir)/cppserver/AbstractClass/AccessControl $(distdir); \
