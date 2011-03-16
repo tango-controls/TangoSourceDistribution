@@ -31,7 +31,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@TANGO_DB_SERVER_ENABLED_TRUE@am__append_1 = database AbstractClass \
+@TANGO_DB_SERVER_ENABLED_TRUE@am__append_1 = database \
 @TANGO_DB_SERVER_ENABLED_TRUE@	tangoaccesscontrol
 subdir = cppserver
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -68,8 +68,7 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = starter tangotest database AbstractClass \
-	tangoaccesscontrol
+DIST_SUBDIRS = starter tangotest database tangoaccesscontrol
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@

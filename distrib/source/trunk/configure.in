@@ -433,8 +433,8 @@ AC_OUTPUT(Makefile
 	  cppserver/database/update_db6.sql
 	  cppserver/starter/Makefile
   	  cppserver/tangotest/Makefile
-	  cppserver/tangoaccesscontrol/AbstractClass/Makefile
-	  cppserver/tangoaccesscontrol/AbstractClass/AccessControl/Makefile
+	  cppserver/AbstractClass/Makefile
+	  cppserver/AbstractClass/AccessControl/Makefile
 	  cppserver/tangoaccesscontrol/Makefile
 	  utils/Makefile
 	  utils/notifd2db/Makefile
