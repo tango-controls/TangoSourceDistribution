@@ -13,4 +13,4 @@ dist-hook:
 	   cp $(top_srcdir)/doc/$$file $(distdir)/$$file;       \
 	done; \
 	cp -R $(top_srcdir)/doc/src $(distdir); \
-	rm -rf `find $(distdir) -name CVS`
+	rm -rf `find $(distdir) -name .svn`
