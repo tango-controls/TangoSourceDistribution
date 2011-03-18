@@ -20941,7 +20941,7 @@ ac_config_commands="$ac_config_commands ac_config.h"
 subdirs="$subdirs lib/cpp/log4tango"
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile lib/java/jive lib/java/logviewer lib/java/TangoVers lib/java/astor lib/java/atkpanel lib/java/atktuning lib/java/pogo-6 lib/java/pogo lib/java/cvstag lib/java/tg_devtest lib/java/devicetree lib/java/jdraw lib/java/synopticappli lib/java/atkmoni cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db5.sql cppserver/database/update_db6.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/tangoaccesscontrol/AbstractClass/Makefile cppserver/tangoaccesscontrol/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca scripts/notify_daemon doc/Makefile doc/man/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile lib/java/jive lib/java/logviewer lib/java/TangoVers lib/java/astor lib/java/atkpanel lib/java/atktuning lib/java/pogo-6 lib/java/pogo lib/java/cvstag lib/java/tg_devtest lib/java/devicetree lib/java/jdraw lib/java/synopticappli lib/java/atkmoni cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db5.sql cppserver/database/update_db6.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca scripts/notify_daemon doc/Makefile doc/man/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -22004,8 +22004,8 @@ do
     "cppserver/database/update_db6.sql") CONFIG_FILES="$CONFIG_FILES cppserver/database/update_db6.sql" ;;
     "cppserver/starter/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/starter/Makefile" ;;
     "cppserver/tangotest/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/tangotest/Makefile" ;;
-    "cppserver/tangoaccesscontrol/AbstractClass/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/tangoaccesscontrol/AbstractClass/Makefile" ;;
-    "cppserver/tangoaccesscontrol/AbstractClass/AccessControl/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/tangoaccesscontrol/AbstractClass/AccessControl/Makefile" ;;
+    "cppserver/AbstractClass/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/AbstractClass/Makefile" ;;
+    "cppserver/AbstractClass/AccessControl/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/AbstractClass/AccessControl/Makefile" ;;
     "cppserver/tangoaccesscontrol/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/tangoaccesscontrol/Makefile" ;;
     "utils/Makefile") CONFIG_FILES="$CONFIG_FILES utils/Makefile" ;;
     "utils/notifd2db/Makefile") CONFIG_FILES="$CONFIG_FILES utils/notifd2db/Makefile" ;;
