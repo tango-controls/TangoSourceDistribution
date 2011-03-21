@@ -1,0 +1,685 @@
+		TANGO source code release version 7.2.6 - README
+		=================================================
+			Jens Meyer (meyer@esrf.fr) - Emmanuel Taurel (taurel@esrf.fr)
+			-------------------------------------------------------------
+			        21/03/2011
+
+
+TABLE OF CONTENTS
+-----------------
+
+ 1 - Introduction
+ 2 - What's inside
+ 3 - Prerequisites
+ 4 - Installing
+ 5 - Compiling
+ 6 - Running
+ 7 - Updating from previous Tango releases
+ 8 - Documentation
+ 9 - Remarks
+10 - Questions
+11 - URL
+12 - Changes
+
+
+1 - INTRODUCTION
+----------------
+This is the README for the TANGO source code release. TANGO is a
+toolkit for building object oriented control systems based on CORBA. 
+TANGO is a joint effort of the ESRF, ELETTRA, ALBA, DESY and SOLEIL synchrotron 
+radiation sources.
+
+This source code release is based on the latest version of TANGO 7 (7.2.6)
+and is intended for Unix platforms. A binary version for Windows of TANGO 
+is available. The source code contained in this package 
+runs on Windows but the Makefile don't.
+
+Tango 7 and above is compliant to the 64 bit architecture.
+
+This package is foreseen (and was tested) to run with omniORB4.1.4 and
+Java 1.6
+
+The default Pogo application in this package can generate source code
+for C++. The old Pogo application is also provided to
+generate Java and Python device servers.
+
+The database server delivered with this package do not force the MySQL
+user to be root. You have to use the my.cnf configuration files
+or the MYSQL_USER and MYSQL_PASSWORD environment variables to specify
+the MySQL account to be used by the database server.
+
+The TangoTest device server delivered with this package is an example 
+implementation of all possible Tango data types. 
+The displayed data is animated what creates some CPU load 
+when running the server. Starting an atkpanel (generic Tango client)
+on a device of this server is CPU and memory consuming, because
+all possible data is read and displayed.
+
+In the case of upgrading an alreay running Tango system, please follow
+the instructions in the chapter UPGRADING FROM PREVIOUS TANGO RELEASES.
+
+
+2 - WHAT'S INSIDE
+-----------------
+
+This source code release contains :
+
+(1) Tango C++ library source files and java library and application jar files
+
+(2) The Tango database device server source files (using mysql) and the
+    MySql configuration files.
+
+(3) The Jive application. 
+
+(4) The Astor application and its associated Starter device server source files.
+
+(5) The Pogo application.
+
+(6) The tg_devtest application
+
+(7) A test device server called TangoTest with its source files
+
+(8) The atk graphical toolkit for writing tango applications in java
+
+(9) The atkpanel application as a generic test client
+
+(10 The atktuning application for tuning attributes in a device
+
+(11) The logviewer application for visualising logging messages
+
+(12) The DeviceTree application to display tango device attribute and/or command
+
+(13) The atkmoni application to monitor scalar attribute values in time
+
+(14) The jdraw synoptic editor to create synoptic applications
+
+(15) The synopticAppli to run and test synoptics created with jdraw
+
+(16) The Tango controlled access device server source file (using mysql)
+     It is used if you want to run Tango with its controlled access feature
+
+The Jive application is a Tango database browsing tool written in Java. It also
+allows device testing. Its documentation is at
+
+	http://www.esrf.eu/computing/cs/tango/tango_doc/tools_doc/jive_doc/index.html
+	
+The Astor application is also a Java application. With the help of the Tango
+starter device server, it allows full remote Tango control system administration.
+Its documentation is at :
+
+	http://www.esrf.eu/computing/cs/tango/tango_doc/tools_doc/astor_doc/index.html
+	
+The Pogo application is a graphical Tango device server code generator.
+Its documentation is at :
+
+	http://www.esrf.eu/computing/cs/tango/tango_doc/tools_doc/pogo_doc/index.html
+	
+tg_devtest is a device testing application for device server which do not
+use the database. It is a sub-part of Jive. 
+
+3 - PREREQUISITES
+-----------------
+
+Before compiling and installing TANGO you need to install :
+
+(1) omniORB available from http://sourceforge.net/projects/omniorb 
+    (version >= 4.1 but not 4.1.1. Preferably version 4.1.4).
+	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
+	 device servers.
+
+(2) mysql available from http://mysql.org (version >= 5.0).
+	 Mysql is mandatory to install a Tango database. To compile the delivered 
+	 database server, only the mysql client library libmysqlclient_r is
+	 needed.
+
+(3) omniNotify release 2.1 available from http://omninotify.sourceforge.net/nfy_download.html
+    
+    Remark : omniNotify is an implementation of the CORBA Notification
+             Service. It is not mandatory to run Tango and therefore
+	     it's installation is not checked by the "configure" script.
+	     If you don't install it, it will not be possible to communicate
+	     between client applications and devices using the Tango event
+	     system. Only the synchronous and asynchronous way of communication
+	     will be possible.
+	     
+(4) doxygen available from http://www.doxygen.org
+
+    Remark : doxygen is not mandatory to run Tango. It is just used by our code
+             generator (called Pogo) to automatically generates some part of 
+	     the Tango device server documentation. If you don't install it,
+	     this part of the documenetaion will simply not be generated.
+	     But in all cases, some HTML pages documenting Tango device server
+	     will allways be generated.
+
+Also check the tools you are using
+
+(1) If you are using gcc, you need to have gcc release 3.2.0 or above. You can
+    download gcc from http://gcc/gnu.org
+
+(2) Only java release 1.6.0 or above is supported, you can download java from
+    http://java.sun.com/j2se (See chapter 4, Java sub-chapter).
+	 Java is mandatory to install and run the Tango tools.
+
+
+4 - INSTALLING
+--------------
+
+Once you have installed the packages in prerequisites you can think
+about configuring and compiling TANGO. 
+
+To configure TANGO you need to tell it where to find omniORB and
+mysql (if it is in a non-standard place) and where to install
+TANGO.
+
+The main options for configure are:
+--prefix=PREFIX         install architecture-independent files in PREFIX
+                        [/usr/local]
+--enable-static[=PKGS]
+                        build static libraries [default=no]
+--disable-java          disable installation of Java applications
+--disable-dbserver      disable installation of Tango database server.
+--disable-dbcreate      enable an creation of the Tango database schema
+  
+--with-java             path to java interpreter
+--with-doxygen          path to doxygen utility  
+--with-zlib=DIR         root directory path of zlib installation defaults to
+                        /usr/local or /usr if not found in /usr/local
+--with-omni             prefix to omniORB installation (default: $OMNI_ROOT)
+
+--with-tango-db-name	Name of the database created in mysql (default: tango)
+--with-tango-rc-file	Location/name of the tango rc file (default: /etc/tangorc)
+
+--with-mysqlclient-prefix=PFX
+                        Prefix where mysqlclient is installed
+--with-mysqlclient-include=DIR
+                        Directory pointing to mysqlclient include files
+--with-mysqlclient-lib=LIB
+                        Directory pointing to mysqlclient library (Note:
+                        -include and -lib do override paths found with
+                        -prefix)
+
+--with-mysql-ho         the host of the mysql database (default: <blank>)
+--with-mysql-admin      super user of your mysql database (default: <blank>)
+--with-mysql-admin-passwd
+                        super user password of your mysql database (default:
+                        <blank>)
+								
+The last three options can be replaced with a .my.cnf file in your home 
+directory with the following content:
+
+			[client]
+			user      = [mysql login name]
+            password  = [password]
+			host      = [host name]
+
+At the end of the configure script, a status is displayed indicating pathes
+and versions of found software and the parts of the Tango package which are
+ready to be installed.
+Example:								
+        
+		Source code location:   ../..
+        Version:                7.2.6
+        Compiler:               /opt/SUNWspro/bin/cc,
+
+        OMNIORB PATH:           /segfs/tango/ORB/omniORB4.1.4/solaris9_CC
+        OMNIORB VERSION:        "4.1.4"
+
+        JAVA PATH:              /usr/bin/java
+        JAVA VERSION:           1.5.0_01
+
+        MYSQL CLIENT LIB:       -L/usr/local/mysql/lib/mysql -lmysqlclient_r
+        MYSQL VERSION:          5.0.41
+        MYSQL CONNECTION:       OK
+
+build:
+        libraries:              yes
+        java application:       yes
+        database server:        yes
+        database schema create: yes
+
+
+Hints to configure:
+
+The Tango database server
+-------------------------
+To compile and install the Tango database server, the threadsafe version of
+the mysql client library libmysqlclient_r must be available.
+Use the --with-mysqlclient* options when the library is not found. To disable 
+the compilation and installation of the database server, 
+use --disable-dbserver. 
+
+Create the Tango database
+-------------------------
+To allow the configure script to create the Tango database in
+your MySQL database, make sure that the mysql version is >5.0 and
+the mysqld is running before doing configure.
+Also check that the mysql client (called mysql) is in your path.
+
+If you are not running the configure script on the same host
+where the mysql server is running, use the "--with-mysql-ho" configure
+option or the host entry in the my.cnf file. 
+
+The configure script will try to connect to the
+MySql database. Make sure that privileges are granted to
+the user used by configure running on the host where you
+run configure. 
+
+The configure options "--with-mysql-admin" and "--with-mysql-admin-passwd"
+allow you to select which MySql user configure will use.
+You can also use the user and password entries of the my.cnf file
+to set-up your connection to mysql.
+
+To disable any access to mysql use the --disable-dbcreate option.
+
+Database server, mysql and libz
+-------------------------------
+Depending on how MySql has been installed, the Tango database
+server may need the compress/uncompress library (called "libz").
+By default, configure try to find this compress/uncompress stuff.
+If you don't need it, use the configure "--without-zlib".								  
+
+Java applications
+-----------------
+Tango arrives with many Java applications. Each java applications has
+its own script (in $prefix/bin) where the CLASSPATH is set before 
+starting the java interpreter. These scripts will be modified by the
+configure script to set a correct path to the java interpreter found in
+your PATH when configure was run. You can also use the "--with-java=xxx"
+to define a path to the java interpreter.
+
+It is not mandatory to find the java interpreter in your PATH. You can use 
+the "--disable-java" configure option to build Tango. 
+When java was not found, disabled, or found with un unsufficient version, 
+the installation of the java applications is disabled.
+
+doxygen
+-------
+Doxygen is a documentation generator from C++ source files. It is used by the
+Tango code generator (called Pogo) to generate Tango device server documentation.
+The script used to start Pogo will be modified bt the configure script to set
+a correct path to the doxygen command found in your PATH when configure was
+run. You can also used the "--with-doxygen=xxx" to define a path to the
+doxygen command.
+It is not mandatory to find the doxygen command in your PATH or to use the
+"--with-doxygen" configure option to build and run Tango. This will only prevent
+some part of Tango device server documentation to be generated by Pogo.
+
+
+You can type "configure --help" to get a print of all the options
+supported by the configure script.
+
+Here is an example of running configure for TANGO telling it where
+to install (--prefix) TANGO and where omniORB is installed:
+
+cd $directory_where_tango_has_been_installed
+mkdir build
+cd build
+export CC=gcc
+export CXX=g++
+../configure --prefix=/home/tango/release/install_dir_linux \
+	--with-omni=/segfs/tango/ORB/omniORB4.1.4/ubuntu904
+
+Here is an example running configure on Solaris telling it where
+to install TANGO, where omniORB is installed and where mysql is
+installed :
+
+cd $directory_where_tango_has_been_installed
+mkdir build
+cd build
+export CC=/opt/SUNWspro/bin/cc
+export CXX=/opt/SUNWspro/bin/CC
+./configure --prefix=/users/tango/release/install_dir_sol \
+	--with-omni=/segfs/tango/ORB/omniORB4.1.4/solaris10_CC \
+	--with-mysqlclient-include=/segfs/tango/database/solaris10/include/mysql \
+	--with-mysqlclient-lib=/segfs/tango/database/solaris10/lib/mysql
+	
+During the configure procedure the access to mysql is tested. Please prepare
+your my.cnf (mysql configuration file) or use the configure options
+               --with-mysql-admin
+               --with-mysql-admin-passwd
+               --with-mysql-ho
+to specify the access to the mysql database.
+	
+
+5 - COMPILING
+-------------
+
+Once configure has run successfully you can compile and install the
+executables, include files, libraries and scripts. Do this by typing :
+
+make all
+
+make install
+
+
+6 - RUNNING
+-----------
+
+To test wether the TANGO build worked do the following :
+
+(1) start the database on port 10000 by typing :
+
+    TANGO_INSTALL_DIR/bin/DataBaseds 2 -ORBendPoint giop:tcp::10000
+    
+	 Specify the mysql account to be used by the database server.
+	 Two possibilities are available:
+	 	- set the following environment variables to the account and 
+		  password to be used
+    
+			MYSQL_USER to specify the mysql login name
+			MYSQL_PASSWORD to specify the password
+			  
+		- configure the mysql client with the mysql configuration 
+		  file my.cnf
+		  		
+			[client]
+			user      = [mysql login name]
+            password  = [password]
+
+(2) Configure the TANGO_HOST environment variable with the hostname the
+    database server is running on and the port number used.
+
+    setenv TANGO_HOST hostname:10000
+
+(3) start the test device server tangoTest :
+
+    TANGO_INSTALL_DIR/bin/TangoTest test
+
+(4) start jive by typing for example :
+
+    TANGO_INSTALL_DIR/bin/jive
+    
+    (See chapter 4 java sub-chapter to check the jive script) 
+
+(5) test your device using the test device in jive
+
+(6) write new device servers using pogo :
+
+    TANGO_INSTALL_DIR/bin/pogo
+
+    (See chapter 4 java sub-chapter to check the pogo script) 
+
+
+7 - UPDATING FROM PREVIOUS TANGO RELEASES
+-----------------------------------------
+
+WARNINGS:
+
+To update the Tango database, the distribution provides some scripts.
+The "make install" command will create these database related scripts in
+<install_dir>/share/tango/db ONLY if the mysql database connection test
+done at configure time is successfull ("database schema create" reported
+as yes at the end of the configure script execution)
+
+
+7-1 - UPDATING FROM A TANGO 7.1 DATABASE
+--------------------------------------
+
+Tango 7.2 is provided with a small update of the data in the database. This is simply a new
+release of the stored procedure. It has been reported that with some MySQL release,
+the stored procedure does not work correctly. This update is provided to
+solve this problem.
+
+To update your database, follow these instructions:
+
+a - Stop your control system and your database server(s)
+
+b - Backup your database (Recommended, not mandatory)
+
+c - Cd to the <install_dir>/share/tango/db directory
+
+d - Run the update script:
+	./update_db.sh
+	
+e - Restart your database server(s)
+
+
+7-2 - UPDATING FROM A TANGO 6 DATABASE
+--------------------------------------
+
+Tango 7 needs a very small update of the data in the database. This is simply some new
+commands definition for the Tango control access.
+
+To update your database, follow these instructions:
+
+a - Stop your control system and your database server(s)
+
+b - Backup your database (Recommended, not mandatory)
+
+c - Cd to the <install_dir>/share/tango/db directory
+
+d - Run the update script:
+	mysql -u[user] -p[password] < ./update_db6.sql
+	
+e - Restart your database server(s)
+
+7-3 - UPDATING FROM A TANGO 5 DATABASE
+--------------------------------------
+
+Tango 7 needs an updated database schema to run the database server
+with full performance.
+
+To check if you are using the updated database schema, please follow the instructions:
+
+Launch the mysql client
+	mysql -u[user] -p[password]
+
+Run the command to display tables in the "tango" database
+    mysql> use tango;
+	mysql> show tables;
+
+If you are already using Tango 6.1 schema, you should see the following tables
+
++--------------------------------+
+| Tables_in_tango                |
++--------------------------------+
+| ....................           |
+| class_attribute_history_id     |
+| class_history_id               |
+| device                         |
+| device_attribute_history_id    |
+| device_history_id              |
+| event                          |
+| history_ids                    |
+| object_history_id              |
+| .................              |
++--------------------------------+
+
+with 5 <xxx>_history_id tables.
+If you don't have these tables, you have to update your database schema.
+
+To update your database schema, follow these instructions:
+
+a - Stop your control system and your database server(s)
+
+b - Backup your database (Recommended, not mandatory)
+
+c - Cd to the <install_dir>/share/tango/db directory
+
+d - Run the update script:
+	mysql -u[user] -p[password] < ./update_db5.sql
+	
+e - Restart your database server(s)
+
+
+8 - DOCUMENTATION
+-----------------
+
+Don't forget to READ THE MANUAL (in doc/tango.pdf) !
+
+9 - REMARKS
+-----------
+
+TANGO 7.0:
+Tango 7.0 is a major release. Recompiling a device server with Tango 7.0 
+means recompiling ALL classes of the device server. You need to work with
+coherent include files.
+
+TANGO 6.1:
+The database server in this package uses stored procedures. To make it reliably 
+work the MySQL version must be >5.0.
+To exploit the full performance of the new database server, on an already 
+installed Tango system, the the chapter UPDATING FROM PREVIOUS TANGO RELEASES.
+
+TANGO 6.0:
+Tango 6.0 is a major release, because it uses omniORB 4.1 which is
+a major release of omniORB. The code generated from the with the IDL
+compiler is not compatible with the code gernerated with omniORB 4.0.x!
+To avoid any confusion with new and old libraries we decided to
+make also a major Tango release.
+
+Recompiling a device server with Tango 6.0 and omniORB 4.1 means 
+recompiling ALL classes of the device server. You need to work with
+coherent include files.
+
+TANGO 5.5.2:
+The new database server keeps by default a history of the last 10 changes
+for every property value. To configure another history depth, the property
+"historyDepth" of the database device can be used. 
+See the README.txt file in share/tango/db for more information.
+With Jive it is possible to view the history of a property value or to 
+restore an old value. Go to Tools menu and choose "Database history".
+To view property values, the wildcard * can be used.
+
+
+10 - QUESTIONS
+--------------
+
+You will definitely have some ! Send questions to tango@esrf.fr.
+
+11 - URL
+--------
+
+Visit the TANGO website http://www.tango-controls.org for online 
+documentation, news and to download add-on packages.
+
+
+12 - CHANGES
+------------
+
+See the file TANGO_CHANGES to get an overview of all modification
+between the different Tango library versions.
+
+Changed between Tango distribution 7.2.1 and 7.2.6
+---------------------------------------------------
+
+- Updated C++ library to						Release 7.2.6
+- Updated Jive to								Release 4.19
+- Updated LogViewer	to							Release 1.2.3
+- Updated Pogo to								Release 7.2.1
+- Updated Astor to							    Release 5.4.1
+- Updated notifd2db to							Release 1.12
+- Updated tango_admin to 						Release 1.7
+- Updated DbServer to							Release 4.12
+- Updated TangORB to							Release 7.4.3
+- Updated ATK to 								Release 4.2.10
+- Updated Starter to							Release 5.2
+- Updated TangoTest to							Release 1.4.5
+- Updated TangoAccessControl to					Release 2.4
+- Updated AccessControl to						Release 2.4
+
+- SourceForge bug 3158150: Architecture issue in configure.in
+- SourceForge bug 3152384: Db Server crash when reading timing attributes
+- SourceForge bug 3138228: A new parameter in tango_admin when pinging database
+- SourceForge bug 3137921: Pogo 7 does not create some output arguments
+- SourceForge bug 3129852: Fix SQL script to update a Tango database from release 6 to 7.2
+
+- Update crate_db_tables.sql script to support MySQL >= 5.1 CREATE TABLE sql statement
+- Implement a retry to MySQl connection in DB server. Needed for binary install
+
+Changes between Tango distribution 7.2.0 and 7.2.1
+--------------------------------------------------
+
+- Updated C++ library 							Release 7.2.1
+
+- Fix SourceForge bugs number 3092110 and 3092764
+- Split lib/cpp/server/jpeg directory in order to optimize compilation options
+
+Changes between Tango distribution 7.1.1 and 7.2.0
+--------------------------------------------------
+
+- Added tango_admin								Release 1.0
+- Updated database device server				Release 4.8
+- Updated TangoAccessControl device server		Release 1.5
+- Updated TangoTest to 							Release 1.4.4
+- Updated ATKCore and ATKWidget to				Release 4.2.3
+- Updated atkpanel to							Release 4.3
+- Updated Jive to								Release 4.12
+- Updated Pogo									Release 7.0
+- Updated Astor to								Release 5.2.9
+- Updated TangORB to							Release 7.3.5
+- Updated Jdraw to 								Release 1.13
+- Updated Starter to							Release 4.14
+
+- Fix SourceForge bugs number 3000308 - 3000310 - 3000329
+- After installation, the doc and man folders are now under the "share" folder
+- A new doc/src folder added in the source package. This folder contains all the
+necessary files (lyx format) to generate the Tango bible (tango.pdf).
+If lyx is installed on your computer, to re-generate the bible, go to doc/src
+and type " lyx -e pdf tango.lyx"
+- Pogo release 6 and 7 are available in this release. If you want to start
+pogo release 6, simply use the pogo-6 script available in the bin directory after
+the install
+- After installation, all Pogo code generation related files are in a pogo directory
+- Java jar files are now in <install_dir>/share/java
+- Include files are now in <install_dir>/include/tango
+
+
+Changes between Tango distribution 7.0.2 and 7.1.1
+--------------------------------------------------
+
+- Updated database device server				Release 4.5
+- Updated TangoAccessControl device server		Release 1.4
+- Updated ATKCore and ATKWidget to				Release 4.0.6
+- Updated atkpanel to							Release 4.2
+- Updated Jive to								Release 4.0
+- Updated Pogo									Release 6.2.0
+- Updated Astor to								Release 5.2.3
+- Updated TangORB to							release 7.1.0
+
+- A new option --with-tango-rc-file allowing the user to select the Tango rc file location has been
+added to the configure script
+- The value passed to the configure script option --with-tango-db-name is now also taken into account
+by the database server and the controlled access server
+- Man pages for binaries have been added
+- omniORB detection done using pkg-config
+- Pictures used in the Tango pdf documentation has been changed in order to clarify their licences
+- In case TANGO_HOST is not defined as a variable environment, scripts to start the provided tools use the rc file if defined
+
+- Fix bug in MySQL detection
+- Fix bug in case doxygen is not available on the host where the installation is performed
+
+
+Changes between Tango distribution 6.1.1.b and 7.0.2
+----------------------------------------------------
+
+- Added the Tango controlled access server		Release 1.3
+- Updated Notifd2db.cpp file					Release 1.7
+- Updated database device server				Release 4.3
+- Updated starter device server					Release 4.8
+- Updated TangoTest device server				Release 1.3
+- Updated Astor to								Release 5.2
+- Updated ATKCore and ATKWidget to				Release 4.0.2
+- Updated Jive									Release	3.21
+- Updated Pogo									Release 6.0.0
+- Updated TangoORB								Release 7.0.2
+- Updated atkpanel to							Release 4.1
+Added a tango_wca script to start/stop a Tango control system when used with its controlled access
+
+Changes between Tango distribution 6.1.1.a and 6.1.1.b
+------------------------------------------------------
+
+- Updated ATKPanel to release 3.5
+- Added the log4j jar file (used by LogViewer and Java device server)
+
+Changes between Tango distribution 6.1.1 and 6.1.1.a
+----------------------------------------------------
+
+- Notifd2db.cpp file updated to release 1.6
+- Fix bug in the database update script in the history ids tables update
+- Add TangORB.jar file to the CLASSPATH in the jdraw script file
+- Updated TangoORB.jar file to release 6.0.2
+- Added the tool_panels jar file
+- Update TangoTest device server (slower data refresh frequency)
+
+
