@@ -2,7 +2,7 @@
 		=================================================
 			Jens Meyer (meyer@esrf.fr) - Emmanuel Taurel (taurel@esrf.fr)
 			-------------------------------------------------------------
-			        15/03/2011
+			        21/03/2011
 
 
 TABLE OF CONTENTS
@@ -575,8 +575,8 @@ Changed between Tango distribution 7.2.1 and 7.2.6
 - Updated ATK to 								Release 4.2.10
 - Updated Starter to							Release 5.2
 - Updated TangoTest to							Release 1.4.5
-- Updated TangoAccessControl to					Release 2.3
-- Updated AccessControl to						Release 2.3
+- Updated TangoAccessControl to					Release 2.4
+- Updated AccessControl to						Release 2.4
 
 - SourceForge bug 3158150: Architecture issue in configure.in
 - SourceForge bug 3152384: Db Server crash when reading timing attributes
