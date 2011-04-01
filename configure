@@ -20890,7 +20890,13 @@ esac
 JPEG_MMX_LIB_CXXFLAGS="-D_TANGO_LIB"
 case $host_cpu in
 	*86 )
+	case $build_os in
+     linux*)
 	JPEG_MMX_LIB_CXXFLAGS="$JPEG_MMX_LIB_CXXFLAGS -mmmx -DJPG_USE_ASM"
+	;;
+	darwin*)
+	JPEG_MMX_LIB_CXXFLAGS="$JPEG_MMX_LIB_CXXFLAGS"
+	esac
 	;;
 	powerpc )
 	JPEG_MMX_LIB_CXXFLAGS="-D_TANGO_LIB"
