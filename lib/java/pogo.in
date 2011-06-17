@@ -40,7 +40,7 @@ CPP_DOC=@DOXYGEN@
 #---------------------------------------------------------
 #	Set the template path
 #---------------------------------------------------------
-TEMPLATES=@DATADIR@/pogo/templates
+TEMPLATES=@prefix@/share/pogo/templates
 export TEMPLATES
 
 #---------------------------------------------------------
@@ -52,8 +52,8 @@ export SRC_PATH
 #---------------------------------------------------------
 #	Set the Class Path for Tango and pogo usage
 #---------------------------------------------------------
-APP_DIR=@DATADIR@/java;			export APP_DIR
-PREF_DIR=@DATADIR@/pogo/preferences;   export PREF_DIR
+APP_DIR=@prefix@/share/java;			export APP_DIR
+PREF_DIR=@prefix@/share/pogo/preferences;   export PREF_DIR
 
 POGO_CLASS=$APP_DIR/org.tango.pogo.jar;		export POGO_CLASS
 

@@ -9,7 +9,7 @@ fi
 #---------------------------------------------------------
 #       Set the Class Path for Tango and AtkPanel usage
 #---------------------------------------------------------
-LIB_DIR=@DATADIR@/java;   export LIB_DIR
+LIB_DIR=@prefix@/share/java;   export LIB_DIR
 
 
 TANGO=$LIB_DIR/TangORB.jar

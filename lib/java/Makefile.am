@@ -30,8 +30,48 @@ bin_SCRIPTS = \
    jdraw \
    synopticappli \
    atkmoni \
+   tg_devtest \
+   TangoVers \
    cvstag
 
+edit = sed \
+		-e 's|@SHELL[@]|$(SHELL)|g' \
+		-e 's|@TANGO_RC_FILE[@]|$(TANGO_RC_FILE)|g' \
+		-e 's|@JAVA[@]|$(JAVA)|g' \
+		-e 's|@DOXYGEN[@]|$(DOXYGEN)|g' \
+		-e 's|@prefix[@]|$(prefix)|g'
+     
+#astor jive pogo pogo-6 devicetree atkpanel logviewer atktuning jdraw synopticappli atkmoni cvstag TangoVers tg_devtest: Makefile
+$(bin_SCRIPTS): Makefile
+	rm -f $@ $@.tmp
+	srcdir=''; \
+	test -f ./$@.in || srcdir=$(srcdir)/; \
+	$(edit) $${srcdir}$@.in >$@.tmp
+     
+	chmod +x $@.tmp
+	chmod a-w $@.tmp
+	mv $@.tmp $@
+
+
+astor: $(srcdir)/astor.in
+jive: $(srcdir)/jive.in
+pogo: $(srcdir)/pogo.in
+pogo-6: $(srcdir)/pogo-6.in
+devicetree: $(srcdir)/devicetree.in
+atkpanel: $(srcdir)/atkpanel.in
+logviewer: $(srcdir)/logviewer.in
+atktuning: $(srcdir)/atktuning.in
+jdraw: $(srcdir)/jdraw.in
+synopticappli: $(srcdir)/synopticappli.in
+atkmoni: $(srcdir)/atkmoni.in
+cvstag: $(srcdir)/cvstag.in
+TangoVers: $(srcdir)/TangoVers.in
+tg_devtest: $(srcdir)/tg_devtest.in
+
+distclean-local: distclean-local-check
+.PHONY: distclean-local-check
+distclean-local-check:
+	-rm -rf $(bin_SCRIPTS)
 endif
 
 # Make sure that all these go into the dist.
@@ -47,7 +87,9 @@ EXTRA_DIST = \
    jdraw.in \
    synopticappli.in \
    atkmoni.in \
-   cvstag.in
+   cvstag.in \
+   tg_devtest.in \
+   TangoVers.in
 
 
 # Even though we do not want to compile anything in the

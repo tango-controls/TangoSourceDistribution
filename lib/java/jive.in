@@ -8,8 +8,8 @@ fi
 #
 # Define the CLASSPATH
 #
-JAVALIB=@DATADIR@/java;
-JAVABIN=@DATADIR@/java;
+JAVALIB=@prefix@/share/java;
+JAVABIN=@prefix@/share/java;
 
 ATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar:$JAVABIN/atkpanel.jar
 LOGVIEWER=$JAVALIB/LogViewer.jar

@@ -41,8 +41,8 @@ fi
 #	Set the Class Path for Tango and Asor usage
 #---------------------------------------------------------
 
-LIB_DIR=@DATADIR@/java;	    		export LIB_DIR
-APP_DIR=@DATADIR@/java;	    		export APP_DIR
+LIB_DIR=@prefix@/share/java;	    export LIB_DIR
+APP_DIR=@prefix@/share/java;	    export APP_DIR
 
 TANGO_CLASS=$LIB_DIR/TangORB.jar;   export TANGO_CLASS
 

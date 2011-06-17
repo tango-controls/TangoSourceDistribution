@@ -2,7 +2,7 @@
 #
 #	Set the Class Path
 #
-LIB_DIR=@DATADIR@/java;	 export LIB_DIR
+LIB_DIR=@prefix@/share/java;	 export LIB_DIR
 CLASSPATH=$LIB_DIR/TangORB.jar
 export CLASSPATH
 #

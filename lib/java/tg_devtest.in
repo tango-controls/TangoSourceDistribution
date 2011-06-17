@@ -4,7 +4,7 @@ if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
    . @TANGO_RC_FILE@
 fi
 
-JAVALIB=@DATADIR@/java;
+JAVALIB=@prefix@/share/java;
 
 TANGOATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar
 
