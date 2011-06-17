@@ -1,8 +1,8 @@
-		TANGO source code release version 7.2.6 - README
+		TANGO source code release version 7.2.6a - README
 		=================================================
 			Jens Meyer (meyer@esrf.fr) - Emmanuel Taurel (taurel@esrf.fr)
 			-------------------------------------------------------------
-			        21/03/2011
+			        17/06/2011
 
 
 TABLE OF CONTENTS
@@ -560,7 +560,12 @@ documentation, news and to download add-on packages.
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
 
-Changed between Tango distribution 7.2.1 and 7.2.6
+Changes between Tango distribution 7.2.1 and 7.2.6a
+---------------------------------------------------
+
+- SourceForge bug 3312284: Could not start jive, astor,...
+
+Changes between Tango distribution 7.2.1 and 7.2.6
 ---------------------------------------------------
 
 - Updated C++ library to						Release 7.2.6

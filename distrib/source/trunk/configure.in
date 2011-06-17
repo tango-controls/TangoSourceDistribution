@@ -413,20 +413,6 @@ AC_OUTPUT(Makefile
 	  lib/cpp/client/Makefile
 	  lib/cpp/client/helpers/Makefile
 	  lib/java/Makefile
-      lib/java/jive
-      lib/java/logviewer
-      lib/java/TangoVers
-      lib/java/astor
-      lib/java/atkpanel
-      lib/java/atktuning
-      lib/java/pogo-6
-      lib/java/pogo
-      lib/java/cvstag
-      lib/java/tg_devtest
-      lib/java/devicetree
-      lib/java/jdraw
-      lib/java/synopticappli
-      lib/java/atkmoni
 	  cppserver/Makefile
 	  cppserver/database/Makefile
 	  cppserver/database/create_db.sql	
