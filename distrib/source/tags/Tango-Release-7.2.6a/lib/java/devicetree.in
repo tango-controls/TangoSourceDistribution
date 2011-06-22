@@ -1,0 +1,13 @@
+#!@SHELL@
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+JAVALIB=@prefix@/share/java;
+JAVABIN=@prefix@/share/java;
+CLASSPATH=$JAVALIB/TangORB.jar:$JAVALIB/ATKWidget.jar:$JAVALIB/ATKCore.jar:$JAVABIN/Jive.jar:$JAVABIN/atkpanel.jar:$JAVABIN/DeviceTree.jar
+export CLASSPATH
+
+echo  Running Device Tree...
+@JAVA@ -DTANGO_HOST=$TANGO_HOST explorer.Main $@

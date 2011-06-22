@@ -1,0 +1,27 @@
+#!@SHELL@
+#
+TANGO_HOME=@prefix@;		export TANGO_HOME
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+#---------------------------------------------------------
+#       Set the Class Path for Tango and AtkPanel usage
+#---------------------------------------------------------
+LIB_DIR=@prefix@/share/java;   export LIB_DIR
+
+
+TANGO=$LIB_DIR/TangORB.jar
+TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
+ATKPANEL=$LIB_DIR/AtkTuning.jar
+
+CLASSPATH=$ATKPANEL:$TANGOATK:$TANGO
+export CLASSPATH
+
+
+#---------------------------------------------------------
+#	Start the atktuning process
+#---------------------------------------------------------
+
+@JAVA@ -DTANGO_HOST=$TANGO_HOST atktuning.MainPanel $*

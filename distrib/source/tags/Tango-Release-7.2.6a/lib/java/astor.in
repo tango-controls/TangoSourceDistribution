@@ -1,0 +1,67 @@
+#!@SHELL@
+#---------------------------------------------------------
+#	
+#---------------------------------------------------------
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+#---------------------------------------------------------
+#	Check $DISPLAY variable
+#---------------------------------------------------------
+if [ $DISPLAY ]
+then
+	echo "Display is $DISPLAY"
+else
+	echo ""
+	echo "DISPLAY environment variable is not defined !"
+	echo "Please, enter your DISPLAY name."
+	read answer
+	if [ $answer ]
+	then
+#		get the end of string to know if ":0" has been set
+		start=`expr $answer : '.*:' \| $answer`
+		echo "$start "
+		if [ $start = $answer ]
+		then
+			DISPLAY=$answer:0
+		else
+			DISPLAY=$answer
+		fi
+		export DISPLAY
+		echo "Starting astor on $DISPLAY"
+	else
+		echo "DISPLAY is not defined ! Astor cannot start !"
+		exit
+	fi
+fi
+
+#---------------------------------------------------------
+#	Set the Class Path for Tango and Asor usage
+#---------------------------------------------------------
+
+LIB_DIR=@prefix@/share/java;	    export LIB_DIR
+APP_DIR=@prefix@/share/java;	    export APP_DIR
+
+TANGO_CLASS=$LIB_DIR/TangORB.jar;   export TANGO_CLASS
+
+ASTOR_CLASS=$LIB_DIR/Astor.jar;     export ASTOR_CLASS
+JIVE_CLASS=$LIB_DIR/Jive.jar;       export JIVE_CLASS
+LOGVIEWER=$LIB_DIR/LogViewer.jar;   export LOGVIEWER
+LOG4J=$LIB_DIR/log4j.jar;			export LOG4J
+
+ATK_CLASS=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
+ATK_CLASS=$ATK_CLASS:$APP_DIR/atkpanel.jar:$APP_DIR/tool_panels.jar
+export ATK_CLASS
+
+CLASSPATH=$TANGO_CLASS:$ASTOR_CLASS:$JIVE_CLASS:$ATK_CLASS:$LOGVIEWER:$LOG4J
+export CLASSPATH
+
+#---------------------------------------------------------
+#	Start the Astor process
+#---------------------------------------------------------
+#
+
+@JAVA@ -mx128m -DTANGO_HOST=$TANGO_HOST admin.astor.Astor $*
+

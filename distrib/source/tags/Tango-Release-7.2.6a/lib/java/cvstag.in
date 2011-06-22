@@ -1,0 +1,23 @@
+#!@SHELL@
+
+#
+# Define the CLASSPATH
+#
+JAVALIB=@prefix@/share/java;
+JAVABIN=@prefix@/share/java;
+
+#---------------------------------------------------------
+#	Set the Class Path for Tango and pogo usage
+#---------------------------------------------------------
+APP_DIR=@prefix@/share/java;	export APP_DIR
+
+TANGO_CLASS=$APP_DIR/TangORB.jar;	export TANGO_CLASS
+POGO_CLASS=$APP_DIR/Pogo.jar;			export POGO_CLASS
+
+CLASSPATH=$POGO_CLASS:$TANGO_CLASS;    export CLASSPATH
+
+#---------------------------------------------------------
+#	Execute java class
+#---------------------------------------------------------
+
+@JAVA@  pogo.make_util.TagModule $@
