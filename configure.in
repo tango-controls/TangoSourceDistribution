@@ -20,7 +20,7 @@ dnl AC_INIT initializes autoconf, The first argument is the
 dnl packagename, the second is the version used for the tar file,
 dnl the third is an email address for bug reports (shouldn't be necessary),
 dnl and the fourth argument is                
-AC_INIT(Tango,7.2.6,tango@esrf.fr,tango)
+AC_INIT(Tango,8.0.0,tango@esrf.fr,tango)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -62,7 +62,7 @@ dnl      library implements.  In other words, the library implements all the
 dnl      interface numbers in the range from number `CURRENT - AGE' to
 dnl      `CURRENT'.
 
-VERSION_INFO=9:6:2
+VERSION_INFO=8:0:0
 	
 dnl Checks for programs.
 AC_PROG_CXX      dnl check for a c++ compiler

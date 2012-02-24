@@ -1,5 +1,118 @@
 TANGO history file
 
+03/2012        *******************************************************
+               *                                                     *
+               *  Tango release 8.0.0 : Changes since version 7.2.6  *
+               *                                                     *
+               *******************************************************
+
+Tango 8 has been developped and tested using:
+
+- omniORB 4.1.6
+- zmq 3.1
+- log4tango 4.0.5
+
+Changes between Log4tango 4.0.3 and Log4Tango 4.0.5
+---------------------------------------------------
+
+- SourceForge bug 3156197
+- Fix warnings when Tango is compiled -Wall -Wextra
+- Add Windows port for Windows 64 bits VC10
+
+Changes in Tango itself
+-----------------------
+
+- New event system based on ZMQ
+- New methods to manage polling in DeviceImpl class (is_attribute_polled()/is_command_polled,
+get_attribute_poll_period()/get_command_poll_period(), poll_attribute()/poll_command(),
+stop_poll_attribute()/stop_poll_command())
+- DevEncoded data type supported for commands
+- New Attribute class setter/getter methods for min_alarm, max_alarm, min_warning and max_warning attribute properties
+- Cleaner way to reset kernel attribute properties to lib/user default value
+- Add some C++11 features when compiler support them (Lambda functions - unique_ptr for extension classes -
+Move contructor and assignement for DeviceData and DeviceAttribute classes)
+This requires a new compilation option (-std=c++0x)
+- The DeviceProxy and DeviceAttribute classes copy constructor and assignement operator now really copy the data
+- Add device log messages when any device attribute(s) quality factor changes
+(ATTR_INVALID -> error stream, ATTR_CHANGING -> info stream, ATTR_VALID -> info stream
+ATTR_ALARM: min/max alarm -> error stream, min/max warning + rds -> warning stream)
+- Add a clean_db parameter to the DeviceImpl::remove_attribute() method. Default is true
+- New DeviceProxy::get_access_right() method
+- New Util::is_svr_starting() and Util::is_svr_shutting_down() methods
+- New DeviceClass::get_cmd_by_name() method
+- New DServer::_create_cpp_class() method (For PyTango)
+- Remove warnings compilation (Tango is now compiled with -Wall and -Wextra)
+- Add Group::command_inout(), Group::command_inout_asynch(), Group::write_attribute() and Group::write_attribute_asynch()
+with vector<DeviceData> to carry the data.
+- Improvements in event management for notifd events (link to bug 3293671)
+- For writable and memorized attribute(s), check coherency of new min/max_value with memorized value when the
+attribute configuration is modified.
+- State computation for device with alarmed attributes: If the attribute is polled, the attribute value is
+read from the polling buffer (also true when reading the state as a CORBA attribute)
+- Add pre-processor define for Tango release number management (TANGO_VERSION_MAJOR, TANGO_VERSION_MINOR
+and TANGO_VERSION_PATCH)
+- Host IP address(es) is(are) now retrieved from network interface(s)
+- Add a check during set_attribute_config() call for users trying to change hard coded properties
+- Optimization in DeviceProxy methods to get asynchronous call replies when caller uses a timeout in case the
+reply is already there
+- Remove some "cerr" messages in AttributeProxy class
+- Uil::get_host_name() always returns host name in lower case letters
+- The caller PID is now reported in black-box also when UNIX socket is used as transport
+- write_attribute() called during device server startup sequence due to memorized attribute(s) is reported 
+in black box with a specific message
+- It's now possible to poll command/attribute in a device server started without database for command/attributes
+with polling defined in code
+- Add a polling thread tuning after the execution of UpdObjPollingPeriod command
+- Remove all Solaris specific code
+- Remove all old stream specific code
+- Signals SIGUSR1 and SIGUSR2 can now be used within a device server process
+- Optimize database calls during device server startup and shutdown sequence (When TAC is used or when
+dynamic attributes are used)
+- Added Database class copy constructor and assignment operator
+- Tango is now compiled with Debian hardenning flags on.
+
+
+Bug fixes
+---------
+
+Bug recorded in sourceForge:
+
+- 3129849 : TANGO_HOST case sensitive for some event usage
+- 3151801 : Missing some attribute properties in UserDefaultAttrProp class
+- 3165120 : Yet another type in doc
+- 3206916 : Another type in doc
+- 3213730 : Device server add wrong ',0' in attribute abs_change property
+- 3259442 : Macos compilation on x86
+- 3267364 : Typo in documentation
+- 3277453 : Database class and Tango Access Control
+- 3280851 : Wrong state computation
+- 3285370 : Printing operator for DeviceData class
+- 3285372 : Wrong lock removal of last locked device from a locking thread (Windows specific)
+- 3285674 : NaN in write_attribute() call
+- 3313211 : Polling threads pool management
+- 3399975 : ULong data type and memorized writable attribute
+- 3400550 : State computation with alrmed attributes
+- 3413944 : Memorized attribute written at init
+- 3460080 : Device server crash during event reconnection (event between devices within the same DS)
+- 3468928 : Does not compile with gcc 3.3
+- 3480524 : Write attribute (SCALAR) when throwing exception
+
+Other bugs
+
+- When user pushes event, pushes first event when it is inited (when the event detection is done by the lib)
+- In case of consecutive signal installations and removals.
+- Bug in error message and in inserters in DbDatum class for unsigned char data type
+- Bug when updating database due to one attribute configuration change
+- Bug when using the WAttribute::set_min_value() methods family: The attribute was not flagged as attribute
+with minimun value defined
+- Doc: Fix bug in Database::get_device_attribute_property() method usage example
+- Bug in WAttribute::set_min_value() and Wattribute::set_max_value() methods for unsigned char data type.
+The data was stored in database as ascii characters
+- Device server crashes when you kill it if there are some long running actions when the signal is received.
+- It's now possible to define in code that state and status has to be polled
+
+
+
 03/2011        *******************************************************
                *                                                     *
                *  Tango release 7.2.6 : Changes since version 7.2.1  *
