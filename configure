@@ -770,6 +770,8 @@ TANGO_RC_FILE
 ALLOCA
 DARWIN_ENABLED_FALSE
 DARWIN_ENABLED_TRUE
+LIBZMQ_LIBS
+LIBZMQ_CFLAGS
 HAVE_ORB_IDL
 ORB_COSNAMING_LIB
 IDL_TIE_CPP_SUFFIX
@@ -933,17 +935,18 @@ ac_user_opts='
 enable_option_checking
 enable_maintainer_mode
 enable_dependency_tracking
-enable_static
 enable_java
 with_java
 with_doxygen
 enable_shared
+enable_static
 with_pic
 enable_fast_install
 with_gnu_ld
 enable_libtool_lock
 with_zlib
 with_omni
+with_zmq
 enable_dbserver
 with_tango_rc_file
 with_tango_db_name
@@ -974,7 +977,9 @@ PKG_CONFIG_LIBDIR
 omniORB4_CFLAGS
 omniORB4_LIBS
 omniCOS4_CFLAGS
-omniCOS4_LIBS'
+omniCOS4_LIBS
+LIBZMQ_CFLAGS
+LIBZMQ_LIBS'
 ac_subdirs_all='lib/cpp/log4tango'
 
 # Initialize some variables set by options.
@@ -1599,9 +1604,9 @@ Optional Features:
 			  (and sometimes confusing) to the casual installer
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
-  --enable-static[=PKGS]  build static libraries [default=no]
   --enable-java           enable installation of Java applications
   --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
   --enable-fast-install[=PKGS]
                           optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
@@ -1619,6 +1624,7 @@ Optional Packages:
   --with-zlib=DIR         root directory path of zlib installation defaults to
                           /usr/local or /usr if not found in /usr/local
   --with-omni             prefix to omniORB installation (default: $OMNI_ROOT)
+  --with-zmq              prefix to ZMQ installation
   --with-tango-rc-file    location of the tango rc file (default /etc/tangorc)
   --with-tango-db-name    the name of the tango database (default tango)
   --with-mysqlclient-prefix=PFX
@@ -1660,6 +1666,9 @@ Some influential environment variables:
               C compiler flags for omniCOS4, overriding pkg-config
   omniCOS4_LIBS
               linker flags for omniCOS4, overriding pkg-config
+  LIBZMQ_CFLAGS
+              C compiler flags for LIBZMQ, overriding pkg-config
+  LIBZMQ_LIBS linker flags for LIBZMQ, overriding pkg-config
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -2741,6 +2750,8 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 
 
+# Tells autoconf that we want at least version 2.53 of autoconf to
+# create configure from configure.in
 
 
 
@@ -2838,8 +2849,12 @@ case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
 
 
 
+# Lets the revision tag from cvs or rcs propagate into the
+# configure script, handy for debugging.
 
 
+# AM_INIT_AUTOMAKE sets up automake which is used to generate
+# Makefile.in from Makefile.am
 am__api_version='1.11'
 
 # Find a good install program.  We prefer a C program (faster),
@@ -3319,15 +3334,33 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
+# Tells automake to use `ac_config.h.tmp' to stash all the #defines
+# that result from a run of configure.
+# The name is .tmp since I must change the PACKAGE_ definitions because
+# of omniORBS installation of their version of this file.
 ac_config_headers="$ac_config_headers ac_config.h.tmp"
 
 
 
+# -version-info CURRENT[:REVISION[:AGE]]
+# From the libtool documentation (info libtool)
+# So, libtool library versions are described by three integers:
 
+# CURRENT
+#      The most recent interface number that this library implements.
 
+# REVISION
+#      The implementation number of the CURRENT interface.
 
+# AGE
+#      The difference between the newest and oldest interfaces that this
+#      library implements.  In other words, the library implements all the
+#      interface numbers in the range from number `CURRENT - AGE' to
+#      `CURRENT'.
 
 VERSION_INFO=8:0:0
+
+# Checks for programs.
 
 ac_ext=cpp
 ac_cpp='$CXXCPP $CPPFLAGS'
@@ -4024,7 +4057,8 @@ else
   am__fastdepCXX_FALSE=
 fi
 
-      ac_ext=cpp
+
+ac_ext=cpp
 ac_cpp='$CXXCPP $CPPFLAGS'
 ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
@@ -4156,7 +4190,8 @@ ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
-   ac_ext=c
+
+ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
@@ -4959,7 +4994,8 @@ ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
-	 for ac_prog in gawk mawk nawk awk
+
+for ac_prog in gawk mawk nawk awk
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -5000,7 +5036,9 @@ fi
 
   test -n "$AWK" && break
 done
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether ln -s works" >&5
+
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether ln -s works" >&5
 $as_echo_n "checking whether ln -s works... " >&6; }
 LN_S=$as_ln_s
 if test "$LN_S" = "ln -s"; then
@@ -5010,7 +5048,8 @@ else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no, using $LN_S" >&5
 $as_echo "no, using $LN_S" >&6; }
 fi
-     { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether ${MAKE-make} sets \$(MAKE)" >&5
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether ${MAKE-make} sets \$(MAKE)" >&5
 $as_echo_n "checking whether ${MAKE-make} sets \$(MAKE)... " >&6; }
 set x ${MAKE-make}
 ac_make=`$as_echo "$2" | sed 's/+/p/g; s/[^a-zA-Z0-9_]/_/g'`
@@ -5042,97 +5081,10 @@ $as_echo "no" >&6; }
 fi
 
 
+# Check gcc release
 
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Worckshop C++ compiler" >&5
-$as_echo_n "checking whether using Sun Worckshop C++ compiler... " >&6; }
-if test "${rssh_cv_check_sunpro_cc+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-
- ac_ext=cpp
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
- cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-int
-main ()
-{
-#ifndef __SUNPRO_CC
-# include "error: this is not Sun Workshop."
-#endif
-
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_cxx_try_compile "$LINENO"; then :
-  rssh_cv_check_sunpro_cc=yes
-else
-  rssh_cv_check_sunpro_cc=no
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-ac_ext=c
-ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_c_compiler_gnu
-
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $rssh_cv_check_sunpro_cc" >&5
-$as_echo "$rssh_cv_check_sunpro_cc" >&6; }
-if test ${rssh_cv_check_sunpro_cc} = yes
-then
-
-  :
-else
-
-  :
-fi
-
-if test "x$rssh_cv_check_sunpro_cc" = "xyes"; then
-   AR="$CXX -xar"
-   AR_FLAGS="-o"
-   LD="$CXX -pta -G"
-	# Check whether --enable-static was given.
-if test "${enable_static+set}" = set; then :
-  enableval=$enable_static; p=${PACKAGE-default}
-    case $enableval in
-    yes) enable_static=yes ;;
-    no) enable_static=no ;;
-    *)
-     enable_static=no
-      # Look at the argument we got.  We use all the common list separators.
-      lt_save_ifs="$IFS"; IFS="${IFS}$PATH_SEPARATOR,"
-      for pkg in $enableval; do
-	IFS="$lt_save_ifs"
-	if test "X$pkg" = "X$p"; then
-	  enable_static=yes
-	fi
-      done
-      IFS="$lt_save_ifs"
-      ;;
-    esac
-else
-  enable_static=no
-fi
-
-
-
-
-
-
-
-
-
-
-else
- 	if test "$CXX" = "c++" -o "$CXX" = "g++"
- 	then
+ if test "$CXX" = "c++" -o "$CXX" = "g++"
+ then
 
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for grep that handles long lines and -e" >&5
@@ -5308,13 +5260,12 @@ _ACEOF
 
 	  fi
 
-     	if test "x$ac_cv_gcc_version_3_2_0" = "xno"; then
-         	as_fn_error -1 "Not supported gcc release. Should be 3.2.0 or above. Please update !" "$LINENO" 5
-     	fi
- 	fi
-fi
+     if test "x$ac_cv_gcc_version_3_2_0" = "xno"; then
+         as_fn_error -1 "Not supported gcc release. Should be 3.2.0 or above. Please update !" "$LINENO" 5
+     fi
+ fi
 
-
+# Check if Java interpreter is there
 
 # Check whether --enable-java was given.
 if test "${enable_java+set}" = set; then :
@@ -5425,6 +5376,9 @@ else
    with_java=
 fi
 
+# Define a conditional variable to enable or disable installation
+# of java applications. The variable is used in the Makefiles.
+#
 
  if test x"$enable_java" != x"no"; then
   TANGO_JAVA_ENABLED_TRUE=
@@ -5436,6 +5390,7 @@ fi
 
 
 
+# Check if doxygen is there
 
 
 # Check whether --with-doxygen was given.
@@ -5490,6 +5445,7 @@ if test -z "$DOXYGEN"; then
 fi
 
 
+# Use libtool which facilitates the creation of shared libraries
 case `pwd` in
   *\ * | *\	*)
     { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Libtool does not cope well with whitespace in \`pwd\`" >&5
@@ -5969,13 +5925,13 @@ if test "${lt_cv_nm_interface+set}" = set; then :
 else
   lt_cv_nm_interface="BSD nm"
   echo "int some_variable = 0;" > conftest.$ac_ext
-  (eval echo "\"\$as_me:5972: $ac_compile\"" >&5)
+  (eval echo "\"\$as_me:5928: $ac_compile\"" >&5)
   (eval "$ac_compile" 2>conftest.err)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:5975: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
+  (eval echo "\"\$as_me:5931: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
   (eval "$NM \"conftest.$ac_objext\"" 2>conftest.err > conftest.out)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:5978: output\"" >&5)
+  (eval echo "\"\$as_me:5934: output\"" >&5)
   cat conftest.out >&5
   if $GREP 'External.*some_variable' conftest.out > /dev/null; then
     lt_cv_nm_interface="MS dumpbin"
@@ -7169,7 +7125,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 7172 "configure"' > conftest.$ac_ext
+  echo '#line 7128 "configure"' > conftest.$ac_ext
   if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -8586,6 +8542,7 @@ fi
 
 
 
+
 # Set options
 
 
@@ -8619,6 +8576,36 @@ else
   enable_shared=yes
 fi
 
+
+
+
+
+
+
+
+
+  # Check whether --enable-static was given.
+if test "${enable_static+set}" = set; then :
+  enableval=$enable_static; p=${PACKAGE-default}
+    case $enableval in
+    yes) enable_static=yes ;;
+    no) enable_static=no ;;
+    *)
+     enable_static=no
+      # Look at the argument we got.  We use all the common list separators.
+      lt_save_ifs="$IFS"; IFS="${IFS}$PATH_SEPARATOR,"
+      for pkg in $enableval; do
+	IFS="$lt_save_ifs"
+	if test "X$pkg" = "X$p"; then
+	  enable_static=yes
+	fi
+      done
+      IFS="$lt_save_ifs"
+      ;;
+    esac
+else
+  enable_static=yes
+fi
 
 
 
@@ -9056,11 +9043,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9059: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9046: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9063: \$? = $ac_status" >&5
+   echo "$as_me:9050: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9395,11 +9382,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9398: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9385: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9402: \$? = $ac_status" >&5
+   echo "$as_me:9389: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9500,11 +9487,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9503: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9490: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:9507: \$? = $ac_status" >&5
+   echo "$as_me:9494: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -9555,11 +9542,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9558: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9545: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:9562: \$? = $ac_status" >&5
+   echo "$as_me:9549: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -11939,7 +11926,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11942 "configure"
+#line 11929 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -12035,7 +12022,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 12038 "configure"
+#line 12025 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -13991,11 +13978,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:13994: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:13981: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:13998: \$? = $ac_status" >&5
+   echo "$as_me:13985: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -14090,11 +14077,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14093: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14080: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14097: \$? = $ac_status" >&5
+   echo "$as_me:14084: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -14142,11 +14129,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14145: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14132: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14149: \$? = $ac_status" >&5
+   echo "$as_me:14136: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -15110,7 +15097,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-
+# check for the presence of zlib
 #
 # Handle user hints
 #
@@ -15243,6 +15230,59 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 fi
 
 
+
+# This macro checks for omniorb and sets various defines, please
+# consult config/RSSH_CHECK_OMNIORB for more details
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Worckshop C++ compiler" >&5
+$as_echo_n "checking whether using Sun Worckshop C++ compiler... " >&6; }
+if test "${rssh_cv_check_sunpro_cc+set}" = set; then :
+  $as_echo_n "(cached) " >&6
+else
+
+ ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+#ifndef __SUNPRO_CC
+# include "error: this is not Sun Workshop."
+#endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  rssh_cv_check_sunpro_cc=yes
+else
+  rssh_cv_check_sunpro_cc=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $rssh_cv_check_sunpro_cc" >&5
+$as_echo "$rssh_cv_check_sunpro_cc" >&6; }
+if test ${rssh_cv_check_sunpro_cc} = yes
+then
+
+  :
+else
+
+  :
+fi
 
 
 
@@ -15475,6 +15515,10 @@ $as_echo "no" >&6; }
 		PKG_CONFIG=""
 	fi
 fi
+
+
+
+
 
 
 
@@ -16238,17 +16282,96 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 enable_lib=yes
 
+# ZMQ dependency
 
 
+# Check whether --with-zmq was given.
+if test "${with_zmq+set}" = set; then :
+  withval=$with_zmq; \
+            ZMQ_PREFIX=${with_zmq}
+else
+  ZMQ_PREFIX=/usr/local
+fi
+
+
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:${ZMQ_PREFIX}/lib/pkgconfig
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBZMQ" >&5
+$as_echo_n "checking for LIBZMQ... " >&6; }
+
+if test -n "$LIBZMQ_CFLAGS"; then
+    pkg_cv_LIBZMQ_CFLAGS="$LIBZMQ_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libzmq >= 3.1.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libzmq >= 3.1.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_LIBZMQ_CFLAGS=`$PKG_CONFIG --cflags "libzmq >= 3.1.0" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$LIBZMQ_LIBS"; then
+    pkg_cv_LIBZMQ_LIBS="$LIBZMQ_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libzmq >= 3.1.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libzmq >= 3.1.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_LIBZMQ_LIBS=`$PKG_CONFIG --libs "libzmq >= 3.1.0" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        LIBZMQ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "libzmq >= 3.1.0" 2>&1`
+        else
+	        LIBZMQ_PKG_ERRORS=`$PKG_CONFIG --print-errors "libzmq >= 3.1.0" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$LIBZMQ_PKG_ERRORS" >&5
+
+	as_fn_error $? "Missing ZMQ library - Use --with-zmq configure option or add directory containing libzmq.pc to PKG_CONFIG_PATH environment variable" "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	as_fn_error $? "Missing ZMQ library - Use --with-zmq configure option or add directory containing libzmq.pc to PKG_CONFIG_PATH environment variable" "$LINENO" 5
+else
+	LIBZMQ_CFLAGS=$pkg_cv_LIBZMQ_CFLAGS
+	LIBZMQ_LIBS=$pkg_cv_LIBZMQ_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+ZMQ_VERSION=`eval pkg-config --modversion libzmq`
+ZMQ_ROOT=`eval pkg-config --variable=prefix libzmq`
+
+# We need to define some stuff for threads and stubs
 
 case $build_os in
-     solaris*)
-
-$as_echo "#define _POSIX_PTHREAD_SEMANTICS 1" >>confdefs.h
-
-	CXXFLAGS="$CXXFLAGS -D_POSIX_PTHREAD_SEMANTICS"
-	;;
-     linux*)
+    linux*)
 
 $as_echo "#define _REENTRANT 1" >>confdefs.h
 
@@ -16262,6 +16385,7 @@ $as_echo "#define _REENTRANT 1" >>confdefs.h
 	DARWIN=yes
 esac
 
+# condition used in the Makefile of the Tango library
  if test x"$DARWIN" = x"yes" ; then
   DARWIN_ENABLED_TRUE=
   DARWIN_ENABLED_FALSE='#'
@@ -16272,9 +16396,11 @@ fi
 
 
 
+# we want to include the omniORB stubs into the tango library
 CXXFLAGS="$CXXFLAGS -DOMNI_UNLOADABLE_STUBS"
 
 
+# checks for libdl
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for dlopen in -ldl" >&5
 $as_echo_n "checking for dlopen in -ldl... " >&6; }
 if test "${ac_cv_lib_dl_dlopen+set}" = set; then :
@@ -16320,6 +16446,7 @@ _ACEOF
 
 fi
 
+# checks for libnsl
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for svc_pollfd in -lnsl" >&5
 $as_echo_n "checking for svc_pollfd in -lnsl... " >&6; }
 if test "${ac_cv_lib_nsl_svc_pollfd+set}" = set; then :
@@ -16365,6 +16492,7 @@ _ACEOF
 
 fi
 
+# checks for libposix4
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for nanosleep in -lposix4" >&5
 $as_echo_n "checking for nanosleep in -lposix4... " >&6; }
 if test "${ac_cv_lib_posix4_nanosleep+set}" = set; then :
@@ -16410,6 +16538,7 @@ _ACEOF
 
 fi
 
+# checks for  libpthread
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread_create in -lpthread" >&5
 $as_echo_n "checking for pthread_create in -lpthread... " >&6; }
 if test "${ac_cv_lib_pthread_pthread_create+set}" = set; then :
@@ -16455,6 +16584,7 @@ _ACEOF
 
 fi
 
+# checks for libsocket
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for getprotobyname in -lsocket" >&5
 $as_echo_n "checking for getprotobyname in -lsocket... " >&6; }
 if test "${ac_cv_lib_socket_getprotobyname+set}" = set; then :
@@ -16501,6 +16631,7 @@ _ACEOF
 fi
 
 
+# Checks for header files.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ANSI C header files" >&5
 $as_echo_n "checking for ANSI C header files... " >&6; }
 if test "${ac_cv_header_stdc+set}" = set; then :
@@ -16627,6 +16758,7 @@ fi
 done
 
 
+# Some hack for testing if we have sstream or not.
 use_sstream=yes;
 
 if test "x$GCC" = "xyes"; then
@@ -16731,6 +16863,7 @@ $as_echo "#define HAVE_SSTREAM /**/" >>confdefs.h
 fi
 
 fi
+# This needs to be worked on!!
 
 if test "x$use_sstream" = "xno"; then
 
@@ -16755,6 +16888,7 @@ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 fi
+# Checks for typedefs, structures, and compiler characteristics.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for an ANSI C-conforming const" >&5
 $as_echo_n "checking for an ANSI C-conforming const... " >&6; }
 if test "${ac_cv_c_const+set}" = set; then :
@@ -16970,6 +17104,7 @@ $as_echo "#define TM_IN_SYS_TIME 1" >>confdefs.h
 fi
 
 
+# Checks for library functions.
 # The Ultrix 4.2 mips builtin alloca declared by alloca.h only works
 # for constant arguments.  Useless!
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working alloca.h" >&5
@@ -17309,6 +17444,9 @@ $as_echo "#define HAVE_CLASS_STRSTREAM 1" >>confdefs.h
   fi
 
 
+# check for the presence of the mysql program, needed when doing the
+# install of the DataBaseds server. You can tweak the connection
+# with some --with variables. ./configure --help will, uhm, help you.
 
 # Check whether --enable-dbserver was given.
 if test "${enable_dbserver+set}" = set; then :
@@ -17334,6 +17472,8 @@ _ACEOF
 
 
 
+# Hacks to provide the name for the tango
+# database. I havent found any other way to provide these arguments.
 
 # Check whether --with-tango-db-name was given.
 if test "${with_tango_db_name+set}" = set; then :
@@ -17343,12 +17483,14 @@ else
 fi
 
 
+# Here we define these constants so that they're reachable from c programs
 
 cat >>confdefs.h <<_ACEOF
 #define TANGO_DB_NAME "$TANGO_DB_NAME"
 _ACEOF
 
 
+# Here we propagate the constants into the makefiles.
 
 
 
@@ -17356,6 +17498,8 @@ _ACEOF
 if test "x$enable_dbserver" = "xyes"; then :
 
 
+	# We need libmysqlclient to compile
+	# finds it for us. Abort if no mysqlclientlibs are found
 
 
 
@@ -17598,6 +17742,7 @@ $as_echo "$as_me: WARNING: Not supported mysql release. Should be 5.0.x or above
 	fi
 
 
+	# check for a database schema update
 
 	if test "x$enable_db_schema_create" = "xyes"; then :
 
@@ -17743,13 +17888,24 @@ fi
 
 fi
 
-
+#
+# Build the jpeg library compilation option
+#
 
 JPEG_LIB_CXXFLAGS=-D_TANGO_LIB
 case $host_cpu in
 	*86 )
 	JPEG_LIB_CXXFLAGS="$JPEG_LIB_CXXFLAGS -DJPG_USE_ASM"
 	;;
+#	case $host_cpu in
+#		*64 )
+#		if test $enable_shared = no; then
+#			JPEG_LIB_CXXFLAGS="$JPEG_LIB_CXXFLAGS -D_64BITS"
+#		else
+#			JPEG_LIB_CXXFLAGS="-D_TANGO_LIB -D_64BITS"
+#		fi
+#		;;
+#	esac
 	* )
 	JPEG_LIB_CXXFLAGS="-D_TANGO_LIB -D_64BITS"
     ;;
@@ -17766,6 +17922,15 @@ case $host_cpu in
 	JPEG_MMX_LIB_CXXFLAGS="$JPEG_MMX_LIB_CXXFLAGS"
 	esac
 	;;
+#	case $host_cpu in
+#		*64 )
+#		if test $enable_shared = no; then
+#			JPEG_MMX_LIB_CXXFLAGS="$JPEG_MMX_LIB_CXXFLAGS -D_64BITS"
+#		else
+#			JPEG_MMX_LIB_CXXFLAGS="-D_TANGO_LIB -mmmx -D_64BITS"
+#		fi
+#		;;
+#	esac
 	powerpc )
 	JPEG_MMX_LIB_CXXFLAGS="-D_TANGO_LIB"
 	;;
@@ -17777,6 +17942,10 @@ esac
 
 
 
+# Define a conditional variables to enable or disable installation
+# of the database server and the database schema creation.
+# The variables are used in the Makefiles.
+#
 
  if test x"$enable_dbserver" = x"yes"; then
   TANGO_DB_SERVER_ENABLED_TRUE=
@@ -17807,14 +17976,17 @@ DATADIR=`eval echo $DATADIR`
 
 
 
+# This is a hack to change PACKAGE_ #defines into TANGO_PACKAGE
 ac_config_commands="$ac_config_commands ac_config.h"
 
 
+# configure log4tango sub-package
 
 
 subdirs="$subdirs lib/cpp/log4tango"
 
 
+# All the Makefiles to be generated.
 ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db5.sql cppserver/database/update_db6.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca scripts/notify_daemon doc/Makefile doc/man/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
 
 cat >confcache <<\_ACEOF
@@ -18562,10 +18734,10 @@ AMDEP_TRUE="$AMDEP_TRUE" ac_aux_dir="$ac_aux_dir"
 sed_quote_subst='$sed_quote_subst'
 double_quote_subst='$double_quote_subst'
 delay_variable_subst='$delay_variable_subst'
-enable_static='`$ECHO "X$enable_static" | $Xsed -e "$delay_single_quote_subst"`'
 macro_version='`$ECHO "X$macro_version" | $Xsed -e "$delay_single_quote_subst"`'
 macro_revision='`$ECHO "X$macro_revision" | $Xsed -e "$delay_single_quote_subst"`'
 enable_shared='`$ECHO "X$enable_shared" | $Xsed -e "$delay_single_quote_subst"`'
+enable_static='`$ECHO "X$enable_static" | $Xsed -e "$delay_single_quote_subst"`'
 pic_mode='`$ECHO "X$pic_mode" | $Xsed -e "$delay_single_quote_subst"`'
 enable_fast_install='`$ECHO "X$enable_fast_install" | $Xsed -e "$delay_single_quote_subst"`'
 host_alias='`$ECHO "X$host_alias" | $Xsed -e "$delay_single_quote_subst"`'
@@ -19697,15 +19869,15 @@ available_tags="CXX "
 
 # ### BEGIN LIBTOOL CONFIG
 
-# Whether or not to build static libraries.
-build_old_libs=$enable_static
-
 # Which release of libtool.m4 was used?
 macro_version=$macro_version
 macro_revision=$macro_revision
 
 # Whether or not to build shared libraries.
 build_libtool_libs=$enable_shared
+
+# Whether or not to build static libraries.
+build_old_libs=$enable_static
 
 # What type of objects to build.
 pic_mode=$pic_mode
@@ -20642,6 +20814,9 @@ Configuration ($PACKAGE):
 	OMNIORB PATH:           ${OMNI_ROOT}
 	OMNIORB VERSION:        ${OMNI_VERSION}
 
+	ZMQ PATH:               ${ZMQ_ROOT}
+	ZMQ VERSION:            ${ZMQ_VERSION}
+
 	JAVA PATH:              ${with_java}
 	JAVA VERSION:           ${JAVA_VERSION}
 
@@ -20669,6 +20844,9 @@ Configuration ($PACKAGE):
 
 	OMNIORB PATH:           ${OMNI_ROOT}
 	OMNIORB VERSION:        ${OMNI_VERSION}
+
+	ZMQ PATH:               ${ZMQ_ROOT}
+	ZMQ VERSION:            ${ZMQ_VERSION}
 
 	JAVA PATH:              ${with_java}
 	JAVA VERSION:           ${JAVA_VERSION}

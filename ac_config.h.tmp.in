@@ -197,9 +197,6 @@
 /* Version number of package */
 #undef VERSION
 
-/* "Needed for threads on solaris" */
-#undef _POSIX_PTHREAD_SEMANTICS
-
 /* "Needed for threads on darwin" */
 #undef _REENTRANT
 
