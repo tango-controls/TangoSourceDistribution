@@ -7,10 +7,10 @@ dnl@author (C) Ruslan Shevchenko <Ruslan@Shevchenko.Kiev.UA>, 1999, 2000
 dnl@id $Id: RSSH_CHECK_OMNIORB.m4,v 1.20 2002/01/16 16:33:28 yad Exp $
 dnl
 AC_DEFUN([RSSH_CHECK_OMNIORB],[
-AC_REQUIRE([AC_PROG_CC])dnl
-AC_REQUIRE([AC_PROG_CXX])dnl
-AC_REQUIRE([AC_PROG_CPP])dnl
-AC_REQUIRE([AC_PROG_CXXCPP])dnl
+AC_REQUIRE([AC_PROG_CC])
+AC_REQUIRE([AC_PROG_CXX])
+AC_REQUIRE([AC_PROG_CPP])
+AC_REQUIRE([AC_PROG_CXXCPP])
 
 
 AC_ARG_WITH(omni, AC_HELP_STRING([--with-omni],[prefix to omniORB installation (default: $OMNI_ROOT)]) ,\
