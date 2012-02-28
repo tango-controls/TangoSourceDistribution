@@ -54,6 +54,9 @@
 /* Define to 1 if we have gcc 3.2.0 */
 #undef HAVE_GCC_VERSION_3_2_0
 
+/* Define to 1 if we have gcc 4.3.0 */
+#undef HAVE_GCC_VERSION_4_3_0
+
 /* Define to 1 if you have the `gethostname' function. */
 #undef HAVE_GETHOSTNAME
 
