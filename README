@@ -127,20 +127,14 @@ Before compiling and installing TANGO you need to install :
 	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
-(2) mysql available from http://mysql.org (version >= 5.0).
+(2) zmq available from http://www.zeromq.org (version >= 3.1).
+	 Zmq is mandatory to build the Tango libraries and the delivered Tango 
+	 device servers.
+
+(3) mysql available from http://mysql.org (version >= 5.0).
 	 Mysql is mandatory to install a Tango database. To compile the delivered 
 	 database server, only the mysql client library libmysqlclient_r is
 	 needed.
-
-(3) omniNotify release 2.1 available from http://omninotify.sourceforge.net/nfy_download.html
-    
-    Remark : omniNotify is an implementation of the CORBA Notification
-             Service. It is not mandatory to run Tango and therefore
-	     it's installation is not checked by the "configure" script.
-	     If you don't install it, it will not be possible to communicate
-	     between client applications and devices using the Tango event
-	     system. Only the synchronous and asynchronous way of communication
-	     will be possible.
 	     
 (4) doxygen available from http://www.doxygen.org
 
@@ -179,12 +173,14 @@ The main options for configure are:
 --disable-java          disable installation of Java applications
 --disable-dbserver      disable installation of Tango database server.
 --disable-dbcreate      enable an creation of the Tango database schema
+--disable-jpegmmx		disable jpeg mmx optimization
   
 --with-java             path to java interpreter
 --with-doxygen          path to doxygen utility  
 --with-zlib=DIR         root directory path of zlib installation defaults to
                         /usr/local or /usr if not found in /usr/local
 --with-omni             prefix to omniORB installation (default: $OMNI_ROOT)
+--with-zmq				prefix to ZMQLIB installation
 
 --with-tango-db-name	Name of the database created in mysql (default: tango)
 --with-tango-rc-file	Location/name of the tango rc file (default: /etc/tangorc)
@@ -224,6 +220,9 @@ Example:
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.1.4/ubuntu1010
         OMNIORB VERSION:        "4.1.6"
 
+        ZMQ PATH:               /segfs/tango/transport/zmq/ubuntu1010
+        ZMQ VERSION:            3.1.0
+
         JAVA PATH:              /usr/bin/java
         JAVA VERSION:           1.6.0_20
 
@@ -234,6 +233,7 @@ Example:
 build:
         libraries:              yes
         java application:       yes
+		access control server:	yes
         database server:        yes
         database schema create: yes
 
@@ -309,7 +309,7 @@ You can type "configure --help" to get a print of all the options
 supported by the configure script.
 
 Here is an example of running configure for TANGO telling it where
-to install (--prefix) TANGO and where omniORB is installed:
+to install (--prefix) TANGO and where omniORB and ZMQ are installed:
 
 cd $directory_where_tango_has_been_installed
 mkdir build
@@ -317,7 +317,8 @@ cd build
 export CC=gcc
 export CXX=g++
 ../configure --prefix=/home/tango/release/install_dir_linux \
-	--with-omni=/segfs/tango/ORB/omniORB4.1.6/ubuntu904
+	--with-omni=/segfs/tango/ORB/omniORB4.1.6/ubuntu1010 \
+    --with-zmq=/segfs/tango/transport/zmq/ubuntu1010
 
 	
 During the configure procedure the access to mysql is tested. Please prepare
@@ -477,15 +478,6 @@ Recompiling a device server with Tango 6.0 and omniORB 4.1 means
 recompiling ALL classes of the device server. You need to work with
 coherent include files.
 
-TANGO 5.5.2:
-The new database server keeps by default a history of the last 10 changes
-for every property value. To configure another history depth, the property
-"historyDepth" of the database device can be used. 
-See the README.txt file in share/tango/db for more information.
-With Jive it is possible to view the history of a property value or to 
-restore an old value. Go to Tools menu and choose "Database history".
-To view property values, the wildcard * can be used.
-
 
 10 - QUESTIONS
 --------------
@@ -524,7 +516,10 @@ Changes between Tango distribution 7.2.6a and 8.0.0
 - Updated TangoAccessControl to					Release 
 - Updated AccessControl to						Release 
 
+- SourceForge bug 3308848: Fix build on kfreebsd system
+- SourceForge bug 3383197: Jpeg mmx option to configure
 - SourceForge bug 3409434: Memory leaks in Database server
+
 
 - Add 2 db commands (DbImportEvent and DbGetDeviceAlias) in allowed command list (For TAC)
 - The database server and TAC server supports a MYSQL_HOST environment variable
