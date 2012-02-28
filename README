@@ -401,13 +401,12 @@ done at configure time is successfull ("database schema create" reported
 as yes at the end of the configure script execution)
 
 
-7-1 - UPDATING FROM A TANGO 7.1 DATABASE
+7-1 - UPDATING FROM A TANGO 7.2 DATABASE
 --------------------------------------
 
-Tango 7.2 is provided with a small update of the data in the database. This is simply a new
-release of the stored procedure. It has been reported that with some MySQL release,
-the stored procedure does not work correctly. This update is provided to
-solve this problem.
+Tango 8.0 is provided with a small update of the data in the database. This is simply a new
+release of the stored procedure and two new commands in the list of allowed commands for the
+Database class (for Tango Access Control system).
 
 To update your database, follow these instructions:
 
@@ -426,8 +425,8 @@ e - Restart your database server(s)
 7-2 - UPDATING FROM A TANGO 6 DATABASE
 --------------------------------------
 
-Tango 7 needs a very small update of the data in the database. This is simply some new
-commands definition for the Tango control access.
+Tango 8 needs an update of the data in the database. This is simply some new
+commands definition for the Tango control access and a new stored procedure release.
 
 To update your database, follow these instructions:
 
