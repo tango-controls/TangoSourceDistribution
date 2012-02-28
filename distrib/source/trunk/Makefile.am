@@ -2,8 +2,7 @@
 
 # The subdirs variable tells automake which subdirs should be
 # traversed on a make.
-#SUBDIRS = lib utils cppserver scripts doc
-SUBDIRS = lib utils cppserver
+SUBDIRS = lib utils cppserver scripts doc
 
 if TANGO_JAVA_ENABLED
 SUBDIRS += pogo
