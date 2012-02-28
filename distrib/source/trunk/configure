@@ -20852,7 +20852,7 @@ Configuration ($PACKAGE):
 build:
 	libraries:              ${enable_lib}
 	java application:       ${enable_java}
-	access control server	${enable_dbserver}
+	access control server:	${enable_dbserver}
 	database server:        ${enable_dbserver}
 	database schema create: ${enable_db_schema_create}
 
@@ -20883,7 +20883,7 @@ Configuration ($PACKAGE):
 build:
 	libraries:              ${enable_lib}
 	java application:       ${enable_java}
-	access control server	${enable_dbserver}
+	access control server:	${enable_dbserver}
 	database server:        ${enable_dbserver}
 	database schema create: ${enable_db_schema_create}
 

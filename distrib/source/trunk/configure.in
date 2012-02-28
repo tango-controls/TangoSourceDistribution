@@ -372,7 +372,7 @@ AC_OUTPUT(Makefile
 	  cppserver/database/stored_proc.sql
 	  cppserver/database/create_db_tables.sql
 	  cppserver/database/update_db.sh
-	  cppserver/database/update_db5.sql
+	  cppserver/database/update_db.sql
 	  cppserver/database/update_db6.sql
 	  cppserver/starter/Makefile
   	  cppserver/tangotest/Makefile
