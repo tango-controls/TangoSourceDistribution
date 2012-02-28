@@ -82,6 +82,12 @@ AC_PROG_MAKE_SET
      if test "x$ac_cv_gcc_version_3_2_0" = "xno"; then
          AC_MSG_ERROR([Not supported gcc release. Should be 3.2.0 or above. Please update !],-1)
      fi
+     gcc_AC_HAVE_GCC_VERSION(4,3,0)
+     if test "x$ac_cv_gcc_version_4_3_0" = "xyes"; then
+		CPP_ELEVEN="-std=c++0x"
+	 else
+		CPP_ELEVEN=""
+	 fi
  fi
 
 # Check if Java interpreter is there
@@ -347,6 +353,7 @@ esac
 
 AC_SUBST(JPEG_LIB_CXXFLAGS)
 AC_SUBST(JPEG_MMX_LIB_CXXFLAGS)
+AC_SUBST(CPP_ELEVEN)
 
 # Define a conditional variables to enable or disable installation
 # of the database server and the database schema creation. 
