@@ -2,7 +2,7 @@ TANGO history file
 
 03/2012        *******************************************************
                *                                                     *
-               *  Tango release 8.0.0 : Changes since version 7.2.6  *
+               *  Tango release 8.0.3 : Changes since version 7.2.6  *
                *                                                     *
                *******************************************************
 
@@ -110,6 +110,9 @@ with minimun value defined
 The data was stored in database as ascii characters
 - Device server crashes when you kill it if there are some long running actions when the signal is received.
 - It's now possible to define in code that state and status has to be polled
+- Possible device server process crash (depending how you are lucky) when trying to start one with an
+instance name not defined in database
+- Bug when reading attribute from CACHE when the attribute is not polled. The returned exception was not correct
 
 
 
@@ -320,6 +323,7 @@ Bugs recorded in SourceForge
 - 2826552: Event abs_change and rel_change attribute property resetting failed
 - 2836943: Unsubscribe_event locks
 - 2836238: Non PIC code
+
 - 2840364: Missing ctors for DeviceAttribute class
 - 2861309: Race condition in EventConsumerKeepAlive thread
 - 2871262: Unsubscribe_event seg fault
