@@ -84,7 +84,7 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 	distdir dist dist-all distcheck
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = lib utils cppserver pogo
+DIST_SUBDIRS = lib utils cppserver scripts doc pogo
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -301,8 +301,7 @@ top_srcdir = @top_srcdir@
 
 # The subdirs variable tells automake which subdirs should be
 # traversed on a make.
-#SUBDIRS = lib utils cppserver scripts doc
-SUBDIRS = lib utils cppserver $(am__append_1)
+SUBDIRS = lib utils cppserver scripts doc $(am__append_1)
 ACLOCAL_AMFLAGS = -I m4
 AUX_DIST = config/config.guess                         \
 	   	   config/config.sub                           \
