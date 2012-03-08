@@ -38,7 +38,7 @@ This requires a new compilation option (-std=c++0x)
 ATTR_ALARM: min/max alarm -> error stream, min/max warning + rds -> warning stream)
 - Add a clean_db parameter to the DeviceImpl::remove_attribute() method. Default is true
 - New DeviceProxy::get_access_right() method
-- New Util::is_svr_starting() and Util::is_svr_shutting_down() methods
+- New Util::is_svr_starting(), Util::is_svr_shutting_down() and Util::is_device_restarting() methods
 - New DeviceClass::get_cmd_by_name() method
 - New DServer::_create_cpp_class() method (For PyTango)
 - Remove warnings compilation (Tango is now compiled with -Wall and -Wextra)
