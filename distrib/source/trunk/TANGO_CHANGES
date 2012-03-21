@@ -28,6 +28,7 @@ get_attribute_poll_period()/get_command_poll_period(), poll_attribute()/poll_com
 stop_poll_attribute()/stop_poll_command())
 - DevEncoded data type supported for commands
 - New Attribute class setter/getter methods for min_alarm, max_alarm, min_warning and max_warning attribute properties
+- New Attribute set_properties/get_properties to set/get several attribute properties in one call
 - Cleaner way to reset kernel attribute properties to lib/user default value
 - Add some C++11 features when compiler support them (Lambda functions - unique_ptr for extension classes -
 Move contructor and assignement for DeviceData and DeviceAttribute classes)
@@ -88,7 +89,7 @@ Bug recorded in sourceForge:
 - 3280851 : Wrong state computation
 - 3285370 : Printing operator for DeviceData class
 - 3285372 : Wrong lock removal of last locked device from a locking thread (Windows specific)
-- 3285674 : NaN in write_attribute() call
+- 3285674 : NaN in write_attribute() call (With a control system prop. to allow/disallow NaN)
 - 3313211 : Polling threads pool management
 - 3399975 : ULong data type and memorized writable attribute
 - 3400550 : State computation with alrmed attributes
@@ -96,6 +97,7 @@ Bug recorded in sourceForge:
 - 3460080 : Device server crash during event reconnection (event between devices within the same DS)
 - 3468928 : Does not compile with gcc 3.3
 - 3480524 : Write attribute (SCALAR) when throwing exception
+- 3495592 : Logging directory
 
 Other bugs
 
@@ -103,8 +105,8 @@ Other bugs
 - In case of consecutive signal installations and removals.
 - Bug in error message and in inserters in DbDatum class for unsigned char data type
 - Bug when updating database due to one attribute configuration change
-- Bug when using the WAttribute::set_min_value() methods family: The attribute was not flagged as attribute
-with minimun value defined
+- Bug when using the WAttribute::set_min_value() methods family: The attribute was not flagged as attribute with 
+minimun value defined
 - Doc: Fix bug in Database::get_device_attribute_property() method usage example
 - Bug in WAttribute::set_min_value() and Wattribute::set_max_value() methods for unsigned char data type.
 The data was stored in database as ascii characters
@@ -737,9 +739,9 @@ Bugs not recorded in SourceForge !
      Avoids segmentation fault in status2attr(). 
 
 
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 5.3 : Changes since version 5.2  *
+           *    Tango release 5.3 : Changes since version 5.2  *
 	       *                                                   *
 	       *****************************************************
 	       
@@ -753,9 +755,9 @@ Bugs not recorded in SourceForge !
 
   
 
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 5.2 : Changes since version 5.1  *
+           *    Tango release 5.2 : Changes since version 5.1  *
 	       *                                                   *
 	       *****************************************************
 
@@ -853,9 +855,9 @@ Bug fixes :
       
 
 
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 5.1 : Changes since version 5.0  *
+           *    Tango release 5.1 : Changes since version 5.0  *
 	       *                                                   *
 	       *****************************************************
 
@@ -900,9 +902,9 @@ Bug fixes :
  
  
  
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 5 : Changes since version 4.3    *
+           *    Tango release 5 : Changes since version 4.3    *
 	       *                                                   *
 	       *****************************************************
 
@@ -1057,9 +1059,9 @@ Bug fixes :
      
 
 
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 4.3 : Changes since version 4.2  *
+           *    Tango release 4.3 : Changes since version 4.2  *
 	       *                                                   *
 	       *****************************************************
 	       
@@ -1068,9 +1070,9 @@ Bug fixes :
   release 4.2 to run using Tango 4.1 shared library
 
 
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 4.2 : Changes since version 4.1  *
+           *    Tango release 4.2 : Changes since version 4.1  *
 	       *                                                   *
 	       *****************************************************
 	       
@@ -1105,9 +1107,9 @@ Bug fixes :
 		    with polled attributes or commands to start correctly.
 
 
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 4.1 : Changes since version 4.0  *
+           *    Tango release 4.1 : Changes since version 4.0  *
 	       *                                                   *
 	       *****************************************************
 
@@ -1145,9 +1147,9 @@ Bug fixes :
 - Windows DLL : Add some import/export declarartions.
 
 
-               *****************************************************
+           *****************************************************
 	       *                                                   *
-               *    Tango release 4 : Changes since version 3.0.2  *
+           *    Tango release 4 : Changes since version 3.0.2  *
 	       *                                                   *
 	       *****************************************************
 
@@ -1237,9 +1239,9 @@ Bug fixes :
 
 
 
-               *********************************************************
+           *********************************************************
 	       *                                                       *
-               *    Tango release 3.0.1 : Changes since version 3.0.0  *
+           *    Tango release 3.0.1 : Changes since version 3.0.0  *
 	       *                                                       *
 	       *********************************************************
 	       
@@ -1298,9 +1300,9 @@ Bug fixes :
 				  with command with a long response time
 
 
-               *********************************************************
+           *********************************************************
 	       *                                                       *
-               *    Tango release 3.0.0 : Changes since version 2.2.0  *
+           *    Tango release 3.0.0 : Changes since version 2.2.0  *
 	       *                                                       *
 	       *********************************************************
 	       
@@ -1581,6 +1583,7 @@ Changes since version 1.5
 
 - Java specific
 ---------------
+
 
 - DSAPI : Change the db call used to get device server class list to
 	  DbGetDserverClassList
