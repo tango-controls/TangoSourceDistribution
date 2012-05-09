@@ -518,6 +518,7 @@ Changes between Tango distribution 7.2.6a and 8.0.3
 - SourceForge bug 3308848: Fix build on kfreebsd system
 - SourceForge bug 3383197: Jpeg mmx option to configure
 - SourceForge bug 3409434: Memory leaks in Database server
+- SourceForge bug 3515206: Bug in PutServerInfo command (Database server)
 
 
 - Add 2 db commands (DbImportEvent and DbGetDeviceAlias) in allowed command list (For TAC)
