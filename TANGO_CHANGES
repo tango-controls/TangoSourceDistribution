@@ -2,11 +2,11 @@ TANGO history file
 
 03/2012        *******************************************************
                *                                                     *
-               *  Tango release 8.0.3 : Changes since version 7.2.6  *
+               *  Tango release 8.0.4 : Changes since version 7.2.6  *
                *                                                     *
                *******************************************************
 
-Tango 8 has been developped and tested using:
+Tango 8 has been developed and tested using:
 
 - omniORB 4.1.6
 - zmq 3.1
@@ -29,7 +29,7 @@ stop_poll_attribute()/stop_poll_command())
 - DevEncoded data type supported for commands
 - New Attribute class setter/getter methods for min_alarm, max_alarm, min_warning and max_warning attribute properties
 - New Attribute set_properties/get_properties to set/get several attribute properties in one call
-- Cleaner way to reset kernel attribute properties to lib/user default value
+- Cleaner way to reset kernel attribute properties to lib/user/class default value
 - Add some C++11 features when compiler support them (Lambda functions - unique_ptr for extension classes -
 Move contructor and assignement for DeviceData and DeviceAttribute classes)
 This requires a new compilation option (-std=c++0x)
@@ -92,12 +92,13 @@ Bug recorded in sourceForge:
 - 3285674 : NaN in write_attribute() call (With a control system prop. to allow/disallow NaN)
 - 3313211 : Polling threads pool management
 - 3399975 : ULong data type and memorized writable attribute
-- 3400550 : State computation with alrmed attributes
+- 3400550 : State computation with alarmed attributes
 - 3413944 : Memorized attribute written at init
 - 3460080 : Device server crash during event reconnection (event between devices within the same DS)
 - 3468928 : Does not compile with gcc 3.3
 - 3480524 : Write attribute (SCALAR) when throwing exception
 - 3495592 : Logging directory
+- 3505226 : Tango misses ORB parameters
 
 Other bugs
 
@@ -112,9 +113,11 @@ minimun value defined
 The data was stored in database as ascii characters
 - Device server crashes when you kill it if there are some long running actions when the signal is received.
 - It's now possible to define in code that state and status has to be polled
+- It's now possible to define an archive event period or a periodic event period for state or status attributes
 - Possible device server process crash (depending how you are lucky) when trying to start one with an
 instance name not defined in database
 - Bug when reading attribute from CACHE when the attribute is not polled. The returned exception was not correct
+- Wrong printed date (and reported in blackbox) when used on 64 bits computer
 
 
 
