@@ -17,6 +17,7 @@
 rm -Rf cppserver/database/winnt
 rm -f cppserver/database/Makefile
 rm -f cppserver/database/README
+rm -f cppserver/database/update_db5.sql.in
 
 rm -Rf cppserver/starter/doc_html
 rm -f cppserver/starter/Makefile
