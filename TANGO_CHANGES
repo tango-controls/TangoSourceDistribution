@@ -1,8 +1,8 @@
 TANGO history file
 
-03/2012        *******************************************************
+05/2012        *******************************************************
                *                                                     *
-               *  Tango release 8.0.4 : Changes since version 7.2.6  *
+               *  Tango release 8.0.5 : Changes since version 7.2.6  *
                *                                                     *
                *******************************************************
 
@@ -10,14 +10,18 @@ Tango 8 has been developed and tested using:
 
 - omniORB 4.1.6
 - zmq 3.1
-- log4tango 4.0.5
+- log4tango 4.0.6
 
-Changes between Log4tango 4.0.3 and Log4Tango 4.0.5
+Changes between Log4tango 4.0.3 and Log4Tango 4.0.6
 ---------------------------------------------------
 
 - SourceForge bug 3156197
 - Fix warnings when Tango is compiled -Wall -Wextra
 - Add Windows port for Windows 64 bits VC10
+- Apply Alessio's patch:
+	- Re-enable Thread's name PatternComponent
+	- Add Thread's id PatternComponent
+	- Add missing conversion patterns (%t and %T)
 
 Changes in Tango itself
 -----------------------
@@ -118,6 +122,8 @@ The data was stored in database as ascii characters
 instance name not defined in database
 - Bug when reading attribute from CACHE when the attribute is not polled. The returned exception was not correct
 - Wrong printed date (and reported in blackbox) when used on 64 bits computer
+- Bug in attribute property management for dynamique attribute when the property is an array
+- Fix bug in logging for devices not using database when the logging level is specified on the command line
 
 
 
