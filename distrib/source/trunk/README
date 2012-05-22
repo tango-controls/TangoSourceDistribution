@@ -499,15 +499,15 @@ Changes between Tango distribution 7.2.6a and 8.0.5
 
 - Updated C++ library to						Release 8.0.5
 - Updated Log4Tango to 							Release 4.0.6
-- Updated Jive to								Release 
-- Updated LogViewer	to							Release 
-- Updated Pogo to								Release 
-- Updated Astor to							    Release 
+- Updated Jive to								Release 4.23
+- Updated atkpanel to							Release 4.4
+- Updated Pogo to								Release 8.0.2
+- Updated Astor to							    Release 6.0.3
 - Updated notifd2db to							Release 
 - Updated tango_admin to 						Release 
 - Updated DbServer to							Release 
-- Updated TangORB to							Release 
-- Updated ATK to 								Release 
+- Updated TangORB to							Release 8.0.0 
+- Updated ATK to 								Release 4.3.6
 - Updated Starter to							Release 
 - Updated TangoTest to							Release 
 - Updated TangoAccessControl to					Release 
