@@ -4,7 +4,7 @@
 
 javadir = $(datadir)/java
 dist_java_DATA=\
-   Astor-6.0.3.jar \
+   Astor-6.0.4.jar \
    DeviceTree-1.8.jar \
    ATKCore-4.3.6.jar \
    Jive-4.23.jar \
