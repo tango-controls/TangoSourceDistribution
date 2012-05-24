@@ -15,6 +15,7 @@
 #
 
 rm -Rf cppserver/database/winnt
+rm -Rf cppserver/database/win64
 rm -f cppserver/database/Makefile
 rm -f cppserver/database/README
 rm -f cppserver/database/update_db5.sql.in
@@ -25,14 +26,17 @@ rm -f cppserver/starter/StarterService.cpp
 rm -f cppserver/starter/StarterService.h
 rm -f cppserver/starter/starter.startup
 rm -Rf cppserver/starter/vc9_proj
+rm -Rf cppserver/starter/vc10_proj
 
 rm -f cppserver/tangoaccesscontrol/Makefile
 rm -Rf cppserver/tangoaccesscontrol/scripts
 rm -Rf cppserver/tangoaccesscontrol/vcproj
+rm -Rf cppserver/tangoaccesscontrol/vc10_proj
 
 rm -f cppserver/tangotest/Makefile
 rm -Rf cppserver/tangotest/doc_html
 rm -Rf cppserver/tangotest/win32
+rm -Rf cppserver/tangotest/win64
 rm -f cppserver/tangotest/Doxyfile
 rm -f cppserver/tangotest/pom.xml
 rm -f cppserver/tangotest/TangoClassID.txt
