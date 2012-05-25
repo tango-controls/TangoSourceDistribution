@@ -28,6 +28,13 @@ ifndef OMNI_HOME
 endif
 
 #------------------------------------------------------------------------------
+#-- ZMQ_HOME
+#------------------------------------------------------------------------------
+ifndef ZMQ_HOME
+	ZMQ_HOME = @ZMQ_PREFIX@
+endif
+
+#------------------------------------------------------------------------------
 #--  CXX
 #------------------------------------------------------------------------------
 ifndef CXX
@@ -94,7 +101,7 @@ INCLUDE_DIRS  = $(INC_DIR_USER)
 INCLUDE_DIRS +=	-I../include -I.
 
 ifeq ($(TANGO_REQUIRED),TRUE)
-	INCLUDE_DIRS +=	-I$(TANGO_HOME)/include/tango -I$(OMNI_HOME)/include
+	INCLUDE_DIRS +=	-I$(TANGO_HOME)/include/tango -I$(OMNI_HOME)/include -I$(ZMQ_HOME)/include
 endif
 
 
@@ -152,7 +159,7 @@ ifdef CXXFLAGS_USR
 	CXXFLAGS_USER = $(CXXFLAGS_USR)
 endif
 
-CXXFLAGS += -D_REENTRANT -W $(INCLUDE_DIRS) $(CXXFLAGS_USER)
+CXXFLAGS += -D_REENTRANT -W $(INCLUDE_DIRS) $(CXXFLAGS_USER) $(CXX11)  -Dlinux
 
 #------------------------------------------------------------------------------
 #-- CFLAGS
@@ -192,7 +199,7 @@ LDFLAGS +=	$(LDFLAGS_USER) $(LIB_DIR_USER)
 
 ifeq ($(TANGO_REQUIRED),TRUE)
 	LDFLAGS +=	-L$(TANGO_HOME)/lib -ltango -llog4tango
-	LDFLAGS +=	-L$(OMNI_HOME)/lib -lCOS4 -lomniORB4 -lomniDynamic4 -lomnithread
+	LDFLAGS +=	-L$(OMNI_HOME)/lib -L$(ZMQ_HOME)/lib -lCOS4 -lomniORB4 -lomniDynamic4 -lomnithread -lzmq
 endif
 
 LDFLAGS += -ldl -lpthread -lstdc++
