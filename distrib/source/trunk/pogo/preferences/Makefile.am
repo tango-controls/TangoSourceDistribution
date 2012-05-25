@@ -2,6 +2,7 @@ edit = sed \
    -e 's|@bindir[@]|$(bindir)|g' \
    -e 's|@datadir[@]|$(datadir)|g' \
    -e 's|@prefix[@]|$(prefix)|g' \
+   -e 's|@ZMQ_PREFIX[@]|$(ZMQ_PREFIX)|g' \
    -e 's|@ORB_PREFIX[@]|$(ORB_PREFIX)|g'
 
 preferencesdir   		= $(datadir)/pogo/preferences
