@@ -108,9 +108,7 @@ rm -f doc/src/java_api/picture/architecture.fig
 rm -f doc/src/java_api/picture/architecture1.fig
 rm -f doc/src/java_api/picture/Newline.*
 
-rm -f doc/src/layouts/stdsections.inc
 rm -f doc/src/layouts/stdFiles.lst
-rm -f doc/src/layouts/textclass.lst
 
 rm -f doc/src/started/DocDs.*
 rm -f doc/src/started/line.lyx
