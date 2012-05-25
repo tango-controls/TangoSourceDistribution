@@ -640,6 +640,7 @@ TANGO_RC_FILE
 ALLOCA
 DARWIN_ENABLED_FALSE
 DARWIN_ENABLED_TRUE
+ZMQ_PREFIX
 LIBZMQ_LIBS
 LIBZMQ_CFLAGS
 HAVE_ORB_IDL
@@ -17114,6 +17115,7 @@ $as_echo "yes" >&6; }
 fi
 ZMQ_VERSION=`eval pkg-config --modversion libzmq`
 ZMQ_ROOT=`eval pkg-config --variable=prefix libzmq`
+
 
 # We need to define some stuff for threads and stubs
 
