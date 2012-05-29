@@ -6,7 +6,13 @@ install-data-local:
 	mkdir -p $(DESTDIR)/$(docdir)
 	for file in $(DOCS); do \
 	    cp -f $(srcdir)/$$file $(DESTDIR)/$(docdir)/$$file; \
+		chmod u+w $(DESTDIR)/$(docdir)/$$file; \
 	done;                                        
+
+uninstall-local:
+	for file in $(DOCS);do \
+		rm $(DESTDIR)/$(docdir)/$$file; \
+	done;
 
 dist-hook:
 	for file in $(DOCS); do        \

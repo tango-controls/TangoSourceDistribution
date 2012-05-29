@@ -501,14 +501,14 @@ Changes between Tango distribution 7.2.6a and 8.0.5
 - Updated Log4Tango to 							Release 4.0.6
 - Updated Jive to								Release 4.23
 - Updated atkpanel to							Release 4.4
-- Updated Pogo to								Release 8.0.2
+- Updated Pogo to								Release 8.0.3
 - Updated Astor to							    Release 6.0.4
 - Updated notifd2db to							Release 1.13
 - Updated tango_admin to 						Release 1.10
 - Updated DbServer to							Release 4.17
 - Updated TangORB to							Release 8.0.0 
 - Updated ATK to 								Release 4.3.6
-- Updated Starter to							Release 5.4
+- Updated Starter to							Release 5.5
 - Updated TangoTest to							Release 1.7.0
 - Updated TangoAccessControl to					Release 2.5
 - Updated AccessControl to						Release 2.5
