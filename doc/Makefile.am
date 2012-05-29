@@ -6,7 +6,7 @@ install-data-local:
 	mkdir -p $(DESTDIR)/$(docdir)
 	for file in $(DOCS); do \
 	    cp -f $(srcdir)/$$file $(DESTDIR)/$(docdir)/$$file; \
-        done;                                        
+	done;                                        
 
 dist-hook:
 	for file in $(DOCS); do        \
