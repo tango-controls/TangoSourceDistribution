@@ -1,4 +1,4 @@
-		TANGO source code release version 8.0.5 - README (05/2012)
+		TANGO source code release version 8.0.5 - README (06/2012)
 		==========================================================
 
 
@@ -499,18 +499,18 @@ Changes between Tango distribution 7.2.6a and 8.0.5
 
 - Updated C++ library to						Release 8.0.5
 - Updated Log4Tango to 							Release 4.0.7
-- Updated Jive to								Release 4.23
+- Updated Jive to							Release 4.23
 - Updated atkpanel to							Release 4.4
-- Updated Pogo to								Release 8.0.3
-- Updated Astor to							    Release 6.0.4
+- Updated Pogo to							Release 8.0.4
+- Updated Astor to							Release 6.0.4
 - Updated notifd2db to							Release 1.13
 - Updated tango_admin to 						Release 1.10
 - Updated DbServer to							Release 4.17
 - Updated TangORB to							Release 8.0.0 
-- Updated ATK to 								Release 4.3.6
+- Updated ATK to 							Release 4.3.6
 - Updated Starter to							Release 5.5
 - Updated TangoTest to							Release 1.7.0
-- Updated TangoAccessControl to					Release 2.5
+- Updated TangoAccessControl to						Release 2.5
 - Updated AccessControl to						Release 2.5
 
 - SourceForge bug 3308848: Fix build on kfreebsd system
