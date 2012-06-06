@@ -76,6 +76,7 @@ with polling defined in code
 - Optimize database calls during device server startup and shutdown sequence (When TAC is used or when
 dynamic attributes are used)
 - Added Database class copy constructor and assignment operator
+- Restore user signal handler for SIGPIPE after CORBA::ORB_init() call
 - Tango is now compiled with Debian hardenning flags on.
 
 
