@@ -1,0 +1,30 @@
+#!@SHELL@
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+#---------------------------------------------------------
+#       Set the Class Path for Tango, ATK and AtkMoni usage
+#---------------------------------------------------------
+LIB_DIR=@prefix@/share/java;   		export LIB_DIR
+APP_DIR=@prefix@/share/java;	   	export APP_DIR
+
+
+TANGO=$LIB_DIR/TangORB.jar
+TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
+
+APPLI_PACKAGE=fr.esrf.tangoatk.widget.attribute;	export APPLI_PACKAGE
+APPLI_MAIN_CLASS=Trend; export APPLI_MAIN_CLASS
+
+CLASSPATH=$TANGO:$TACO:$TANGOATK
+export CLASSPATH
+echo "CLASSPATH=$CLASSPATH"
+
+
+#---------------------------------------------------------
+#       Start the atkmoni process
+#---------------------------------------------------------
+#
+
+@JAVA@ -DTANGO_HOST=$TANGO_HOST $APPLI_PACKAGE.$APPLI_MAIN_CLASS $*
