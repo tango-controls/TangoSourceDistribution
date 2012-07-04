@@ -1,0 +1,32 @@
+#!@SHELL@
+#---------------------------------------------------------
+#
+#---------------------------------------------------------
+
+LIB_DIR=@prefix@/share/java;	    export LIB_DIR
+APP_DIR=@prefix@/share/java;	    export APP_DIR
+
+#---------------------------------------------------------
+#       Set the Class Path Jdraw usage
+#---------------------------------------------------------
+
+
+TANGO=$LIB_DIR/TangORB.jar
+TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
+
+APPLI_PACKAGE=fr.esrf.tangoatk.widget.util.jdraw;	export APPLI_PACKAGE
+APPLI_MAIN_CLASS=JDrawEditorFrame; export APPLI_MAIN_CLASS
+
+CLASSPATH=$TANGOATK:$TANGO
+export CLASSPATH
+echo "CLASSPATH=$CLASSPATH"
+
+echo Running Jdraw ...
+
+#---------------------------------------------------------
+#       Start the Jdraw process
+#---------------------------------------------------------
+#
+
+@JAVA@ $APPLI_PACKAGE.$APPLI_MAIN_CLASS $@
+
