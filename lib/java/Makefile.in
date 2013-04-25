@@ -278,17 +278,17 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 javadir = $(datadir)/java
 dist_java_DATA = \
-   Astor-6.0.4.jar \
-   DeviceTree-1.8.jar \
-   ATKCore-4.3.9.jar \
-   Jive-4.24.jar \
-   org.tango.pogo-8.0.7.jar \
-   atkpanel-4.5.jar \
+   Astor-6.3.2.jar \
+   DeviceTree-1.9.6.jar \
+   ATKCore-4.5.0.jar \
+   Jive-4.29.jar \
+   org.tango.pogo-8.1.10.jar \
+   atkpanel-4.8.jar \
    log4j-1.2.15.jar \
    AtkTuning-2.8.jar \
    LogViewer-1.2.3.jar \
-   TangORB-8.0.0.jar \
-   ATKWidget-4.3.9.jar \
+   TangORB-8.2.2a.jar \
+   ATKWidget-4.5.0.jar \
    tool_panels-1.9.jar
 
 @TANGO_JAVA_ENABLED_TRUE@bin_SCRIPTS = \
