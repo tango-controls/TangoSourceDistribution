@@ -50,6 +50,8 @@ rm -f doc/src/install_all
 rm -f doc/src/replace
 rm -f doc/src/Replace.class
 rm -f doc/src/tango_latex2html
+rm -f doc/src/add_lic
+rm -f doc/src/license.add
 
 rm -f doc/src/advanced/alarm.fig
 rm -f doc/src/advanced/att_lock.*
