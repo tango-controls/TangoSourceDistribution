@@ -500,10 +500,10 @@ Changes between Tango distribution 8.0.5 and 8.1.2
 - Updated C++ library to						Release 8.1.2
 - Updated Jive to								Release 4.29
 - Updated atkpanel to							Release 4.8
-- Updated Pogo to								Release 8.1.10
+- Updated Pogo to								Release 8.1.11
 - Updated Astor to								Release 6.3.2
 - Updated DbServer to							Release 4.20
-- Updated TangORB to							Release 8.2.2a
+- Updated TangORB to							Release 8.2.3
 - Updated ATK to 								Release 4.5
 - Updated Starter to							Release 5.11
 - Updated TangoTest to							Release 1.8
