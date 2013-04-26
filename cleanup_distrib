@@ -58,7 +58,6 @@ rm -f doc/src/advanced/att_lock.*
 rm -f doc/src/advanced/DevTestClass.*
 rm -f doc/src/advanced/events.*
 rm -f doc/src/advanced/ext_*
-rm -f doc/src/advanced/line.tex
 rm -f doc/src/advanced/main*
 
 rm -f doc/src/appendix/serv.res
