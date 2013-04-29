@@ -50,8 +50,6 @@ rm -f doc/src/install_all
 rm -f doc/src/replace
 rm -f doc/src/Replace.class
 rm -f doc/src/tango_latex2html
-rm -f doc/src/add_lic
-rm -f doc/src/license.add
 
 rm -f doc/src/advanced/alarm.fig
 rm -f doc/src/advanced/att_lock.*
@@ -94,7 +92,11 @@ rm -Rf doc/src/ds_writing/java_started
 rm -f doc/src/ds_writing/line.lyx
 rm -Rf doc/src/ds_writing/logging
 rm -Rf doc/src/ds_writing/model
-rm -Rf doc/src/ds_writing/nt_server
+rm -Rf doc/src/ds_writing/nt_server/*.bmp
+rm -Rf doc/src/ds_writing/nt_server/*.pdf
+rm -Rf doc/src/ds_writing/nt_server/*.cpp
+rm -Rf doc/src/ds_writing/nt_server/*.lines
+rm -Rf doc/src/ds_writing/nt_server/*.h
 rm -f doc/src/ds_writing/r_attributes.fig
 rm -f doc/src/ds_writing/startup.fig
 rm -f doc/src/ds_writing/startup.jpg
@@ -114,6 +116,13 @@ rm -f doc/src/layouts/stdFiles.lst
 rm -f doc/src/started/DocDs.*
 rm -f doc/src/started/line.lyx
 rm -f doc/src/started/tango1.jpg
+
+cd doc/src
+./add_lic
+cd ../..
+
+rm -f doc/src/add_lic
+rm -f doc/src/license.add
 
 #
 #	lib directories
