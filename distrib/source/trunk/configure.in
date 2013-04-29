@@ -138,6 +138,18 @@ if test -z "$DOXYGEN"; then
 	DOXYGEN=NOT_INSTALLED
 fi
       
+# Check if lyx is there
+	
+AC_ARG_WITH([lyx], 
+	AC_HELP_STRING([--with-lyx],[path to LyX utility]),
+	[LYX=${with_lyx}],
+	[AC_PATH_PROG(LYX,lyx)])
+
+if test -z "$LYX"; then
+	LYX=false
+fi
+
+AM_CONDITIONAL(TANGO_LYX_ENABLED, test x"$LYX" != x"false")
 
 # Use libtool which facilitates the creation of shared libraries
 LT_INIT()
@@ -344,6 +356,7 @@ AC_SUBST(DATADIR)
 
 AC_SUBST(JAVA)
 AC_SUBST(DOXYGEN)
+AC_SUBST(LYX)
 
 # This is a hack to change PACKAGE_ #defines into TANGO_PACKAGE
 AC_CONFIG_COMMANDS(ac_config.h,
@@ -389,6 +402,7 @@ AC_OUTPUT(Makefile
 	  scripts/notify_daemon
   	  doc/Makefile
 	  doc/man/Makefile
+	  doc/src/Makefile
 	  pogo/Makefile
 	  pogo/templates/Makefile
 	  pogo/preferences/Makefile
