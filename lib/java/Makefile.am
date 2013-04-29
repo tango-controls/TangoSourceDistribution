@@ -13,7 +13,7 @@ dist_java_DATA=\
    log4j-1.2.15.jar \
    AtkTuning-2.8.jar \
    LogViewer-1.2.3.jar \
-   TangORB-8.2.2a.jar \
+   TangORB-8.2.3.jar \
    ATKWidget-4.5.0.jar \
    tool_panels-1.9.jar
 
