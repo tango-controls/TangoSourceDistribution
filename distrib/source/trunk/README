@@ -498,6 +498,7 @@ Changes between Tango distribution 8.0.5 and 8.1.2
 ---------------------------------------------------
 
 - Updated C++ library to						Release 8.1.2
+- Updated Log4Tango to 							Release 4.0.8
 - Updated Jive to								Release 4.29
 - Updated atkpanel to							Release 4.8
 - Updated Pogo to								Release 8.1.11
