@@ -700,6 +700,9 @@ LD
 FGREP
 SED
 LIBTOOL
+TANGO_LYX_ENABLED_FALSE
+TANGO_LYX_ENABLED_TRUE
+LYX
 DOXYGEN
 TANGO_JAVA_ENABLED_FALSE
 TANGO_JAVA_ENABLED_TRUE
@@ -812,6 +815,7 @@ enable_dependency_tracking
 enable_java
 with_java
 with_doxygen
+with_lyx
 enable_shared
 enable_static
 with_pic
@@ -1495,6 +1499,7 @@ Optional Packages:
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-java             path to java interpreter
   --with-doxygen          path to doxygen utility
+  --with-lyx              path to LyX utility
   --with-pic[=PKGS]       try to use only PIC/non-PIC objects [default=use
                           both]
   --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
@@ -5372,6 +5377,68 @@ fi
 
 if test -z "$DOXYGEN"; then
 	DOXYGEN=NOT_INSTALLED
+fi
+
+# Check if lyx is there
+
+
+# Check whether --with-lyx was given.
+if test "${with_lyx+set}" = set; then :
+  withval=$with_lyx; LYX=${with_lyx}
+else
+  # Extract the first word of "lyx", so it can be a program name with args.
+set dummy lyx; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_LYX+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $LYX in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_LYX="$LYX" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_LYX="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+LYX=$ac_cv_path_LYX
+if test -n "$LYX"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $LYX" >&5
+$as_echo "$LYX" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+
+
+if test -z "$LYX"; then
+	LYX=false
+fi
+
+ if test x"$LYX" != x"false"; then
+  TANGO_LYX_ENABLED_TRUE=
+  TANGO_LYX_ENABLED_FALSE='#'
+else
+  TANGO_LYX_ENABLED_TRUE='#'
+  TANGO_LYX_ENABLED_FALSE=
 fi
 
 
@@ -18699,6 +18766,7 @@ DATADIR=`eval echo $DATADIR`
 
 
 
+
 # This is a hack to change PACKAGE_ #defines into TANGO_PACKAGE
 ac_config_commands="$ac_config_commands ac_config.h"
 
@@ -18710,7 +18778,7 @@ subdirs="$subdirs lib/cpp/log4tango"
 
 
 # All the Makefiles to be generated.
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db6.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca scripts/notify_daemon doc/Makefile doc/man/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db6.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca scripts/notify_daemon doc/Makefile doc/man/Makefile doc/src/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -18847,6 +18915,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${TANGO_JAVA_ENABLED_TRUE}" && test -z "${TANGO_JAVA_ENABLED_FALSE}"; then
   as_fn_error $? "conditional \"TANGO_JAVA_ENABLED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${TANGO_LYX_ENABLED_TRUE}" && test -z "${TANGO_LYX_ENABLED_FALSE}"; then
+  as_fn_error $? "conditional \"TANGO_LYX_ENABLED\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${DARWIN_ENABLED_TRUE}" && test -z "${DARWIN_ENABLED_FALSE}"; then
@@ -19880,6 +19952,7 @@ do
     "scripts/notify_daemon") CONFIG_FILES="$CONFIG_FILES scripts/notify_daemon" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "doc/man/Makefile") CONFIG_FILES="$CONFIG_FILES doc/man/Makefile" ;;
+    "doc/src/Makefile") CONFIG_FILES="$CONFIG_FILES doc/src/Makefile" ;;
     "pogo/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/Makefile" ;;
     "pogo/templates/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/templates/Makefile" ;;
     "pogo/preferences/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/preferences/Makefile" ;;
