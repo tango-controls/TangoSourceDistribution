@@ -15,7 +15,6 @@
 
 @SET_MAKE@
 
-
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -35,9 +34,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = lib/java
-DIST_COMMON = README $(dist_java_DATA) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in
+subdir = lib/java/jzmq
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/RSSH_CHECK_OMNIORB.m4 \
 	$(top_srcdir)/m4/RSSH_CHECK_PTHREADS.m4 \
@@ -87,52 +85,46 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(javadir)"
-SCRIPTS = $(bin_SCRIPTS)
-SOURCES =
-DIST_SOURCES =
-RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
-	html-recursive info-recursive install-data-recursive \
-	install-dvi-recursive install-exec-recursive \
-	install-html-recursive install-info-recursive \
-	install-pdf-recursive install-ps-recursive install-recursive \
-	installcheck-recursive installdirs-recursive pdf-recursive \
-	ps-recursive uninstall-recursive
-DATA = $(dist_java_DATA)
-RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
-  distclean-recursive maintainer-clean-recursive
-AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
-	$(RECURSIVE_CLEAN_TARGETS:-recursive=) tags TAGS ctags CTAGS \
-	distdir
+am__installdirs = "$(DESTDIR)$(libdir)"
+LTLIBRARIES = $(lib_LTLIBRARIES)
+libjzmq_la_LIBADD =
+am__objects_1 = libjzmq_la-ZMQ.lo libjzmq_la-Context.lo \
+	libjzmq_la-Socket.lo libjzmq_la-Poller.lo libjzmq_la-util.lo
+am_libjzmq_la_OBJECTS = $(am__objects_1)
+am__objects_2 =
+nodist_libjzmq_la_OBJECTS = $(am__objects_2) $(am__objects_2)
+libjzmq_la_OBJECTS = $(am_libjzmq_la_OBJECTS) \
+	$(nodist_libjzmq_la_OBJECTS)
+libjzmq_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(libjzmq_la_CXXFLAGS) \
+	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+depcomp = $(SHELL) $(top_srcdir)/config/depcomp
+am__depfiles_maybe = depfiles
+am__mv = mv -f
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+SOURCES = $(libjzmq_la_SOURCES) $(nodist_libjzmq_la_SOURCES)
+DIST_SOURCES = $(libjzmq_la_SOURCES)
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = jzmq
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-am__relativize = \
-  dir0=`pwd`; \
-  sed_first='s,^\([^/]*\)/.*$$,\1,'; \
-  sed_rest='s,^[^/]*/*,,'; \
-  sed_last='s,^.*/\([^/]*\)$$,\1,'; \
-  sed_butlast='s,/*[^/]*$$,,'; \
-  while test -n "$$dir1"; do \
-    first=`echo "$$dir1" | sed -e "$$sed_first"`; \
-    if test "$$first" != "."; then \
-      if test "$$first" = ".."; then \
-        dir2=`echo "$$dir0" | sed -e "$$sed_last"`/"$$dir2"; \
-        dir0=`echo "$$dir0" | sed -e "$$sed_butlast"`; \
-      else \
-        first2=`echo "$$dir2" | sed -e "$$sed_first"`; \
-        if test "$$first2" = "$$first"; then \
-          dir2=`echo "$$dir2" | sed -e "$$sed_rest"`; \
-        else \
-          dir2="../$$dir2"; \
-        fi; \
-        dir0="$$dir0"/"$$first"; \
-      fi; \
-    fi; \
-    dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
-  done; \
-  reldir="$$dir2"
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
 AMTAR = @AMTAR@
@@ -318,70 +310,58 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-@TANGO_JZMQ_ENABLED_TRUE@SUBDIRS = jzmq
+jarfile = zmq.jar
+#jardir = $(datadir)/java
+INCLUDES = $(LIBZMQ_CFLAGS)
+JZMQ_CPP_FILES = \
+	ZMQ.cpp \
+	Context.cpp \
+	Socket.cpp \
+	Poller.cpp \
+	util.cpp
 
-# In the java directory we don't want to do anything, just
-# make sure it is in the dist. Don't use EXTRA_DIST. It will copy
-# the link instead of keeping them as links
-javadir = $(datadir)/java
-dist_java_DATA = \
-   Astor-6.3.2.jar \
-   DeviceTree-1.9.6.jar \
-   ATKCore-4.5.0.jar \
-   Jive-4.29.jar \
-   org.tango.pogo-8.1.11.jar \
-   atkpanel-4.8.jar \
-   log4j-1.2.15.jar \
-   AtkTuning-2.8.jar \
-   LogViewer-1.2.3.jar \
-   TangORB-8.2.3.jar \
-   ATKWidget-4.5.0.jar \
-   tool_panels-1.9.jar
+JZMQ_H_FILES = \
+	org_zeromq_ZMQ.h \
+	org_zeromq_ZMQ_Error.h \
+	org_zeromq_ZMQ_Context.h \
+	org_zeromq_ZMQ_Socket.h \
+	org_zeromq_ZMQ_Poller.h
 
-@TANGO_JAVA_ENABLED_TRUE@bin_SCRIPTS = \
-@TANGO_JAVA_ENABLED_TRUE@   astor \
-@TANGO_JAVA_ENABLED_TRUE@   jive \
-@TANGO_JAVA_ENABLED_TRUE@   pogo \
-@TANGO_JAVA_ENABLED_TRUE@   pogo-6 \
-@TANGO_JAVA_ENABLED_TRUE@   devicetree \
-@TANGO_JAVA_ENABLED_TRUE@   atkpanel \
-@TANGO_JAVA_ENABLED_TRUE@   logviewer \
-@TANGO_JAVA_ENABLED_TRUE@   atktuning \
-@TANGO_JAVA_ENABLED_TRUE@   jdraw \
-@TANGO_JAVA_ENABLED_TRUE@   synopticappli \
-@TANGO_JAVA_ENABLED_TRUE@   atkmoni \
-@TANGO_JAVA_ENABLED_TRUE@   tg_devtest \
-@TANGO_JAVA_ENABLED_TRUE@   TangoVers \
-@TANGO_JAVA_ENABLED_TRUE@   cvstag
+JZMQ_HPP_FILES = \
+	util.hpp
 
-@TANGO_JAVA_ENABLED_TRUE@edit = sed \
-@TANGO_JAVA_ENABLED_TRUE@		-e 's|@SHELL[@]|$(SHELL)|g' \
-@TANGO_JAVA_ENABLED_TRUE@		-e 's|@TANGO_RC_FILE[@]|$(TANGO_RC_FILE)|g' \
-@TANGO_JAVA_ENABLED_TRUE@		-e 's|@JAVA[@]|$(JAVA)|g' \
-@TANGO_JAVA_ENABLED_TRUE@		-e 's|@DOXYGEN[@]|$(DOXYGEN)|g' \
-@TANGO_JAVA_ENABLED_TRUE@		-e 's|@prefix[@]|$(prefix)|g'
+JAVAH_FLAGS = -d . -classpath .
 
+#$(jarfile):
+#	$(JAVAC) -encoding utf8 -d . $(JZMQ_JAVA_FILES)
+#	$(JAR) cf $(JARFLAGS) $@ org/zeromq/*.class
 
-# Make sure that all these go into the dist.
-EXTRA_DIST = \
-   astor.in \
-   jive.in \
-   pogo.in \
-   pogo-6.in \
-   devicetree.in \
-   atkpanel.in \
-   logviewer.in \
-   atktuning.in \
-   jdraw.in \
-   synopticappli.in \
-   atkmoni.in \
-   cvstag.in \
-   tg_devtest.in \
-   TangoVers.in
+#jar_DATA = $(jarfile)
+lib_LTLIBRARIES = libjzmq.la
+libjzmq_la_SOURCES = $(JZMQ_CPP_FILES)
+nodist_libjzmq_la_SOURCES = \
+	$(JZMQ_H_FILES) \
+	$(JZMQ_HPP_FILES)
 
-all: all-recursive
+libjzmq_la_CXXFLAGS = -Wall @JNI_INCL_DIRS@
+
+#if DISABLE_VERSION
+#libjzmq_la_LDFLAGS = -avoid-version
+#else
+#libjzmq_la_LDFLAGS = -version-info @JLTVER@
+#endif
+BUILT_SOURCES = \
+	$(JZMQ_H_FILES)
+
+CLEANFILES = \
+	$(JZMQ_H_FILES) \
+	$(jarfile)
+
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
+.SUFFIXES: .cpp .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -391,9 +371,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu lib/java/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu lib/java/jzmq/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu lib/java/Makefile
+	  $(AUTOMAKE) --gnu lib/java/jzmq/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -412,132 +392,113 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-install-binSCRIPTS: $(bin_SCRIPTS)
+install-libLTLIBRARIES: $(lib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
-	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
-	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  if test -f "$$d$$p"; then echo "$$d$$p"; echo "$$p"; else :; fi; \
-	done | \
-	sed -e 'p;s,.*/,,;n' \
-	    -e 'h;s|.*|.|' \
-	    -e 'p;x;s,.*/,,;$(transform)' | sed 'N;N;N;s,\n, ,g' | \
-	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1; } \
-	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
-	    if ($$2 == $$4) { files[d] = files[d] " " $$1; \
-	      if (++n[d] == $(am__install_max)) { \
-		print "f", d, files[d]; n[d] = 0; files[d] = "" } } \
-	    else { print "f", d "/" $$4, $$1 } } \
-	  END { for (d in files) print "f", d, files[d] }' | \
-	while read type dir files; do \
-	     if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
-	     test -z "$$files" || { \
-	       echo " $(INSTALL_SCRIPT) $$files '$(DESTDIR)$(bindir)$$dir'"; \
-	       $(INSTALL_SCRIPT) $$files "$(DESTDIR)$(bindir)$$dir" || exit $$?; \
-	     } \
-	; done
+	test -z "$(libdir)" || $(MKDIR_P) "$(DESTDIR)$(libdir)"
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	list2=; for p in $$list; do \
+	  if test -f $$p; then \
+	    list2="$$list2 $$p"; \
+	  else :; fi; \
+	done; \
+	test -z "$$list2" || { \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
+	}
 
-uninstall-binSCRIPTS:
+uninstall-libLTLIBRARIES:
 	@$(NORMAL_UNINSTALL)
-	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || exit 0; \
-	files=`for p in $$list; do echo "$$p"; done | \
-	       sed -e 's,.*/,,;$(transform)'`; \
-	dir='$(DESTDIR)$(bindir)'; $(am__uninstall_files_from_dir)
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	for p in $$list; do \
+	  $(am__strip_dir) \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
+	done
+
+clean-libLTLIBRARIES:
+	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
+	@list='$(lib_LTLIBRARIES)'; for p in $$list; do \
+	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
+	  test "$$dir" != "$$p" || dir=.; \
+	  echo "rm -f \"$${dir}/so_locations\""; \
+	  rm -f "$${dir}/so_locations"; \
+	done
+libjzmq.la: $(libjzmq_la_OBJECTS) $(libjzmq_la_DEPENDENCIES) $(EXTRA_libjzmq_la_DEPENDENCIES) 
+	$(libjzmq_la_LINK) -rpath $(libdir) $(libjzmq_la_OBJECTS) $(libjzmq_la_LIBADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT)
+
+distclean-compile:
+	-rm -f *.tab.c
+
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libjzmq_la-Context.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libjzmq_la-Poller.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libjzmq_la-Socket.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libjzmq_la-ZMQ.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libjzmq_la-util.Plo@am__quote@
+
+.cpp.o:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+@am__fastdepCXX_TRUE@	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
+
+libjzmq_la-ZMQ.lo: ZMQ.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -MT libjzmq_la-ZMQ.lo -MD -MP -MF $(DEPDIR)/libjzmq_la-ZMQ.Tpo -c -o libjzmq_la-ZMQ.lo `test -f 'ZMQ.cpp' || echo '$(srcdir)/'`ZMQ.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libjzmq_la-ZMQ.Tpo $(DEPDIR)/libjzmq_la-ZMQ.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ZMQ.cpp' object='libjzmq_la-ZMQ.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -c -o libjzmq_la-ZMQ.lo `test -f 'ZMQ.cpp' || echo '$(srcdir)/'`ZMQ.cpp
+
+libjzmq_la-Context.lo: Context.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -MT libjzmq_la-Context.lo -MD -MP -MF $(DEPDIR)/libjzmq_la-Context.Tpo -c -o libjzmq_la-Context.lo `test -f 'Context.cpp' || echo '$(srcdir)/'`Context.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libjzmq_la-Context.Tpo $(DEPDIR)/libjzmq_la-Context.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Context.cpp' object='libjzmq_la-Context.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -c -o libjzmq_la-Context.lo `test -f 'Context.cpp' || echo '$(srcdir)/'`Context.cpp
+
+libjzmq_la-Socket.lo: Socket.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -MT libjzmq_la-Socket.lo -MD -MP -MF $(DEPDIR)/libjzmq_la-Socket.Tpo -c -o libjzmq_la-Socket.lo `test -f 'Socket.cpp' || echo '$(srcdir)/'`Socket.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libjzmq_la-Socket.Tpo $(DEPDIR)/libjzmq_la-Socket.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Socket.cpp' object='libjzmq_la-Socket.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -c -o libjzmq_la-Socket.lo `test -f 'Socket.cpp' || echo '$(srcdir)/'`Socket.cpp
+
+libjzmq_la-Poller.lo: Poller.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -MT libjzmq_la-Poller.lo -MD -MP -MF $(DEPDIR)/libjzmq_la-Poller.Tpo -c -o libjzmq_la-Poller.lo `test -f 'Poller.cpp' || echo '$(srcdir)/'`Poller.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libjzmq_la-Poller.Tpo $(DEPDIR)/libjzmq_la-Poller.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Poller.cpp' object='libjzmq_la-Poller.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -c -o libjzmq_la-Poller.lo `test -f 'Poller.cpp' || echo '$(srcdir)/'`Poller.cpp
+
+libjzmq_la-util.lo: util.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -MT libjzmq_la-util.lo -MD -MP -MF $(DEPDIR)/libjzmq_la-util.Tpo -c -o libjzmq_la-util.lo `test -f 'util.cpp' || echo '$(srcdir)/'`util.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libjzmq_la-util.Tpo $(DEPDIR)/libjzmq_la-util.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='util.cpp' object='libjzmq_la-util.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libjzmq_la_CXXFLAGS) $(CXXFLAGS) -c -o libjzmq_la-util.lo `test -f 'util.cpp' || echo '$(srcdir)/'`util.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-dist_javaDATA: $(dist_java_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(javadir)" || $(MKDIR_P) "$(DESTDIR)$(javadir)"
-	@list='$(dist_java_DATA)'; test -n "$(javadir)" || list=; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(javadir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(javadir)" || exit $$?; \
-	done
-
-uninstall-dist_javaDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(dist_java_DATA)'; test -n "$(javadir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(javadir)'; $(am__uninstall_files_from_dir)
-
-# This directory's subdirectories are mostly independent; you can cd
-# into them and run `make' without going through this Makefile.
-# To change the values of `make' variables: instead of editing Makefiles,
-# (1) if the variable is set in `config.status', edit `config.status'
-#     (which will cause the Makefiles to be regenerated when you run `make');
-# (2) otherwise, pass the desired values on the `make' command line.
-$(RECURSIVE_TARGETS):
-	@fail= failcom='exit 1'; \
-	for f in x $$MAKEFLAGS; do \
-	  case $$f in \
-	    *=* | --[!k]*);; \
-	    *k*) failcom='fail=yes';; \
-	  esac; \
-	done; \
-	dot_seen=no; \
-	target=`echo $@ | sed s/-recursive//`; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    dot_seen=yes; \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	  || eval $$failcom; \
-	done; \
-	if test "$$dot_seen" = "no"; then \
-	  $(MAKE) $(AM_MAKEFLAGS) "$$target-am" || exit 1; \
-	fi; test -z "$$fail"
-
-$(RECURSIVE_CLEAN_TARGETS):
-	@fail= failcom='exit 1'; \
-	for f in x $$MAKEFLAGS; do \
-	  case $$f in \
-	    *=* | --[!k]*);; \
-	    *k*) failcom='fail=yes';; \
-	  esac; \
-	done; \
-	dot_seen=no; \
-	case "$@" in \
-	  distclean-* | maintainer-clean-*) list='$(DIST_SUBDIRS)' ;; \
-	  *) list='$(SUBDIRS)' ;; \
-	esac; \
-	rev=''; for subdir in $$list; do \
-	  if test "$$subdir" = "."; then :; else \
-	    rev="$$subdir $$rev"; \
-	  fi; \
-	done; \
-	rev="$$rev ."; \
-	target=`echo $@ | sed s/-recursive//`; \
-	for subdir in $$rev; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	  || eval $$failcom; \
-	done && test -z "$$fail"
-tags-recursive:
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  test "$$subdir" = . || ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) tags); \
-	done
-ctags-recursive:
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  test "$$subdir" = . || ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) ctags); \
-	done
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -549,23 +510,10 @@ ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	mkid -fID $$unique
 tags: TAGS
 
-TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	set x; \
 	here=`pwd`; \
-	if ($(ETAGS) --etags-include --version) >/dev/null 2>&1; then \
-	  include_option=--etags-include; \
-	  empty_fix=.; \
-	else \
-	  include_option=--include; \
-	  empty_fix=; \
-	fi; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    test ! -f $$subdir/TAGS || \
-	      set "$$@" "$$include_option=$$here/$$subdir/TAGS"; \
-	  fi; \
-	done; \
 	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
@@ -584,7 +532,7 @@ TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 	  fi; \
 	fi
 ctags: CTAGS
-CTAGS: ctags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
@@ -634,51 +582,27 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
-	@list='$(DIST_SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    test -d "$(distdir)/$$subdir" \
-	    || $(MKDIR_P) "$(distdir)/$$subdir" \
-	    || exit 1; \
-	  fi; \
-	done
-	@list='$(DIST_SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    dir1=$$subdir; dir2="$(distdir)/$$subdir"; \
-	    $(am__relativize); \
-	    new_distdir=$$reldir; \
-	    dir1=$$subdir; dir2="$(top_distdir)"; \
-	    $(am__relativize); \
-	    new_top_distdir=$$reldir; \
-	    echo " (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) top_distdir="$$new_top_distdir" distdir="$$new_distdir" \\"; \
-	    echo "     am__remove_distdir=: am__skip_length_check=: am__skip_mode_fix=: distdir)"; \
-	    ($(am__cd) $$subdir && \
-	      $(MAKE) $(AM_MAKEFLAGS) \
-	        top_distdir="$$new_top_distdir" \
-	        distdir="$$new_distdir" \
-		am__remove_distdir=: \
-		am__skip_length_check=: \
-		am__skip_mode_fix=: \
-	        distdir) \
-	      || exit 1; \
-	  fi; \
-	done
+	$(MAKE) $(AM_MAKEFLAGS) \
+	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
+	  dist-hook
 check-am: all-am
-check: check-recursive
-all-am: Makefile $(SCRIPTS) $(DATA)
-installdirs: installdirs-recursive
-installdirs-am:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(javadir)"; do \
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
+all-am: Makefile $(LTLIBRARIES)
+installdirs:
+	for dir in "$(DESTDIR)$(libdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: install-recursive
-install-exec: install-exec-recursive
-install-data: install-data-recursive
-uninstall: uninstall-recursive
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
+install-exec: install-exec-am
+install-data: install-data-am
+uninstall: uninstall-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 
-installcheck: installcheck-recursive
+installcheck: installcheck-am
 install-strip:
 	if test -z '$(STRIP)'; then \
 	  $(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
@@ -692,6 +616,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -700,137 +625,122 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-@TANGO_JAVA_ENABLED_FALSE@distclean-local:
-clean: clean-recursive
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+clean: clean-am
 
-clean-am: clean-generic clean-libtool mostlyclean-am
+clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
+	mostlyclean-am
 
-distclean: distclean-recursive
+distclean: distclean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
-distclean-am: clean-am distclean-generic distclean-local \
+distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
 
-dvi: dvi-recursive
+dvi: dvi-am
 
 dvi-am:
 
-html: html-recursive
+html: html-am
 
 html-am:
 
-info: info-recursive
+info: info-am
 
 info-am:
 
-install-data-am: install-dist_javaDATA
-	@$(NORMAL_INSTALL)
-	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
-install-dvi: install-dvi-recursive
+install-data-am:
+
+install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am: install-binSCRIPTS
+install-exec-am: install-libLTLIBRARIES
 
-install-html: install-html-recursive
+install-html: install-html-am
 
 install-html-am:
 
-install-info: install-info-recursive
+install-info: install-info-am
 
 install-info-am:
 
 install-man:
 
-install-pdf: install-pdf-recursive
+install-pdf: install-pdf-am
 
 install-pdf-am:
 
-install-ps: install-ps-recursive
+install-ps: install-ps-am
 
 install-ps-am:
 
 installcheck-am:
 
-maintainer-clean: maintainer-clean-recursive
+maintainer-clean: maintainer-clean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
-mostlyclean: mostlyclean-recursive
+mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-generic mostlyclean-libtool
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
-pdf: pdf-recursive
+pdf: pdf-am
 
 pdf-am:
 
-ps: ps-recursive
+ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binSCRIPTS uninstall-dist_javaDATA
+uninstall-am: uninstall-libLTLIBRARIES
 
-.MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
-	install-am install-data-am install-strip tags-recursive
+.MAKE: all check install install-am install-strip
 
-.PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
-	all all-am check check-am clean clean-generic clean-libtool \
-	ctags ctags-recursive distclean distclean-generic \
-	distclean-libtool distclean-local distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-binSCRIPTS install-data install-data-am \
-	install-data-hook install-dist_javaDATA install-dvi \
+.PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+	clean-libLTLIBRARIES clean-libtool ctags dist-hook distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
-	ps ps-am tags tags-recursive uninstall uninstall-am \
-	uninstall-binSCRIPTS uninstall-dist_javaDATA
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-libLTLIBRARIES
 
 
-#astor jive pogo pogo-6 devicetree atkpanel logviewer atktuning jdraw synopticappli atkmoni cvstag TangoVers tg_devtest: Makefile
-@TANGO_JAVA_ENABLED_TRUE@$(bin_SCRIPTS): Makefile
-@TANGO_JAVA_ENABLED_TRUE@	rm -f $@ $@.tmp
-@TANGO_JAVA_ENABLED_TRUE@	srcdir=''; \
-@TANGO_JAVA_ENABLED_TRUE@	test -f ./$@.in || srcdir=$(srcdir)/; \
-@TANGO_JAVA_ENABLED_TRUE@	$(edit) $${srcdir}$@.in >$@.tmp
+#$(JZMQ_H_FILES): $(jarfile)
+#	$(CLASSPATH_ENV) $(JAVAH) -jni -classpath . org.zeromq.ZMQ
 
-@TANGO_JAVA_ENABLED_TRUE@	chmod +x $@.tmp
-@TANGO_JAVA_ENABLED_TRUE@	chmod a-w $@.tmp
-@TANGO_JAVA_ENABLED_TRUE@	mv $@.tmp $@
+$(JZMQ_H_FILES):
+	$(CLASSPATH_ENV) $(JAVAH) -jni -classpath . org.zeromq.ZMQ
 
-@TANGO_JAVA_ENABLED_TRUE@astor: $(srcdir)/astor.in
-@TANGO_JAVA_ENABLED_TRUE@jive: $(srcdir)/jive.in
-@TANGO_JAVA_ENABLED_TRUE@pogo: $(srcdir)/pogo.in
-@TANGO_JAVA_ENABLED_TRUE@pogo-6: $(srcdir)/pogo-6.in
-@TANGO_JAVA_ENABLED_TRUE@devicetree: $(srcdir)/devicetree.in
-@TANGO_JAVA_ENABLED_TRUE@atkpanel: $(srcdir)/atkpanel.in
-@TANGO_JAVA_ENABLED_TRUE@logviewer: $(srcdir)/logviewer.in
-@TANGO_JAVA_ENABLED_TRUE@atktuning: $(srcdir)/atktuning.in
-@TANGO_JAVA_ENABLED_TRUE@jdraw: $(srcdir)/jdraw.in
-@TANGO_JAVA_ENABLED_TRUE@synopticappli: $(srcdir)/synopticappli.in
-@TANGO_JAVA_ENABLED_TRUE@atkmoni: $(srcdir)/atkmoni.in
-@TANGO_JAVA_ENABLED_TRUE@cvstag: $(srcdir)/cvstag.in
-@TANGO_JAVA_ENABLED_TRUE@TangoVers: $(srcdir)/TangoVers.in
-@TANGO_JAVA_ENABLED_TRUE@tg_devtest: $(srcdir)/tg_devtest.in
+$(srcdir)/ZMQ.cpp: \
+	$(JZMQ_H_FILES) \
+	$(JZMQ_HPP_FILES)
 
-@TANGO_JAVA_ENABLED_TRUE@distclean-local: distclean-local-check
-@TANGO_JAVA_ENABLED_TRUE@.PHONY: distclean-local-check
-@TANGO_JAVA_ENABLED_TRUE@distclean-local-check:
-@TANGO_JAVA_ENABLED_TRUE@	-rm -rf $(bin_SCRIPTS)
+$(srcdir)/Context.cpp: \
+	org_zeromq_ZMQ_Context.h \
+	$(JZMQ_HPP_FILES)
 
-# Even though we do not want to compile anything in the
-# java-directory, we still want to install the sources in
-# prefix/share/tango
+$(srcdir)/Socket.cpp: \
+	org_zeromq_ZMQ_Socket.h \
+	$(JZMQ_HPP_FILES)
 
-install-data-hook:
-	(cd  $(DESTDIR)$(javadir) ; \
-	for i in $(dist_java_DATA) ; do \
-	link_name=`echo $$i | @SED@ -e's/-[0-9.]*/./'` ; \
-	$(RM) $$link_name && @LN_S@ $$i $$link_name ; \
-	done \
-	)
+$(srcdir)/Poller.cpp: \
+	org_zeromq_ZMQ_Poller.h \
+	$(JZMQ_HPP_FILES)
+
+$(srcdir)/util.cpp: \
+	$(JZMQ_HPP_FILES)
+
+dist-hook:
+	-rm $(distdir)/*.h
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
