@@ -91,10 +91,7 @@ libjzmq_la_LIBADD =
 am__objects_1 = libjzmq_la-ZMQ.lo libjzmq_la-Context.lo \
 	libjzmq_la-Socket.lo libjzmq_la-Poller.lo libjzmq_la-util.lo
 am_libjzmq_la_OBJECTS = $(am__objects_1)
-am__objects_2 =
-nodist_libjzmq_la_OBJECTS = $(am__objects_2) $(am__objects_2)
-libjzmq_la_OBJECTS = $(am_libjzmq_la_OBJECTS) \
-	$(nodist_libjzmq_la_OBJECTS)
+libjzmq_la_OBJECTS = $(am_libjzmq_la_OBJECTS)
 libjzmq_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(libjzmq_la_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
@@ -111,16 +108,7 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-CCLD = $(CC)
-LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
-	$(LDFLAGS) -o $@
-SOURCES = $(libjzmq_la_SOURCES) $(nodist_libjzmq_la_SOURCES)
+SOURCES = $(libjzmq_la_SOURCES)
 DIST_SOURCES = $(libjzmq_la_SOURCES)
 ETAGS = etags
 CTAGS = ctags
@@ -310,8 +298,6 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-jarfile = zmq.jar
-#jardir = $(datadir)/java
 INCLUDES = $(LIBZMQ_CFLAGS)
 JZMQ_CPP_FILES = \
 	ZMQ.cpp \
@@ -327,38 +313,21 @@ JZMQ_H_FILES = \
 	org_zeromq_ZMQ_Socket.h \
 	org_zeromq_ZMQ_Poller.h
 
-JZMQ_HPP_FILES = \
-	util.hpp
+JZMQ_HPP_FILES = jzmq.hpp \
+				 util.hpp
 
 JAVAH_FLAGS = -d . -classpath .
-
-#$(jarfile):
-#	$(JAVAC) -encoding utf8 -d . $(JZMQ_JAVA_FILES)
-#	$(JAR) cf $(JARFLAGS) $@ org/zeromq/*.class
-
-#jar_DATA = $(jarfile)
 lib_LTLIBRARIES = libjzmq.la
 libjzmq_la_SOURCES = $(JZMQ_CPP_FILES)
-nodist_libjzmq_la_SOURCES = \
-	$(JZMQ_H_FILES) \
-	$(JZMQ_HPP_FILES)
 
+#nodist_libjzmq_la_SOURCES = \
+#	$(JZMQ_H_FILES) \
+#	$(JZMQ_HPP_FILES)
 libjzmq_la_CXXFLAGS = -Wall @JNI_INCL_DIRS@
+EXTRA_DIST = $(JZMQ_H_FILES) \
+			 $(JZMQ_HPP_FILES)
 
-#if DISABLE_VERSION
-#libjzmq_la_LDFLAGS = -avoid-version
-#else
-#libjzmq_la_LDFLAGS = -version-info @JLTVER@
-#endif
-BUILT_SOURCES = \
-	$(JZMQ_H_FILES)
-
-CLEANFILES = \
-	$(JZMQ_H_FILES) \
-	$(jarfile)
-
-all: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) all-am
+all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -582,19 +551,14 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
-	$(MAKE) $(AM_MAKEFLAGS) \
-	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
-	  dist-hook
 check-am: all-am
-check: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) check-am
+check: check-am
 all-am: Makefile $(LTLIBRARIES)
 installdirs:
 	for dir in "$(DESTDIR)$(libdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) install-am
+install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -616,7 +580,6 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
-	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -625,7 +588,6 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
@@ -697,10 +659,10 @@ ps-am:
 
 uninstall-am: uninstall-libLTLIBRARIES
 
-.MAKE: all check install install-am install-strip
+.MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
-	clean-libLTLIBRARIES clean-libtool ctags dist-hook distclean \
+	clean-libLTLIBRARIES clean-libtool ctags distclean \
 	distclean-compile distclean-generic distclean-libtool \
 	distclean-tags distdir dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-dvi \
@@ -713,9 +675,6 @@ uninstall-am: uninstall-libLTLIBRARIES
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-libLTLIBRARIES
 
-
-#$(JZMQ_H_FILES): $(jarfile)
-#	$(CLASSPATH_ENV) $(JAVAH) -jni -classpath . org.zeromq.ZMQ
 
 $(JZMQ_H_FILES):
 	$(CLASSPATH_ENV) $(JAVAH) -jni -classpath . org.zeromq.ZMQ
@@ -738,9 +697,6 @@ $(srcdir)/Poller.cpp: \
 
 $(srcdir)/util.cpp: \
 	$(JZMQ_HPP_FILES)
-
-dist-hook:
-	-rm $(distdir)/*.h
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
