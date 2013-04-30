@@ -618,6 +618,7 @@ am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
 subdirs
+JNI_INCL_DIRS
 DATADIR
 VERSION_INFO
 ac_aux_dir
@@ -704,8 +705,13 @@ TANGO_LYX_ENABLED_FALSE
 TANGO_LYX_ENABLED_TRUE
 LYX
 DOXYGEN
+TANGO_JZMQ_ENABLED_FALSE
+TANGO_JZMQ_ENABLED_TRUE
 TANGO_JAVA_ENABLED_FALSE
 TANGO_JAVA_ENABLED_TRUE
+_ACJNI_JAVAC
+JAVAH
+JAVAC
 JAVA
 EGREP
 GREP
@@ -5225,7 +5231,7 @@ if test "x$enable_java" = "xyes" ; then
 		enable_java=no
    else
 		if test "x$with_java" = "xyes"; then
-        # Extract the first word of "java", so it can be a program name with args.
+        	# Extract the first word of "java", so it can be a program name with args.
 set dummy java; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
@@ -5252,6 +5258,7 @@ done
   done
 IFS=$as_save_IFS
 
+  test -z "$ac_cv_path_JAVA" && ac_cv_path_JAVA=""notfound""
   ;;
 esac
 fi
@@ -5266,7 +5273,8 @@ fi
 
 
 		fi
-      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for java release (at least version 1.6)" >&5
+		if test "x$JAVA" != "xnotfound"; then
+      		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for java release (at least version 1.6)" >&5
 $as_echo_n "checking for java release (at least version 1.6)... " >&6; }
 if ${ac_cv_java_version_1_6+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -5298,18 +5306,240 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_java_version_1_6" >&5
 $as_echo "$ac_cv_java_version_1_6" >&6; }
 
-      if test "x$ac_cv_java_version_1_6" = "xno"; then
-           { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Not supported java release. Should be 1.6.x or above. Java will be disabled for this build!" >&5
+			if test "x$ac_cv_java_version_1_6" = "xno"; then
+           		{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Not supported java release. Should be 1.6.x or above. Java will be disabled for this build!" >&5
 $as_echo "$as_me: WARNING: Not supported java release. Should be 1.6.x or above. Java will be disabled for this build!" >&2;}
-        	  with_java=
-			  enable_java=no
+				with_java=
+				enable_java=no
+			else
+				with_java=$JAVA
+			fi
 		else
-			with_java=$JAVA
+			with_java=
+			enable_java=no
 		fi
    fi
 else
    with_java=
 fi
+
+enable_jzmq=yes
+if test "x$enable_java" = "xyes" ; then
+# Check for JDK
+	test "x$JAVAC" = x && for ac_prog in javac -encoding ut8
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_prog_JAVAC+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test -n "$JAVAC"; then
+  ac_cv_prog_JAVAC="$JAVAC" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_prog_JAVAC="$ac_prog"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi
+fi
+JAVAC=$ac_cv_prog_JAVAC
+if test -n "$JAVAC"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $JAVAC" >&5
+$as_echo "$JAVAC" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+  test -n "$JAVAC" && break
+done
+
+	if test "x$JAVAC" = x; then
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find javac" >&5
+$as_echo "$as_me: WARNING: cannot find javac" >&2;}
+		enable_jzmq=no
+	fi
+
+	if test "x$JAVAC" != x; then
+		test "x$JAVAH" = x && for ac_prog in javah
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_prog_JAVAH+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test -n "$JAVAH"; then
+  ac_cv_prog_JAVAH="$JAVAH" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_prog_JAVAH="$ac_prog"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi
+fi
+JAVAH=$ac_cv_prog_JAVAH
+if test -n "$JAVAH"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $JAVAH" >&5
+$as_echo "$JAVAH" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+  test -n "$JAVAH" && break
+done
+
+		if test "x$JAVAH" = x; then
+			{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find javah" >&5
+$as_echo "$as_me: WARNING: cannot find javah" >&2;}
+			enable_jzmq=no
+		fi
+	fi
+
+	if test "x$enable_jzmq" = "xyes"; then
+
+
+JNI_INCLUDE_DIRS=""
+
+test "x$JAVAC" = x && as_fn_error $? "'\$JAVAC' undefined" "$LINENO" 5
+# Extract the first word of "$JAVAC", so it can be a program name with args.
+set dummy $JAVAC; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path__ACJNI_JAVAC+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $_ACJNI_JAVAC in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path__ACJNI_JAVAC="$_ACJNI_JAVAC" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH$PATH_SEPARATOR/
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path__ACJNI_JAVAC="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  test -z "$ac_cv_path__ACJNI_JAVAC" && ac_cv_path__ACJNI_JAVAC="no"
+  ;;
+esac
+fi
+_ACJNI_JAVAC=$ac_cv_path__ACJNI_JAVAC
+if test -n "$_ACJNI_JAVAC"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $_ACJNI_JAVAC" >&5
+$as_echo "$_ACJNI_JAVAC" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+test "x$_ACJNI_JAVAC" = xno && as_fn_error $? "$JAVAC could not be found in path" "$LINENO" 5
+
+
+# find the include directory relative to the javac executable
+_cur=""$_ACJNI_JAVAC""
+while ls -ld "$_cur" 2>/dev/null | grep " -> " >/dev/null; do
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking symlink for $_cur" >&5
+$as_echo_n "checking symlink for $_cur... " >&6; }
+        _slink=`ls -ld "$_cur" | sed 's/.* -> //'`
+        case "$_slink" in
+        /*) _cur="$_slink";;
+        # 'X' avoids triggering unwanted echo options.
+        *) _cur=`echo "X$_cur" | sed -e 's/^X//' -e 's:[^/]*$::'`"$_slink";;
+        esac
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: $_cur" >&5
+$as_echo "$_cur" >&6; }
+done
+_ACJNI_FOLLOWED="$_cur"
+
+_JTOPDIR=`echo "$_ACJNI_FOLLOWED" | sed -e 's://*:/:g' -e 's:/[^/]*$::'`
+case "$host_os" in
+        darwin*)        _JTOPDIR=`echo "$_JTOPDIR" | sed -e 's:/[^/]*$::'`
+                        _JINC="$_JTOPDIR/Headers";;
+        *)              _JINC="$_JTOPDIR/include";;
+esac
+#_AS_ECHO_LOG([_JTOPDIR=$_JTOPDIR])
+#_AS_ECHO_LOG([_JINC=$_JINC])
+
+# On Mac OS X 10.6.4, jni.h is a symlink:
+# /System/Library/Frameworks/JavaVM.framework/Versions/Current/Headers/jni.h
+# -> ../../CurrentJDK/Headers/jni.h.
+if test -f "$_JINC/jni.h" || test -L "$_JINC/jni.h"; then
+        JNI_INCLUDE_DIRS="$JNI_INCLUDE_DIRS $_JINC"
+else
+        _JTOPDIR=`echo "$_JTOPDIR" | sed -e 's:/[^/]*$::'`
+        if test -f "$_JTOPDIR/include/jni.h"; then
+                JNI_INCLUDE_DIRS="$JNI_INCLUDE_DIRS $_JTOPDIR/include"
+        else
+                as_fn_error $? "cannot find java include files" "$LINENO" 5
+        fi
+fi
+
+# get the likely subdirectories for system specific java includes
+case "$host_os" in
+bsdi*)          _JNI_INC_SUBDIRS="bsdos";;
+linux*)         _JNI_INC_SUBDIRS="linux genunix";;
+osf*)           _JNI_INC_SUBDIRS="alpha";;
+solaris*)       _JNI_INC_SUBDIRS="solaris";;
+mingw*)		_JNI_INC_SUBDIRS="win32";;
+cygwin*)	_JNI_INC_SUBDIRS="win32";;
+*)              _JNI_INC_SUBDIRS="genunix";;
+esac
+
+# add any subdirectories that are present
+for JINCSUBDIR in $_JNI_INC_SUBDIRS
+do
+    if test -d "$_JTOPDIR/include/$JINCSUBDIR"; then
+         JNI_INCLUDE_DIRS="$JNI_INCLUDE_DIRS $_JTOPDIR/include/$JINCSUBDIR"
+    fi
+done
+
+		for JNI_INCLUDE_DIR in $JNI_INCLUDE_DIRS; do
+  			JNI_INCL_DIRS="$JNI_INCL_DIRS -I$JNI_INCLUDE_DIR"
+		done
+	fi
+fi
+
+
+
 
 # Define a conditional variable to enable or disable installation
 # of java applications. The variable is used in the Makefiles.
@@ -5321,6 +5551,14 @@ fi
 else
   TANGO_JAVA_ENABLED_TRUE='#'
   TANGO_JAVA_ENABLED_FALSE=
+fi
+
+ if test x"$enable_jzmq" != x"no"; then
+  TANGO_JZMQ_ENABLED_TRUE=
+  TANGO_JZMQ_ENABLED_FALSE='#'
+else
+  TANGO_JZMQ_ENABLED_TRUE='#'
+  TANGO_JZMQ_ENABLED_FALSE=
 fi
 
 
@@ -18767,6 +19005,7 @@ DATADIR=`eval echo $DATADIR`
 
 
 
+
 # This is a hack to change PACKAGE_ #defines into TANGO_PACKAGE
 ac_config_commands="$ac_config_commands ac_config.h"
 
@@ -18778,7 +19017,7 @@ subdirs="$subdirs lib/cpp/log4tango"
 
 
 # All the Makefiles to be generated.
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db6.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca scripts/notify_daemon doc/Makefile doc/man/Makefile doc/src/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile lib/java/jzmq/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db6.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca scripts/notify_daemon doc/Makefile doc/man/Makefile doc/src/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -18915,6 +19154,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${TANGO_JAVA_ENABLED_TRUE}" && test -z "${TANGO_JAVA_ENABLED_FALSE}"; then
   as_fn_error $? "conditional \"TANGO_JAVA_ENABLED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${TANGO_JZMQ_ENABLED_TRUE}" && test -z "${TANGO_JZMQ_ENABLED_FALSE}"; then
+  as_fn_error $? "conditional \"TANGO_JZMQ_ENABLED\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${TANGO_LYX_ENABLED_TRUE}" && test -z "${TANGO_LYX_ENABLED_FALSE}"; then
@@ -19928,6 +20171,7 @@ do
     "lib/cpp/client/Makefile") CONFIG_FILES="$CONFIG_FILES lib/cpp/client/Makefile" ;;
     "lib/cpp/client/helpers/Makefile") CONFIG_FILES="$CONFIG_FILES lib/cpp/client/helpers/Makefile" ;;
     "lib/java/Makefile") CONFIG_FILES="$CONFIG_FILES lib/java/Makefile" ;;
+    "lib/java/jzmq/Makefile") CONFIG_FILES="$CONFIG_FILES lib/java/jzmq/Makefile" ;;
     "cppserver/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/Makefile" ;;
     "cppserver/database/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/database/Makefile" ;;
     "cppserver/database/create_db.sql") CONFIG_FILES="$CONFIG_FILES cppserver/database/create_db.sql" ;;
@@ -21653,6 +21897,7 @@ Configuration ($PACKAGE):
 build:
 	libraries:              ${enable_lib}
 	java application:       ${enable_java}
+	event java interface:	${enable_jzmq}
 	access control server:	${enable_dbserver}
 	database server:        ${enable_dbserver}
 	database schema create: ${enable_db_schema_create}
@@ -21684,6 +21929,7 @@ Configuration ($PACKAGE):
 build:
 	libraries:              ${enable_lib}
 	java application:       ${enable_java}
+	event java interface:	${enable_jzmq}
 	access control server:	${enable_dbserver}
 	database server:        ${enable_dbserver}
 	database schema create: ${enable_db_schema_create}
