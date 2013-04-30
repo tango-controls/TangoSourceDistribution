@@ -25,14 +25,25 @@ Bug fixes
 
 Bug recorded in sourceForge:
 
-- 3563183 : Group command_inout fails between server restart
-- 3564392 : Database::get_info() method returns a string with extra '\0'
-- 3564995 : Memory leak in DbDatum class
-- 3565021 : Archive event subscription with only relative change
-- 3564930 : DeviceImpl::stop_poll_attribute and stop_poll_command
-- 3566280 : Device right in init_device() method when using a device running in another CS
-- 3568781 : Memorized attribute and device monitor
-- 2027829 and 2668010 : Database::get_services() method
+- 178 (2027829) and 219 (2668010) : Database::get_services() method
+- 529 (3563183) : Group command_inout fails between server restart
+- 530 (3564392) : Database::get_info() method returns a string with extra '\0'
+- 531 (3564930) : DeviceImpl::stop_poll_attribute and stop_poll_command
+- 533 (3564995) : Memory leak in DbDatum class
+- 534 (3565021) : Archive event subscription with only relative change
+- 536 (3566280) : Device right in init_device() method when using a device running in another CS
+- 537 (3568781) : Memorized attribute and device monitor
+- 545 (3577835) : Event subscription by different threads
+- 546 (3577837) : Attribute name given to user callback
+- 552 (3586344) : Polling thread out of sync error and event
+- 554 (3592399) : Seg fault in Attribute::set_value()
+- 559 (3601231) : Limit in event number
+- 560 (3601232) : Open file leak
+- 561 (3601267) : Access right exception
+- 563 (3601471) : exit() call in library
+- 570 (3604715) : Default format of DevULong (Feature Request 22)
+- 572 (3605540) : DevUChar memorized attribute
+- 593 (3606931) : DeviceImpl class polling methods 
 
 Other bugs
 
