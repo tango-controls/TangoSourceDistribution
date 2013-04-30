@@ -20,7 +20,7 @@
 #ifndef __JZMQ_HPP_INCLUDED__
 #define __JZMQ_HPP_INCLUDED__
 
-#include "config.hpp"
+#include "ac_config.h"
 
 #if defined HAVE_INTTYPES_H
 

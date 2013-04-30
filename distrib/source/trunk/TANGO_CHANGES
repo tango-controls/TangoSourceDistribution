@@ -1,5 +1,44 @@
 TANGO history file
 
+05/2013        *******************************************************
+               *                                                     *
+               *  Tango release 8.1.2 : Changes since version 8.0.5  *
+               *                                                     *
+               *******************************************************
+
+Tango 8.1 has been developed and tested using:
+
+- omniORB 4.1.6
+- zmq 3.2.2
+- log4tango 4.0.8
+
+Changes between Log4tango 4.0.7 and Log4Tango 4.0.8
+---------------------------------------------------
+
+- Small changes to allow Tango doc generation with a "make pdf" command
+
+Changes in Tango itself
+-----------------------
+
+Bug fixes
+---------
+
+Bug recorded in sourceForge:
+
+- 3563183 : Group command_inout fails between server restart
+- 3564392 : Database::get_info() method returns a string with extra '\0'
+- 3564995 : Memory leak in DbDatum class
+- 3565021 : Archive event subscription with only relative change
+- 3564930 : DeviceImpl::stop_poll_attribute and stop_poll_command
+- 3566280 : Device right in init_device() method when using a device running in another CS
+- 3568781 : Memorized attribute and device monitor
+- 2027829 and 2668010 : Database::get_services() method
+
+Other bugs
+
+
+
+
 05/2012        *******************************************************
                *                                                     *
                *  Tango release 8.0.5 : Changes since version 7.2.6  *
