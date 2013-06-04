@@ -159,7 +159,7 @@ Also check the tools you are using
 Once you have installed the packages in prerequisites you can think
 about configuring and compiling TANGO. 
 
-To configure TANGO you need to tell it where to find omniORB and
+To configure TANGO you need to tell it where to find omniORB, ZMQ and
 mysql (if it is in a non-standard place) and where to install
 TANGO.
 
@@ -174,7 +174,8 @@ The main options for configure are:
 --disable-jpegmmx		disable jpeg mmx optimization
   
 --with-java             path to java interpreter
---with-doxygen          path to doxygen utility  
+--with-doxygen          path to doxygen utility
+--with-lyx				path to LyX utility
 --with-zlib=DIR         root directory path of zlib installation defaults to
                         /usr/local or /usr if not found in /usr/local
 --with-omni             prefix to omniORB installation (default: $OMNI_ROOT)
@@ -231,6 +232,7 @@ Example:
 build:
         libraries:              yes
         java application:       yes
+		event java interface:   yes
 		access control server:	yes
         database server:        yes
         database schema create: yes
@@ -290,11 +292,28 @@ the "--disable-java" configure option to build Tango.
 When java was not found, disabled, or found with un unsufficient version, 
 the installation of the java applications is disabled.
 
+Starting with Tango 8.1.2, the java event system uses ZMQ event.
+ZMQ in Java is implemented as a thin JNI layer. The java part of this layer is
+included in the distributed "TangORB.jar" file. The associated small
+library (libjzmq.so) is compiled when you run "make". Nevertheless, this
+compilation is executed only is the java utility "javac" (part of the 
+classical JDK) is found during the configure run. At the end of its run,
+configure tells you in the list of what will be built if the
+"event java interface" will be generated. 
+
+lyx
+---
+LyX is a document processor used to generate the tango manual documentation.
+One already generated manual is provided in this distribution. Nevertheless,
+if you want to re-generate it, you can use the command "make pdf" but this
+requires LyX to be installed on your host. You can used the "--with-lyx=xxx"
+configure command line to define a path to the LyX utility on your host.
+
 doxygen
 -------
 Doxygen is a documentation generator from C++ source files. It is used by the
 Tango code generator (called Pogo) to generate Tango device server documentation.
-The script used to start Pogo will be modified bt the configure script to set
+The script used to start Pogo will be modified by the configure script to set
 a correct path to the doxygen command found in your PATH when configure was
 run. You can also used the "--with-doxygen=xxx" to define a path to the
 doxygen command.
@@ -520,7 +539,8 @@ Changes between Tango distribution 8.0.5 and 8.1.2
 - The DbDeleteServer command now also delete device properties
 - Improvement in TAC device filter (sr/v-*/* allowed)
 - Add jzmq in source distribution
-- "make pdf" command now generates the Tango book
+- "make pdf" command now generates the Tango book with a new
+  --with-lyx configure command line option
 
 
 Changes between Tango distribution 7.2.6a and 8.0.5
