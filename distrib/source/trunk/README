@@ -1,4 +1,4 @@
-		TANGO source code release version 8.1.2 - README (05/2013)
+		TANGO source code release version 8.1.2 - README (06/2013)
 		==========================================================
 
 
@@ -499,17 +499,28 @@ Changes between Tango distribution 8.0.5 and 8.1.2
 
 - Updated C++ library to						Release 8.1.2
 - Updated Log4Tango to 							Release 4.0.8
-- Updated Jive to								Release 4.29
+- Updated Jive to								Release 4.31
 - Updated atkpanel to							Release 4.8
-- Updated Pogo to								Release 8.1.11
-- Updated Astor to								Release 6.3.2
+- Updated Pogo to								Release 8.1.13
+- Updated Astor to								Release 6.3.5
 - Updated DbServer to							Release 4.21
 - Updated TangORB to							Release 8.2.3
-- Updated ATK to 								Release 4.5
+- Updated ATK to 								Release 4.5.1
 - Updated Starter to							Release 5.11
 - Updated TangoTest to							Release 1.8
 - Updated TangoAccessControl to					Release 2.8
 - Updated DeviceTree to							Release 1.9.4
+
+- SourceForge bug 88  (1497526) - Updating property with character \
+- SourceForge bug 520 (3543407) - Bug in DbGetDeviceAttributeProperty2
+- SourceForge bug 525 (3559224) - Missing -lzmq for libtango
+
+- New attribute alias related commands in Database server
+- New DbRenameServer command in database server
+- The DbDeleteServer command now also delete device properties
+- Improvement in TAC device filter (sr/v-*/* allowed)
+- Add jzmq in source distribution
+- "make pdf" command now generates the Tango book
 
 
 Changes between Tango distribution 7.2.6a and 8.0.5
