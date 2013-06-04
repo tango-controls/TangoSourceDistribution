@@ -9,17 +9,17 @@ endif
 
 javadir = $(datadir)/java
 dist_java_DATA=\
-   Astor-6.3.2.jar \
+   Astor-6.3.5.jar \
    DeviceTree-1.9.6.jar \
-   ATKCore-4.5.0.jar \
-   Jive-4.29.jar \
-   org.tango.pogo-8.1.11.jar \
+   ATKCore-4.5.1.jar \
+   Jive-4.31.jar \
+   org.tango.pogo-8.1.13.jar \
    atkpanel-4.8.jar \
    log4j-1.2.15.jar \
    AtkTuning-2.8.jar \
    LogViewer-1.2.3.jar \
    TangORB-8.2.3.jar \
-   ATKWidget-4.5.0.jar \
+   ATKWidget-4.5.1.jar \
    tool_panels-1.9.jar
 
 if TANGO_JAVA_ENABLED

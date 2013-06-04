@@ -1,6 +1,6 @@
 TANGO history file
 
-05/2013        *******************************************************
+06/2013        *******************************************************
                *                                                     *
                *  Tango release 8.1.2 : Changes since version 8.0.5  *
                *                                                     *
@@ -19,6 +19,27 @@ Changes between Log4tango 4.0.7 and Log4Tango 4.0.8
 
 Changes in Tango itself
 -----------------------
+
+- Add event propagation using multicasting
+- Add a DeviceImpl::write_attr_hardware() method (Feature request 68)
+- Add a new EventConfirmSubscription command to admin device to optimize event heartbeat system
+- Add a new define (TANGO_BASE_CLASS) to make next Tango inheritance change transparent
+- Add class DbServerData with methods to ease moving device server from one CS to another
+- Improve TAC device filters. It is now possible to use one wildcard per field (sr/v-*/*)
+- Memorize error for memorized attribute which failed during device server startup sequence
+- Change the way Tango device server retrieve host IP address(es)
+- New methods in Database class: get_device_from_alias(), get_alias_from_device(), get_attribute_from_alias()
+  and get_alias_from_attribute(). Deprecate get_alias(), get_device_alias() and get_attribute_alias()
+  Also add a new rename_server() method
+- Add DeviceProxy::get_tango_lib_version() method
+- Add DeviceAttribute::set_error_list() method
+- Remove CORBA methods throw clause
+- Add Database::get_device_info() method
+- Coherent inserters/extracters method set between DeviceData and DeviceAttribute for DevEncoded data type
+- Change format define for DevEncoded attribute data type to prevent compilation error when used with Lima
+- Add a check against NULL pointer in Attribute::set_value() method
+- Message "Failed to narrow the EventChannelFactory... is printed on console only during DS startup
+- Reduce min polling period to 5 mS
 
 Bug fixes
 ---------
@@ -44,10 +65,20 @@ Bug recorded in sourceForge:
 - 570 (3604715) : Default format of DevULong (Feature Request 22)
 - 572 (3605540) : DevUChar memorized attribute
 - 593 (3606931) : DeviceImpl class polling methods 
+- 602 : Tango lock mechanism
+- 603 : Open file leak (duplicate of 560)
+- 604 : Polling with long period
+- 608 : Missing include for FreeBSD
+- 609 : FreeBSD and DServerSignal::get_sig_thread_pid() method
 
 Other bugs
 
-
+- In notifd event system in case of slow DS generating event
+- In state/status management when attribute are wrongly configured
+- Small bug in returned value of GroupAttrReply::operator>>
+- In event reconnection in the DS is re-started with the instance name given with different letter cases
+- In admin device RestartDevice command when the device name is defined with upper case letters
+- Double free in case of event system reconnection when events are sent to queue
 
 
 05/2012        *******************************************************
