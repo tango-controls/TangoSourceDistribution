@@ -418,12 +418,12 @@ done at configure time is successfull ("database schema create" reported
 as yes at the end of the configure script execution)
 
 
-7-1 - UPDATING FROM A TANGO 7.2 DATABASE
+7-1 - UPDATING FROM A TANGO 8.0 DATABASE
 --------------------------------------
 
-Tango 8.0 is provided with a small update of the data in the database. This is simply a new
-release of the stored procedure and two new commands in the list of allowed commands for the
-Database class (for Tango Access Control system).
+Tango 8.1 is provided with a small update of the data in the database. This is simply 
+some new commands in the list of allowed commands for the
+Starter and DServer classes (for Tango Access Control system).
 
 To update your database, follow these instructions:
 
@@ -439,11 +439,12 @@ d - Run the update script:
 e - Restart your database server(s)
 
 
-7-2 - UPDATING FROM A TANGO 6 DATABASE
+7-2 - UPDATING FROM A TANGO 7.2 DATABASE
 --------------------------------------
 
-Tango 8 needs an update of the data in the database. This is simply some new
-commands definition for the Tango control access and a new stored procedure release.
+Tango 8.1 needs an update of the data in the database. This is simply one
+update of the stored procedure (release 1.8) and some more
+commands definition for the Tango control access.
 
 To update your database, follow these instructions:
 
@@ -454,7 +455,7 @@ b - Backup your database (Recommended, not mandatory)
 c - Cd to the <install_dir>/share/tango/db directory
 
 d - Run the update script:
-	mysql -u[user] -p[password] < ./update_db6.sql
+	mysql -u[user] -p[password] < ./update_db7.sql
 	
 e - Restart your database server(s)
 
