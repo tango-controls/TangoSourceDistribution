@@ -12,7 +12,7 @@ APP_DIR=@prefix@/share/java;	    export APP_DIR
 
 
 TANGO=$LIB_DIR/TangORB.jar
-TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
+TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar:$LIB_DIR/atkpanel.jar
 
 APPLI_PACKAGE=fr.esrf.tangoatk.widget.util.jdraw;	export APPLI_PACKAGE
 APPLI_MAIN_CLASS=JDrawEditorFrame; export APPLI_MAIN_CLASS
