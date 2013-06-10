@@ -534,6 +534,7 @@ Changes between Tango distribution 8.0.5 and 8.1.2
 - SourceForge bug 88  (1497526) - Updating property with character \
 - SourceForge bug 520 (3543407) - Bug in DbGetDeviceAttributeProperty2
 - SourceForge bug 525 (3559224) - Missing -lzmq for libtango
+- SourceForge bug 555 - Not possible to launch atkpanel from Jdraw
 
 - New attribute alias related commands in Database server
 - New DbRenameServer command in database server
