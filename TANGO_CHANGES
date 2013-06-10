@@ -10,12 +10,13 @@ Tango 8.1 has been developed and tested using:
 
 - omniORB 4.1.6
 - zmq 3.2.2
-- log4tango 4.0.8
+- log4tango 5.0.0
 
-Changes between Log4tango 4.0.7 and Log4Tango 4.0.8
+Changes between Log4tango 4.0.7 and Log4Tango 5.0.0
 ---------------------------------------------------
 
 - Small changes to allow Tango doc generation with a "make pdf" command
+- Created a release 5 to handle a compatibility problem of timestamp buggy in release < 4.0.6 (SF Bug 613)
 
 Changes in Tango itself
 -----------------------
