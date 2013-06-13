@@ -47,6 +47,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/RSSH_CHECK_OMNIORB.m4 \
 	$(top_srcdir)/m4/ac_cxx_namespaces.m4 \
 	$(top_srcdir)/m4/ac_path_mysqlclient.m4 \
 	$(top_srcdir)/m4/ac_prog_mysql.m4 \
+	$(top_srcdir)/m4/ax_cxx_compile_stdcxx_11.m4 \
 	$(top_srcdir)/m4/ax_jni_include_dir.m4 \
 	$(top_srcdir)/m4/check_zlib.m4 $(top_srcdir)/m4/gcc_release.m4 \
 	$(top_srcdir)/m4/java_release.m4 $(top_srcdir)/m4/libtool.m4 \
@@ -165,6 +166,7 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
+HAVE_CXX11 = @HAVE_CXX11@
 HAVE_ORB_IDL = @HAVE_ORB_IDL@
 IDL = @IDL@
 IDLCXX = @IDLCXX@

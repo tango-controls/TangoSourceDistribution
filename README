@@ -523,13 +523,16 @@ Changes between Tango distribution 8.0.5 and 8.1.2
 - Updated atkpanel to							Release 4.8
 - Updated Pogo to								Release 8.1.13
 - Updated Astor to								Release 6.3.5
-- Updated DbServer to							Release 4.22
+- Updated DbServer to							Release 4.23
 - Updated TangORB to							Release 8.2.3
 - Updated ATK to 								Release 4.5.1
-- Updated Starter to							Release 5.11
-- Updated TangoTest to							Release 1.8
-- Updated TangoAccessControl to					Release 2.8
+- Updated Starter to							Release 5.12
+- Updated TangoTest to							Release 1.9
+- Updated TangoAccessControl to					Release 2.9
 - Updated DeviceTree to							Release 1.9.4
+- Updated notifd2db to							Release 1.14
+- Updated tango_admin to						Release 1.11
+- Updated AccessControl abstract class to		Release 2.6
 
 - SourceForge bug 88  (1497526) - Updating property with character \
 - SourceForge bug 520 (3543407) - Bug in DbGetDeviceAttributeProperty2
