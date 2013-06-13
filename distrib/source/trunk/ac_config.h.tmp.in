@@ -42,6 +42,9 @@
 /* define if the library defines strstream */
 #undef HAVE_CLASS_STRSTREAM
 
+/* define if the compiler supports basic C++11 syntax */
+#undef HAVE_CXX11
+
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
@@ -53,9 +56,6 @@
 
 /* Define to 1 if we have gcc 3.2.0 */
 #undef HAVE_GCC_VERSION_3_2_0
-
-/* Define to 1 if we have gcc 4.3.0 */
-#undef HAVE_GCC_VERSION_4_3_0
 
 /* Define to 1 if you have the `gethostname' function. */
 #undef HAVE_GETHOSTNAME

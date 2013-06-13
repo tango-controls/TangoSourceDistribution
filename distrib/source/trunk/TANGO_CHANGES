@@ -80,6 +80,7 @@ Other bugs
 - In event reconnection in the DS is re-started with the instance name given with different letter cases
 - In admin device RestartDevice command when the device name is defined with upper case letters
 - Double free in case of event system reconnection when events are sent to queue
+- Safer memory management in Deviceproxy::read_attributes() method
 
 
 05/2012        *******************************************************

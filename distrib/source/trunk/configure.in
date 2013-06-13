@@ -82,13 +82,11 @@ AC_PROG_MAKE_SET
      if test "x$ac_cv_gcc_version_3_2_0" = "xno"; then
          AC_MSG_ERROR([Not supported gcc release. Should be 3.2.0 or above. Please update !],-1)
      fi
-     gcc_AC_HAVE_GCC_VERSION(4,3,0)
-     if test "x$ac_cv_gcc_version_4_3_0" = "xyes"; then
-		CPP_ELEVEN="-std=c++0x"
-	 else
-		CPP_ELEVEN=""
-	 fi
  fi
+
+# Check if gcc support C++11
+
+AX_CXX_COMPILE_STDCXX_11([noext],[optional])
 
 # Check if Java interpreter is there
 
@@ -148,6 +146,8 @@ if test "x$enable_java" = "xyes" ; then
   			JNI_INCL_DIRS="$JNI_INCL_DIRS -I$JNI_INCLUDE_DIR"
 		done
 	fi
+else
+    enable_jzmq=no
 fi
 
 AC_SUBST(JAVAC)
@@ -323,6 +323,7 @@ AS_IF([test "x$enable_dbserver" = "xyes"], [
 		if test "x$ac_cv_mysql_version_5_0" = "xno"; then
 		 	AC_MSG_WARN([Not supported mysql release. Should be 5.0.x or above. Please update !],-1)
 			enable_db_schema_create=no
+			enable_dbserver=no
 		else
 			enable_db_schema_create=yes
 		fi
@@ -361,15 +362,14 @@ JPEG_MMX_LIB_CXXFLAGS="-D_TANGO_LIB"
 if test "x$enable_jpegmmx" != xno; then
 case $host_cpu in
 	i*86 )
-		JPEG_LIB_CXXFLAGS+=" -DJPG_USE_ASM"
-		JPEG_MMX_LIB_CXXFLAGS+=" -mmmx -DJPG_USE_ASM"
+		JPEG_LIB_CXXFLAGS="-D_TANGO_LIB -DJPG_USE_ASM"
+		JPEG_MMX_LIB_CXXFLAGS="-D_TANGO_LIB -mmmx -DJPG_USE_ASM"
 	;;
 esac
 fi
 
 AC_SUBST(JPEG_LIB_CXXFLAGS)
 AC_SUBST(JPEG_MMX_LIB_CXXFLAGS)
-AC_SUBST(CPP_ELEVEN)
 
 # Define a conditional variables to enable or disable installation
 # of the database server and the database schema creation. 
