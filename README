@@ -529,7 +529,7 @@ Changes between Tango distribution 8.0.5 and 8.1.2
 - Updated Starter to							Release 5.12
 - Updated TangoTest to							Release 1.9
 - Updated TangoAccessControl to					Release 2.9
-- Updated DeviceTree to							Release 1.9.4
+- Updated DeviceTree to							Release 1.9.6
 - Updated notifd2db to							Release 1.14
 - Updated tango_admin to						Release 1.11
 - Updated AccessControl abstract class to		Release 2.6
