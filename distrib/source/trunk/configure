@@ -5159,7 +5159,7 @@ _ACEOF
      fi
  fi
 
-# Check if gcc support C++11
+# Check if compiler support C++11
 
 
     ax_cxx_compile_cxx11_required=falsednl
