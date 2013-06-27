@@ -84,7 +84,7 @@ AC_PROG_MAKE_SET
      fi
  fi
 
-# Check if gcc support C++11
+# Check if compiler support C++11
 
 AX_CXX_COMPILE_STDCXX_11([noext],[optional])
 
