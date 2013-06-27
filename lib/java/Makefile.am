@@ -13,7 +13,7 @@ dist_java_DATA=\
    DeviceTree-1.9.6.jar \
    ATKCore-4.5.1.jar \
    Jive-4.31.jar \
-   org.tango.pogo-8.1.13.jar \
+   org.tango.pogo-8.1.14.jar \
    atkpanel-4.8.jar \
    log4j-1.2.15.jar \
    AtkTuning-2.8.jar \
