@@ -9,7 +9,7 @@ endif
 
 javadir = $(datadir)/java
 dist_java_DATA=\
-   Astor-6.3.5.jar \
+   Astor-6.3.6.jar \
    DeviceTree-1.9.6.jar \
    ATKCore-4.5.1.jar \
    Jive-4.31.jar \
@@ -18,7 +18,7 @@ dist_java_DATA=\
    log4j-1.2.15.jar \
    AtkTuning-2.8.jar \
    LogViewer-1.2.3.jar \
-   TangORB-8.2.3.jar \
+   TangORB-8.3.0.jar \
    ATKWidget-4.5.1.jar \
    tool_panels-1.9.jar
 
