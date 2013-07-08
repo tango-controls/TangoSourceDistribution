@@ -1,0 +1,22 @@
+#!@SHELL@
+applet_name=jive3.MainPanel
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+#
+# Define the CLASSPATH
+#
+JAVALIB=@prefix@/share/java;
+JAVABIN=@prefix@/share/java;
+
+ATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar:$JAVABIN/atkpanel.jar
+LOGVIEWER=$JAVALIB/LogViewer.jar
+ASTOR=$JAVALIB/Astor.jar:$JAVALIB/tools_panel.jar
+LOG4J=$JAVALIB/log4j.jar
+
+CLASSPATH=$JAVALIB/TangORB.jar:$JAVABIN/Jive.jar:$ATK:$LOGVIEWER:$LOG4J:$ASTOR:.
+export CLASSPATH
+
+@JAVA@ -mx128m -DTANGO_HOST=$TANGO_HOST $applet_name $@
