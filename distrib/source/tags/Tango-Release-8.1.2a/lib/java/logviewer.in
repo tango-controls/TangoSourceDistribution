@@ -1,0 +1,21 @@
+#!@SHELL@
+applet_name=fr.esrf.logviewer.Main
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+#
+# Define the CLASSPATH
+#
+JAVALIB=@prefix@/share/java;
+JAVABIN=@prefix@/share/java;
+ATKBIN=@prefix@/share/java;
+TLVBIN=@prefix@/share/java;
+
+ATKJAR=$ATKBIN/ATKCore.jar:$ATKBIN/ATKWidget.jar:$ATKBIN/log4j.jar
+
+CLASSPATH=$JAVALIB/TangORB.jar:$TLVBIN/LogViewer.jar:$ATKJAR:.
+export CLASSPATH
+
+@JAVA@ -DTANGO_HOST=$TANGO_HOST $applet_name $*
