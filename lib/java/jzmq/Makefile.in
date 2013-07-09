@@ -88,7 +88,8 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libjzmq_la_LIBADD =
+am__DEPENDENCIES_1 =
+libjzmq_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am__objects_1 = libjzmq_la-ZMQ.lo libjzmq_la-Context.lo \
 	libjzmq_la-Socket.lo libjzmq_la-Poller.lo libjzmq_la-util.lo
 am_libjzmq_la_OBJECTS = $(am__objects_1)
@@ -321,6 +322,7 @@ JZMQ_HPP_FILES = jzmq.hpp \
 JAVAH_FLAGS = -d . -classpath .
 lib_LTLIBRARIES = libjzmq.la
 libjzmq_la_SOURCES = $(JZMQ_CPP_FILES)
+libjzmq_la_LIBADD = $(LIBZMQ_LIBS)
 
 #nodist_libjzmq_la_SOURCES = \
 #	$(JZMQ_H_FILES) \

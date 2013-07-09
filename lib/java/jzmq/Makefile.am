@@ -23,6 +23,8 @@ JAVAH_FLAGS = -d . -classpath .
 lib_LTLIBRARIES = libjzmq.la
 libjzmq_la_SOURCES = $(JZMQ_CPP_FILES)
 
+libjzmq_la_LIBADD = $(LIBZMQ_LIBS)
+
 #nodist_libjzmq_la_SOURCES = \
 #	$(JZMQ_H_FILES) \
 #	$(JZMQ_HPP_FILES)
