@@ -16,8 +16,11 @@ POGO_CLASS=$APP_DIR/Pogo.jar;			export POGO_CLASS
 
 CLASSPATH=$POGO_CLASS:$TANGO_CLASS;    export CLASSPATH
 
+LIBPATH=@prefix@/lib
+export LIBPATH
+
 #---------------------------------------------------------
 #	Execute java class
 #---------------------------------------------------------
 
-@JAVA@  pogo.make_util.TagModule $@
+@JAVA@  -Djava.library.path=$LIBPATH pogo.make_util.TagModule $@
