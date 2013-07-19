@@ -10,6 +10,10 @@ TANGOATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar
 
 CLASSPATH=$JAVALIB/TangORB.jar:$JAVALIB/Jive.jar:$TANGOATK
 export CLASSPATH
+
+LIBPATH=@prefix@/lib
+export LIBPATH
+
 echo   Starting...
 
-@JAVA@    -DTANGO_HOST=$TANGO_HOST jive.ExecDev $1
+@JAVA@  -Djava.library.path=$LIBPATH  -DTANGO_HOST=$TANGO_HOST jive.ExecDev $1
