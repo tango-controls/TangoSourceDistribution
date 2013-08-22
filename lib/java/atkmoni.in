@@ -21,7 +21,7 @@ CLASSPATH=$TANGO:$TACO:$TANGOATK
 export CLASSPATH
 echo "CLASSPATH=$CLASSPATH"
 
-LIBPATH=@prefix@/lib
+LIBPATH=@libdir@
 export LIBPATH
 
 #---------------------------------------------------------

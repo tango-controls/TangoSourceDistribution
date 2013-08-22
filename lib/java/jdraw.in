@@ -21,7 +21,7 @@ CLASSPATH=$TANGOATK:$TANGO
 export CLASSPATH
 echo "CLASSPATH=$CLASSPATH"
 
-LIBPATH=@prefix@/lib
+LIBPATH=@libdir@
 export LIBPATH
 
 echo Running Jdraw ...

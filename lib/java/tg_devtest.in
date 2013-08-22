@@ -11,7 +11,7 @@ TANGOATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar
 CLASSPATH=$JAVALIB/TangORB.jar:$JAVALIB/Jive.jar:$TANGOATK
 export CLASSPATH
 
-LIBPATH=@prefix@/lib
+LIBPATH=@libdir@
 export LIBPATH
 
 echo   Starting...

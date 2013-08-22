@@ -58,7 +58,7 @@ export ATK_CLASS
 CLASSPATH=$TANGO_CLASS:$ASTOR_CLASS:$JIVE_CLASS:$ATK_CLASS:$LOGVIEWER:$LOG4J
 export CLASSPATH
 
-LIBPATH=@prefix@/lib
+LIBPATH=@libdir@
 export LIBPATH
 
 #---------------------------------------------------------
