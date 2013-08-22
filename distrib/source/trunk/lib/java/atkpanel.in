@@ -19,7 +19,7 @@ ATKPANEL=$LIB_DIR/atkpanel.jar
 CLASSPATH=$ATKPANEL:$TANGOATK:$TANGO
 export CLASSPATH
 
-LIBPATH=@prefix@/lib
+LIBPATH=@libdir@
 export LIBPATH
 
 #---------------------------------------------------------

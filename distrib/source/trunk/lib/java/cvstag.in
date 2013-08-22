@@ -16,7 +16,7 @@ POGO_CLASS=$APP_DIR/Pogo.jar;			export POGO_CLASS
 
 CLASSPATH=$POGO_CLASS:$TANGO_CLASS;    export CLASSPATH
 
-LIBPATH=@prefix@/lib
+LIBPATH=@libdir@
 export LIBPATH
 
 #---------------------------------------------------------

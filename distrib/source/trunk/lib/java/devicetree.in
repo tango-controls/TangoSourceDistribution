@@ -9,7 +9,7 @@ JAVABIN=@prefix@/share/java;
 CLASSPATH=$JAVALIB/TangORB.jar:$JAVALIB/ATKWidget.jar:$JAVALIB/ATKCore.jar:$JAVABIN/Jive.jar:$JAVABIN/atkpanel.jar:$JAVABIN/DeviceTree.jar
 export CLASSPATH
 
-LIBPATH=@prefix@/lib
+LIBPATH=@libdir@
 export LIBPATH
 
 echo  Running Device Tree...
