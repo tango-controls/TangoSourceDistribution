@@ -361,6 +361,7 @@ dist_java_DATA = \
 @TANGO_JAVA_ENABLED_TRUE@		-e 's|@TANGO_RC_FILE[@]|$(TANGO_RC_FILE)|g' \
 @TANGO_JAVA_ENABLED_TRUE@		-e 's|@JAVA[@]|$(JAVA)|g' \
 @TANGO_JAVA_ENABLED_TRUE@		-e 's|@DOXYGEN[@]|$(DOXYGEN)|g' \
+@TANGO_JAVA_ENABLED_TRUE@		-e 's|@libdir[@]|$(libdir)|g' \
 @TANGO_JAVA_ENABLED_TRUE@		-e 's|@prefix[@]|$(prefix)|g'
 
 

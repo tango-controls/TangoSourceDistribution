@@ -44,6 +44,7 @@ edit = sed \
 		-e 's|@TANGO_RC_FILE[@]|$(TANGO_RC_FILE)|g' \
 		-e 's|@JAVA[@]|$(JAVA)|g' \
 		-e 's|@DOXYGEN[@]|$(DOXYGEN)|g' \
+		-e 's|@libdir[@]|$(libdir)|g' \
 		-e 's|@prefix[@]|$(prefix)|g'
      
 #astor jive pogo pogo-6 devicetree atkpanel logviewer atktuning jdraw synopticappli atkmoni cvstag TangoVers tg_devtest: Makefile
