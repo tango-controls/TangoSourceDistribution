@@ -20,7 +20,7 @@
 # packagename, the second is the version used for the tar file,
 # the third is an email address for bug reports (shouldn't be necessary),
 # and the fourth argument is                
-AC_INIT(Tango,8.1.2,tango@esrf.fr,tango)
+AC_INIT(Tango,9.0.2,tango@esrf.fr,tango)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -62,7 +62,7 @@ AC_CONFIG_HEADERS(ac_config.h.tmp)
 #      interface numbers in the range from number `CURRENT - AGE' to
 #      `CURRENT'.
 
-VERSION_INFO=9:2:1
+VERSION_INFO=9:2:0
 	
 # Checks for programs.
 
@@ -204,7 +204,7 @@ AC_ARG_WITH(zmq, AC_HELP_STRING([--with-zmq],[prefix to ZMQ installation]) ,\
 
 PKG_CONFIG_PATH=$PKG_CONFIG_PATH:${ZMQ_PREFIX}/lib/pkgconfig
 
-PKG_CHECK_MODULES([LIBZMQ], [libzmq >= 3.1.0],[],AC_MSG_ERROR(Missing ZMQ library - Use --with-zmq configure option or add directory containing libzmq.pc to PKG_CONFIG_PATH environment variable))
+PKG_CHECK_MODULES([LIBZMQ], [libzmq >= 3.2.0],[],AC_MSG_ERROR(Missing ZMQ library - Use --with-zmq configure option or add directory containing libzmq.pc to PKG_CONFIG_PATH environment variable))
 ZMQ_VERSION=`eval pkg-config --modversion libzmq`
 ZMQ_ROOT=`eval pkg-config --variable=prefix libzmq`
 AC_SUBST(ZMQ_PREFIX)
