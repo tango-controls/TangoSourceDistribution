@@ -9,8 +9,5 @@ JAVABIN=@prefix@/share/java;
 CLASSPATH=$JAVALIB/TangORB.jar:$JAVALIB/ATKWidget.jar:$JAVALIB/ATKCore.jar:$JAVABIN/Jive.jar:$JAVABIN/atkpanel.jar:$JAVABIN/DeviceTree.jar
 export CLASSPATH
 
-LIBPATH=@libdir@
-export LIBPATH
-
 echo  Running Device Tree...
-@JAVA@ -Djava.library.path=$LIBPATH -DTANGO_HOST=$TANGO_HOST explorer.Main $@
+@JAVA@ -DTANGO_HOST=$TANGO_HOST explorer.Main $@

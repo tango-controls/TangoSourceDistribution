@@ -21,12 +21,9 @@ CLASSPATH=$TANGO:$TACO:$TANGOATK
 export CLASSPATH
 echo "CLASSPATH=$CLASSPATH"
 
-LIBPATH=@libdir@
-export LIBPATH
-
 #---------------------------------------------------------
 #       Start the atkmoni process
 #---------------------------------------------------------
 #
 
-@JAVA@ -Djava.library.path=$LIBPATH -DTANGO_HOST=$TANGO_HOST $APPLI_PACKAGE.$APPLI_MAIN_CLASS $*
+@JAVA@ -DTANGO_HOST=$TANGO_HOST $APPLI_PACKAGE.$APPLI_MAIN_CLASS $*

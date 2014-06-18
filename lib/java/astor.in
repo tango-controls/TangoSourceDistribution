@@ -58,13 +58,10 @@ export ATK_CLASS
 CLASSPATH=$TANGO_CLASS:$ASTOR_CLASS:$JIVE_CLASS:$ATK_CLASS:$LOGVIEWER:$LOG4J
 export CLASSPATH
 
-LIBPATH=@libdir@
-export LIBPATH
-
 #---------------------------------------------------------
 #	Start the Astor process
 #---------------------------------------------------------
 #
 
-@JAVA@ -mx128m -Djava.library.path=$LIBPATH -DTANGO_HOST=$TANGO_HOST admin.astor.Astor $*
+@JAVA@ -mx128m -DTANGO_HOST=$TANGO_HOST admin.astor.Astor $*
 

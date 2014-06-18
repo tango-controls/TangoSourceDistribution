@@ -19,7 +19,4 @@ LOG4J=$JAVALIB/log4j.jar
 CLASSPATH=$JAVALIB/TangORB.jar:$JAVABIN/Jive.jar:$ATK:$LOGVIEWER:$LOG4J:$ASTOR:.
 export CLASSPATH
 
-LIBPATH=@libdir@
-export LIBPATH
-
-@JAVA@ -mx128m -Djava.library.path=$LIBPATH -DTANGO_HOST=$TANGO_HOST $applet_name $@
+@JAVA@ -mx128m -DTANGO_HOST=$TANGO_HOST $applet_name $@
