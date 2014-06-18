@@ -52,7 +52,6 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/RSSH_CHECK_OMNIORB.m4 \
 	$(top_srcdir)/m4/ac_path_mysqlclient.m4 \
 	$(top_srcdir)/m4/ac_prog_mysql.m4 \
 	$(top_srcdir)/m4/ax_cxx_compile_stdcxx_11.m4 \
-	$(top_srcdir)/m4/ax_jni_include_dir.m4 \
 	$(top_srcdir)/m4/check_zlib.m4 $(top_srcdir)/m4/gcc_release.m4 \
 	$(top_srcdir)/m4/java_release.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -161,8 +160,6 @@ INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 JAVA = @JAVA@
-JAVAC = @JAVAC@
-JAVAH = @JAVAH@
 JNI_INCL_DIRS = @JNI_INCL_DIRS@
 JPEG_LIB_CXXFLAGS = @JPEG_LIB_CXXFLAGS@
 JPEG_MMX_LIB_CXXFLAGS = @JPEG_MMX_LIB_CXXFLAGS@
@@ -222,7 +219,6 @@ ZLIB_CPPFLAGS = @ZLIB_CPPFLAGS@
 ZLIB_LDFLAGS = @ZLIB_LDFLAGS@
 ZLIB_LIBS = @ZLIB_LIBS@
 ZMQ_PREFIX = @ZMQ_PREFIX@
-_ACJNI_JAVAC = @_ACJNI_JAVAC@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
