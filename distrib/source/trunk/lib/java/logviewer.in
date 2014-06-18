@@ -18,7 +18,4 @@ ATKJAR=$ATKBIN/ATKCore.jar:$ATKBIN/ATKWidget.jar:$ATKBIN/log4j.jar
 CLASSPATH=$JAVALIB/TangORB.jar:$TLVBIN/LogViewer.jar:$ATKJAR:.
 export CLASSPATH
 
-LIBPATH=@libdir@
-export LIBPATH
-
-@JAVA@ -Djava.library.path=$LIBPATH -DTANGO_HOST=$TANGO_HOST $applet_name $*
+@JAVA@ -DTANGO_HOST=$TANGO_HOST $applet_name $*

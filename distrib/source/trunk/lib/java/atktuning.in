@@ -19,11 +19,8 @@ ATKPANEL=$LIB_DIR/AtkTuning.jar
 CLASSPATH=$ATKPANEL:$TANGOATK:$TANGO
 export CLASSPATH
 
-LIBPATH=@libdir@
-export LIBPATH
-
 #---------------------------------------------------------
 #	Start the atktuning process
 #---------------------------------------------------------
 
-@JAVA@ -Djava.library.path=$LIBPATH -DTANGO_HOST=$TANGO_HOST atktuning.MainPanel $*
+@JAVA@ -DTANGO_HOST=$TANGO_HOST atktuning.MainPanel $*

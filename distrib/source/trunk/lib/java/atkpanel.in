@@ -19,11 +19,8 @@ ATKPANEL=$LIB_DIR/atkpanel.jar
 CLASSPATH=$ATKPANEL:$TANGOATK:$TANGO
 export CLASSPATH
 
-LIBPATH=@libdir@
-export LIBPATH
-
 #---------------------------------------------------------
 #	Start the atkpanel process
 #---------------------------------------------------------
 
-@JAVA@ -mx128m -Djava.library.path=$LIBPATH -DTANGO_HOST=$TANGO_HOST atkpanel.MainPanel $*
+@JAVA@ -mx128m -DTANGO_HOST=$TANGO_HOST atkpanel.MainPanel $*
