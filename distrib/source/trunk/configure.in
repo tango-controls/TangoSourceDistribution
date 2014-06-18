@@ -397,7 +397,6 @@ AC_OUTPUT(Makefile
 	  cppserver/AbstractClass/AccessControl/Makefile
 	  cppserver/tangoaccesscontrol/Makefile
 	  utils/Makefile
-	  utils/notifd2db/Makefile
 	  utils/tango_admin/Makefile
 	  scripts/Makefile
 	  scripts/tango
