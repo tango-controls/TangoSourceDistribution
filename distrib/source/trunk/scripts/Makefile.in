@@ -36,11 +36,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@TANGO_DB_SERVER_ENABLED_TRUE@am__append_1 = tango tango_wca
 subdir = scripts
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/notify_daemon.in $(srcdir)/tango.in \
-	$(srcdir)/tango_wca.in
+	$(srcdir)/tango.in $(srcdir)/tango_wca.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/RSSH_CHECK_OMNIORB.m4 \
 	$(top_srcdir)/m4/RSSH_CHECK_PTHREADS.m4 \
@@ -61,7 +59,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/ac_config.h.tmp
-CONFIG_CLEAN_FILES = tango tango_wca notify_daemon
+CONFIG_CLEAN_FILES = tango tango_wca
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -278,7 +276,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-bin_SCRIPTS = notify_daemon $(am__append_1)
+@TANGO_DB_SERVER_ENABLED_TRUE@bin_SCRIPTS = tango tango_wca
 all: all-am
 
 .SUFFIXES:
@@ -315,8 +313,6 @@ $(am__aclocal_m4_deps):
 tango: $(top_builddir)/config.status $(srcdir)/tango.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 tango_wca: $(top_builddir)/config.status $(srcdir)/tango_wca.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-notify_daemon: $(top_builddir)/config.status $(srcdir)/notify_daemon.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-binSCRIPTS: $(bin_SCRIPTS)
 	@$(NORMAL_INSTALL)
