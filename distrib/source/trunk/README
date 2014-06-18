@@ -512,7 +512,7 @@ Changes between Tango distribution 8.1.2 and 9.0.5
 --------------------------------------------------
 
 - Updated C++ library to						Release 9.0.2
-- Updated Log4Tango to 							Release
+- Updated Log4Tango to 							Release 5.0.1
 - Updated Jive to								Release
 - Updated atkpanel to							Release
 - Updated Pogo to								Release
@@ -524,9 +524,11 @@ Changes between Tango distribution 8.1.2 and 9.0.5
 - Updated TangoTest to							Release
 - Updated TangoAccessControl to					Release
 - Updated DeviceTree to							Release
-- Updated notifd2db to							Release
 - Updated tango_admin to						Release
 - Updated AccessControl abstract class to		Release
+
+- notifd2db removed from distribution
+- jzmq removed from distribution
 
 Changes between Tango distribution 8.0.5 and 8.1.2
 ---------------------------------------------------

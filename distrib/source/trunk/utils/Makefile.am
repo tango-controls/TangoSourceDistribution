@@ -1,2 +1,2 @@
 
-SUBDIRS = notifd2db tango_admin
+SUBDIRS = tango_admin
