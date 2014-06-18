@@ -123,43 +123,11 @@ else
    with_java=
 fi
 
-enable_jzmq=yes
-if test "x$enable_java" = "xyes" ; then
-# Check for JDK
-	test "x$JAVAC" = x && AC_CHECK_PROGS(JAVAC, javac -encoding ut8)
-	if test "x$JAVAC" = x; then
-		AC_MSG_WARN([cannot find javac])
-		enable_jzmq=no
-	fi
-
-	if test "x$JAVAC" != x; then
-		test "x$JAVAH" = x && AC_CHECK_PROGS(JAVAH, javah)
-		if test "x$JAVAH" = x; then
-			AC_MSG_WARN([cannot find javah])
-			enable_jzmq=no
-		fi
-	fi
-
-	if test "x$enable_jzmq" = "xyes"; then
-		AX_JNI_INCLUDE_DIR
-		for JNI_INCLUDE_DIR in $JNI_INCLUDE_DIRS; do
-  			JNI_INCL_DIRS="$JNI_INCL_DIRS -I$JNI_INCLUDE_DIR"
-		done
-	fi
-else
-    enable_jzmq=no
-fi
-
-AC_SUBST(JAVAC)
-AC_SUBST(JAVAH)
-
 # Define a conditional variable to enable or disable installation
 # of java applications. The variable is used in the Makefiles.
 #
  
 AM_CONDITIONAL(TANGO_JAVA_ENABLED, test x"$enable_java" != x"no")
-AM_CONDITIONAL(TANGO_JZMQ_ENABLED, test x"$enable_jzmq" != x"no")
-
 
 # Check if doxygen is there
 
@@ -413,7 +381,6 @@ AC_OUTPUT(Makefile
 	  lib/cpp/client/Makefile
 	  lib/cpp/client/helpers/Makefile
 	  lib/java/Makefile
-      lib/java/jzmq/Makefile
 	  cppserver/Makefile
 	  cppserver/database/Makefile
 	  cppserver/database/create_db.sql	
@@ -468,7 +435,6 @@ Configuration ($PACKAGE):
 build:
 	libraries:              ${enable_lib}
 	java application:       ${enable_java}
-	event java interface:	${enable_jzmq}
 	access control server:	${enable_dbserver}
 	database server:        ${enable_dbserver}
 	database schema create: ${enable_db_schema_create}

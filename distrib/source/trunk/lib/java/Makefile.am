@@ -1,8 +1,4 @@
 
-if TANGO_JZMQ_ENABLED
-SUBDIRS=jzmq
-endif
-
 # In the java directory we don't want to do anything, just
 # make sure it is in the dist. Don't use EXTRA_DIST. It will copy
 # the link instead of keeping them as links

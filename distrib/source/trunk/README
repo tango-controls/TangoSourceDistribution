@@ -33,12 +33,11 @@ runs on Windows but the Makefile don't.
 
 Tango 9 and above is compliant to the 64 bit architecture.
 
-This package is foreseen (and was tested) to run with omniORB4.1.7 and
-Java 1.6
+This package is foreseen (and was tested) to run with omniORB4.1.7,
+zmq 3.2.4 and Java 1.6
 
 The default Pogo application in this package can generate source code
-for C++. The old Pogo application is also provided to
-generate Java and Python device servers.
+for C++, Python and Java device servers.
 
 The database server delivered with this package do not force the MySQL
 user to be root. You have to use the my.cnf configuration files
@@ -241,7 +240,7 @@ Hints to configure:
 
 The Tango database server
 -------------------------
-To compile and install the Tango database server, the threadsafe version of
+To compile and install the Tango database server, the thread safe version of
 the mysql client library libmysqlclient_r must be available.
 Use the --with-mysqlclient* options when the library is not found. To disable 
 the compilation and installation of the database server, 
@@ -290,15 +289,6 @@ It is not mandatory to find the java interpreter in your PATH. You can use
 the "--disable-java" configure option to build Tango. 
 When java was not found, disabled, or found with un unsufficient version, 
 the installation of the java applications is disabled.
-
-Starting with Tango 8.1.2, the java event system uses ZMQ event.
-ZMQ in Java is implemented as a thin JNI layer. The java part of this layer is
-included in the distributed "TangORB.jar" file. The associated small
-library (libjzmq.so) is compiled when you run "make". Nevertheless, this
-compilation is executed only is the java utility "javac" (part of the 
-classical JDK) is found during the configure run. At the end of its run,
-configure tells you in the list of what will be built if the
-"event java interface" will be generated. 
 
 lyx
 ---
