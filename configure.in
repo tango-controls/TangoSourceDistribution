@@ -402,7 +402,6 @@ AC_OUTPUT(Makefile
 	  scripts/Makefile
 	  scripts/tango
 	  scripts/tango_wca
-	  scripts/notify_daemon
   	  doc/Makefile
 	  doc/man/Makefile
 	  doc/src/Makefile

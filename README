@@ -529,6 +529,7 @@ Changes between Tango distribution 8.1.2 and 9.0.5
 
 - notifd2db removed from distribution
 - jzmq removed from distribution
+- removed notify_daemon script
 
 Changes between Tango distribution 8.0.5 and 8.1.2
 ---------------------------------------------------
