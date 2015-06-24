@@ -1,4 +1,4 @@
-		TANGO source code release version 9.0.2 - README (07/2014)
+		TANGO source code release version 9.1.0 - README (07/2015)
 		==========================================================
 
 
@@ -26,15 +26,15 @@ This is the README for the TANGO source code release. TANGO is a
 toolkit for building object oriented control systems based on CORBA ans ZMQ. 
 TANGO is a joint effort of the several European research institutes.
 
-This source code release is based on the latest version of TANGO 9 (9.0.2)
+This source code release is based on the latest version of TANGO 9 (9.1.0)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
 
 Tango 9 and above is compliant to the 64 bit architecture.
 
-This package is foreseen (and was tested) to run with omniORB4.1.7,
-zmq 3.2.4 and Java 1.6
+This package is foreseen (and was tested) to run with omniORB4.2.0,
+zmq 4.0.5 and Java 1.6
 
 The default Pogo application in this package can generate source code
 for C++, Python and Java device servers.
@@ -119,11 +119,11 @@ use the database. It is a sub-part of Jive.
 Before compiling and installing TANGO you need to install :
 
 (1) omniORB available from http://sourceforge.net/projects/omniorb 
-    (version >= 4.1 but not 4.1.1. Preferably version 4.1.7).
+    (version >= 4.1 but not 4.1.1. Preferably version 4.2.0).
 	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
-(2) zmq available from http://www.zeromq.org (version >= 3.2).
+(2) zmq available from http://www.zeromq.org (version >= 4.0.5).
 	 Zmq is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
@@ -211,14 +211,14 @@ ready to be installed.
 Example:								
         
 		Source code location:   ../..
-        Version:                9.0.2
+        Version:                9.1.0
         Compiler:               gcc,g++
 
-        OMNIORB PATH:           /segfs/tango/ORB/omniORB4.1.7/ubuntu1204
-        OMNIORB VERSION:        "4.1.7"
+        OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.0/ubuntu1404
+        OMNIORB VERSION:        "4.2.0"
 
-        ZMQ PATH:               /segfs/tango/transport/zmq/ubuntu1204
-        ZMQ VERSION:            3.2.4
+        ZMQ PATH:               /segfs/tango/transport/zmq/ubuntu1404
+        ZMQ VERSION:            4.0.5
 
         JAVA PATH:              /usr/bin/java
         JAVA VERSION:           1.6.0_26
@@ -323,8 +323,8 @@ cd build
 export CC=gcc
 export CXX=g++
 ../configure --prefix=/home/tango/release/install_dir_linux \
-	--with-omni=/segfs/tango/ORB/omniORB4.1.7/ubuntu1010 \
-    --with-zmq=/segfs/tango/transport/zmq/ubuntu1010
+	--with-omni=/segfs/tango/ORB/omniORB4.2.0/ubuntu1404 \
+    --with-zmq=/segfs/tango/transport/zmq/ubuntu1404
 
 	
 During the configure procedure the access to mysql is tested. Please prepare
@@ -508,10 +508,10 @@ documentation, news and to download add-on packages.
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
 
-Changes between Tango distribution 8.1.2 and 9.0.5
+Changes between Tango distribution 8.1.2 and 9.1.0
 --------------------------------------------------
 
-- Updated C++ library to						Release 9.0.2
+- Updated C++ library to						Release 9.1.0
 - Updated Log4Tango to 							Release 5.0.1
 - Updated Jive to								Release
 - Updated atkpanel to							Release
@@ -521,10 +521,10 @@ Changes between Tango distribution 8.1.2 and 9.0.5
 - Updated TangORB to							Release
 - Updated ATK to 								Release
 - Updated Starter to							Release
-- Updated TangoTest to							Release
+- Updated TangoTest to							Release 2.0
 - Updated TangoAccessControl to					Release
 - Updated DeviceTree to							Release
-- Updated tango_admin to						Release
+- Updated tango_admin to						Release 1.12
 - Updated AccessControl abstract class to		Release
 
 - notifd2db removed from distribution

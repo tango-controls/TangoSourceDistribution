@@ -18865,7 +18865,7 @@ subdirs="$subdirs lib/cpp/log4tango"
 
 
 # All the Makefiles to be generated.
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db7.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/notifd2db/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca doc/Makefile doc/man/Makefile doc/src/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db7.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca doc/Makefile doc/man/Makefile doc/src/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -20031,7 +20031,6 @@ do
     "cppserver/AbstractClass/AccessControl/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/AbstractClass/AccessControl/Makefile" ;;
     "cppserver/tangoaccesscontrol/Makefile") CONFIG_FILES="$CONFIG_FILES cppserver/tangoaccesscontrol/Makefile" ;;
     "utils/Makefile") CONFIG_FILES="$CONFIG_FILES utils/Makefile" ;;
-    "utils/notifd2db/Makefile") CONFIG_FILES="$CONFIG_FILES utils/notifd2db/Makefile" ;;
     "utils/tango_admin/Makefile") CONFIG_FILES="$CONFIG_FILES utils/tango_admin/Makefile" ;;
     "scripts/Makefile") CONFIG_FILES="$CONFIG_FILES scripts/Makefile" ;;
     "scripts/tango") CONFIG_FILES="$CONFIG_FILES scripts/tango" ;;
