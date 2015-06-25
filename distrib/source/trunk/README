@@ -524,7 +524,7 @@ Changes between Tango distribution 8.1.2 and 9.1.0
 - Updated TangoTest to							Release 2.0
 - Updated TangoAccessControl to					Release
 - Updated DeviceTree to							Release
-- Updated tango_admin to						Release 1.12
+- Updated tango_admin to						Release 1.13
 - Updated AccessControl abstract class to		Release
 
 - notifd2db removed from distribution
