@@ -8,7 +8,7 @@ JAVALIB=@prefix@/share/java;
 
 TANGOATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar
 
-CLASSPATH=$JAVALIB/TangORB.jar:$JAVALIB/Jive.jar:$TANGOATK
+CLASSPATH=$JAVALIB/JTango.jar:$JAVALIB/Jive.jar:$TANGOATK
 export CLASSPATH
 
 echo   Starting...

@@ -54,7 +54,7 @@ export SRC_PATH
 #---------------------------------------------------------
 APP_DIR=@prefix@/share/java;		export APP_DIR
 
-TANGO_CLASS=$APP_DIR/TangORB.jar;	export TANGO_CLASS
+TANGO_CLASS=$APP_DIR/JTango.jar;	export TANGO_CLASS
 POGO_CLASS=$APP_DIR/org.tango.pogo.jar;		export POGO_CLASS
 
 CLASSPATH=$POGO_CLASS:$TANGO_CLASS;    export CLASSPATH
