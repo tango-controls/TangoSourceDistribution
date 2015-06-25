@@ -37,7 +37,8 @@ AC_REVISION($Revision$)
 
 # AM_INIT_AUTOMAKE sets up automake which is used to generate
 # Makefile.in from Makefile.am
-AM_INIT_AUTOMAKE		
+AM_INIT_AUTOMAKE
+AM_SILENT_RULES([yes])
 
 # Tells automake to use `ac_config.h.tmp' to stash all the #defines
 # that result from a run of configure.

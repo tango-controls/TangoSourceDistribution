@@ -3,14 +3,9 @@
 #	Set the Class Path
 #
 LIB_DIR=@prefix@/share/java;	 export LIB_DIR
-CLASSPATH=$LIB_DIR/TangORB.jar
+CLASSPATH=$LIB_DIR/JTango.jar:$LIB_DIR/Astor.jar
 export CLASSPATH
 #
 #	Start the java virtual machine
 #
-if [ "$#" -lt 1 ]
-then
-	echo usage: $0 "<Tango jar file path>"
-else
-	@JAVA@ fr.esrf.TangoApi.TangORBversion $1
-fi
+@JAVA@ admin.astor.tango_release.JTangoVersion

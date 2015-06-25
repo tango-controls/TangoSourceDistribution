@@ -15,7 +15,7 @@ APP_DIR=@prefix@/share/java;	    export APP_DIR
 #--------------------------------------------------------------------------
 
 
-TANGO=$LIB_DIR/TangORB.jar
+TANGO=$LIB_DIR/JTango.jar
 
 TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
 ATKPANEL=$APP_DIR/atkpanel.jar

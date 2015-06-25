@@ -12,7 +12,7 @@ fi
 LIB_DIR=@prefix@/share/java;   export LIB_DIR
 
 
-TANGO=$LIB_DIR/TangORB.jar
+TANGO=$LIB_DIR/JTango.jar
 TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
 ATKPANEL=$LIB_DIR/AtkTuning.jar
 
