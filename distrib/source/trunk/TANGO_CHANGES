@@ -1,5 +1,115 @@
 TANGO history file
 
+06/2015        *******************************************************
+               *                                                     *
+               *  Tango release 9.1.0 : Changes since version 8.1.2  *
+               *                                                     *
+               *******************************************************
+
+Tango 9.1 has been developed and tested using:
+
+- omniORB 4.2.0
+- zmq 4.0.5
+- log4tango 5.0.1
+
+Please note that omniORB 4.2.0 on Windows has a bug preventing timeout to work correctly.
+There is a required change described in http://www.omniorb-support.com/pipermail/omniorb-list/2014-November/031621.html
+Do not use the omniORB libraries distributed from omniORB site. Use those provided by Tango Windows binary
+distribution (which include the bug fix)
+
+Changes between Log4tango 5.0.0 and Log4Tango 5.0.1
+---------------------------------------------------
+
+- Small Windows specific change to support new Windows compiler
+
+Changes in Tango itself
+-----------------------
+
+- Add device pipe
+- Add forwarded attribute
+- Add enumeration data type for attribute
+- Add device interface change event (FR 90)
+- Add dynamic command (FR 44)
+- New polling algorithm
+- Add memorized attribute information in attribute config (FR 20)
+- New method DeviceProxy::write_read_attributes(). Note the ending s meaning plurial.
+- Attribute "unit" property library default value is now an empty string
+- Only one reference doc generated for all Tango classes (client and server). Tango book chapter 6 
+is removed.
+- Add method DeviceImpl::is_there_subscriber() (FR 89)
+- Use template explicit instantiation
+- Code re-factoring for 
+    . attribute configuration storage in DB
+    . Event compatibility
+    . KeepAliveThread (on client)
+- Optimize group calls in case of disconnected group members 
+- Replace many "#define" by "const int" or "const char *" in Tango namespace
+- Added a Tango::string_free() call
+- Windows: Add a WSAStartup() call for pure client
+- Event: During bind action, ask for ephemeral port number to ZMQ
+- In Attribute::set_value() method family: Add test on data size before testing given pointer validity
+- If not already installed, install SIGINT and SIGTERM signal handler in pure client for faster device
+unlocking (in case some device is locked)
+- Messsage "Failed to narrow the EventChannelfactory..." printed by DS to cout5 (FR 91)
+- Better management of the admin device in Util::get_device_by_name()
+- svr_starting flag now reset in Util::server_run() (instead of end of admin device creation)
+- Better support of host alias when used in device fqdn
+- Better support of DS without db when they embed several Tango classes
+- Add methods DeviceProxy::get_command_list() and DeviceProxy::get_command_config() for better compatibility
+between command an attribute
+- Client using event: ORB shutdown an destroyed at process exit
+- Remove possible deadlock in server side when using DeviceImpl class polling related methods
+- Increase ORB maxGIOPConnectionPerServer to 128
+- Change in attribute name passed to event callback in case of CS with multiple DB servers and in case of
+CS with TANGO_HOST defined using a host alias
+- It's supported to specify a host name When using ORBendPoint command line option
+- Added DeviceData and DeviceAttribute state() methods
+- First sync. event also for periodic event
+- Also manage alternate address(es) for events for DS running on host with several NIC
+- Databaase::add_server() method also manages the admin device
+
+
+Bug fixes
+---------
+
+Bug recorded in sourceForge:
+
+- 620 : IP address specification from omniORB configuration file
+- 621 : INcompatibility between ZMQ events
+- 627 : DeviceAttribute data format field when using event
+- 631 : Event reconnection
+- 632 : Seg fault during event reconnection (with Tango 7/8 devices)
+- 633 : DevRestart with dynamic attribute when polling is configured via code
+- 638 : Missing events after two consecutive re-connection
+- 642 : Client crash during re-connection
+- 643 : Compilation clash on Windows (about NO_DATA)
+- 646 : ZMQ event for device name when using FQDN
+- 652 : Bug in signal managementwhen using your own signal handler
+- 667 : Subscribing to event does not report error when polling is stopped on server side
+- 668 : Inconsistency between stateless and non-stateless event subscription
+- 676 : Event notification stopped after a while
+- 682 : AttributeProxy created by alias and put_property() method
+- 699 : Memory leak in callback calls when using asynchronous PUSH methods
+- 707 : Wron dates from attribute_history() call
+- 720 : Event with no-db device
+- 725 : Hang in client when doing event subscription within the event callback
+
+
+Other bugs
+
+- In DbServerData class: Device attribute properties were not correctly copied
+- In admin device polling_threads_pool_conf property when property size is > 255 chars
+- Memory leak in server side during command ZmqEventSubscriptionChange in case of wrongly configured event
+- In polling thread tuning algorithm
+- Server side: In case one ORB is already created, also destroy db related objects stored in ApiUtil
+- When using C++11: No event in case of CS with multiple DB servers if the server is started with
+TANGO_HOST set to one DB server while the client is started with TANGO_HOST set to other DB server
+- Fix valgrind complaining about uninitialized bytes when pushing events
+- For float or double attribute: bug preventing events to be fired when attribute value is NaN
+- During re-connection when remote device has alternate address(es) in its IOR 
+
+
+
 06/2013        *******************************************************
                *                                                     *
                *  Tango release 8.1.2 : Changes since version 8.0.5  *

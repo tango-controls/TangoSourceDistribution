@@ -531,6 +531,17 @@ Changes between Tango distribution 8.1.2 and 9.1.0
 - jzmq removed from distribution
 - removed notify_daemon script
 
+- SourceForge bug 661: DbServer : Wrong initialization of device table int and date columns (created_db script)
+- SourceForge bug 669: Jive : File written with escaped " character
+- SourceForge bug 670: TangoTest : Crash with value < 1 given to attribute float_scalar
+- SourceForge bug 671: DbServer : Attribute alias not deleted during delete_device
+- SourceForge bug 713: DbServer : History ID on 64 bits value
+- DbServer: Characters / and " " forbidden in alias name
+- DbServer: Small memory leak in DbGetInstanceNameList command
+- DbServer: Memory leak when trying to get event from it
+- Tango_admin: Add options --server-list and --server-instance-list (FR 99)
+
+
 Changes between Tango distribution 8.0.5 and 8.1.2
 ---------------------------------------------------
 
