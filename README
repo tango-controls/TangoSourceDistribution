@@ -513,17 +513,16 @@ Changes between Tango distribution 8.1.2 and 9.1.0
 
 - Updated C++ library to						Release 9.1.0
 - Updated Log4Tango to 							Release 5.0.1
-- Updated Jive to								Release
-- Updated atkpanel to							Release
-- Updated Pogo to								Release
-- Updated Astor to								Release
+- Updated Jive to								Release 6.7
+- Updated atkpanel to							Release 5.0
+- Updated Pogo to								Release 9.1.1
+- Updated Astor to								Release 6.6.6
 - Updated DbServer to							Release
-- Updated TangORB to							Release
-- Updated ATK to 								Release
+- Replacing TanORB with JTango					Release 9.0.3
+- Updated ATK to 								Release 9.0.8
 - Updated Starter to							Release
 - Updated TangoTest to							Release 2.0
 - Updated TangoAccessControl to					Release
-- Updated DeviceTree to							Release
 - Updated tango_admin to						Release 1.13
 - Updated AccessControl abstract class to		Release
 
