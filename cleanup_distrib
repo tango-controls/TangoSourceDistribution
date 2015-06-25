@@ -7,6 +7,7 @@
 # distrib are links to other directories in SVN using svn:externals
 # property. In these original directories, they are some files 
 # which are needed there but not in a source distribution framework
+# (Windows specific files....)
 #
 
 
@@ -145,9 +146,11 @@ rm -Rf lib/cpp/log4tango/autom4te.cache
 rm -f lib/cpp/log4tango/make-install.sh
 rm -Rf lib/cpp/log4tango/msvc8
 rm -Rf lib/cpp/log4tango/msvc9
-rm -Rf lib/cpp/log4tango/m32vc9
-rm -Rf lib/cpp/log4tango/m32vc10
+rm -Rf lib/cpp/log4tango/ms32vc10
+rm -Rf lib/cpp/log4tango/m64vc9
+rm -Rf lib/cpp/log4tango/m64vc10
 rm -Rf lib/cpp/log4tango/m64vc11
+rm -Rf lib/cpp/log4tango/m64vc12
 
 #
 #	utils directories
