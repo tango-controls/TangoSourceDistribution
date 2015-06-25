@@ -25,7 +25,7 @@ AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
 
 # Tells autoconf that we want at least version 2.53 of autoconf to
-# create configure from configure.in
+# create configure from configure.ac
 AC_PREREQ(2.53)
 
 AM_MAINTAINER_MODE()
@@ -37,7 +37,7 @@ AC_REVISION($Revision$)
 
 # AM_INIT_AUTOMAKE sets up automake which is used to generate
 # Makefile.in from Makefile.am
-AM_INIT_AUTOMAKE($PACKAGE_TARNAME, $PACKAGE_VERSION)		
+AM_INIT_AUTOMAKE		
 
 # Tells automake to use `ac_config.h.tmp' to stash all the #defines
 # that result from a run of configure.
