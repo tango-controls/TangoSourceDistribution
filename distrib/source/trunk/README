@@ -119,7 +119,7 @@ use the database. It is a sub-part of Jive.
 Before compiling and installing TANGO you need to install :
 
 (1) omniORB available from http://sourceforge.net/projects/omniorb 
-    (version >= 4.1 but not 4.1.1. Preferably version 4.2.0).
+    (Preferably version 4.2.0).
 	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
@@ -146,8 +146,8 @@ Also check the tools you are using
 (1) If you are using gcc, you need to have gcc release 3.2.0 or above. You can
     download gcc from http://gcc/gnu.org
 
-(2) Only java release 1.6.0 or above is supported, you can download java from
-    http://java.sun.com/j2se (See chapter 4, Java sub-chapter).
+(2) Only java release 1.7.0 or above is supported, you can download java from
+    http://java.sun.com/j2se.
 	 Java is mandatory to install and run the Tango tools.
 
 
