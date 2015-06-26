@@ -69,6 +69,5 @@ echo "Starting Pogo Appli under $MY_OS.  "
 		-DCPP_DOC_PATH=$CPP_DOC		\
 		-DIN_LANG=$POGO_LANG		\
 		-DEDITOR=$POGO_EDITOR 		\
-		-D_812_=true	 		\
 		-Dfile.encoding=ISO-8859-1 	\
 		org.tango.pogo.pogo_gui.Pogo $*
