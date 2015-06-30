@@ -37,6 +37,7 @@ Changes in Tango itself
 - Only one reference doc generated for all Tango classes (client and server). Tango book chapter 6 
 is removed.
 - Add method DeviceImpl::is_there_subscriber() (FR 89)
+- Change logging system maximum and default logging file size (FR 112)
 - Use template explicit instantiation
 - Code re-factoring for 
     . attribute configuration storage in DB
