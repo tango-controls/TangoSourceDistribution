@@ -74,6 +74,7 @@ rm -f doc/src/cpp_api/nb.*
 rm -f doc/src/dance/Ready.fig
 
 rm -f doc/src/ds_model/archi.gif
+rm -f doc/src/ds_model/zmq_event.fig
 
 rm -Rf doc/src/ds_writing/advanced
 rm -f doc/src/ds_writing/circle.tex
@@ -105,13 +106,15 @@ rm -f doc/src/ds_writing/startup.jpg
 rm -f doc/src/ds_writing/w_attribute.fig
 rm -Rf doc/src/ds_writing/writing
 rm -Rf doc/src/ds_writing/writing_java
+rm -Rf doc/src/ds_writing/r_attribute.fig
+rm -Rf doc/src/ds_writing/command.fig
 
 rm -f doc/src/gen_api/line.lyx
 
 rm -f doc/src/java_api/line.lyx
 rm -f doc/src/java_api/picture/architecture.fig
 rm -f doc/src/java_api/picture/architecture1.fig
-rm -f doc/src/java_api/picture/Newline.*
+rm -f doc/src/java_api/picture/Newline.fig
 
 rm -f doc/src/layouts/stdFiles.lst
 
