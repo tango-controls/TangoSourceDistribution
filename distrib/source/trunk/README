@@ -434,7 +434,7 @@ e - Restart your database server(s)
 
 Tango 9.1 needs an update of the data in the database. This is one
 update of the stored procedure (release 1.9), some more
-commands definition for the Tango control access and ne tables dedicated to pipe.
+commands definition for the Tango control access and new tables dedicated to pipe.
 
 To update your database, follow these instructions:
 
