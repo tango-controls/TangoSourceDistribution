@@ -1,5 +1,5 @@
 
-SUBDIRS=log4tango client server
+SUBDIRS=log4tango server client
 
 EXTRA_DIST = tango.pc.in
 
