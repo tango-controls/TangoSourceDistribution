@@ -137,8 +137,8 @@ rm -f doc/src/license.add
 rm -f lib/cpp/client/README
 rm -Rf lib/cpp/server/winnt_lib
 rm -f lib/cpp/server/idl/idl2cpp
-mv lib/cpp/server/idl/tangoSK.cpp lib/cpp/server/tangoSK.cpp
-mv lib/cpp/server/idl/tangoDynSK.cpp lib/cpp/server/tangoDynSK.cpp
+rm -f lib/cpp/server/idl/*.cpp
+rm -f lib/cpp/server/idl/*.h
 rm -f cpp/lib/server/w32win.cpp
 rm -f cpp/lib/server/w32win.h
 rm -f lib/cpp/server/ntservice.cpp
