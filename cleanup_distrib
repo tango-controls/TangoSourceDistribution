@@ -53,7 +53,6 @@ rm -f doc/src/replace
 rm -f doc/src/Replace.class
 rm -f doc/src/tango_latex2html
 
-rm -f doc/src/advanced/alarm.fig
 rm -f doc/src/advanced/att_lock.*
 rm -f doc/src/advanced/DevTestClass.*
 rm -f doc/src/advanced/events.*
@@ -71,22 +70,18 @@ rm -f doc/src/cpp_api/line.lyx
 rm -f doc/src/cpp_api/NamedExcept.cpp
 rm -f doc/src/cpp_api/nb.*
 
-rm -f doc/src/dance/Ready.fig
-
 rm -f doc/src/ds_model/archi.gif
-rm -f doc/src/ds_model/zmq_event.fig
+mv doc/src/ds_model/zmq_event.fig doc/src/ds_model/event_schematic_zmq.fig
 
 rm -Rf doc/src/ds_writing/advanced
 rm -f doc/src/ds_writing/circle.tex
 rm -f doc/src/ds_writing/circle.fig
 rm -f doc/src/ds_writing/circle.jpg
 rm -Rf doc/src/ds_writing/compiling
-rm -f doc/src/ds_writing/complete_server.fig
 rm -f doc/src/ds_writing/complete_server.jpg
 rm -Rf doc/src/ds_writing/cpp_exchanging
 rm -Rf doc/src/ds_writing/cpp_started
 rm -Rf doc/src/ds_writing/dance
-rm -f doc/src/ds_writing/device_et.fig
 rm -f doc/src/ds_writing/device_et.jpg
 rm -f doc/src/ds_writing/ESRFlogo.tex
 rm -f doc/src/ds_writing/images.tex
@@ -100,21 +95,14 @@ rm -Rf doc/src/ds_writing/nt_server/*.pdf
 rm -Rf doc/src/ds_writing/nt_server/*.cpp
 rm -Rf doc/src/ds_writing/nt_server/*.lines
 rm -Rf doc/src/ds_writing/nt_server/*.h
-rm -f doc/src/ds_writing/r_attributes.fig
-rm -f doc/src/ds_writing/startup.fig
 rm -f doc/src/ds_writing/startup.jpg
-rm -f doc/src/ds_writing/w_attribute.fig
 rm -Rf doc/src/ds_writing/writing
 rm -Rf doc/src/ds_writing/writing_java
-rm -Rf doc/src/ds_writing/r_attribute.fig
-rm -Rf doc/src/ds_writing/command.fig
 
 rm -f doc/src/gen_api/line.lyx
 
 rm -f doc/src/java_api/line.lyx
-rm -f doc/src/java_api/picture/architecture.fig
 rm -f doc/src/java_api/picture/architecture1.fig
-rm -f doc/src/java_api/picture/Newline.fig
 
 rm -f doc/src/layouts/stdFiles.lst
 
