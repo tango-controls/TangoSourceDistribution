@@ -149,10 +149,25 @@ AC_ARG_WITH([lyx],
 	[AC_PATH_PROG(LYX,lyx)])
 
 if test -z "$LYX"; then
-	LYX=false
+	LYX="false"
 fi
 
 AM_CONDITIONAL(TANGO_LYX_ENABLED, test x"$LYX" != x"false")
+
+# Check if fig2dev is there
+	
+AC_ARG_WITH([fig2dev], 
+	AC_HELP_STRING([--with-fig2dev],[path to fig2dev utility]),
+	[FIG2DEV=${with_fig2dev}],
+	[AC_PATH_PROG(FIG2DEV,fig2dev)])
+
+if test -z "$FIG2DEV"; then
+	FIG2DEV="false"
+fi
+
+AM_CONDITIONAL(TANGO_FIG2DEV_ENABLED, test x"$FIG2DEV" != x"false")
+AM_CONDITIONAL(TANGO_DOC_ENABLED, test x"$LYX" != x"false" && test x"$FIG2DEV" != x"false")
+
 
 # Use libtool which facilitates the creation of shared libraries
 LT_INIT()
@@ -360,6 +375,7 @@ AC_SUBST(DATADIR)
 AC_SUBST(JAVA)
 AC_SUBST(DOXYGEN)
 AC_SUBST(LYX)
+AC_SUBST(FIG2DEV)
 AC_SUBST(JNI_INCL_DIRS)
 
 # This is a hack to change PACKAGE_ #defines into TANGO_PACKAGE
@@ -405,6 +421,13 @@ AC_OUTPUT(Makefile
   	  doc/Makefile
 	  doc/man/Makefile
 	  doc/src/Makefile
+	  doc/src/ds_writing/Makefile
+	  doc/src/ds_model/Makefile
+	  doc/src/dance/Makefile
+	  doc/src/java_api/Makefile
+	  doc/src/java_api/picture/Makefile
+	  doc/src/gen_api/Makefile
+	  doc/src/advanced/Makefile
 	  pogo/Makefile
 	  pogo/templates/Makefile
 	  pogo/preferences/Makefile
