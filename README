@@ -119,7 +119,7 @@ use the database. It is a sub-part of Jive.
 Before compiling and installing TANGO you need to install :
 
 (1) omniORB available from http://sourceforge.net/projects/omniorb 
-    (Preferably version 4.2.0 but 4.1.7 is fine).
+    (Preferably version 4.2.0 but 4.1.7/4.1.6 is fine).
 	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
@@ -539,7 +539,12 @@ Changes between Tango distribution 8.1.2 and 9.1.0
 - DbServer: Characters / and " " forbidden in alias name
 - DbServer: Small memory leak in DbGetInstanceNameList command
 - DbServer: Memory leak when trying to get event from it
+- DbServer: Change the way memorized attribute property (__value) is managed
+- DbServer: Remove history memorization for memorized attribute (including already stored history)
+- DbServer: Replace NULL insertion in not null table colums by actual date (now())
 - Tango_admin: Add options --server-list and --server-instance-list (FR 99)
+- Distribution: Doc images source files (.fig) added to distribution
+- Distribution: Idl file compiled during the package compilation 
 
 
 Changes between Tango distribution 8.0.5 and 8.1.2
