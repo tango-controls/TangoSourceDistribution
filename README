@@ -33,8 +33,8 @@ runs on Windows but the Makefile don't.
 
 Tango 9 and above is compliant to the 64 bit architecture.
 
-This package is foreseen (and was tested) to run with omniORB4.2.0,
-zmq 4.0.5 and Java 1.6
+This package is foreseen (and was tested) to run with omniORB4.2.0 even if it 
+works as well with omniORB 4.1.6 or 4.1.7, zmq 4.0.5 and Java 1.6
 
 The default Pogo application in this package can generate source code
 for C++, Python and Java device servers.
@@ -119,7 +119,7 @@ use the database. It is a sub-part of Jive.
 Before compiling and installing TANGO you need to install :
 
 (1) omniORB available from http://sourceforge.net/projects/omniorb 
-    (Preferably version 4.2.0).
+    (Preferably version 4.2.0 but 4.1.7 is fine).
 	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
