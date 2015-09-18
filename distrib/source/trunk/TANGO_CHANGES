@@ -1,6 +1,6 @@
 TANGO history file
 
-06/2015        *******************************************************
+09/2015        *******************************************************
                *                                                     *
                *  Tango release 9.1.0 : Changes since version 8.1.2  *
                *                                                     *
@@ -94,6 +94,7 @@ Bug recorded in sourceForge:
 - 707 : Wron dates from attribute_history() call
 - 720 : Event with no-db device
 - 725 : Hang in client when doing event subscription within the event callback
+- 732 : GCC 5.2 compatibility
 
 
 Other bugs
