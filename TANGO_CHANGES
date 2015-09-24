@@ -43,6 +43,7 @@ is removed.
     . attribute configuration storage in DB
     . Event compatibility
     . KeepAliveThread (on client)
+- Solve memory pb due to event re-connection when nothing is sent on ZMQ sockets between re-connection
 - Optimize group calls in case of disconnected group members 
 - Replace many "#define" by "const int" or "const char *" in Tango namespace
 - Added a Tango::string_free() call
