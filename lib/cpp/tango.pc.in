@@ -5,7 +5,7 @@ includedir=@includedir@
 
 Name: tango
 Description: The tango constrol system library
-Requires: omniDynamic4 >= 4.2.0, omniCOS4, log4tango, libzmq
+Requires: omniDynamic4 >= 4.1.6, omniCOS4, log4tango, libzmq
 Version: @VERSION@
 Libs: -L${libdir} -ltango
 Cflags: @CPP_ELEVEN@ -I${includedir}/tango
