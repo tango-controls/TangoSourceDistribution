@@ -1,4 +1,4 @@
-		TANGO source code release version 9.1.0 - README (09/2015)
+		TANGO source code release version 9.2.0 - README (01/2016)
 		==========================================================
 
 
@@ -26,15 +26,15 @@ This is the README for the TANGO source code release. TANGO is a
 toolkit for building object oriented control systems based on CORBA ans ZMQ. 
 TANGO is a joint effort of the several European research institutes.
 
-This source code release is based on the latest version of TANGO 9 (9.1.0)
+This source code release is based on the latest version of TANGO 9 (9.2.0)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
 
 Tango 9 and above is compliant to the 64 bit architecture.
 
-This package is foreseen (and was tested) to run with omniORB4.2.0 even if it 
-works as well with omniORB 4.1.6 or 4.1.7, zmq 4.0.5 and Java 1.6
+This package is foreseen (and was tested) to run with omniORB4.2.1 even if it 
+works as well with omniORB 4.1.6, 4.1.7 and 4.2.0, zmq 4.0.5 and Java 1.6
 
 The default Pogo application in this package can generate source code
 for C++, Python and Java device servers.
@@ -119,7 +119,7 @@ use the database. It is a sub-part of Jive.
 Before compiling and installing TANGO you need to install :
 
 (1) omniORB available from http://sourceforge.net/projects/omniorb 
-    (Preferably version 4.2.0 but 4.1.7/4.1.6 is fine).
+    (Preferably version 4.2.1 but 4.2.0/4.1.7/4.1.6 is fine).
 	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
@@ -211,11 +211,11 @@ ready to be installed.
 Example:								
         
 		Source code location:   ../..
-        Version:                9.1.0
+        Version:                9.2.0
         Compiler:               gcc,g++
 
-        OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.0/ubuntu1404
-        OMNIORB VERSION:        "4.2.0"
+        OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.1/ubuntu1404
+        OMNIORB VERSION:        "4.2.1"
 
         ZMQ PATH:               /segfs/tango/transport/zmq/ubuntu1404
         ZMQ VERSION:            4.0.5
@@ -508,6 +508,12 @@ documentation, news and to download add-on packages.
 
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
+
+Changes between Tango distribution 9.1.0 and 9.2.0
+--------------------------------------------------
+
+- Updated C++ library to						Release 9.2.0
+
 
 Changes between Tango distribution 8.1.2 and 9.1.0
 --------------------------------------------------

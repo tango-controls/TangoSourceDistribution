@@ -1,4 +1,4 @@
-/* ac_config.h.tmp.in.  Generated from configure.in by autoheader.  */
+/* ac_config.h.tmp.in.  Generated from configure.ac by autoheader.  */
 
 /* "" */
 #undef CORBA_H
