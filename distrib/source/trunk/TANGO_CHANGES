@@ -20,7 +20,7 @@ Changes in Tango itself
 Bug fixes
 ---------
 
-Bug recorded in sourceForge:
+Bug recorded in SourceForge:
 
 - 741 : Device_4Impl and Tango 9 compatibility
 - 745 : Missing method for data ready event
