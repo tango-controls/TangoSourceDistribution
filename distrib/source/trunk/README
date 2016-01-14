@@ -217,11 +217,11 @@ Example:
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.1/ubuntu1404
         OMNIORB VERSION:        "4.2.1"
 
-        ZMQ PATH:               /segfs/tango/transport/zmq/ubuntu1404
+        ZMQ PATH:               /segfs/tango/transport/zmq4.0.5/ubuntu1404
         ZMQ VERSION:            4.0.5
 
         JAVA PATH:              /usr/bin/java
-        JAVA VERSION:           1.6.0_26
+        JAVA VERSION:           1.7.0_79
 
         MYSQL CLIENT LIB:       -L/usr/local/mysql/lib/mysql -lmysqlclient_r
         MYSQL VERSION:          5.5.22
@@ -323,8 +323,8 @@ cd build
 export CC=gcc
 export CXX=g++
 ../configure --prefix=/home/tango/release/install_dir_linux \
-	--with-omni=/segfs/tango/ORB/omniORB4.2.0/ubuntu1404 \
-    --with-zmq=/segfs/tango/transport/zmq/ubuntu1404
+	--with-omni=/segfs/tango/ORB/omniORB4.2.1/ubuntu1404 \
+    --with-zmq=/segfs/tango/transport/zmq4.0.5/ubuntu1404
 
 	
 During the configure procedure the access to mysql is tested. Please prepare
