@@ -1,5 +1,48 @@
 TANGO history file
 
+01/2016        *******************************************************
+               *                                                     *
+               *  Tango release 9.2.0 : Changes since version 9.1.0  *
+               *                                                     *
+               *******************************************************
+
+Tango 9.2 has been developed and tested using:
+
+- omniORB 4.2.1
+- zmq 4.0.5
+- log4tango 5.0.1
+
+Changes in Tango itself
+-----------------------
+
+- Apply changes sent by Szeged university for better code
+
+Bug fixes
+---------
+
+Bug recorded in sourceForge:
+
+- 741 : Device_4Impl and Tango 9 compatibility
+- 745 : Missing method for data ready event
+- 748 : Memory leak in DeviceProxy assignment operator
+- 749 : User dev_state() method not called + hide att exception in state method
+- 752 : ZmqEventSupplier::push_event() from multiple threads
+- 753 : Server crash when polling thread is late and IDL 4 clients
+- 761 : Crash when pushing events from my own thread
+- 765 : Asyn re-connection after admin device DevRestart command
+
+Other bugs
+
+- Crash using asyn calls when returning error using omniORB 4.2.1
+- Memory leak in DeviceProxy::get_command_config()
+- It's now possible to read write only attribute of type DevState even before any value has been written
+- Bug in DeviceProxy::write_attribute() family methods in case of DeviceProxy created while the DS is not
+running and write_attribute being the first call
+- Several pipe related bugs (get_data_elt_nb() method crashing process - Pipe defined at class level
+  instead of device level - Not possible to insert data in pipe/blob using DataElement class if no previous
+  call to set_data_elt_nb() method)
+
+
 09/2015        *******************************************************
                *                                                     *
                *  Tango release 9.1.0 : Changes since version 8.1.2  *

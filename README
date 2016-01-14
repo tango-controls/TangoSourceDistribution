@@ -224,7 +224,7 @@ Example:
         JAVA VERSION:           1.7.0_79
 
         MYSQL CLIENT LIB:       -L/usr/local/mysql/lib/mysql -lmysqlclient_r
-        MYSQL VERSION:          5.5.22
+        MYSQL VERSION:          5.6.19
         MYSQL CONNECTION:       OK
 
 build:
@@ -513,6 +513,20 @@ Changes between Tango distribution 9.1.0 and 9.2.0
 --------------------------------------------------
 
 - Updated C++ library to						Release 9.2.0
+- Updated Jive to								Release 6.8
+- Updated atkpanel to							Release 5.4
+- Updated Pogo to								Release 9.1.9
+- Updated DbServer to							Release 5.3
+- Replacing TangORB with JTango					Release 9.0.5
+- Updated ATK to 								Release 9.1.9
+- Updated TangoTest to							Release 2.1
+- Updated TangoAccessControl to					Release 2.12
+
+- SourceForge bug 755 : DBserver and TAC : Passing database name at run time
+- SourceForge bug 762 : TangoTest : SegFault writing to long_spectrum attribute
+- SourceForge bug 763 : DBserver : NULL insertion in NOT NULL columns
+- TangoTest : Memory not freed in delete_device() method
+- DBserver : Add command DbGetForwardedAttributeForDevice
 
 
 Changes between Tango distribution 8.1.2 and 9.1.0
