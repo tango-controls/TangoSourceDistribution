@@ -38,6 +38,7 @@ Other bugs
 - It's now possible to read write only attribute of type DevState even before any value has been written
 - Bug in DeviceProxy::write_attribute() family methods in case of DeviceProxy created while the DS is not
 running and write_attribute being the first call
+- Bug in case of forwarded enumerated attribute (enum labels not forwarded)
 - Several pipe related bugs (get_data_elt_nb() method crashing process - Pipe defined at class level
   instead of device level - Not possible to insert data in pipe/blob using DataElement class if no previous
   call to set_data_elt_nb() method)
