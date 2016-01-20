@@ -30,6 +30,7 @@ Bug recorded in SourceForge:
 - 753 : Server crash when polling thread is late and IDL 4 clients
 - 761 : Crash when pushing events from my own thread
 - 765 : Asyn re-connection after admin device DevRestart command
+- 767 : push_change_event("State") crashes device server process
 
 Other bugs
 
