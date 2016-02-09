@@ -513,12 +513,13 @@ Changes between Tango distribution 9.1.0 and 9.2.0
 --------------------------------------------------
 
 - Updated C++ library to						Release 9.2.0
-- Updated Jive to								Release 6.8
+- Updated Jive to								Release 6.9
 - Updated atkpanel to							Release 5.4
-- Updated Pogo to								Release 9.2.0
+- Updated Pogo to								Release 9.2.2
 - Updated DbServer to							Release 5.3
-- Replacing TangORB with JTango					Release 9.0.5
-- Updated ATK to 								Release 9.1.9
+- Updated JTango to								Release 9.0.7
+- Updated ATK to 								Release 9.1.13
+- Updated Astor to								Release 6.7.0
 - Updated Starter to							Release 6.8
 - Updated TangoTest to							Release 2.1
 - Updated TangoAccessControl to					Release 2.12
