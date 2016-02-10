@@ -534,7 +534,7 @@ Changes between Tango distribution 9.1.0 and 9.2.0
 - Updated Jive to								Release 6.9
 - Updated atkpanel to							Release 5.4
 - Updated Pogo to								Release 9.2.2
-- Updated DbServer to							Release 5.3 (stored procedure release 1.11)
+- Updated DbServer to							Release 5.4 (stored procedure release 1.11)
 - Updated JTango to								Release 9.0.7
 - Updated ATK to 								Release 9.1.13
 - Updated Astor to								Release 6.7.0
