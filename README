@@ -406,12 +406,30 @@ The "make install" command will create these database related scripts in
 done at configure time is successfull ("database schema create" reported
 as yes at the end of the configure script execution)
 
+7-2 - UPDATING FROM A TANGO 9 DATABASE
+--------------------------------------
 
-7-1 - UPDATING FROM A TANGO 8 DATABASE
+Tango 9.2 includes an update of the database. This is one update of
+the stored procedure (release 1.11).
+
+To update your database, follow these instructions:
+
+a - Stop your control system and your database server(s)
+
+b - Backup your database (Recommended, not mandatory)
+
+c - Cd to the <install_dir>/share/tango/db directory
+
+d - Run the update script:
+	./update_db.sh
+	
+e - Restart your database server(s)
+
+7-2 - UPDATING FROM A TANGO 8 DATABASE
 --------------------------------------
 
 Tango 9.1 requires an update of the database. This is one update of
-the stored procedure (release 1.9), some new commands in the list of allowed 
+the stored procedure (release 1.11), some new commands in the list of allowed 
 commands for the Database class (for Tango Access Control system) and
 some new tables related to the new pipe feature.
 
@@ -424,7 +442,7 @@ b - Backup your database (Recommended, not mandatory)
 c - Cd to the <install_dir>/share/tango/db directory
 
 d - Run the update script:
-	./update_db.sh
+	mysql -u[user] -p[password] < ./update_db8.sql
 	
 e - Restart your database server(s)
 
