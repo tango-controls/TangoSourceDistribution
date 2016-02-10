@@ -1,4 +1,4 @@
-		TANGO source code release version 9.2.0 - README (01/2016)
+		TANGO source code release version 9.2.0 - README (02/2016)
 		==========================================================
 
 
@@ -34,7 +34,7 @@ runs on Windows but the Makefile don't.
 Tango 9 and above is compliant to the 64 bit architecture.
 
 This package is foreseen (and was tested) to run with omniORB4.2.1 even if it 
-works as well with omniORB 4.1.6, 4.1.7 and 4.2.0, zmq 4.0.5 and Java 1.6
+works as well with omniORB 4.1.6, 4.1.7 and 4.2.0, zmq 4.0.5 and Java 1.7
 
 The default Pogo application in this package can generate source code
 for C++, Python and Java device servers.
@@ -527,6 +527,8 @@ Changes between Tango distribution 9.1.0 and 9.2.0
 - SourceForge bug 755 : DBserver and TAC : Passing database name at run time
 - SourceForge bug 762 : TangoTest : SegFault writing to long_spectrum attribute
 - SourceForge bug 763 : DBserver : NULL insertion in NOT NULL columns
+- SourceForge bug 766 : Starter : memory leak
+- SourceForge bug 772 : Pogo : Fix makefile dependencies to prevent unnecessary rebuilds
 - TangoTest : Memory not freed in delete_device() method
 - DBserver : Add command DbGetForwardedAttributeForDevice
 
