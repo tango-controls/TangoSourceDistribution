@@ -516,7 +516,7 @@ Changes between Tango distribution 9.1.0 and 9.2.0
 - Updated Jive to								Release 6.9
 - Updated atkpanel to							Release 5.4
 - Updated Pogo to								Release 9.2.2
-- Updated DbServer to							Release 5.3
+- Updated DbServer to							Release 5.3 (stored procedure release 1.11)
 - Updated JTango to								Release 9.0.7
 - Updated ATK to 								Release 9.1.13
 - Updated Astor to								Release 6.7.0
@@ -531,6 +531,8 @@ Changes between Tango distribution 9.1.0 and 9.2.0
 - SourceForge bug 772 : Pogo : Fix makefile dependencies to prevent unnecessary rebuilds
 - TangoTest : Memory not freed in delete_device() method
 - DBserver : Add command DbGetForwardedAttributeForDevice
+- DBserver : Change default value for accessed columns in 2 tables
+- DBserver : Change variable data type in Stored procedure
 
 
 Changes between Tango distribution 8.1.2 and 9.1.0
