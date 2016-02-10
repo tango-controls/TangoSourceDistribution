@@ -407,8 +407,9 @@ AC_OUTPUT(Makefile
 	  cppserver/database/create_db_tables.sql
 	  cppserver/database/update_db.sh
 	  cppserver/database/update_db.sql
+	  cppserver/database/update_db8.sql
 	  cppserver/database/update_db7.sql
-          cppserver/database/rem_history.sql
+      cppserver/database/rem_history.sql
 	  cppserver/starter/Makefile
   	  cppserver/tangotest/Makefile
 	  cppserver/AbstractClass/Makefile
