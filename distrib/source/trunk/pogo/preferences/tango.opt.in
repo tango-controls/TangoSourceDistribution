@@ -120,12 +120,12 @@ ifeq ($(PROJECT_TYPE),DEVICE)
 	OUTPUT_DIR= $(HOME)/DeviceServers
 else
 ifeq ($(PROJECT_TYPE),STATIC_LIB)
-	OUTPUT_DIR= ../lib
+	OUTPUT_DIR= lib
 else
 ifeq ($(PROJECT_TYPE),SHARED_LIB)
-	OUTPUT_DIR= ../lib
+	OUTPUT_DIR= lib
 else
-	OUTPUT_DIR= ../bin
+	OUTPUT_DIR= bin
 endif
 endif
 endif
@@ -196,8 +196,10 @@ endif
 LDFLAGS +=	$(LDFLAGS_USER) $(LIB_DIR_USER)
 
 ifeq ($(TANGO_REQUIRED),TRUE)
-	LDFLAGS +=	-L$(TANGO_HOME)/lib -ltango -llog4tango
-	LDFLAGS +=	-L$(OMNI_HOME)/lib -L$(ZMQ_HOME)/lib -lCOS4 -lomniORB4 -lomniDynamic4 -lomnithread -lzmq
+    OMNI_LIB = $(shell pkg-config --libs-only-L omniORB4)
+    ZMQ_LIB = $(shell pkg-config --libs-only-L libzmq)
+    TANGO_LIB = $(shell pkg-config --libs tango)
+    LDFLAGS += $(OMNI_LIB) $(ZMQ_LIB) $(TANGO_LIB)
 endif
 
 LDFLAGS += -ldl -lpthread -lstdc++
