@@ -20,7 +20,7 @@
 # packagename, the second is the version used for the tar file,
 # the third is an email address for bug reports (shouldn't be necessary),
 # and the fourth argument is                
-AC_INIT(Tango,9.2.0,tango@esrf.fr,tango)
+AC_INIT(Tango,9.2.1,tango@esrf.fr,tango)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -63,7 +63,7 @@ AC_CONFIG_HEADERS(ac_config.h.tmp)
 #      interface numbers in the range from number `CURRENT - AGE' to
 #      `CURRENT'.
 
-VERSION_INFO=11:0:2
+VERSION_INFO=11:1:2
 	
 # Checks for programs.
 

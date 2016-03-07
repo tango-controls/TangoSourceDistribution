@@ -1,8 +1,8 @@
 TANGO history file
 
-01/2016        *******************************************************
+03/2016        *******************************************************
                *                                                     *
-               *  Tango release 9.2.0 : Changes since version 9.1.0  *
+               *  Tango release 9.2.1 : Changes since version 9.1.0  *
                *                                                     *
                *******************************************************
 
@@ -16,6 +16,8 @@ Changes in Tango itself
 -----------------------
 
 - Apply changes sent by Szeged university for better code
+- Improve way TANGO_HOST is used when the host name specified in TANGO_HOST is a host alias name
+- Method DeviceClass::get_pipe_list() with device name as arg. is now case independant
 
 Bug fixes
 ---------
@@ -31,6 +33,7 @@ Bug recorded in SourceForge:
 - 761 : Crash when pushing events from my own thread
 - 765 : Asyn re-connection after admin device DevRestart command
 - 767 : push_change_event("State") crashes device server process
+- 783 : Tango server NO_SYNC serial mode
 
 Other bugs
 

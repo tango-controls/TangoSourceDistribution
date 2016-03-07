@@ -1,4 +1,4 @@
-		TANGO source code release version 9.2.0 - README (02/2016)
+		TANGO source code release version 9.2.1 - README (03/2016)
 		==========================================================
 
 
@@ -26,7 +26,7 @@ This is the README for the TANGO source code release. TANGO is a
 toolkit for building object oriented control systems based on CORBA ans ZMQ. 
 TANGO is a joint effort of the several European research institutes.
 
-This source code release is based on the latest version of TANGO 9 (9.2.0)
+This source code release is based on the latest version of TANGO 9 (9.2.1)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
@@ -211,7 +211,7 @@ ready to be installed.
 Example:								
         
 		Source code location:   ../..
-        Version:                9.2.0
+        Version:                9.2.1
         Compiler:               gcc,g++
 
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.1/ubuntu1404
@@ -527,13 +527,13 @@ documentation, news and to download add-on packages.
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
 
-Changes between Tango distribution 9.1.0 and 9.2.0
+Changes between Tango distribution 9.1.0 and 9.2.1
 --------------------------------------------------
 
-- Updated C++ library to						Release 9.2.0
+- Updated C++ library to						Release 9.2.1
 - Updated Jive to								Release 6.9
 - Updated atkpanel to							Release 5.4
-- Updated Pogo to								Release 9.2.2
+- Updated Pogo to								Release 9.2.4
 - Updated DbServer to							Release 5.4 (stored procedure release 1.11)
 - Updated JTango to								Release 9.0.7
 - Updated ATK to 								Release 9.1.13
@@ -546,7 +546,8 @@ Changes between Tango distribution 9.1.0 and 9.2.0
 - SourceForge bug 762 : TangoTest : SegFault writing to long_spectrum attribute
 - SourceForge bug 763 : DBserver : NULL insertion in NOT NULL columns
 - SourceForge bug 766 : Starter : memory leak
-- SourceForge bug 772 : Pogo : Fix makefile dependencies to prevent unnecessary rebuilds
+- SourceForge bug 778 : tango.opt defines wrong LDFLAGS
+- SourceForge bug 782 : Bug in common_target.opt file
 - TangoTest : Memory not freed in delete_device() method
 - DBserver : Add command DbGetForwardedAttributeForDevice
 - DBserver : Change default value for accessed columns in 2 tables
