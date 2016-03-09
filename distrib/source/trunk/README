@@ -546,6 +546,7 @@ Changes between Tango distribution 9.1.0 and 9.2.1
 - SourceForge bug 762 : TangoTest : SegFault writing to long_spectrum attribute
 - SourceForge bug 763 : DBserver : NULL insertion in NOT NULL columns
 - SourceForge bug 766 : Starter : memory leak
+- SourceForge bug 772 : Makefile dependencies to prevent unnecessary rebuilt
 - SourceForge bug 778 : tango.opt defines wrong LDFLAGS
 - SourceForge bug 782 : Bug in common_target.opt file
 - TangoTest : Memory not freed in delete_device() method
