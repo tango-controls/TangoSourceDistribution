@@ -1,5 +1,8 @@
 INSTALL_DIR=$(TANGO_HOME)/bin
 
+# create all directories
+directories := $(shell mkdir -p $(OUTPUT_DIR); for FILE in $(SVC_OBJS); do mkdir -p `dirname $$FILE`; done)
+
 #------------------------------------------------------------------------------
 #--  rule: ./*.cpp 
 #------------------------------------------------------------------------------
@@ -75,13 +78,25 @@ $(OBJDIR)/%.o: $(CPPDIRUSER)/%.c
 #------------------------------------------------------------------------------
 #-- all:
 #------------------------------------------------------------------------------
-all: $(SPECIFIC_ALL_TARGET) $(PROJECT_NAME)  
+
+ifeq ($(PROJECT_TYPE),DEVICE)
+all: $(SPECIFIC_ALL_TARGET) $(OUTPUT_DIR)/$(PROJECT_NAME)
+endif
+ifeq ($(PROJECT_TYPE),SIMPLE_EXE)
+all: $(SPECIFIC_ALL_TARGET) $(OUTPUT_DIR)/$(PROJECT_NAME)
+endif
+ifeq ($(PROJECT_TYPE),STATIC_LIB)
+all: $(SPECIFIC_ALL_TARGET) $(OUTPUT_DIR)/lib$(PROJECT_NAME).a
+endif
+ifeq ($(PROJECT_TYPE),SHARED_LIB)
+all: $(SPECIFIC_ALL_TARGET) $(OUTPUT_DIR)/lib$(PROJECT_NAME).so
+endif
 
 #------------------------------------------------------------------------------
 #-- $(PROJECT_NAME) for DEVICE:
 #------------------------------------------------------------------------------
 ifeq ($(PROJECT_TYPE),DEVICE)
-$(PROJECT_NAME): diretories $(SVC_OBJS)
+$(OUTPUT_DIR)/$(PROJECT_NAME): $(SVC_OBJS)
 		@echo "Linking TANGO device server $(OUTPUT_DIR)/$(PROJECT_NAME) ..."
 		$(CXX) $(SVC_OBJS) $(LDFLAGS) -o $(OUTPUT_DIR)/$(PROJECT_NAME)
 		$(POST_PROCESSING)
@@ -91,7 +106,7 @@ endif
 #-- $(PROJECT_NAME) for SIMPLE_EXE:
 #------------------------------------------------------------------------------
 ifeq ($(PROJECT_TYPE),SIMPLE_EXE)
-$(PROJECT_NAME): diretories $(SVC_OBJS)
+$(OUTPUT_DIR)/$(PROJECT_NAME): $(SVC_OBJS)
 		@echo "Linking executable $(OUTPUT_DIR)/$(PROJECT_NAME) ..."
 		$(CXX) $(SVC_OBJS) $(LDFLAGS) -o $(OUTPUT_DIR)/$(PROJECT_NAME)
 		$(POST_PROCESSING)
@@ -101,7 +116,7 @@ endif
 #-- $(PROJECT_NAME) for STATIC_LIB:
 #------------------------------------------------------------------------------
 ifeq ($(PROJECT_TYPE),STATIC_LIB)
-$(PROJECT_NAME):    diretories	$(LIB_OBJS)
+$(OUTPUT_DIR)/lib$(PROJECT_NAME).a: $(LIB_OBJS)
 		@echo "Creating static library "$(OUTPUT_DIR)/lib$(PROJECT_NAME).a
 ifdef EXTERNAL_LIBS
 		mkdir -p $(OBJ_DIR)/external_libs
@@ -119,19 +134,11 @@ endif
 #-- $(PROJECT_NAME) for SHARED_LIB:
 #------------------------------------------------------------------------------
 ifeq ($(PROJECT_TYPE),SHARED_LIB)
-$(PROJECT_NAME):    diretories	$(LIB_OBJS)
+$(OUTPUT_DIR)/lib$(PROJECT_NAME).so: $(LIB_OBJS)
 		@echo "Linking shared library "$(OUTPUT_DIR)/lib$(PROJECT_NAME).so
 		$(CXX) $(LIB_OBJS) $(LDFLAGS) -o $(OUTPUT_DIR)/lib$(PROJECT_NAME).so
 		@echo "Link successfull"
 endif
-
-#------------------------------------------------------------------------------
-#-- diretories:
-#------------------------------------------------------------------------------
-diretories:
-	@echo "Creating directories "$(OUTPUT_DIR)
-	@mkdir -p $(OUTPUT_DIR)
-	@for FILE in $(SVC_OBJS); do mkdir -p `dirname $$FILE`; done
 
 #------------------------------------------------------------------------------
 #-- clean:
