@@ -1,4 +1,4 @@
-		TANGO source code release version 9.2.1 - README (03/2016)
+		TANGO source code release version 9.2.2 - README (03/2016)
 		==========================================================
 
 
@@ -26,7 +26,7 @@ This is the README for the TANGO source code release. TANGO is a
 toolkit for building object oriented control systems based on CORBA ans ZMQ. 
 TANGO is a joint effort of the several European research institutes.
 
-This source code release is based on the latest version of TANGO 9 (9.2.1)
+This source code release is based on the latest version of TANGO 9 (9.2.2)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
@@ -211,7 +211,7 @@ ready to be installed.
 Example:								
         
 		Source code location:   ../..
-        Version:                9.2.1
+        Version:                9.2.2
         Compiler:               gcc,g++
 
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.1/ubuntu1404
@@ -527,10 +527,10 @@ documentation, news and to download add-on packages.
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
 
-Changes between Tango distribution 9.1.0 and 9.2.1
+Changes between Tango distribution 9.1.0 and 9.2.2
 --------------------------------------------------
 
-- Updated C++ library to						Release 9.2.1
+- Updated C++ library to						Release 9.2.2
 - Updated Jive to								Release 6.9
 - Updated atkpanel to							Release 5.4
 - Updated Pogo to								Release 9.2.4
@@ -549,6 +549,7 @@ Changes between Tango distribution 9.1.0 and 9.2.1
 - SourceForge bug 772 : Makefile dependencies to prevent unnecessary rebuilt
 - SourceForge bug 778 : tango.opt defines wrong LDFLAGS
 - SourceForge bug 782 : Bug in common_target.opt file
+
 - TangoTest : Memory not freed in delete_device() method
 - DBserver : Add command DbGetForwardedAttributeForDevice
 - DBserver : Change default value for accessed columns in 2 tables

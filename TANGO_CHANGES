@@ -2,6 +2,21 @@ TANGO history file
 
 03/2016        *******************************************************
                *                                                     *
+               *  Tango release 9.2.2 : Changes since version 9.2.1  *
+               *                                                     *
+               *******************************************************
+
+Bug fixes
+---------
+
+Bug recorded in SourceForge:
+
+- 784 : DevULong memorized attribute
+- 785 : Db and DS crash in case no DNS is available
+
+
+03/2016        *******************************************************
+               *                                                     *
                *  Tango release 9.2.1 : Changes since version 9.1.0  *
                *                                                     *
                *******************************************************
