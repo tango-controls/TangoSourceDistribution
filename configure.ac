@@ -339,6 +339,7 @@ if test "x$enable_mariadb" != "xyes" ; then
 		DB_VERSION=${MYSQL_VERSION}
 		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
 		DB_LDLIBS=${MYSQLCLIENT_LIBS}
+		DB_CFLAGS=${MYSQLCLIENT_CFLAGS}
 	fi
 else
 	DB_NAME=MARIADB
@@ -372,7 +373,7 @@ else
 	 	
 
 		# check for a database schema update
-	
+
 		AS_IF([test "x$enable_db_schema_create" = "xyes"], [
 	
 			AC_ARG_ENABLE([dbcreate],AC_HELP_STRING([--enable-dbcreate],[enable an creation of the Tango database schema]),
@@ -390,8 +391,14 @@ else
 		DB_VERSION=${MARIADB_VERSION}
 		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
 		DB_LDLIBS=${MARIADBCLIENT_LIBS}
+		DB_CFLAGS=${MARIADBCLIENT_CFLAGS}
 	fi
 fi
+
+
+AC_SUBST(DB_LDFLAGS)
+AC_SUBST(DB_CFLAGS)
+AC_SUBST(DB_LDLIBS)
 
 #
 # Build the jpeg library compilation option

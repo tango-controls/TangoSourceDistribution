@@ -648,6 +648,9 @@ TANGO_DB_SERVER_ENABLED_FALSE
 TANGO_DB_SERVER_ENABLED_TRUE
 JPEG_MMX_LIB_CXXFLAGS
 JPEG_LIB_CXXFLAGS
+DB_LDLIBS
+DB_CFLAGS
+DB_LDFLAGS
 MARIADBCLIENT_LIBS
 MARIADBCLIENT_CFLAGS
 MARIADBCLIENT_LDFLAGS
@@ -19750,6 +19753,7 @@ fi
 		DB_VERSION=${MYSQL_VERSION}
 		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
 		DB_LDLIBS=${MYSQLCLIENT_LIBS}
+		DB_CFLAGS=${MYSQLCLIENT_CFLAGS}
 	fi
 else
 	DB_NAME=MARIADB
@@ -19796,9 +19800,9 @@ $as_echo_n "checking for mariadbclient ... " >&6; }
 
         for tryprefix in /usr /usr/local /usr/mysql /usr/local/mysql /usr/pkg $mariadbclient_prefix ; do
 		for hloc in lib/mariadb lib ; do
-			if test -f "$tryprefix/$hloc/libmysqlclient.so"; then
+			if test -f "$tryprefix/$hloc/libmariadb.so"; then
                 MARIADBCLIENT_LDFLAGS="-L$tryprefix/$hloc"
-			elif test -f "$tryprefix/$hloc/libmysqlclient.a"; then
+			elif test -f "$tryprefix/$hloc/libmariadb.a"; then
                 MARIADBCLIENT_LDFLAGS="-L$tryprefix/$hloc"
 			fi
 		done
@@ -19811,7 +19815,7 @@ $as_echo_n "checking for mariadbclient ... " >&6; }
 		# testloop
 	done
 
-        if test "x$mariaclient_include" != "x" ; then
+        if test "x$mariadbclient_include" != "x" ; then
 		echo "checking for mariadb includes... "
         if test -d "$mariadbclient_include/mariadb" ; then
             MARIADBCLIENT_CFLAGS="-I$mariadbclient_include"
@@ -20149,8 +20153,14 @@ fi
 		DB_VERSION=${MARIADB_VERSION}
 		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
 		DB_LDLIBS=${MARIADBCLIENT_LIBS}
+		DB_CFLAGS=${MARIADBCLIENT_CFLAGS}
 	fi
 fi
+
+
+
+
+
 
 #
 # Build the jpeg library compilation option

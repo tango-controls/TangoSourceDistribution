@@ -19,6 +19,8 @@ Bug recorded in SourceForge:
 - 790 : Wrong full name passed to event callback
 - 791 : Wrong usage of omni_mutex
 - 792 : Calls to asynchronous methods not thread safe
+- 793 : API_AsynReplyNotArrived exception thrown when asyn call response is 
+        received in the last 20 ms before the timeout expiration
 - 795 : Compilation pb with gcc >= 5.3
 - 798 : memory leak in DeviceData for old compiler (not supporting C++11)
 - 799 : read value for attribute xxx has not been updated

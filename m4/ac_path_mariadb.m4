@@ -37,9 +37,9 @@ AC_ARG_WITH(mariadbclient-lib,AC_HELP_STRING([--with-mariadbclient-lib=LIB],[Dir
     dnl test --with-mariadbclient-prefix
     for tryprefix in /usr /usr/local /usr/mysql /usr/local/mysql /usr/pkg $mariadbclient_prefix ; do
 		for hloc in lib/mariadb lib ; do
-			if test -f "$tryprefix/$hloc/libmysqlclient.so"; then
+			if test -f "$tryprefix/$hloc/libmariadb.so"; then
                 MARIADBCLIENT_LDFLAGS="-L$tryprefix/$hloc"
-			elif test -f "$tryprefix/$hloc/libmysqlclient.a"; then
+			elif test -f "$tryprefix/$hloc/libmariadb.a"; then
                 MARIADBCLIENT_LDFLAGS="-L$tryprefix/$hloc"
 			fi
 		done
@@ -53,7 +53,7 @@ AC_ARG_WITH(mariadbclient-lib,AC_HELP_STRING([--with-mariadbclient-lib=LIB],[Dir
 	done
 
     dnl test --with-mariadbclient-include
-    if test "x$mariaclient_include" != "x" ; then
+    if test "x$mariadbclient_include" != "x" ; then
 		echo "checking for mariadb includes... "
         if test -d "$mariadbclient_include/mariadb" ; then
             MARIADBCLIENT_CFLAGS="-I$mariadbclient_include"
