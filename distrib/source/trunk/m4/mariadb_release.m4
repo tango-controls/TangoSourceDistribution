@@ -17,15 +17,21 @@ AC_DEFUN([mariadb_AC_HAVE_MARIADB_VERSION],
 	         		MARIADB_MAJOR=`echo $VERS | cut -d '.' -f 1`
 			 		MARIADB_MINOR=`echo $VERS | cut -d '.' -f 2`
 			 		MARIADB_MICRO=`echo $VERS | cut -d '.' -f 3`
+					MARIA=`echo $MARIADB_MICRO | cut -d '-' -f 2`
 
-			 		if test $MARIADB_MAJOR -lt $2; then
-			    		ac_cv_mariadb_version_$2_$3=no
-			 		else
-			    		if test $MARIADB_MINOR -lt $3; then
-			        		ac_cv_mariadb_version_$2_$3=no
-		        	 	else
-			        		ac_cv_mariadb_version_$2_$3=yes
-		    			fi			        
+					if [[ "$MARIA" == *aria* ]]; then
+				 		if test $MARIADB_MAJOR -lt $2; then
+							ac_cv_mariadb_version_$2_$3=no
+				 		else
+							if test $MARIADB_MINOR -lt $3; then
+					    		ac_cv_mariadb_version_$2_$3=no
+				    	 	else
+					    		ac_cv_mariadb_version_$2_$3=yes
+							fi			        
+						fi
+					else
+						MARIADB_VERSION=not_found
+						ac_cv_mariadb_version_$2_$3=no
 					fi
 				else
 					ac_cv_mariadb_version_$2_$3=no	
