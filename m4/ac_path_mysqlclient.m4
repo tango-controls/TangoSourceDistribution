@@ -31,15 +31,15 @@ AC_ARG_WITH(mysqlclient-lib,AC_HELP_STRING([--with-mysqlclient-lib=LIB],[Directo
     AC_MSG_CHECKING([for mysqlclient ifelse([$1], , ,[>= v$1])])
     MYSQLCLIENT_LDFLAGS=""
     MYSQLCLIENT_CFLAGS=""
-    MYSQLCLIENT_LIBS="-lmysqlclient_r"
+    MYSQLCLIENT_LIBS="-lmysqlclient"
     mysqlclient_fail=""
 
     dnl test --with-mysqlclient-prefix
     for tryprefix in /usr /usr/local /usr/mysql /usr/local/mysql /usr/pkg $mysqlclient_prefix ; do
 		for hloc in lib/mysql lib ; do
-			if test -f "$tryprefix/$hloc/libmysqlclient_r.so"; then
+			if test -f "$tryprefix/$hloc/libmysqlclient.so"; then
                 MYSQLCLIENT_LDFLAGS="-L$tryprefix/$hloc"
-			elif test -f "$tryprefix/$hloc/libmysqlclient_r.a"; then
+			elif test -f "$tryprefix/$hloc/libmysqlclient.a"; then
                 MYSQLCLIENT_LDFLAGS="-L$tryprefix/$hloc"
 			fi
 		done

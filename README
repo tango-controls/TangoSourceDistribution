@@ -1,4 +1,4 @@
-		TANGO source code release version 9.2.2 - README (03/2016)
+		TANGO source code release version 9.2.5 - README (11/2016)
 		==========================================================
 
 
@@ -26,7 +26,7 @@ This is the README for the TANGO source code release. TANGO is a
 toolkit for building object oriented control systems based on CORBA ans ZMQ. 
 TANGO is a joint effort of the several European research institutes.
 
-This source code release is based on the latest version of TANGO 9 (9.2.2)
+This source code release is based on the latest version of TANGO 9 (9.2.5)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
@@ -39,10 +39,10 @@ works as well with omniORB 4.1.6, 4.1.7 and 4.2.0, zmq 4.0.5 and Java 1.7
 The default Pogo application in this package can generate source code
 for C++, Python and Java device servers.
 
-The database server delivered with this package do not force the MySQL
+The database server delivered with this package do not force the database
 user to be root. You have to use the my.cnf configuration files
 or the MYSQL_USER and MYSQL_PASSWORD environment variables to specify
-the MySQL account to be used by the database server.
+the database account to be used by the database server.
 
 The TangoTest device server delivered with this package is an example 
 implementation of all possible Tango data types. 
@@ -62,8 +62,7 @@ This source code release contains :
 
 (1) Tango C++ library source files and java library and application jar files
 
-(2) The Tango database device server source files (using mysql) and the
-    MySql configuration files.
+(2) The Tango database device server source files and the database configuration files (.my.cnf).
 
 (3) The Jive application. 
 
@@ -91,7 +90,7 @@ This source code release contains :
 
 (15) The synopticAppli to run and test synoptics created with jdraw
 
-(16) The Tango controlled access device server source file (using mysql)
+(16) The Tango controlled access device server source file
      It is used if you want to run Tango with its controlled access feature
 
 The Jive application is a Tango database browsing tool written in Java. It also
@@ -127,10 +126,9 @@ Before compiling and installing TANGO you need to install :
 	 Zmq is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
-(3) mysql available from http://mysql.org (version >= 5.0).
-	 Mysql is mandatory to install a Tango database. To compile the delivered 
-	 database server, only the mysql client library libmysqlclient_r is
-	 needed.
+(3) mysql available from http://mysql.org (version >= 5.5) or MariaDB from https://mariadb.org (version >= 10.0)
+	One of these two databases is mandatory to install a Tango database. The default database is still mysql.
+    If you want to use MariaDB, use the --enable-mariadb configure option.
 	     
 (4) doxygen available from http://www.doxygen.org
 
@@ -166,6 +164,9 @@ The main options for configure are:
                         [/usr/local]
 --enable-static[=PKGS]
                         build static libraries [default=no]
+--enable-mariadb		MariaDb database instead of mysql. 
+						Build database server using mariadb instead of mysql
+
 --disable-java          disable installation of Java applications
 --disable-dbserver      disable installation of Tango database server.
 --disable-dbcreate      enable an creation of the Tango database schema
@@ -191,27 +192,27 @@ The main options for configure are:
                         -include and -lib do override paths found with
                         -prefix)
 
---with-mysql-ho         the host of the mysql database (default: <blank>)
---with-mysql-admin      super user of your mysql database (default: <blank>)
+--with-mysql-ho         the host of the database (mysql or mariadb) (default: <blank>)
+--with-mysql-admin      super user of your database (mysql or mariadb) (default: <blank>)
 --with-mysql-admin-passwd
-                        super user password of your mysql database (default:
+                        super user password of your database (mysql or mariadb) (default:
                         <blank>)
 								
 The last three options can be replaced with a .my.cnf file in your home 
 directory with the following content:
 
 			[client]
-			user      = [mysql login name]
+			user      = [db login name]
             password  = [password]
 			host      = [host name]
 
 At the end of the configure script, a status is displayed indicating pathes
 and versions of found software and the parts of the Tango package which are
 ready to be installed.
-Example:								
+Example (using mysql):								
         
 		Source code location:   ../..
-        Version:                9.2.2
+        Version:                9.2.5
         Compiler:               gcc,g++
 
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.1/ubuntu1404
@@ -223,8 +224,8 @@ Example:
         JAVA PATH:              /usr/bin/java
         JAVA VERSION:           1.7.0_79
 
-        MYSQL CLIENT LIB:       -L/usr/local/mysql/lib/mysql -lmysqlclient_r
-        MYSQL VERSION:          5.6.19
+        MYSQL CLIENT LIB:       -L/usr/local/mysql/lib/mysql -lmysqlclient
+        MYSQL VERSION:          5.7.13
         MYSQL CONNECTION:       OK
 
 build:
@@ -240,16 +241,13 @@ Hints to configure:
 
 The Tango database server
 -------------------------
-To compile and install the Tango database server, the thread safe version of
-the mysql client library libmysqlclient_r must be available.
-Use the --with-mysqlclient* options when the library is not found. To disable 
-the compilation and installation of the database server, 
+To disable the compilation and installation of the database server, 
 use --disable-dbserver. 
 
 Create the Tango database
 -------------------------
 To allow the configure script to create the Tango database in
-your MySQL database, make sure that the mysql version is >5.0 and
+your database, make sure that the mysql version is > 5.5 (or 10.0 for mariadb) and
 the mysqld is running before doing configure.
 Also check that the mysql client (called mysql) is in your path.
 
@@ -258,16 +256,16 @@ where the mysql server is running, use the "--with-mysql-ho" configure
 option or the host entry in the my.cnf file. 
 
 The configure script will try to connect to the
-MySql database. Make sure that privileges are granted to
+database. Make sure that privileges are granted to
 the user used by configure running on the host where you
 run configure. 
 
 The configure options "--with-mysql-admin" and "--with-mysql-admin-passwd"
-allow you to select which MySql user configure will use.
+allow you to select which database user configure will use.
 You can also use the user and password entries of the my.cnf file
-to set-up your connection to mysql.
+to set-up your connection to the database.
 
-To disable any access to mysql use the --disable-dbcreate option.
+To disable any access to the database use the --disable-dbcreate option.
 
 Database server, mysql and libz
 -------------------------------
@@ -327,12 +325,12 @@ export CXX=g++
     --with-zmq=/segfs/tango/transport/zmq4.0.5/ubuntu1404
 
 	
-During the configure procedure the access to mysql is tested. Please prepare
-your my.cnf (mysql configuration file) or use the configure options
+During the configure procedure the access to the database is tested. Please prepare
+your my.cnf (database configuration file) or use the configure options
                --with-mysql-admin
                --with-mysql-admin-passwd
                --with-mysql-ho
-to specify the access to the mysql database.
+to specify the access to the database.
 	
 
 5 - COMPILING
@@ -355,20 +353,20 @@ To test wether the TANGO build worked do the following :
 
     TANGO_INSTALL_DIR/bin/DataBaseds 2 -ORBendPoint giop:tcp::10000
     
-	 Specify the mysql account to be used by the database server.
+	 Specify the database account to be used by the database server.
 	 Two possibilities are available:
 	 	- set the following environment variables to the account and 
 		  password to be used
     
-			MYSQL_USER to specify the mysql login name
+			MYSQL_USER to specify the database login name
 			MYSQL_PASSWORD to specify the password
 			MYSQL_HOST if required
 			  
-		- configure the mysql client with the mysql configuration 
+		- configure the database client with the database configuration 
 		  file my.cnf
 		  		
 			[client]
-			user      = [mysql login name]
+			user      = [database login name]
             password  = [password]
 
 (2) Configure the TANGO_HOST environment variable with the hostname the
@@ -402,7 +400,7 @@ WARNINGS:
 
 To update the Tango database, the distribution provides some scripts.
 The "make install" command will create these database related scripts in
-<install_dir>/share/tango/db ONLY if the mysql database connection test
+<install_dir>/share/tango/db ONLY if the database connection test
 done at configure time is successfull ("database schema create" reported
 as yes at the end of the configure script execution)
 
@@ -410,7 +408,7 @@ as yes at the end of the configure script execution)
 --------------------------------------
 
 Tango 9.2 includes an update of the database. This is one update of
-the stored procedure (release 1.11).
+the stored procedure (release 1.12).
 
 To update your database, follow these instructions:
 
@@ -526,6 +524,20 @@ documentation, news and to download add-on packages.
 
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
+
+Changes between Tango distribution 9.2.2 and 9.2.5
+--------------------------------------------------
+
+- Updated C++ library to						Release 9.2.5
+- Updated Jive to								Release 6.13
+- Updated atkpanel to							Release 5.5
+- Updated Pogo to								Release 9.4.1
+- Updated DbServer to							Release 5.5 (stored procedure release 1.12)
+- Updated JTango to								Release 9.0.7
+- Updated ATK to 								Release 9.1.22
+- Updated Astor to								Release 7.0.0
+- Updated Starter to							Release 6.9
+- Updated LogViewer to							Release 2.0.2
 
 Changes between Tango distribution 9.1.0 and 9.2.2
 --------------------------------------------------

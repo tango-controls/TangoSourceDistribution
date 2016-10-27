@@ -20,7 +20,7 @@
 # packagename, the second is the version used for the tar file,
 # the third is an email address for bug reports (shouldn't be necessary),
 # and the fourth argument is                
-AC_INIT(Tango,9.2.2,tango@esrf.fr,tango)
+AC_INIT(Tango,9.2.5,tango@esrf.fr,tango)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -63,7 +63,7 @@ AC_CONFIG_HEADERS(ac_config.h.tmp)
 #      interface numbers in the range from number `CURRENT - AGE' to
 #      `CURRENT'.
 
-VERSION_INFO=11:2:2
+VERSION_INFO=11:5:2
 	
 # Checks for programs.
 
@@ -93,6 +93,9 @@ AX_CXX_COMPILE_STDCXX_11([noext],[optional])
 
 AC_ARG_ENABLE([java],AC_HELP_STRING([--enable-java],[enable installation of Java applications]),
 [],[enable_java=yes])
+
+AC_ARG_ENABLE([mariadb],AC_HELP_STRING([--enable-mariadb],[enable mariadb instead of mysql]),
+[enable_mariadb=yes],[enable_mariadb=no])
 
 AC_ARG_WITH([java], 
 	AC_HELP_STRING([--with-java],[path to java interpreter]),
@@ -286,51 +289,109 @@ AC_DEFINE_UNQUOTED(TANGO_DB_NAME, "$TANGO_DB_NAME", The tango database name)
 # Here we propagate the constants into the makefiles.
 AC_SUBST(TANGO_DB_NAME)			
 
-						
-AS_IF([test "x$enable_dbserver" = "xyes"], [ 
+if test "x$enable_mariadb" != "xyes" ; then
+	DB_NAME=MYSQL
+	AS_IF([test "x$enable_dbserver" = "xyes"], [ 
 
 	# We need libmysqlclient to compile
 	# finds it for us. Abort if no mysqlclientlibs are found
 
-	AM_PATH_MYSQLCLIENT
-	if test "x$MYSQLCLIENT_CFLAGS" = "x"
-		then
-  		 	AC_MSG_WARN(No libmysqlclient_r libs found)
-			enable_dbserver=no
-		fi
+		AM_PATH_MYSQLCLIENT
+		if test "x$MYSQLCLIENT_CFLAGS" = "x"
+			then
+  		 		AC_MSG_WARN(No libmysqlclient libs found)
+				enable_dbserver=no
+			fi
 	
-	AC_PATH_PROG(MYSQL, mysql, nocommand)
-	MYSQL_VERSION=not_found
+		AC_PATH_PROG(MYSQL, mysql, nocommand)
+		MYSQL_VERSION=not_found
 	
-	if test "$MYSQL" != nocommand; then
-		mysql_AC_HAVE_MYSQL_VERSION($MYSQL,5,0)
-		if test "x$ac_cv_mysql_version_5_0" = "xno"; then
-		 	AC_MSG_WARN([Not supported mysql release. Should be 5.0.x or above. Please update !],-1)
-			enable_db_schema_create=no
-			enable_dbserver=no
+		if test "$MYSQL" != nocommand; then
+			mysql_AC_HAVE_MYSQL_VERSION($MYSQL,5,5)
+			if test "x$ac_cv_mysql_version_5_5" = "xno"; then
+			 	AC_MSG_WARN([Not supported mysql release. Should be 5.5.x or above. Please update !],-1)
+				enable_db_schema_create=no
+				enable_dbserver=no
+			else
+				enable_db_schema_create=yes
+			fi
 		else
-			enable_db_schema_create=yes
+			enable_db_schema_create=no
 		fi
-	else
-		enable_db_schema_create=no
-	fi
  	
 
-	# check for a database schema update
+		# check for a database schema update
 	
-	AS_IF([test "x$enable_db_schema_create" = "xyes"], [
+		AS_IF([test "x$enable_db_schema_create" = "xyes"], [
 	
-		AC_ARG_ENABLE([dbcreate],AC_HELP_STRING([--enable-dbcreate],[enable an creation of the Tango database schema]),
-                 		[],[enable_dbcreate=yes])
-		enable_db_schema_create=$enable_dbcreate
-		 			  
-		AS_IF([test "x$enable_db_schema_create" = "xyes"], [  
+			AC_ARG_ENABLE([dbcreate],AC_HELP_STRING([--enable-dbcreate],[enable an creation of the Tango database schema]),
+		             		[],[enable_dbcreate=yes])
+			enable_db_schema_create=$enable_dbcreate
+			 			  
+			AS_IF([test "x$enable_db_schema_create" = "xyes"], [  
 	
-			AC_PROG_MYSQL
+				AC_PROG_MYSQL
 
+			])
 		])
 	])
-])
+	if test $MYSQL_VERSION != not_found; then
+		DB_VERSION=${MYSQL_VERSION}
+		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
+		DB_LDLIBS=${MYSQLCLIENT_LIBS}
+	fi
+else
+	DB_NAME=MARIADB
+	AS_IF([test "x$enable_dbserver" = "xyes"], [ 
+
+		# We need libmysqlclient to compile
+		# finds it for us. Abort if no mysqlclientlibs are found
+
+		AM_PATH_MARIADBCLIENT
+		if test "x$MARIADBCLIENT_CFLAGS" = "x"
+			then
+	  		 	AC_MSG_WARN(No libmariadbclient libs found)
+				enable_dbserver=no
+			fi
+	
+		AC_PATH_PROG(MYSQL, mysql, nocommand)
+		MARIADB_VERSION=not_found
+	
+		if test "$MYSQL" != nocommand; then
+			mariadb_AC_HAVE_MARIADB_VERSION($MYSQL,10,0)
+			if test "x$ac_cv_mariadb_version_10_0" = "xno"; then
+			 	AC_MSG_WARN([Not supported mariadb release. Should be 10.0.x or above. Please update !],-1)
+				enable_db_schema_create=no
+				enable_dbserver=no
+			else
+				enable_db_schema_create=yes
+			fi
+		else
+			enable_db_schema_create=no
+		fi
+	 	
+
+		# check for a database schema update
+	
+		AS_IF([test "x$enable_db_schema_create" = "xyes"], [
+	
+			AC_ARG_ENABLE([dbcreate],AC_HELP_STRING([--enable-dbcreate],[enable an creation of the Tango database schema]),
+		             		[],[enable_dbcreate=yes])
+			enable_db_schema_create=$enable_dbcreate
+			 			  
+			AS_IF([test "x$enable_db_schema_create" = "xyes"], [  
+	
+				AC_PROG_MYSQL
+
+			])
+		])
+	])
+	if test $MARIADB_VERSION != not_found; then
+		DB_VERSION=${MARIADB_VERSION}
+		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
+		DB_LDLIBS=${MARIADBCLIENT_LIBS}
+	fi
+fi
 
 #
 # Build the jpeg library compilation option
@@ -452,9 +513,9 @@ Configuration ($PACKAGE):
 	JAVA PATH:              ${with_java}
 	JAVA VERSION:           ${JAVA_VERSION}
 		
-	MYSQL CLIENT LIB:       ${MYSQLCLIENT_LDFLAGS} ${MYSQLCLIENT_LIBS}
-	MYSQL VERSION:          ${MYSQL_VERSION}
-	MYSQL CONNECTION:       ${MYSQL_CONNECTION}
+	${DB_NAME} CLIENT LIB:  ${DB_LDFLAGS} ${DB_LDLIBS}
+	${DB_NAME} VERSION:     ${DB_VERSION}
+	${DB_NAME} CONNECTION:  ${MYSQL_CONNECTION}
 		
 build:
 	libraries:              ${enable_lib}
