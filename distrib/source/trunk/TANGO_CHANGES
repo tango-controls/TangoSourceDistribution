@@ -6,7 +6,7 @@ TANGO history file
                *                                                     *
                *******************************************************
 
-- Add automatic even unsubscription in DeviceProxy class destructor
+- Add automatic event unsubscription in DeviceProxy class destructor
 
 Bug fixes
 ---------
