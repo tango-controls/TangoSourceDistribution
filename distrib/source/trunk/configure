@@ -19510,6 +19510,10 @@ $as_echo "$as_me: WARNING: No libmysqlclient libs found" >&2;}
 				enable_dbserver=no
 			fi
 
+		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
+		DB_LDLIBS=${MYSQLCLIENT_LIBS}
+		DB_CFLAGS=${MYSQLCLIENT_CFLAGS}
+
 		# Extract the first word of "mysql", so it can be a program name with args.
 set dummy mysql; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -19553,7 +19557,7 @@ fi
 
 		MYSQL_VERSION=not_found
 
-		if test "$MYSQL" != nocommand; then
+		if test "x$MYSQL" != "xnocommand"; then
 			{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for mysql release (at least version 5.5)" >&5
 $as_echo_n "checking for mysql release (at least version 5.5)... " >&6; }
 if ${ac_cv_mysql_version_5_5+:} false; then :
@@ -19569,7 +19573,10 @@ else
 			 		MYSQL_MICRO=`echo $VERS | cut -d '.' -f 3`
 					MARIA=`echo $MYSQL_MICRO | cut -d '-' -f 2`
 
-					if test -z $MARIA; then
+					if [ "$MARIA" == *aria* ]; then
+						MYSQL_VERSION=not_found
+						ac_cv_mysql_version_5_5=no
+					else
 				 		if test $MYSQL_MAJOR -lt 5; then
 							ac_cv_mysql_version_5_5=no
 				 		else
@@ -19579,9 +19586,6 @@ else
 					    		ac_cv_mysql_version_5_5=yes
 							fi
 						fi
-					else
-						MYSQL_VERSION=not_found
-						ac_cv_mysql_version_5_5=no
 					fi
 				else
 					ac_cv_mysql_version_5_5=no
@@ -19749,11 +19753,8 @@ fi
 fi
 
 fi
-	if test $MYSQL_VERSION != not_found; then
+	if test "x$MYSQL_VERSION" != "xnot_found"; then
 		DB_VERSION=${MYSQL_VERSION}
-		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
-		DB_LDLIBS=${MYSQLCLIENT_LIBS}
-		DB_CFLAGS=${MYSQLCLIENT_CFLAGS}
 	fi
 else
 	DB_NAME=MARIADB
@@ -19916,6 +19917,10 @@ $as_echo "$as_me: WARNING: No libmariadbclient libs found" >&2;}
 				enable_dbserver=no
 			fi
 
+		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
+		DB_LDLIBS=${MARIADBCLIENT_LIBS}
+		DB_CFLAGS=${MARIADBCLIENT_CFLAGS}
+
 		# Extract the first word of "mysql", so it can be a program name with args.
 set dummy mysql; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -19959,7 +19964,7 @@ fi
 
 		MARIADB_VERSION=not_found
 
-		if test "$MYSQL" != nocommand; then
+		if test "x$MYSQL" != "xnocommand"; then
 			{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for mariadb release (at least version 10.0)" >&5
 $as_echo_n "checking for mariadb release (at least version 10.0)... " >&6; }
 if ${ac_cv_mariadb_version_10_0+:} false; then :
@@ -19973,15 +19978,21 @@ else
 	         		MARIADB_MAJOR=`echo $VERS | cut -d '.' -f 1`
 			 		MARIADB_MINOR=`echo $VERS | cut -d '.' -f 2`
 			 		MARIADB_MICRO=`echo $VERS | cut -d '.' -f 3`
+					MARIA=`echo $MARIADB_MICRO | cut -d '-' -f 2`
 
-			 		if test $MARIADB_MAJOR -lt 10; then
-			    		ac_cv_mariadb_version_10_0=no
-			 		else
-			    		if test $MARIADB_MINOR -lt 0; then
-			        		ac_cv_mariadb_version_10_0=no
-		        	 	else
-			        		ac_cv_mariadb_version_10_0=yes
-		    			fi
+					if [ "$MARIA" == *aria* ]; then
+				 		if test $MARIADB_MAJOR -lt 10; then
+							ac_cv_mariadb_version_10_0=no
+				 		else
+							if test $MARIADB_MINOR -lt 0; then
+					    		ac_cv_mariadb_version_10_0=no
+				    	 	else
+					    		ac_cv_mariadb_version_10_0=yes
+							fi
+						fi
+					else
+						MARIADB_VERSION=not_found
+						ac_cv_mariadb_version_10_0=no
 					fi
 				else
 					ac_cv_mariadb_version_10_0=no
@@ -20149,11 +20160,8 @@ fi
 fi
 
 fi
-	if test $MARIADB_VERSION != not_found; then
+	if test "x$MARIADB_VERSION" != "xnot_found"; then
 		DB_VERSION=${MARIADB_VERSION}
-		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
-		DB_LDLIBS=${MARIADBCLIENT_LIBS}
-		DB_CFLAGS=${MARIADBCLIENT_CFLAGS}
 	fi
 fi
 

@@ -302,11 +302,15 @@ if test "x$enable_mariadb" != "xyes" ; then
   		 		AC_MSG_WARN(No libmysqlclient libs found)
 				enable_dbserver=no
 			fi
+
+		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
+		DB_LDLIBS=${MYSQLCLIENT_LIBS}
+		DB_CFLAGS=${MYSQLCLIENT_CFLAGS}
 	
 		AC_PATH_PROG(MYSQL, mysql, nocommand)
 		MYSQL_VERSION=not_found
 	
-		if test "$MYSQL" != nocommand; then
+		if test "x$MYSQL" != "xnocommand"; then
 			mysql_AC_HAVE_MYSQL_VERSION($MYSQL,5,5)
 			if test "x$ac_cv_mysql_version_5_5" = "xno"; then
 			 	AC_MSG_WARN([Not supported mysql release. Should be 5.5.x or above. Please update !],-1)
@@ -335,11 +339,8 @@ if test "x$enable_mariadb" != "xyes" ; then
 			])
 		])
 	])
-	if test $MYSQL_VERSION != not_found; then
+	if test "x$MYSQL_VERSION" != "xnot_found"; then
 		DB_VERSION=${MYSQL_VERSION}
-		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
-		DB_LDLIBS=${MYSQLCLIENT_LIBS}
-		DB_CFLAGS=${MYSQLCLIENT_CFLAGS}
 	fi
 else
 	DB_NAME=MARIADB
@@ -354,11 +355,15 @@ else
 	  		 	AC_MSG_WARN(No libmariadbclient libs found)
 				enable_dbserver=no
 			fi
+
+		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
+		DB_LDLIBS=${MARIADBCLIENT_LIBS}
+		DB_CFLAGS=${MARIADBCLIENT_CFLAGS}
 	
 		AC_PATH_PROG(MYSQL, mysql, nocommand)
 		MARIADB_VERSION=not_found
 	
-		if test "$MYSQL" != nocommand; then
+		if test "x$MYSQL" != "xnocommand"; then
 			mariadb_AC_HAVE_MARIADB_VERSION($MYSQL,10,0)
 			if test "x$ac_cv_mariadb_version_10_0" = "xno"; then
 			 	AC_MSG_WARN([Not supported mariadb release. Should be 10.0.x or above. Please update !],-1)
@@ -387,11 +392,8 @@ else
 			])
 		])
 	])
-	if test $MARIADB_VERSION != not_found; then
+	if test "x$MARIADB_VERSION" != "xnot_found"; then
 		DB_VERSION=${MARIADB_VERSION}
-		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
-		DB_LDLIBS=${MARIADBCLIENT_LIBS}
-		DB_CFLAGS=${MARIADBCLIENT_CFLAGS}
 	fi
 fi
 
