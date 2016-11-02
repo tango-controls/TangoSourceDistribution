@@ -538,6 +538,7 @@ Changes between Tango distribution 9.2.2 and 9.2.5
 - Updated Astor to								Release 7.0.1
 - Updated Starter to							Release 6.9
 - Updated LogViewer to							Release 2.0.2
+- Updated TangoAccessControl to					Release 2.13
 
 Changes between Tango distribution 9.1.0 and 9.2.2
 --------------------------------------------------
