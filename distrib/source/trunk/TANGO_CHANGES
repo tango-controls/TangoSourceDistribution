@@ -32,6 +32,7 @@ Bug recorded in SourceForge:
 - 814 : Segmentation fault when reading attribute
 - 822 : Swapped origin and desc in some versions of Tango::Except::throw_exception
 - 825 : Event relative change filter does nothing
+- 828 : Crash when client receives att conf change event for enum att
 
 Other bugs
 
