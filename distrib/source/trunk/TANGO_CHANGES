@@ -1,6 +1,6 @@
 TANGO history file
 
-11/2016        *******************************************************
+12/2016        *******************************************************
                *                                                     *
                *  Tango release 9.2.5 : Changes since version 9.2.2  *
                *                                                     *
@@ -33,6 +33,9 @@ Bug recorded in SourceForge:
 - 822 : Swapped origin and desc in some versions of Tango::Except::throw_exception
 - 825 : Event relative change filter does nothing
 - 828 : Crash when client receives att conf change event for enum att
+- 829 (github 312): Compatibility with Zmq 4.2.0
+- github 313 : Improve doc for AttributeProxy::subscribe_event() method
+- github 314 : DServer class ZmqEventSubscriptionChange cmd arg. check
 
 Other bugs
 
