@@ -8,7 +8,7 @@ dist_java_DATA=\
    Astor-7.0.3.jar \
    DeviceTree-1.9.6.jar \
    ATKCore-9.1.22.jar \
-   Jive-7.5.jar \
+   Jive-7.6.jar \
    org.tango.pogo-9.4.2.jar \
    atkpanel-5.5.jar \
    log4j-1.2.15.jar \

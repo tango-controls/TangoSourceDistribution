@@ -529,7 +529,7 @@ Changes between Tango distribution 9.2.2 and 9.2.5
 --------------------------------------------------
 
 - Updated C++ library to						Release 9.2.5
-- Updated Jive to								Release 7.5
+- Updated Jive to								Release 7.6
 - Updated atkpanel to							Release 5.5
 - Updated Pogo to								Release 9.4.2
 - Updated DbServer to							Release 5.5 (stored procedure release 1.12)
