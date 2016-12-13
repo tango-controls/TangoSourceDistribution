@@ -14,7 +14,7 @@ dist_java_DATA=\
    log4j-1.2.15.jar \
    AtkTuning-2.8.jar \
    LogViewer-2.0.4.jar \
-   JTango-9.1.1.jar \
+   JTango-9.1.2.jar \
    ATKWidget-9.1.22.jar \
    tool_panels-3.2.jar
 
