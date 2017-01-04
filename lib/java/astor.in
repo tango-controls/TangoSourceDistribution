@@ -51,11 +51,13 @@ JIVE_CLASS=$LIB_DIR/Jive.jar;       export JIVE_CLASS
 LOGVIEWER=$LIB_DIR/LogViewer.jar;   export LOGVIEWER
 LOG4J=$LIB_DIR/log4j.jar;			export LOG4J
 
+JSSHTERM=JSSHTerminal.jar
+
 ATK_CLASS=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
 ATK_CLASS=$ATK_CLASS:$APP_DIR/atkpanel.jar:$APP_DIR/tool_panels.jar
 export ATK_CLASS
 
-CLASSPATH=$TANGO_CLASS:$ASTOR_CLASS:$JIVE_CLASS:$ATK_CLASS:$LOGVIEWER:$LOG4J
+CLASSPATH=$TANGO_CLASS:$ASTOR_CLASS:$JIVE_CLASS:$ATK_CLASS:$LOGVIEWER:$JSSHTERM:$LOG4J
 export CLASSPATH
 
 #---------------------------------------------------------
