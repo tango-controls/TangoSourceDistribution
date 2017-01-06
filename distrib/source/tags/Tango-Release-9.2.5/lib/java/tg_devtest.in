@@ -1,0 +1,16 @@
+#@SHELL@
+
+if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
+   . @TANGO_RC_FILE@
+fi
+
+JAVALIB=@prefix@/share/java;
+
+TANGOATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar
+
+CLASSPATH=$JAVALIB/JTango.jar:$JAVALIB/Jive.jar:$TANGOATK
+export CLASSPATH
+
+echo   Starting...
+
+@JAVA@  -DTANGO_HOST=$TANGO_HOST jive.ExecDev $1
