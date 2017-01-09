@@ -8,7 +8,10 @@ TANGO history file
 Bug fixes
 ---------
 - Jive: Fix bug when creating free property
-- JSSHTerminal: Updated to 1.10 version to be compatible with DBBench feature available from Astor
+
+New Features
+------------
+- Astor: Added DBBench feature
 
 12/2016        *******************************************************
                *                                                     *
