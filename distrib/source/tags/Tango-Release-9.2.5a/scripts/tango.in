@@ -1,0 +1,187 @@
+#!@SHELL@
+#
+# script to start TANGO database 
+#
+
+TANGO_DB_PORT=10000
+
+#
+# Internal functions
+#
+checkmysql() {
+        NB=`$PS -ef | $GREP mysqld| $GREP -v $GREP | wc -l`
+	export NB
+
+	if [ $NB = 0 ] 
+	then
+		return=1
+		export return
+	else
+		return=0
+		export return
+	fi
+}
+
+findproc() {
+	pid=`$PS -e | $GREP "$1" | $SED -e 's/^  *//' -e 's/ .*//'`
+}
+
+checkdatabaseds() {
+        NB=`$PS -ef | $GREP -i databaseds | $GREP -v $GREP | wc -l`
+	export NB
+	if [ $NB = 0 ] 
+	then
+		return=1
+	else
+		return=0
+	fi
+}
+
+killproc() {
+	pid=`$PS -e | $GREP "$1" | $SED -e 's/^  *//' -e 's/ .*//'`
+
+	[ "$pid" != "" ] && kill -9 $pid
+}
+
+
+#
+# Check the platform used
+#
+OS=`uname -s`
+
+#
+# Settings common  to all platforms
+#
+DATABASEDSHOME=@prefix@/bin
+LD_LIBRARY_PATH=@prefix@/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
+
+#
+# Platform specific settings
+#
+case "${OS}" in
+    "Linux")
+	PS="/bin/ps"
+	ECHO="/bin/echo -e"
+	GREP="grep"
+	SED="sed"
+	TANGO_LOG="/tmp/tango.log"
+    ;;
+    "SunOS")
+	rc_failed=" failed"
+	rc_done=" OK"
+
+	PS="/bin/ps"
+	ECHO="/usr/ucb/echo"
+	GREP="grep"
+	SED="sed"
+	TANGO_LOG=/tmp/tango.log
+    ;;
+    "HP-UX")
+	test -f /etc/rc.config && . /etc/rc.config
+	
+    	PS="/usr/bin/ps"
+	ECHO="/bin/echo "
+	GREP="/usr/bin/grep"
+	SED="/usr/bin/sed"
+	TANGO_LOG="/tmp/tango.log"	
+    ;;
+    *)
+    echo "Not supporting operating system: " ${OS}
+    exit 1
+esac
+
+
+
+#
+# Main part
+#
+case "$1" in
+    start)
+
+    ${ECHO} "Starting TANGO database"
+
+	# first check the MySQL  server
+	checkmysql
+	export return
+	if [ ${return} = 1 ]
+	then
+		sleep 3
+		checkmysql
+
+		if [ ${return} = 1 ]
+		then
+			# MySQL is not there, we can't start Tango db
+			${ECHO} "PLEASE Start MySQL server\n"
+			'date' >> ${TANGO_LOG}
+			${ECHO} "Failed to start Tango database server" >> ${TANGO_LOG}
+			${ECHO} "MySQL is not running !!!" >> ${TANGO_LOG}
+	        	${ECHO} "$rc_failed"
+			exit 1
+		fi
+	fi
+	# Start the database device server if needed
+	findproc DataBase
+	if [ "$pid" != "" ];
+	then
+		${ECHO} "Database Server already running, exiting"
+		'date' >> ${TANGO_LOG}
+		${ECHO} "Database Server already running, exiting" >> ${TANGO_LOG}
+	else
+		${DATABASEDSHOME}/DataBaseds 2 -ORBendPoint giop:tcp::$TANGO_DB_PORT &
+		
+		${ECHO} "Starting TANGO Database Server"
+		'date' >> ${TANGO_LOG}
+		${ECHO} "Starting TANGO Database Server" >> ${TANGO_LOG}
+
+		# wait for a while before checking status
+		sleep 3
+		findproc DataBase
+		if [ "$pid" = "" ];
+		then
+			${ECHO} "Failed to start Tango database server"
+			'date' >> ${TANGO_LOG}
+			${ECHO} "Failed to start Tango database server" >> ${TANGO_LOG}
+			exit 1
+		fi
+		${ECHO} "$rc_done"
+	fi
+
+    ;;
+    stop)
+        ${ECHO} "Shutting down TANGO database"
+
+	# first shutdown the database device server
+	'date' >> ${TANGO_LOG}
+	${ECHO} "Stopping TANGO Database Server" >> ${TANGO_LOG}
+	killproc DataBaseds
+	${ECHO} "$rc_done"
+    ;;
+    restart)
+        $0 stop  && sleep 3 &&  $0 start 
+    ;;
+    status)
+	checkmysql
+	if [ ${return} = 0 ]
+	then
+		${ECHO} "MySQL OK"
+	else
+		${ECHO} "MySQL : No process"
+	fi
+
+	findproc DataBase
+	if [ "$pid" != "" ];
+	then
+		${ECHO} "TANGO Database server OK"
+	else
+		${ECHO} "TANGO Database server : No process"
+	fi
+
+    ;;
+    *)
+    ${ECHO} "Usage: $0 {start|stop|status|restart}"
+    exit 1
+esac
+
+exit 0
+

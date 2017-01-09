@@ -1,0 +1,11 @@
+#!@SHELL@
+#
+#	Set the Class Path
+#
+LIB_DIR=@prefix@/share/java;	 export LIB_DIR
+CLASSPATH=$LIB_DIR/JTango.jar:$LIB_DIR/Astor.jar
+export CLASSPATH
+#
+#	Start the java virtual machine
+#
+@JAVA@ admin.astor.tango_release.JTangoVersion
