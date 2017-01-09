@@ -24,7 +24,7 @@ New Features
 Bug fixes
 ---------
 
-Bug recorded in SourceForge:
+Bugs recorded in SourceForge:
 
 - 787 : Event errors persisting after server restart
 - 788 : Dead lock in event system
@@ -43,6 +43,7 @@ Bug recorded in SourceForge:
 - 805 : Missing check in Dserver::zmq_event_subscription_change() method 
 - 813 : Segfault when pushing a change event with invalid quality 
 - 814 : Segmentation fault when reading attribute
+- 816 : DevShort attribute change event has wrong data_type
 - 822 : Swapped origin and desc in some versions of Tango::Except::throw_exception
 - 825 : Event relative change filter does nothing
 - 828 : Crash when client receives att conf change event for enum att
