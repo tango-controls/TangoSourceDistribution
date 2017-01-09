@@ -5,7 +5,7 @@
 
 javadir = $(datadir)/java
 dist_java_DATA=\
-   Astor-7.0.7.jar \
+   Astor-7.0.9.jar \
    DeviceTree-1.9.6.jar \
    ATKCore-9.1.22.jar \
    Jive-7.10.jar \
@@ -17,7 +17,8 @@ dist_java_DATA=\
    JTango-9.1.2.jar \
    ATKWidget-9.1.22.jar \
    tool_panels-3.2.jar \
-   JSSHTerminal-1.10.jar
+   JSSHTerminal-1.10.jar \
+   DBBench-1.3.jar
 
 if TANGO_JAVA_ENABLED
 bin_SCRIPTS = \
