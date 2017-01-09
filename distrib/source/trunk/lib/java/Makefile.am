@@ -8,7 +8,7 @@ dist_java_DATA=\
    Astor-7.0.7.jar \
    DeviceTree-1.9.6.jar \
    ATKCore-9.1.22.jar \
-   Jive-7.8.jar \
+   Jive-7.10.jar \
    org.tango.pogo-9.4.5.jar \
    atkpanel-5.5.jar \
    log4j-1.2.15.jar \
@@ -17,7 +17,7 @@ dist_java_DATA=\
    JTango-9.1.2.jar \
    ATKWidget-9.1.22.jar \
    tool_panels-3.2.jar \
-   JSSHTerminal-1.9.jar
+   JSSHTerminal-1.10.jar
 
 if TANGO_JAVA_ENABLED
 bin_SCRIPTS = \

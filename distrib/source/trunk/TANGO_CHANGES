@@ -1,5 +1,15 @@
 TANGO history file
 
+01/2016        *******************************************************
+               *                                                     *
+               *  Tango release 9.2.5a : Changes since version 9.2.5 *
+               *                                                     *
+               *******************************************************
+Bug fixes
+---------
+- Jive: Fix bug when creating free property
+- JSSHTerminal: Updated to 1.10 version to be compatible with DBBench feature available from Astor
+
 12/2016        *******************************************************
                *                                                     *
                *  Tango release 9.2.5 : Changes since version 9.2.2  *
