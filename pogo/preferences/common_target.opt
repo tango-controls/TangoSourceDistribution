@@ -162,6 +162,7 @@ endif
 ifeq ($(PROJECT_TYPE),SHARED_LIB)
 	rm -f $(OUTPUT_DIR)/lib$(PROJECT_NAME).so
 endif
+rmdir $(OUTPUT_DIR) 2> /dev/null || true
   
 #------------------------------------------------------------------------------
 #-- install:
