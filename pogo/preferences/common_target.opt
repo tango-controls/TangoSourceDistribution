@@ -1,3 +1,5 @@
+# vim: set filetype=make:
+
 INSTALL_DIR=$(TANGO_HOME)/bin
 
 # create all directories
