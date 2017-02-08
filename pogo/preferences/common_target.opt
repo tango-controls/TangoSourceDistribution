@@ -1,7 +1,7 @@
 INSTALL_DIR=$(TANGO_HOME)/bin
 
 # create all directories
-directories := $(shell mkdir -p $(OUTPUT_DIR); for FILE in $(SVC_OBJS); do mkdir -p `dirname $$FILE`; done)
+directories := $(shell mkdir -p $(OUTPUT_DIR); for FILE in $(SVC_OBJS); do mkdir -p `dirname $$FILE`; done; for FILE in $(LIB_OBJS); do mkdir -p `dirname $$FILE`; done)
 
 #------------------------------------------------------------------------------
 #--  rule: ./*.cpp 
