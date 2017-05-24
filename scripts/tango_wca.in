@@ -50,7 +50,7 @@ killproc() {
 OS=`uname -s`
 
 #
-# Settings common  to all platforms
+# Settings common to all platforms
 #
 DATABASEDSHOME=@prefix@/bin
 ACCESSCONTROLHOME=@prefix@/bin
@@ -122,7 +122,7 @@ case "$1" in
 		fi
 	fi
 	# Start the database device server if needed
-	findproc DataBase
+	findproc DataBaseds
 	if [ "$pid" != "" ];
 	then
 		${ECHO} "Database Server already running"
@@ -137,7 +137,7 @@ case "$1" in
 
 		# wait for a while before checking status
 		sleep 3
-		findproc DataBase
+		findproc DataBaseds
 		if [ "$pid" = "" ];
 		then
 			${ECHO} "Failed to start Tango database server"
@@ -149,7 +149,7 @@ case "$1" in
 	fi
 	
 	# Start the tango control access server if needed
-	findproc TangogAccessC
+	findproc TangoAccessCont
 	if [ "$pid" != "" ];
 	then
 		${ECHO} "TangoAccessControl Server already running, exiting"
@@ -165,7 +165,7 @@ case "$1" in
 
 		# wait for a while before checking status
 		sleep 2
-		findproc TangoAccessControl
+		findproc TangoAccessCont
 		if [ "$pid" = "" ];
 		then
 			${ECHO} "Failed to start Tango access control server"
@@ -183,7 +183,7 @@ case "$1" in
 	# first shutdown the control access device server
 	'date' >> ${TANGO_LOG}
 	${ECHO} "Stopping TANGO Control Access Server" >> ${TANGO_LOG}
-	killproc TangoAccessControl
+	killproc TangoAccessCont
 	
 	# then shutdown the database device server
 	'date' >> ${TANGO_LOG}
@@ -203,7 +203,7 @@ case "$1" in
 		${ECHO} "MySQL : No process"
 	fi
 
-	findproc DataBase
+	findproc DataBaseds
 	if [ "$pid" != "" ];
 	then
 		${ECHO} "TANGO Database server OK"
@@ -211,7 +211,7 @@ case "$1" in
 		${ECHO} "TANGO Database server : No process"
 	fi
 
-	findproc TangoAccessC
+	findproc TangoAccessCont
 	if [ "$pid" != "" ];
 	then
 		${ECHO} "TANGO Access Control server OK"
