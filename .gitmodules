@@ -4,3 +4,6 @@
 [submodule "utils/tango_admin"]
 	path = utils/tango_admin
 	url = https://github.com/tango-controls/tango_admin.git
+[submodule "cppserver/starter"]
+	path = cppserver/starter
+	url = https://github.com/tango-controls/starter.git
