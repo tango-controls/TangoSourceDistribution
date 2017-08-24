@@ -1,0 +1,3 @@
+[submodule "lib/idl"]
+	path = lib/idl
+	url = https://github.com/tango-controls/tango-idl.git
