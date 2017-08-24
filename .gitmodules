@@ -7,3 +7,6 @@
 [submodule "cppserver/starter"]
 	path = cppserver/starter
 	url = https://github.com/tango-controls/starter.git
+[submodule "cppserver/tangotest"]
+	path = cppserver/tangotest
+	url = https://github.com/tango-controls/tangotest.git
