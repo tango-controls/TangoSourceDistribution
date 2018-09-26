@@ -14,7 +14,16 @@
         <copy todir="${distrdir}">
             <fileset dir="${basedir}/assets">
                 <include name="**/*"/>
+                <exclude name="configure"/>
             </fileset>
+        </copy>
+        <copy todir="${distrdir}">
+            <fileset dir="${basedir}/assets">
+                <include name="configure"/>
+            </fileset>
+            <filterset>
+                <filter token="VERSION" value="${cppTango}"/>
+            </filterset>
         </copy>
     </target>
 
@@ -79,8 +88,11 @@
     </target>
 
     <target name="-move-TangoAccessControl" depends="-fetch-TangoAccessControl">
+        <move todir="${distrdir}/cppserver/AbstractClass/AccessControl">
+            <fileset dir="${workdir}/tangoaccesscontrol/AbstractClasses"/>
+        </move>
         <move todir="${distrdir}/cppserver/tangoaccesscontrol">
-            <fileset dir="${workdir}/tangoaccesscontrol"/>
+            <fileset dir="${workdir}/tangoaccesscontrol/TangoAccessControl"/>
         </move>
     </target>
 
@@ -103,6 +115,7 @@
 
         <antcall target="-move-TangoDatabase"/>
         <antcall target="-move-starter"/>
+        <antcall target="-move-TangoAccessControl"/>
         <antcall target="-move-TangoTest"/>
     </target>
 
