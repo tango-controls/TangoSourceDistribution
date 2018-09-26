@@ -338,4 +338,8 @@
     <target name="build" depends="prepare-distribution, cleanup-distribution">
         <echo>Done!</echo>
     </target>
+
+    <target name="package" depends="build">
+        <tar basedir="${distrdir}" compression="gzip" destfile="${builddir}/tango-${env.TRAVIS_BRANCH}.tar.gz"/>
+    </target>
 </project>
