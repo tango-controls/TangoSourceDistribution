@@ -28,8 +28,14 @@
     </target>
 
     <target name="-move-cppTango" depends="-fetch-cppTango">
-        <move todir="${distrdir}/lib/cpp">
-            <fileset dir="${workdir}/cpp"/>
+        <move todir="${distrdir}/lib/cpp/server">
+            <fileset dir="${workdir}/cpp/cppapi/server"/>
+        </move>
+        <move todir="${distrdir}/lib/cpp/client">
+            <fileset dir="${workdir}/cpp/cppapi/client"/>
+        </move>
+        <move todir="${distrdir}/lib/cpp/log4tango">
+            <fileset dir="${workdir}/cpp/log4tango"/>
         </move>
     </target>
 
