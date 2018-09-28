@@ -14,6 +14,8 @@
 # PARTICULAR PURPOSE.
 
 @SET_MAKE@
+
+
 VPATH = @srcdir@
 am__make_dryrun = \
   { \
@@ -50,8 +52,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = cppserver/AbstractClass
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+subdir = lib/cpp/server
+DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(tangoinclude_HEADERS)
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/RSSH_CHECK_OMNIORB.m4 \
 	$(top_srcdir)/m4/RSSH_CHECK_PTHREADS.m4 \
@@ -76,14 +79,55 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/ac_config.h.tmp
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-AM_V_GEN = $(am__v_GEN_@AM_V@)
-am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
-am__v_GEN_0 = @echo "  GEN   " $@;
+LTLIBRARIES = $(noinst_LTLIBRARIES)
+libserver_la_LIBADD =
+am_libserver_la_OBJECTS = attrdesc.lo attrgetsetprop.lo attribute.lo \
+	attrsetval.lo attrmanip.lo basiccommand.lo blackbox.lo \
+	class_factory.lo classattribute.lo command.lo coutappender.lo \
+	classpipe.lo dev_event.lo dev_poll.lo device.lo device_2.lo \
+	device_3.lo device_4.lo device_5.lo deviceclass.lo \
+	devicelog.lo devintr.lo dintrthread.lo dserver.lo \
+	dserverclass.lo dserverlock.lo dserverlog.lo dserverpoll.lo \
+	dserversignal.lo encoded_attribute.lo eventcmds.lo \
+	eventsupplier.lo except.lo fwdattrdesc.lo fwdattribute.lo \
+	logcmds.lo logging.lo logstream.lo multiattribute.lo \
+	notifdeventsupplier.lo pipe.lo pollcmds.lo pollobj.lo \
+	pollring.lo pollthread.lo rootattreg.lo seqvec.lo \
+	subdev_diag.lo tangoappender.lo tangorollingfileappender.lo \
+	templ_inst.lo thsig.lo utils.lo utils_polling.lo utils_shut.lo \
+	w_attribute.lo w_pipe.lo zmqeventsupplier.lo
+libserver_la_OBJECTS = $(am_libserver_la_OBJECTS)
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+depcomp = $(SHELL) $(top_srcdir)/config/depcomp
+am__depfiles_maybe = depfiles
+am__mv = mv -f
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CXXFLAGS) $(CXXFLAGS)
+AM_V_CXX = $(am__v_CXX_@AM_V@)
+am__v_CXX_ = $(am__v_CXX_@AM_DEFAULT_V@)
+am__v_CXX_0 = @echo "  CXX   " $@;
 AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
-SOURCES =
-DIST_SOURCES =
+CXXLD = $(CXX)
+CXXLINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
+am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
+am__v_CXXLD_0 = @echo "  CXXLD " $@;
+AM_V_GEN = $(am__v_GEN_@AM_V@)
+am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
+am__v_GEN_0 = @echo "  GEN   " $@;
+SOURCES = $(libserver_la_SOURCES)
+DIST_SOURCES = $(libserver_la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -96,6 +140,35 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
+am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
+am__vpath_adj = case $$p in \
+    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
+    *) f=$$p;; \
+  esac;
+am__strip_dir = f=`echo $$p | sed -e 's|^.*/||'`;
+am__install_max = 40
+am__nobase_strip_setup = \
+  srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*|]/\\\\&/g'`
+am__nobase_strip = \
+  for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
+am__nobase_list = $(am__nobase_strip_setup); \
+  for p in $$list; do echo "$$p $$p"; done | \
+  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
+  $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
+    if (++n[$$2] == $(am__install_max)) \
+      { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
+    END { for (dir in files) print dir, files[dir] }'
+am__base_list = \
+  sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
+  sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+am__uninstall_files_from_dir = { \
+  test -z "$$files" \
+    || { test ! -d "$$dir" && test ! -f "$$dir" && test ! -r "$$dir"; } \
+    || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
+         $(am__cd) "$$dir" && rm -f $$files; }; \
+  }
+am__installdirs = "$(DESTDIR)$(tangoincludedir)"
+HEADERS = $(tangoinclude_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -321,10 +394,159 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = AccessControl
+SUBDIRS = idl jpeg jpeg_mmx .
+
+# We need the ORB to compile and the tango header files to compile
+AM_CPPFLAGS = -I$(top_srcdir)/lib/cpp/client \
+              -I$(top_srcdir)/lib/cpp/log4tango/include \
+              -I$(top_builddir)/lib/cpp/log4tango/include \
+              -I$(top_builddir)/lib/cpp/server \
+              $(ORB_INCLUDE_PREFIX) $(LIBZMQ_CFLAGS)
+
+
+# We're making a libtool convenience library which is not to be installed,
+# therefore the automake noinst variable
+noinst_LTLIBRARIES = libserver.la
+AM_CXXFLAGS = -D_TANGO_LIB
+
+# The sources
+libserver_la_SOURCES = attrdesc.cpp                 \
+                      attrgetsetprop.cpp            \
+                      attribute.cpp                 \
+                      attrsetval.cpp                \
+                      attrmanip.cpp                 \
+                      basiccommand.cpp              \
+                      blackbox.cpp                  \
+                      class_factory.cpp             \
+                      classattribute.cpp            \
+                      command.cpp                   \
+                      coutappender.cpp              \
+                      classpipe.cpp                 \
+                      dev_event.cpp                 \
+                      dev_poll.cpp                  \
+                      device.cpp                    \
+                      device_2.cpp                  \
+                      device_3.cpp                  \
+                      device_4.cpp                  \
+                      device_5.cpp                  \
+                      deviceclass.cpp               \
+                      devicelog.cpp                 \
+                      devintr.cpp                   \
+                      dintrthread.cpp               \
+                      dserver.cpp                   \
+                      dserverclass.cpp              \
+                      dserverlock.cpp               \
+                      dserverlog.cpp                \
+                      dserverpoll.cpp               \
+                      dserversignal.cpp             \
+                      encoded_attribute.cpp         \
+                      eventcmds.cpp                 \
+                      eventsupplier.cpp             \
+                      except.cpp                    \
+                      fwdattrdesc.cpp               \
+                      fwdattribute.cpp              \
+                      logcmds.cpp                   \
+                      logging.cpp                   \
+                      logstream.cpp                 \
+                      multiattribute.cpp            \
+                      notifdeventsupplier.cpp       \
+                      pipe.cpp                      \
+                      pollcmds.cpp                  \
+                      pollobj.cpp                   \
+                      pollring.cpp                  \
+                      pollthread.cpp                \
+                      rootattreg.cpp                \
+                      seqvec.cpp                    \
+                      subdev_diag.cpp               \
+                      tangoappender.cpp             \
+                      tangorollingfileappender.cpp  \
+                      templ_inst.cpp                \
+                      thsig.cpp                     \
+                      utils.cpp                     \
+                      utils_polling.cpp             \
+                      utils_shut.cpp                \
+                      w_attribute.cpp               \
+                      w_pipe.cpp                    \
+                      zmqeventsupplier.cpp
+
+tangoincludedir = $(includedir)/tango
+tangoinclude_HEADERS = attrdesc.h                 \
+                       attribute.h                \
+                       attrmanip.h                \
+                       attrprop.h                 \
+                       auto_tango_monitor.h       \
+                       basiccommand.h             \
+                       blackbox.h                 \
+                       classattribute.h           \
+                       classpipe.h                \
+                       command.h                  \
+                       coutappender.h             \
+                       coutbuf.h                  \
+                       device.h                   \
+                       device_2.h                 \
+                       device_3.h                 \
+                       device_4.h                 \
+                       device_5.h                 \
+                       deviceclass.h              \
+                       devintr.h                  \
+                       dintrthread.h              \
+                       dserver.h                  \
+                       dserverclass.h             \
+                       dserversignal.h            \
+                       encoded_attribute.h        \
+                       encoded_format.h           \
+                       eventsupplier.h            \
+                       except.h                   \
+                       fwdattrdesc.h              \
+                       fwdattribute.h             \
+                       log4tango.h                \
+                       logcmds.h                  \
+                       logging.h                  \
+                       logstream.h                \
+                       multiattribute.h           \
+                       ntservice.h                \
+                       pipe.h                     \
+                       pipedesc.h                 \
+                       pollcmds.h                 \
+                       pollext.h                  \
+                       pollobj.h                  \
+                       pollring.h                 \
+                       pollthread.h               \
+                       readers_writers_lock.h     \
+                       rootattreg.h               \
+                       seqvec.h                   \
+                       subdev_diag.h              \
+                       tango.h                    \
+                       tango_config.h             \
+                       tango_const.h              \
+                       tango_monitor.h            \
+                       tangoappender.h            \
+                       tangorollingfileappender.h \
+                       utils.h                    \
+                       w_attribute.h              \
+                       w_pipe.h                   \
+                       attribute.tpp              \
+                       attribute_spec.tpp         \
+                       attrprop.tpp               \
+                       attrsetval.tpp             \
+                       device_3.tpp               \
+                       fwdattribute.tpp           \
+                       fwdattribute_spec.tpp      \
+                       pipe.tpp                   \
+                       pollext.tpp                \
+                       pollring.tpp               \
+                       pollthread.tpp             \
+                       utils.tpp                  \
+                       utils_spec.tpp             \
+                       w_attribute.tpp            \
+                       w_attribute_spec.tpp       \
+                       w_attrsetval.tpp           \
+                       w_pipe.tpp
+
 all: all-recursive
 
 .SUFFIXES:
+.SUFFIXES: .cpp .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -334,9 +556,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu cppserver/AbstractClass/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu lib/cpp/server/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu cppserver/AbstractClass/Makefile
+	  $(AUTOMAKE) --gnu lib/cpp/server/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -356,11 +578,129 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
+	@list='$(noinst_LTLIBRARIES)'; for p in $$list; do \
+	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
+	  test "$$dir" != "$$p" || dir=.; \
+	  echo "rm -f \"$${dir}/so_locations\""; \
+	  rm -f "$${dir}/so_locations"; \
+	done
+libserver.la: $(libserver_la_OBJECTS) $(libserver_la_DEPENDENCIES) $(EXTRA_libserver_la_DEPENDENCIES) 
+	$(AM_V_CXXLD)$(CXXLINK)  $(libserver_la_OBJECTS) $(libserver_la_LIBADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT)
+
+distclean-compile:
+	-rm -f *.tab.c
+
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/attrdesc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/attrgetsetprop.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/attribute.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/attrmanip.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/attrsetval.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basiccommand.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/blackbox.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/class_factory.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/classattribute.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/classpipe.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/command.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/coutappender.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dev_event.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dev_poll.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/device.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/device_2.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/device_3.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/device_4.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/device_5.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/deviceclass.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devicelog.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devintr.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dintrthread.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dserver.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dserverclass.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dserverlock.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dserverlog.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dserverpoll.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dserversignal.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/encoded_attribute.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventcmds.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventsupplier.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/except.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fwdattrdesc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fwdattribute.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logcmds.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logging.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logstream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/multiattribute.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/notifdeventsupplier.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pipe.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pollcmds.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pollobj.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pollring.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pollthread.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rootattreg.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/seqvec.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/subdev_diag.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tangoappender.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tangorollingfileappender.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/templ_inst.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/thsig.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils_polling.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils_shut.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/w_attribute.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/w_pipe.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/zmqeventsupplier.Plo@am__quote@
+
+.cpp.o:
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
+
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-tangoincludeHEADERS: $(tangoinclude_HEADERS)
+	@$(NORMAL_INSTALL)
+	@list='$(tangoinclude_HEADERS)'; test -n "$(tangoincludedir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(tangoincludedir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(tangoincludedir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(tangoincludedir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(tangoincludedir)" || exit $$?; \
+	done
+
+uninstall-tangoincludeHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(tangoinclude_HEADERS)'; test -n "$(tangoincludedir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(tangoincludedir)'; $(am__uninstall_files_from_dir)
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -552,14 +892,14 @@ distdir: $(DISTFILES)
 	      || exit 1; \
 	  fi; \
 	done
-	$(MAKE) $(AM_MAKEFLAGS) \
-	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
-	  dist-hook
 check-am: all-am
 check: check-recursive
-all-am: Makefile
+all-am: Makefile $(LTLIBRARIES) $(HEADERS)
 installdirs: installdirs-recursive
 installdirs-am:
+	for dir in "$(DESTDIR)$(tangoincludedir)"; do \
+	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+	done
 install: install-recursive
 install-exec: install-exec-recursive
 install-data: install-data-recursive
@@ -592,11 +932,14 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-recursive
 
-clean-am: clean-generic clean-libtool mostlyclean-am
+clean-am: clean-generic clean-libtool clean-noinstLTLIBRARIES \
+	mostlyclean-am
 
 distclean: distclean-recursive
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
-distclean-am: clean-am distclean-generic distclean-tags
+distclean-am: clean-am distclean-compile distclean-generic \
+	distclean-tags
 
 dvi: dvi-recursive
 
@@ -610,7 +953,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am:
+install-data-am: install-tangoincludeHEADERS
 
 install-dvi: install-dvi-recursive
 
@@ -639,12 +982,14 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-recursive
 
-mostlyclean-am: mostlyclean-generic mostlyclean-libtool
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-recursive
 
@@ -654,29 +999,27 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am:
+uninstall-am: uninstall-tangoincludeHEADERS
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
 	install-am install-strip tags-recursive
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
 	all all-am check check-am clean clean-generic clean-libtool \
-	ctags ctags-recursive dist-hook distclean distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
+	clean-noinstLTLIBRARIES ctags ctags-recursive distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip install-tangoincludeHEADERS installcheck \
 	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
-	uninstall uninstall-am
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-recursive uninstall uninstall-am \
+	uninstall-tangoincludeHEADERS
 
-
-dist-hook:
-	cp -R $(top_srcdir)/cppserver/AbstractClass/AccessControl $(distdir); \
-	rm -rf `find $(distdir) -name .svn`
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

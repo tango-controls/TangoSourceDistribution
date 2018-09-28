@@ -55,7 +55,7 @@ export SRC_PATH
 APP_DIR=@prefix@/share/java;			export APP_DIR
 PREF_DIR=@prefix@/share/pogo/preferences;   export PREF_DIR
 
-POGO_CLASS=$APP_DIR/org.tango.pogo.jar;		export POGO_CLASS
+POGO_CLASS=$APP_DIR/Pogo.jar;		export POGO_CLASS
 
 CLASSPATH=$PREF_DIR:$POGO_CLASS;    export CLASSPATH
 

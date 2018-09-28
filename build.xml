@@ -4,25 +4,56 @@
     <property file="distribution.properties"/>
     <property name="builddir" value="build"/>
     <property name="workdir" value="${builddir}/tmp"/>
-    <property name="distrdir" value="${builddir}/distr"/>
+    <property name="distrdir" value="${builddir}/distr/tango-${cppTango}"/>
+    <condition property="build" value="${env.TRAVIS_BRANCH}" else="dev">
+        <isset property="env.TRAVIS_BRANCH" />
+    </condition>
 
     <target name="clean">
         <delete dir="${builddir}"/>
     </target>
 
     <target name="prepare-assets">
-        <copy todir="${distrdir}">
+        <copy todir="${distrdir}" overwrite="true">
             <fileset dir="${basedir}/assets">
                 <include name="**/*"/>
                 <exclude name="configure"/>
+                <exclude name="lib/java/Makefile.in"/>
+                <exclude name="doc/Makefile.in"/>
             </fileset>
         </copy>
-        <copy todir="${distrdir}">
+        <copy todir="${distrdir}" overwrite="true">
             <fileset dir="${basedir}/assets">
                 <include name="configure"/>
             </fileset>
             <filterset>
                 <filter token="VERSION" value="${cppTango}"/>
+            </filterset>
+        </copy>
+        <copy todir="${distrdir}/doc" overwrite="true">
+            <fileset dir="${basedir}/assets/doc">
+                <include name="Makefile.in"/>
+            </fileset>
+            <filterset>
+                <filter token="DOCS_VER" value="${docs-ver}"/>
+            </filterset>
+        </copy>
+        <copy todir="${distrdir}/lib/java" overwrite="true">
+            <fileset dir="${basedir}/assets/lib/java">
+                <include name="Makefile.in"/>
+            </fileset>
+            <filterset>
+                <filter token="JTANGO_JAR" value="${JTango}.jar"/>
+                <filter token="ASTOR_JAR" value="${astor-jar}"/>
+                <filter token="ATK_CORE_JAR" value="${atk-core-jar}"/>
+                <filter token="ATK_WIDGET_JAR" value="${atk-widget-jar}"/>
+                <filter token="ATK_PANEL_JAR" value="${atk-panel-jar}"/>
+                <filter token="ATK_TUNING_JAR" value="${atk-tuning-jar}"/>
+                <filter token="JIVE_JAR" value="${jive-jar}"/>
+                <filter token="POGO_JAR" value="${pogo-jar}"/>
+                <filter token="LOGVIEWER_JAR" value="${log-viewer-jar}"/>
+                <filter token="DBBENCH_JAR" value="${dbbench-jar}"/>
+                <filter token="JSSH_TERMINAL_JAR" value="${jssh-terminal-jar}"/>
             </filterset>
         </copy>
     </target>
@@ -36,16 +67,25 @@
         </exec>
     </target>
 
-    <target name="-move-cppTango" depends="-fetch-cppTango">
-        <move todir="${distrdir}/lib/cpp/server">
+    <target name="-pre-move-cppTango" depends="-fetch-cppTango">
+        <mkdir dir="${workdir}/cpp/cmake-build"/>
+        <exec executable="cmake" failonerror="true" failifexecutionfails="true">
+            <arg value="-H${workdir}/cpp"/>
+            <arg value="-B${workdir}/cpp/cmake-build"/>
+        </exec>
+    </target>
+
+    <target name="-move-cppTango" depends="-pre-move-cppTango">
+        <copy todir="${distrdir}/lib/cpp/server">
             <fileset dir="${workdir}/cpp/cppapi/server"/>
-        </move>
-        <move todir="${distrdir}/lib/cpp/client">
+        </copy>
+        <copy file="${workdir}/cpp/cmake-build/cppapi/server/tango_const.h" todir="${distrdir}/lib/cpp/server"/>
+        <copy todir="${distrdir}/lib/cpp/client">
             <fileset dir="${workdir}/cpp/cppapi/client"/>
-        </move>
-        <move todir="${distrdir}/lib/cpp/log4tango">
+        </copy>
+        <copy todir="${distrdir}/lib/cpp/log4tango">
             <fileset dir="${workdir}/cpp/log4tango"/>
-        </move>
+        </copy>
     </target>
 
     <target name="-fetch-TangoDatabase">
@@ -335,8 +375,6 @@
     </target>
 
     <target name="prepare-distribution" depends="-mkdirs">
-        <antcall target="prepare-assets"/>
-
         <antcall target="prepare-cppserver"/>
 
         <antcall target="prepare-doc"/>
@@ -346,6 +384,8 @@
         <antcall target="prepare-java"/>
 
         <antcall target="prepare-utils"/>
+
+        <antcall target="prepare-assets"/>
     </target>
 
     <target name="cleanup-distribution">
@@ -358,7 +398,7 @@
         <echo>Done!</echo>
     </target>
 
-    <target name="package" depends="build">
-        <tar basedir="${distrdir}" compression="gzip" destfile="${builddir}/tango-${env.TRAVIS_BRANCH}.tar.gz"/>
+    <target name="package">
+        <tar basedir="${builddir}/distr" compression="gzip" destfile="${builddir}/tango-${build}.tar.gz"/>
     </target>
 </project>

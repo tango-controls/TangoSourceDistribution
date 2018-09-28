@@ -388,8 +388,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-DOCS = tango.pdf
-SUBDIRS = man src
+DOCS = tango-@DOCS_VER@.pdf
+SUBDIRS = man
 all: all-recursive
 
 .SUFFIXES:
