@@ -1,14 +1,12 @@
 language: java
 before_install:
   - sudo apt-get install -y build-essential omniidl libomniorb4-dev libcos4-dev libomnithread3-dev libzmq3-dev  
-install: ant build package
+install: ant build
 env:
   - ROOT=/home/travis/build/tango-controls/TangoSourceDistribution/build/distr
 
-before_script: cd ${ROOT}
 script:
-  - ./configure
-  - make all
+  - ant package
 
 addons:
   apt:
