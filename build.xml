@@ -2,9 +2,9 @@
 <project name="TangoSourceDistribution" default="build">
     <property environment="env"/>
     <property file="distribution.properties"/>
-    <property name="builddir" value="build"/>
+    <property name="builddir" value="${basedir}/build"/>
     <property name="workdir" value="${builddir}/tmp"/>
-    <property name="distrdir" value="${builddir}/distr/tango-${cppTango}"/>
+    <property name="distrdir" value="${builddir}/distr"/>
     <condition property="build" value="${env.TRAVIS_BRANCH}" else="dev">
         <isset property="env.TRAVIS_BRANCH" />
     </condition>
@@ -30,6 +30,7 @@
                 <filter token="VERSION" value="${cppTango}"/>
             </filterset>
         </copy>
+        <chmod file="${distrdir}/configure" perm="755"/>
         <copy todir="${distrdir}/doc" overwrite="true">
             <fileset dir="${basedir}/assets/doc">
                 <include name="Makefile.in"/>
@@ -72,6 +73,7 @@
         <exec executable="cmake" failonerror="true" failifexecutionfails="true">
             <arg value="-H${workdir}/cpp"/>
             <arg value="-B${workdir}/cpp/cmake-build"/>
+            <arg value="-DIDL_BASE=${workdir}/idl/install"/>
         </exec>
     </target>
 
@@ -314,10 +316,21 @@
         </exec>
     </target>
 
-    <target name="-move-tango-idl" depends="-fetch-tango-idl">
-        <move todir="${distrdir}/lib/idl">
-            <fileset dir="${workdir}/idl"/>
-        </move>
+    <target name="-pre-move-tango-idl" depends="-fetch-tango-idl">
+        <mkdir dir="${workdir}/idl/cmake-build"/>
+        <mkdir dir="${workdir}/idl/install"/>
+        <exec executable="cmake" failonerror="true" failifexecutionfails="true">
+            <arg value="-H${workdir}/idl"/>
+            <arg value="-B${workdir}/idl/cmake-build"/>
+            <arg value="-DCMAKE_INSTALL_PREFIX=${workdir}/idl/install"/>
+        </exec>
+        <exec executable="make" dir="${workdir}/idl/cmake-build" failonerror="true" failifexecutionfails="true">
+            <arg value="install"/>
+        </exec>
+    </target>
+
+    <target name="-move-tango-idl" depends="-pre-move-tango-idl">
+        <copy file="${workdir}/idl/tango.idl" todir="${distrdir}/lib/idl"/>
     </target>
 
     <target name="prepare-java" depends="-mkdirs">
@@ -334,8 +347,8 @@
     </target>
 
     <target name="prepare-lib" depends="-mkdirs">
-        <antcall target="-move-cppTango"/>
         <antcall target="-move-tango-idl"/>
+        <antcall target="-move-cppTango"/>
         <antcall target="-move-JTango"/>
     </target>
 
@@ -399,6 +412,8 @@
     </target>
 
     <target name="package">
-        <tar basedir="${builddir}/distr" compression="gzip" destfile="${builddir}/tango-${build}.tar.gz"/>
+        <mkdir dir="${builddir}/package/tango-${cppTango}"/>
+        <copydir src="${builddir}/distr" dest="${builddir}/package/tango-${cppTango}"/>
+        <tar basedir="${builddir}/package" compression="gzip" destfile="${builddir}/tango-${build}.tar.gz"/>
     </target>
 </project>
