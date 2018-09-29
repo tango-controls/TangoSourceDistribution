@@ -52,7 +52,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 subdir = lib/idl
-DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/RSSH_CHECK_OMNIORB.m4 \
 	$(top_srcdir)/m4/RSSH_CHECK_PTHREADS.m4 \
@@ -312,8 +312,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 idldir = ${pkgdatadir}/idl
-idl_DATA = tango.idl \
-	   README
+idl_DATA = tango.idl
 
 EXTRA_DIST = $(idl_DATA)
 all: all-am

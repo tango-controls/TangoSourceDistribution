@@ -20245,7 +20245,7 @@ subdirs="$subdirs lib/cpp/log4tango"
 
 
 # All the Makefiles to be generated.
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db8.sql cppserver/database/update_db7.sql cppserver/database/rem_history.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca doc/Makefile doc/man/Makefile pogo/Makefile pogo/preferences/Makefile"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/idl/Makefile lib/cpp/tango.pc lib/cpp/Makefile lib/cpp/server/Makefile lib/cpp/server/idl/Makefile lib/cpp/server/jpeg/Makefile lib/cpp/server/jpeg_mmx/Makefile lib/cpp/client/Makefile lib/cpp/client/helpers/Makefile lib/java/Makefile cppserver/Makefile cppserver/database/Makefile cppserver/database/create_db.sql cppserver/database/create_db.sh cppserver/database/my.cnf cppserver/database/stored_proc.sql cppserver/database/create_db_tables.sql cppserver/database/update_db.sh cppserver/database/update_db.sql cppserver/database/update_db8.sql cppserver/database/update_db7.sql cppserver/database/rem_history.sql cppserver/starter/Makefile cppserver/tangotest/Makefile cppserver/AbstractClass/Makefile cppserver/AbstractClass/AccessControl/Makefile cppserver/tangoaccesscontrol/Makefile utils/Makefile utils/tango_admin/Makefile scripts/Makefile scripts/tango scripts/tango_wca doc/Makefile doc/man/Makefile pogo/Makefile pogo/templates/Makefile pogo/preferences/Makefile pogo/templates/cpp/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -21438,9 +21438,9 @@ do
 #    "doc/src/gen_api/Makefile") CONFIG_FILES="$CONFIG_FILES doc/src/gen_api/Makefile" ;;
 #    "doc/src/advanced/Makefile") CONFIG_FILES="$CONFIG_FILES doc/src/advanced/Makefile" ;;
     "pogo/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/Makefile" ;;
-#    "pogo/templates/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/templates/Makefile" ;;
+    "pogo/templates/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/templates/Makefile" ;;
     "pogo/preferences/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/preferences/Makefile" ;;
-#    "pogo/templates/cpp/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/templates/cpp/Makefile" ;;
+    "pogo/templates/cpp/Makefile") CONFIG_FILES="$CONFIG_FILES pogo/templates/cpp/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

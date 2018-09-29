@@ -325,7 +325,6 @@ dist_java_DATA = \
    @JIVE_JAR@ \
    @POGO_JAR@ \
    @ATK_PANEL_JAR@ \
-#   log4j-1.2.15.jar \
    @ATK_TUNING_JAR@ \
    @LOGVIEWER_JAR@ \
    @JTANGO_JAR@ \
