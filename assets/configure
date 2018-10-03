@@ -19796,7 +19796,7 @@ fi
 $as_echo_n "checking for mariadbclient ... " >&6; }
     MARIADBCLIENT_LDFLAGS=""
     MARIADBCLIENT_CFLAGS=""
-    MARIADBCLIENT_LIBS="-lmariadb"
+    MARIADBCLIENT_LIBS="-lmariadbclient"
     mariadbclient_fail=""
 
         for tryprefix in /usr /usr/local /usr/mysql /usr/local/mysql /usr/pkg $mariadbclient_prefix ; do
