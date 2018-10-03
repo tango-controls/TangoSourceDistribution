@@ -432,7 +432,7 @@
         </exec>
     </target>
 
-    <target name="build" depends="prepare-distribution, cleanup-distribution">
+    <target name="build" depends="prepare-distribution, bootstrap-distribution, cleanup-distribution">
         <echo>Done!</echo>
     </target>
 
