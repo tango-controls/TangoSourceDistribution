@@ -19573,7 +19573,7 @@ else
 			 		MYSQL_MICRO=`echo $VERS | cut -d '.' -f 3`
 					MARIA=`echo $MYSQL_MICRO | cut -d '-' -f 2`
 
-					if [ "$MARIA" == *aria* ]; then
+					if [[ "$MARIA" == *aria* ]]; then
 						MYSQL_VERSION=not_found
 						ac_cv_mysql_version_5_5=no
 					else
@@ -19980,7 +19980,7 @@ else
 			 		MARIADB_MICRO=`echo $VERS | cut -d '.' -f 3`
 					MARIA=`echo $MARIADB_MICRO | cut -d '-' -f 2`
 
-					if [ "$MARIA" == *aria* ]; then
+					if [[ "$MARIA" == *aria* ]]; then
 				 		if test $MARIADB_MAJOR -lt 10; then
 							ac_cv_mariadb_version_10_0=no
 				 		else
