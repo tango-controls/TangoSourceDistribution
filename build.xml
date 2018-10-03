@@ -17,23 +17,22 @@
         <copy todir="${distrdir}" overwrite="true">
             <fileset dir="${basedir}/assets">
                 <include name="**/*"/>
-                <exclude name="configure"/>
-                <exclude name="lib/java/Makefile.in"/>
-                <exclude name="doc/Makefile.in"/>
+                <exclude name="configure.ac"/>
+                <exclude name="lib/java/Makefile.am"/>
+                <exclude name="doc/Makefile.am"/>
             </fileset>
         </copy>
         <copy todir="${distrdir}" overwrite="true">
             <fileset dir="${basedir}/assets">
-                <include name="configure"/>
+                <include name="configure.ac"/>
             </fileset>
             <filterset>
                 <filter token="VERSION" value="${cppTango}"/>
             </filterset>
         </copy>
-        <chmod file="${distrdir}/configure" perm="755"/>
         <copy todir="${distrdir}/doc" overwrite="true">
             <fileset dir="${basedir}/assets/doc">
-                <include name="Makefile.in"/>
+                <include name="Makefile.am"/>
             </fileset>
             <filterset>
                 <filter token="DOCS_VER" value="${docs-ver}"/>
@@ -41,7 +40,7 @@
         </copy>
         <copy todir="${distrdir}/lib/java" overwrite="true">
             <fileset dir="${basedir}/assets/lib/java">
-                <include name="Makefile.in"/>
+                <include name="Makefile.am"/>
             </fileset>
             <filterset>
                 <filter token="JTANGO_JAR" value="${JTango}.jar"/>
@@ -154,11 +153,11 @@
     </target>
 
     <target name="prepare-cppserver" depends="-mkdirs">
-
         <antcall target="-move-TangoDatabase"/>
         <antcall target="-move-starter"/>
         <antcall target="-move-TangoAccessControl"/>
         <antcall target="-move-TangoTest"/>
+        <antcall target="-post-prepare-cppserver"/>
     </target>
 
     <target name="-mkdirs">
@@ -333,6 +332,24 @@
         <copy file="${workdir}/idl/tango.idl" todir="${distrdir}/lib/idl"/>
     </target>
 
+    <target name="-post-prepare-lib">
+        <delete>
+            <fileset dir="${distrdir}/lib" includes="**/Makefile.in"/>
+        </delete>
+    </target>
+
+    <target name="-post-prepare-cppserver">
+        <delete>
+            <fileset dir="${distrdir}/cppserver" includes="**/Makefile.in"/>
+        </delete>
+    </target>
+
+    <target name="-post-prepare-utils">
+        <delete>
+            <fileset dir="${distrdir}/utils" includes="**/Makefile.in"/>
+        </delete>
+    </target>
+
     <target name="prepare-java" depends="-mkdirs">
         <antcall target="-move-jive"/>
         <antcall target="-move-atkcore"/>
@@ -350,6 +367,7 @@
         <antcall target="-move-tango-idl"/>
         <antcall target="-move-cppTango"/>
         <antcall target="-move-JTango"/>
+        <antcall target="-post-prepare-lib"/>
     </target>
 
     <!-- Doc -->
@@ -385,6 +403,7 @@
 
     <target name="prepare-utils" depends="-mkdirs">
         <antcall target="-move-tango_admin"/>
+        <antcall target="-post-prepare-utils"/>
     </target>
 
     <target name="prepare-distribution" depends="-mkdirs">
@@ -404,6 +423,12 @@
     <target name="cleanup-distribution">
         <exec executable="/bin/bash" dir="${distrdir}" failifexecutionfails="true" failonerror="true">
             <arg value="${basedir}/cleanup_distrib"/>
+        </exec>
+    </target>
+
+    <target name="bootstrap-distribution">
+        <exec executable="/bin/bash" dir="${distrdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="${basedir}/bootstrap"/>
         </exec>
     </target>
 

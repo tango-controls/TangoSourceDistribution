@@ -20,7 +20,7 @@
 # packagename, the second is the version used for the tar file,
 # the third is an email address for bug reports (shouldn't be necessary),
 # and the fourth argument is                
-AC_INIT(Tango,9.2.5a,info@tango-controls.org,tango)
+AC_INIT(Tango,@VERSION@,info@tango-controls.org,tango)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -492,14 +492,6 @@ AC_OUTPUT(Makefile
 	  scripts/tango_wca
   	  doc/Makefile
 	  doc/man/Makefile
-	  doc/src/Makefile
-	  doc/src/ds_writing/Makefile
-	  doc/src/ds_model/Makefile
-	  doc/src/dance/Makefile
-	  doc/src/java_api/Makefile
-	  doc/src/java_api/picture/Makefile
-	  doc/src/gen_api/Makefile
-	  doc/src/advanced/Makefile
 	  pogo/Makefile
 	  pogo/templates/Makefile
 	  pogo/preferences/Makefile

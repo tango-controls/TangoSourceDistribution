@@ -4,21 +4,18 @@
 # the link instead of keeping them as links
 
 javadir = $(datadir)/java
-dist_java_DATA=\
-   Astor-7.0.9.jar \
-   DeviceTree-1.9.6.jar \
-   ATKCore-9.1.22.jar \
-   Jive-7.10.jar \
-   org.tango.pogo-9.4.5.jar \
-   atkpanel-5.5.jar \
-   log4j-1.2.15.jar \
-   AtkTuning-2.8.jar \
-   LogViewer-2.0.4.jar \
-   JTango-9.1.2.jar \
-   ATKWidget-9.1.22.jar \
-   tool_panels-3.2.jar \
-   JSSHTerminal-1.10.jar \
-   DBBench-1.3.jar
+dist_java_DATA = \
+   @ASTOR_JAR@ \
+   @ATK_CORE_JAR@ \
+   @JIVE_JAR@ \
+   @POGO_JAR@ \
+   @ATK_PANEL_JAR@ \
+   @ATK_TUNING_JAR@ \
+   @LOGVIEWER_JAR@ \
+   @JTANGO_JAR@ \
+   @ATK_WIDGET_JAR@ \
+   @DBBENCH_JAR@ \
+   @JSSH_TERMINAL_JAR@
 
 if TANGO_JAVA_ENABLED
 bin_SCRIPTS = \
@@ -26,7 +23,6 @@ bin_SCRIPTS = \
    jive \
    pogo \
    pogo-6 \
-   devicetree \
    atkpanel \
    logviewer \
    atktuning \

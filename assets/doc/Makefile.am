@@ -1,6 +1,6 @@
 
-DOCS = tango.pdf
-SUBDIRS = man src
+DOCS = tango-@DOCS_VER@.pdf
+SUBDIRS = man
 
 install-data-local:
 	mkdir -p $(DESTDIR)/$(docdir)
