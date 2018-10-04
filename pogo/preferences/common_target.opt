@@ -148,9 +148,8 @@ endif
 clean: $(SPECIFIC_CLEAN_TARGET)
 	@echo "Cleaning "$(PROJECT_NAME)
 ifdef OBJDIR
-ifneq ($(OBJDIR),/tmp)
-	rm -rf $(OBJDIR)
-endif
+	rm -f $(OBJDIR)/*.o
+	rmdir $(OBJDIR) 2> /dev/null || true
 endif
 ifeq ($(PROJECT_TYPE),SIMPLE_EXE)
 	rm -f $(OUTPUT_DIR)/$(PROJECT_NAME)
