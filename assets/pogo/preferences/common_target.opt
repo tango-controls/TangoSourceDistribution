@@ -1,3 +1,5 @@
+# vim: set filetype=make:
+
 INSTALL_DIR=$(TANGO_HOME)/bin
 
 # create all directories
@@ -146,9 +148,8 @@ endif
 clean: $(SPECIFIC_CLEAN_TARGET)
 	@echo "Cleaning "$(PROJECT_NAME)
 ifdef OBJDIR
-ifneq ($(OBJDIR),/tmp)
-	rm -rf $(OBJDIR)
-endif
+	rm -f $(OBJDIR)/*.o
+	rmdir $(OBJDIR) 2> /dev/null || true
 endif
 ifeq ($(PROJECT_TYPE),SIMPLE_EXE)
 	rm -f $(OUTPUT_DIR)/$(PROJECT_NAME)
@@ -162,7 +163,8 @@ endif
 ifeq ($(PROJECT_TYPE),SHARED_LIB)
 	rm -f $(OUTPUT_DIR)/lib$(PROJECT_NAME).so
 endif
-  
+rmdir $(OUTPUT_DIR) 2> /dev/null || true
+
 #------------------------------------------------------------------------------
 #-- install:
 #------------------------------------------------------------------------------
