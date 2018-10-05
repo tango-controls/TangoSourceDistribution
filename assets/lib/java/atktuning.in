@@ -14,7 +14,7 @@ LIB_DIR=@prefix@/share/java;   export LIB_DIR
 
 TANGO=$LIB_DIR/JTango.jar
 TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
-ATKPANEL=$LIB_DIR/AtkTuning.jar
+ATKPANEL=$LIB_DIR/ATKTuning.jar
 
 CLASSPATH=$ATKPANEL:$TANGOATK:$TANGO
 export CLASSPATH
