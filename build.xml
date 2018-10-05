@@ -67,7 +67,7 @@
         </exec>
     </target>
 
-    <target name="-pre-move-cppTango" depends="-fetch-cppTango">
+    <target name="-pre-copy-cppTango" depends="-fetch-cppTango">
         <mkdir dir="${workdir}/cpp/cmake-build"/>
         <exec executable="cmake" failonerror="true" failifexecutionfails="true">
             <arg value="-H${workdir}/cpp"/>
@@ -76,16 +76,22 @@
         </exec>
     </target>
 
-    <target name="-move-cppTango" depends="-pre-move-cppTango">
+    <target name="-copy-cppTango" depends="-pre-copy-cppTango">
         <copy todir="${distrdir}/lib/cpp/server">
-            <fileset dir="${workdir}/cpp/cppapi/server"/>
+            <fileset dir="${workdir}/cpp/cppapi/server">
+                <exclude name="**/Makefile*"/>
+            </fileset>
         </copy>
         <copy file="${workdir}/cpp/cmake-build/cppapi/server/tango_const.h" todir="${distrdir}/lib/cpp/server"/>
         <copy todir="${distrdir}/lib/cpp/client">
-            <fileset dir="${workdir}/cpp/cppapi/client"/>
+            <fileset dir="${workdir}/cpp/cppapi/client">
+                <exclude name="**/Makefile*"/>
+            </fileset>
         </copy>
         <copy todir="${distrdir}/lib/cpp/log4tango">
-            <fileset dir="${workdir}/cpp/log4tango"/>
+            <fileset dir="${workdir}/cpp/log4tango">
+                <exclude name="**/Makefile*"/>
+            </fileset>
         </copy>
     </target>
 
@@ -98,10 +104,12 @@
         </exec>
     </target>
 
-    <target name="-move-TangoDatabase" depends="-fetch-TangoDatabase">
-        <move todir="${distrdir}/cppserver/database">
-            <fileset dir="${workdir}/database"/>
-        </move>
+    <target name="-copy-TangoDatabase" depends="-fetch-TangoDatabase">
+        <copy todir="${distrdir}/cppserver/database">
+            <fileset dir="${workdir}/database">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
     </target>
 
     <target name="-fetch-starter">
@@ -113,10 +121,12 @@
         </exec>
     </target>
 
-    <target name="-move-starter" depends="-fetch-starter">
-        <move todir="${distrdir}/cppserver/starter">
-            <fileset dir="${workdir}/starter"/>
-        </move>
+    <target name="-copy-starter" depends="-fetch-starter">
+        <copy todir="${distrdir}/cppserver/starter">
+            <fileset dir="${workdir}/starter">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
     </target>
 
     <target name="-fetch-TangoAccessControl">
@@ -128,13 +138,17 @@
         </exec>
     </target>
 
-    <target name="-move-TangoAccessControl" depends="-fetch-TangoAccessControl">
-        <move todir="${distrdir}/cppserver/AbstractClass/AccessControl">
-            <fileset dir="${workdir}/tangoaccesscontrol/AbstractClasses"/>
-        </move>
-        <move todir="${distrdir}/cppserver/tangoaccesscontrol">
-            <fileset dir="${workdir}/tangoaccesscontrol/TangoAccessControl"/>
-        </move>
+    <target name="-copy-TangoAccessControl" depends="-fetch-TangoAccessControl">
+        <copy todir="${distrdir}/cppserver/AbstractClass/AccessControl">
+            <fileset dir="${workdir}/tangoaccesscontrol/AbstractClasses">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+        <copy todir="${distrdir}/cppserver/tangoaccesscontrol">
+            <fileset dir="${workdir}/tangoaccesscontrol/TangoAccessControl">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
     </target>
 
     <target name="-fetch-TangoTest">
@@ -146,18 +160,19 @@
         </exec>
     </target>
 
-    <target name="-move-TangoTest" depends="-fetch-TangoTest">
-        <move todir="${distrdir}/cppserver/tangotest">
-            <fileset dir="${workdir}/tangotest"/>
-        </move>
+    <target name="-copy-TangoTest" depends="-fetch-TangoTest">
+        <copy todir="${distrdir}/cppserver/tangotest">
+            <fileset dir="${workdir}/tangotest">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
     </target>
 
     <target name="prepare-cppserver" depends="-mkdirs">
-        <antcall target="-move-TangoDatabase"/>
-        <antcall target="-move-starter"/>
-        <antcall target="-move-TangoAccessControl"/>
-        <antcall target="-move-TangoTest"/>
-        <antcall target="-post-prepare-cppserver"/>
+        <antcall target="-copy-TangoDatabase"/>
+        <antcall target="-copy-starter"/>
+        <antcall target="-copy-TangoAccessControl"/>
+        <antcall target="-copy-TangoTest"/>
     </target>
 
     <target name="-mkdirs">
@@ -315,7 +330,7 @@
         </exec>
     </target>
 
-    <target name="-pre-move-tango-idl" depends="-fetch-tango-idl">
+    <target name="-pre-copy-tango-idl" depends="-fetch-tango-idl">
         <mkdir dir="${workdir}/idl/cmake-build"/>
         <mkdir dir="${workdir}/idl/install"/>
         <exec executable="cmake" failonerror="true" failifexecutionfails="true">
@@ -328,26 +343,8 @@
         </exec>
     </target>
 
-    <target name="-move-tango-idl" depends="-pre-move-tango-idl">
+    <target name="-copy-tango-idl" depends="-pre-copy-tango-idl">
         <copy file="${workdir}/idl/tango.idl" todir="${distrdir}/lib/idl"/>
-    </target>
-
-    <target name="-post-prepare-lib">
-        <delete>
-            <fileset dir="${distrdir}/lib" includes="**/Makefile.in"/>
-        </delete>
-    </target>
-
-    <target name="-post-prepare-cppserver">
-        <delete>
-            <fileset dir="${distrdir}/cppserver" includes="**/Makefile.in"/>
-        </delete>
-    </target>
-
-    <target name="-post-prepare-utils">
-        <delete>
-            <fileset dir="${distrdir}/utils" includes="**/Makefile.in"/>
-        </delete>
     </target>
 
     <target name="prepare-java" depends="-mkdirs">
@@ -364,10 +361,9 @@
     </target>
 
     <target name="prepare-lib" depends="-mkdirs">
-        <antcall target="-move-tango-idl"/>
-        <antcall target="-move-cppTango"/>
+        <antcall target="-copy-tango-idl"/>
+        <antcall target="-copy-cppTango"/>
         <antcall target="-move-JTango"/>
-        <antcall target="-post-prepare-lib"/>
     </target>
 
     <!-- Doc -->
@@ -394,16 +390,17 @@
         </exec>
     </target>
 
-    <target name="-move-tango_admin" depends="-fetch-tango_admin">
-        <move todir="${distrdir}/utils/tango_admin">
-            <fileset dir="${workdir}/tango_admin"/>
-        </move>
+    <target name="-copy-tango_admin" depends="-fetch-tango_admin">
+        <copy todir="${distrdir}/utils/tango_admin">
+            <fileset dir="${workdir}/tango_admin">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
     </target>
 
 
     <target name="prepare-utils" depends="-mkdirs">
-        <antcall target="-move-tango_admin"/>
-        <antcall target="-post-prepare-utils"/>
+        <antcall target="-copy-tango_admin"/>
     </target>
 
     <target name="prepare-distribution" depends="-mkdirs">

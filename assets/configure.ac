@@ -467,6 +467,13 @@ AC_OUTPUT(Makefile
 	  lib/cpp/server/jpeg_mmx/Makefile
 	  lib/cpp/client/Makefile
 	  lib/cpp/client/helpers/Makefile
+	  lib/cpp/log4tango/Makefile
+	  lib/cpp/log4tango/config/Makefile
+	  lib/cpp/log4tango/include/Makefile
+	  lib/cpp/log4tango/include/log4tango/Makefile
+	  lib/cpp/log4tango/include/log4tango/threading/Makefile
+	  lib/cpp/log4tango/src/Makefile
+	  lib/cpp/log4tango/tests/Makefile
 	  lib/java/Makefile
 	  cppserver/Makefile
 	  cppserver/database/Makefile
