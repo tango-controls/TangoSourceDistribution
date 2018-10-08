@@ -1,6 +1,6 @@
 lib_LTLIBRARIES = liblog4tango.la
 
-INCLUDES = -I$(top_srcdir)/include
+INCLUDES = -I../include -I$(top_srcdir)/include
 
 noinst_HEADERS = snprintf.c
 
