@@ -1,6 +1,6 @@
 # TangoSourceDistribution
 
-[![Build Status](https://travis-ci.org/tango-controls/TangoSourceDistribution.svg?branch=reincarnation)](https://travis-ci.org/tango-controls/TangoSourceDistribution)
+[![Build Status](https://travis-ci.org/tango-controls/TangoSourceDistribution.svg?branch=master)](https://travis-ci.org/tango-controls/TangoSourceDistribution)
 
 ## How to build
 
