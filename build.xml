@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<project name="TangoSourceDistribution" default="build">
+    <property environment="env"/>
+    <property file="distribution.properties"/>
+    <property name="builddir" value="${basedir}/build"/>
+    <property name="workdir" value="${builddir}/tmp"/>
+    <property name="distrdir" value="${builddir}/distr"/>
+    <condition property="build" value="${env.TRAVIS_BRANCH}" else="dev">
+        <isset property="env.TRAVIS_BRANCH" />
+    </condition>
+
+    <target name="clean">
+        <delete dir="${builddir}"/>
+    </target>
+
+    <target name="prepare-assets">
+        <copy todir="${distrdir}" overwrite="true">
+            <fileset dir="${basedir}/assets">
+                <include name="**/*"/>
+                <exclude name="configure.ac"/>
+                <exclude name="lib/java/Makefile.am"/>
+                <exclude name="doc/Makefile.am"/>
+            </fileset>
+        </copy>
+        <copy todir="${distrdir}" overwrite="true">
+            <fileset dir="${basedir}/assets">
+                <include name="configure.ac"/>
+            </fileset>
+            <filterset>
+                <filter token="VERSION" value="${cppTango}"/>
+            </filterset>
+        </copy>
+        <copy todir="${distrdir}/doc" overwrite="true">
+            <fileset dir="${basedir}/assets/doc">
+                <include name="Makefile.am"/>
+            </fileset>
+            <filterset>
+                <filter token="DOCS_VER" value="${docs-ver}"/>
+            </filterset>
+        </copy>
+        <copy todir="${distrdir}/lib/java" overwrite="true">
+            <fileset dir="${basedir}/assets/lib/java">
+                <include name="Makefile.am"/>
+            </fileset>
+            <filterset>
+                <filter token="JTANGO_JAR" value="${JTango}.jar"/>
+                <filter token="ASTOR_JAR" value="${astor-jar}"/>
+                <filter token="ATK_CORE_JAR" value="${atk-core-jar}"/>
+                <filter token="ATK_WIDGET_JAR" value="${atk-widget-jar}"/>
+                <filter token="ATK_PANEL_JAR" value="${atk-panel-jar}"/>
+                <filter token="ATK_TUNING_JAR" value="${atk-tuning-jar}"/>
+                <filter token="JIVE_JAR" value="${jive-jar}"/>
+                <filter token="POGO_JAR" value="${pogo-jar}"/>
+                <filter token="LOGVIEWER_JAR" value="${log-viewer-jar}"/>
+                <filter token="DBBENCH_JAR" value="${dbbench-jar}"/>
+                <filter token="JSSH_TERMINAL_JAR" value="${jssh-terminal-jar}"/>
+            </filterset>
+        </copy>
+    </target>
+
+    <target name="-fetch-cppTango">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="-b ${cppTango}"/>
+            <arg value="${src-root-repo}/cppTango"/>
+            <arg value="cpp"/>
+        </exec>
+    </target>
+
+    <target name="-pre-copy-cppTango" depends="-fetch-cppTango">
+        <mkdir dir="${workdir}/cpp/cmake-build"/>
+        <exec executable="cmake" failonerror="true" failifexecutionfails="true">
+            <arg value="-H${workdir}/cpp"/>
+            <arg value="-B${workdir}/cpp/cmake-build"/>
+            <arg value="-DIDL_BASE=${workdir}/idl/install"/>
+        </exec>
+    </target>
+
+    <target name="-copy-cppTango" depends="-pre-copy-cppTango">
+        <copy todir="${distrdir}/lib/cpp/server">
+            <fileset dir="${workdir}/cpp/cppapi/server">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+        <copy file="${workdir}/cpp/cmake-build/cppapi/server/tango_const.h" todir="${distrdir}/lib/cpp/server"/>
+        <copy todir="${distrdir}/lib/cpp/client">
+            <fileset dir="${workdir}/cpp/cppapi/client">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+        <copy todir="${distrdir}/lib/cpp/log4tango">
+            <fileset dir="${workdir}/cpp/log4tango">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="-fetch-TangoDatabase">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="-b ${TangoDatabase}"/>
+            <arg value="${src-root-repo}/TangoDatabase"/>
+            <arg value="database"/>
+        </exec>
+    </target>
+
+    <target name="-copy-TangoDatabase" depends="-fetch-TangoDatabase">
+        <copy todir="${distrdir}/cppserver/database">
+            <fileset dir="${workdir}/database">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="-fetch-starter">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="-b ${starter}"/>
+            <arg value="${src-root-repo}/starter"/>
+            <arg value="starter"/>
+        </exec>
+    </target>
+
+    <target name="-copy-starter" depends="-fetch-starter">
+        <copy todir="${distrdir}/cppserver/starter">
+            <fileset dir="${workdir}/starter">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="-fetch-TangoAccessControl">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="-b ${TangoAccessControl}"/>
+            <arg value="${src-root-repo}/TangoAccessControl"/>
+            <arg value="tangoaccesscontrol"/>
+        </exec>
+    </target>
+
+    <target name="-copy-TangoAccessControl" depends="-fetch-TangoAccessControl">
+        <copy todir="${distrdir}/cppserver/AbstractClass/AccessControl">
+            <fileset dir="${workdir}/tangoaccesscontrol/AbstractClasses">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+        <copy todir="${distrdir}/cppserver/tangoaccesscontrol">
+            <fileset dir="${workdir}/tangoaccesscontrol/TangoAccessControl">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="-fetch-TangoTest">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="-b ${TangoTest}"/>
+            <arg value="${src-root-repo}/TangoTest"/>
+            <arg value="tangotest"/>
+        </exec>
+    </target>
+
+    <target name="-copy-TangoTest" depends="-fetch-TangoTest">
+        <copy todir="${distrdir}/cppserver/tangotest">
+            <fileset dir="${workdir}/tangotest">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="prepare-cppserver" depends="-mkdirs">
+        <antcall target="-copy-TangoDatabase"/>
+        <antcall target="-copy-starter"/>
+        <antcall target="-copy-TangoAccessControl"/>
+        <antcall target="-copy-TangoTest"/>
+    </target>
+
+    <target name="-mkdirs">
+        <mkdir dir="${workdir}"/>
+        <mkdir dir="${distrdir}/lib"/>
+        <mkdir dir="${distrdir}/doc"/>
+        <mkdir dir="${distrdir}/cppserver"/>
+        <mkdir dir="${distrdir}/utils"/>
+    </target>
+
+    <target name="-fetch-JTango">
+        <get src="${jtango-root-repo}=${JTango}.jar" dest="${workdir}/${JTango}.jar" skipexisting="true"/>
+    </target>
+
+    <target name="-move-JTango" depends="-fetch-JTango">
+        <move file="${workdir}/${JTango}.jar" todir="${distrdir}/lib/java"/>
+    </target>
+
+    <!-- Jive -->
+    <property name="jive-jar" value="Jive-${jive-ver}.jar"/>
+    <property name="jive-url" value="${java-root-repo}=org%2Ftango%2FJive%2F${jive-ver}%2F${jive-jar}"/>
+
+    <target name="-fetch-jive">
+        <get src="${jive-url}" dest="${workdir}/${jive-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-jive" depends="-fetch-jive">
+        <move file="${workdir}/${jive-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- Jive -->
+
+    <!-- ATKCore -->
+    <property name="atk-core-jar" value="ATKCore-${atk-ver}.jar"/>
+    <property name="atk-core-url" value="${java-root-repo}=org%2Ftango%2Fatk%2FATKCore%2F${atk-ver}%2F${atk-core-jar}"/>
+
+    <target name="-fetch-atkcore">
+        <get src="${atk-core-url}" dest="${workdir}/${atk-core-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-atkcore" depends="-fetch-atkcore">
+        <move file="${workdir}/${atk-core-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- ATKCore -->
+
+    <!-- ATKWidget -->
+    <property name="atk-widget-jar" value="ATKWidget-${atk-ver}.jar"/>
+    <property name="atk-widget-url" value="${java-root-repo}=org%2Ftango%2Fatk%2FATKWidget%2F${atk-ver}%2F${atk-widget-jar}"/>
+
+    <target name="-fetch-atkwidget">
+        <get src="${atk-widget-url}" dest="${workdir}/${atk-widget-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-atkwidget" depends="-fetch-atkwidget">
+        <move file="${workdir}/${atk-widget-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- ATKWidget -->
+
+    <!-- ATKPanel -->
+    <property name="atk-panel-jar" value="ATKPanel-${atk-panel-ver}.jar"/>
+    <property name="atk-panel-url" value="${java-root-repo}=org%2Ftango%2Fgui%2FATKPanel%2F${atk-panel-ver}%2F${atk-panel-jar}"/>
+
+    <target name="-fetch-atkpanel">
+        <get src="${atk-panel-url}" dest="${workdir}/${atk-panel-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-atkpanel" depends="-fetch-atkpanel">
+        <move file="${workdir}/${atk-panel-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- ATKPanel -->
+
+    <!-- ATKTuning -->
+    <property name="atk-tuning-jar" value="ATKTuning-${atk-tuning-ver}.jar"/>
+    <property name="atk-tuning-url" value="${java-root-repo}=org%2Ftango%2Fatk%2FATKTuning%2F${atk-tuning-ver}%2F${atk-tuning-jar}"/>
+
+    <target name="-fetch-atktuning">
+        <get src="${atk-tuning-url}" dest="${workdir}/${atk-tuning-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-atktuning" depends="-fetch-atktuning">
+        <move file="${workdir}/${atk-tuning-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- ATKTuning -->
+
+    <!-- Astor -->
+    <property name="astor-jar" value="Astor-${astor-ver}.jar"/>
+    <property name="astor-url" value="${java-root-repo}=org%2Ftango%2Fgui%2FAstor%2F${astor-ver}%2F${astor-jar}"/>
+
+    <target name="-fetch-astor">
+        <get src="${astor-url}" dest="${workdir}/${astor-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-astor" depends="-fetch-astor">
+        <move file="${workdir}/${astor-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- Astor -->
+
+    <!-- DBBench -->
+    <property name="dbbench-jar" value="DBBench-${dbbench-ver}.jar"/>
+    <property name="dbbench-url" value="${java-root-repo}=org%2Ftango%2FDBBench%2F${dbbench-ver}%2F${dbbench-jar}"/>
+
+    <target name="-fetch-dbbench">
+        <get src="${dbbench-url}" dest="${workdir}/${dbbench-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-dbbench" depends="-fetch-dbbench">
+        <move file="${workdir}/${dbbench-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- DBBench -->
+
+    <!-- JSSHTerminal -->
+    <property name="jssh-terminal-jar" value="JSSHTerminal-${jssh-terminal-ver}.jar"/>
+    <property name="jssh-terminal-url" value="${java-root-repo}=org%2Ftango%2FJSSHTerminal%2F${jssh-terminal-ver}%2F${jssh-terminal-jar}"/>
+
+    <target name="-fetch-jssh-terminal">
+        <get src="${jssh-terminal-url}" dest="${workdir}/${jssh-terminal-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-jssh-terminal" depends="-fetch-jssh-terminal">
+        <move file="${workdir}/${jssh-terminal-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- JSSHTerminal -->
+
+    <!-- LogViewer -->
+    <property name="log-viewer-jar" value="LogViewer-${log-viewer-ver}.jar"/>
+    <property name="log-viewer-url" value="${java-root-repo}=org%2Ftango%2Fgui%2FLogViewer%2F${log-viewer-ver}%2F${log-viewer-jar}"/>
+
+    <target name="-fetch-log-viewer">
+        <get src="${log-viewer-url}" dest="${workdir}/${log-viewer-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-log-viewer" depends="-fetch-log-viewer">
+        <move file="${workdir}/${log-viewer-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- LogViewer -->
+
+    <!-- Pogo -->
+    <property name="pogo-jar" value="Pogo-${pogo-ver}.jar"/>
+    <property name="pogo-url" value="${java-root-repo}=org%2Ftango%2Ftools%2Fpogo%2Fgui%2FPogo%2F${pogo-ver}%2F${pogo-jar}"/>
+
+    <target name="-fetch-pogo">
+        <get src="${pogo-url}" dest="${workdir}/${pogo-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-pogo" depends="-fetch-pogo">
+        <move file="${workdir}/${pogo-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- Pogo -->
+
+    <target name="-fetch-tango-idl">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="-b ${tango-idl}"/>
+            <arg value="${src-root-repo}/tango-idl"/>
+            <arg value="idl"/>
+        </exec>
+    </target>
+
+    <target name="-pre-copy-tango-idl" depends="-fetch-tango-idl">
+        <mkdir dir="${workdir}/idl/cmake-build"/>
+        <mkdir dir="${workdir}/idl/install"/>
+        <exec executable="cmake" failonerror="true" failifexecutionfails="true">
+            <arg value="-H${workdir}/idl"/>
+            <arg value="-B${workdir}/idl/cmake-build"/>
+            <arg value="-DCMAKE_INSTALL_PREFIX=${workdir}/idl/install"/>
+        </exec>
+        <exec executable="make" dir="${workdir}/idl/cmake-build" failonerror="true" failifexecutionfails="true">
+            <arg value="install"/>
+        </exec>
+    </target>
+
+    <target name="-copy-tango-idl" depends="-pre-copy-tango-idl">
+        <copy file="${workdir}/idl/tango.idl" todir="${distrdir}/lib/idl"/>
+    </target>
+
+    <target name="prepare-java" depends="-mkdirs">
+        <antcall target="-move-jive"/>
+        <antcall target="-move-atkcore"/>
+        <antcall target="-move-atkwidget"/>
+        <antcall target="-move-atkpanel"/>
+        <antcall target="-move-atktuning"/>
+        <antcall target="-move-astor"/>
+        <antcall target="-move-dbbench"/>
+        <antcall target="-move-jssh-terminal"/>
+        <antcall target="-move-log-viewer"/>
+        <antcall target="-move-pogo"/>
+    </target>
+
+    <target name="prepare-lib" depends="-mkdirs">
+        <antcall target="-copy-tango-idl"/>
+        <antcall target="-copy-cppTango"/>
+        <antcall target="-move-JTango"/>
+    </target>
+
+    <!-- Doc -->
+    <target name="-fetch-docs">
+        <get src="${docs-root-repo}/${docs-ver}" dest="${workdir}/tango-${docs-ver}.pdf" skipexisting="true"/>
+    </target>
+
+    <target name="-move-docs" depends="-fetch-docs">
+        <move file="${workdir}/tango-${docs-ver}.pdf" todir="${distrdir}/doc"/>
+    </target>
+    <!-- Doc -->
+
+
+    <target name="prepare-doc" depends="-mkdirs">
+        <antcall target="-move-docs"/>
+    </target>
+
+    <target name="-fetch-tango_admin">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="-b ${tango_admin}"/>
+            <arg value="${src-root-repo}/tango_admin"/>
+            <arg value="tango_admin"/>
+        </exec>
+    </target>
+
+    <target name="-copy-tango_admin" depends="-fetch-tango_admin">
+        <copy todir="${distrdir}/utils/tango_admin">
+            <fileset dir="${workdir}/tango_admin">
+                <exclude name="**/Makefile*"/>
+            </fileset>
+        </copy>
+    </target>
+
+
+    <target name="prepare-utils" depends="-mkdirs">
+        <antcall target="-copy-tango_admin"/>
+    </target>
+
+    <target name="prepare-distribution" depends="-mkdirs">
+        <antcall target="prepare-cppserver"/>
+
+        <antcall target="prepare-doc"/>
+
+        <antcall target="prepare-lib"/>
+
+        <antcall target="prepare-java"/>
+
+        <antcall target="prepare-utils"/>
+
+        <antcall target="prepare-assets"/>
+    </target>
+
+    <target name="cleanup-distribution">
+        <exec executable="/bin/bash" dir="${distrdir}" failifexecutionfails="true" failonerror="true">
+            <arg value="${basedir}/cleanup_distrib"/>
+        </exec>
+    </target>
+
+    <target name="bootstrap-distribution">
+        <exec executable="/bin/bash" dir="${distrdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="${basedir}/bootstrap"/>
+        </exec>
+    </target>
+
+    <target name="build" depends="prepare-distribution, bootstrap-distribution, cleanup-distribution">
+        <echo>Done!</echo>
+    </target>
+
+    <target name="package">
+        <mkdir dir="${builddir}/package/tango-${cppTango}"/>
+        <copydir src="${builddir}/distr" dest="${builddir}/package/tango-${cppTango}"/>
+        <tar basedir="${builddir}/package" compression="gzip" destfile="${builddir}/tango-${build}.tar.gz"/>
+    </target>
+</project>

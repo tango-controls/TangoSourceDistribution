@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Tango Programer's Guide</title>
+  <meta content="Pascale Verdier" name="author">
+</head>
+<body>
+<div style="text-align: center;"><small><font color="#0000ff"><font
+ size="+4"><small>E</small></font></font><font
+ style="font-weight: bold;" size="+1"><small>UROPEAN</small></font><span
+ style="font-weight: bold;">
+</span><font color="#0000ff"><font size="+4"><small>S</small></font></font><font
+ style="font-weight: bold;" size="+1"><small>YNCHROTRON</small></font>
+<font color="#0000ff"><font size="+4"><small>R</small></font></font><font
+ style="font-weight: bold;" size="+1"><small>ADIATION</small></font>
+<font color="#0000ff"><font size="+4"><small>F</small></font></font><font
+ style="font-weight: bold;" size="+1"><small>ACILITY</small></font></small>
+</div>
+<h5 style="text-align: center;">
+<small>INSTALLATION EUROPEENNE DE RAYONNEMENT SYNCHROTRON</small></h5>
+<div style="text-align: center;"><br>
+
+<big style="font-weight: bold;"><big><big>
+<span style="text-decoration: underline;"> TANGO Programmer's Guide</span>
+</big></big></big>
+</div>
+
+<div style="text-align: left;">
+
+<br>
+<br>
+<br>
+<a name="CVS_tag_man"> </a>
+<big><span style="font-weight: bold;"><span style="text-decoration: underline;">
+CVS Tag Management</span>:</span></big>
+<ul>
+	<a name="CVS_tag_ds"> </a>
+    <li><span style="font-weight: bold;">
+	<b>Tag a Device Server:</b> </span></li>
+	<ol>
+		<li> First time, don't forget to commit your source files (cvs commit -m..., tkcvs, ...).
+		<li> Then increase the release number in <b>Makefile</b>.
+		<ul>
+			The line to be modified looks like:
+			<ul>
+				RELEASE  = Release_1_3
+			</ul>Change it to:
+			<ul>
+				RELEASE  = Release_1_4 <Br>
+					&nbsp;&nbsp;&nbsp;&nbsp; <b>or</b><br>
+				RELEASE  = Release_2_0
+			</ul>
+		</ul>
+		<li> Then type:
+		<ul>
+			linuxmake tag <Br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<b>or</b><Br>
+			solmake tag.<Br>
+			<br>
+			This command needs /segfs/tango/bin/cvstag script using Pogo java classes.
+			It will make a CVS tag on the current module.
+			It will patch the MyDServerClass.cpp file like:
+			<ul>
+				static const char *TagName   = "$Name$";
+			</ul>
+			And then it will re-build the executable file.
+		</ul>
+		<li> And finally you can install the device serer.
+	</ol>
+
+	<br>
+	<br>
+	<a name="CVS_tag_list"> </a>
+    <li><span style="font-weight: bold;">
+	<b>See last Tags of a Device Server: </b></span></li>
+	<ul>
+		Type &nbsp;&nbsp;&nbsp;<i>make show_tag</i> to display the last 
+		tag used for this module.
+	</ul>
+	
+	<br>
+	<br>
+	<a name="CVS_tag_goal"> </a>
+    <li><span style="font-weight: bold;">
+	<b>CVS tag goal: </b></span></li>
+	<ul>
+		The goal of the CVS tag usage is to know which version is running.
+		There is 2 ways to know it.
+		<ol>
+			<li> <b>The server is running.</b><br>
+				Use the command info on a device proxy or <br>
+				with Device Panel, on tab admin click on Device Info.
+			</li>
+
+			<li><b> The server is NOT running.</b><br>
+				Use the shell command : <br>
+				<i>ident {dserver filename} |grep Name </i>
+				It will display:<br>
+				&nbsp;&nbsp;<i>$Name$</i>
+			</li>
+		</ol>
+	</ul>
+</ul>
+</div>
+</div>
+</body>
+</html>
