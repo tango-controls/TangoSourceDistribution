@@ -474,6 +474,8 @@ AC_OUTPUT(Makefile
 	  lib/cpp/log4tango/include/log4tango/threading/Makefile
 	  lib/cpp/log4tango/src/Makefile
 	  lib/cpp/log4tango/tests/Makefile
+	  lib/cpp/log4tango/doc/Makefile
+	  lib/cpp/log4tango/doc/html/Makefile
 	  lib/java/Makefile
 	  cppserver/Makefile
 	  cppserver/database/Makefile
