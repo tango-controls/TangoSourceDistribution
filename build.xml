@@ -436,6 +436,19 @@
     <target name="package">
         <mkdir dir="${builddir}/package/tango-${cppTango}"/>
         <copydir src="${builddir}/distr" dest="${builddir}/package/tango-${cppTango}"/>
-        <tar basedir="${builddir}/package" compression="gzip" destfile="${builddir}/tango-${build}.tar.gz"/>
+        <tar compression="gzip" destfile="${builddir}/tango-${build}.tar.gz">
+            <tarfileset dir="${builddir}/package" filemode="755">
+                <include name="tango-${cppTango}/configure"/>
+                <include name="tango-${cppTango}/missing"/>
+                <include name="tango-${cppTango}/mkinstalldirs"/>
+                <include name="tango-${cppTango}/install-sh"/>
+            </tarfileset>
+            <tarfileset dir="${builddir}/package">
+                <exclude name="tango-${cppTango}/configure"/>
+                <exclude name="tango-${cppTango}/missing"/>
+                <exclude name="tango-${cppTango}/mkinstalldirs"/>
+                <exclude name="tango-${cppTango}/install-sh"/>
+            </tarfileset>
+        </tar>
     </target>
 </project>
