@@ -443,7 +443,7 @@
                 <include name="tango-${cppTango}/mkinstalldirs"/>
                 <include name="tango-${cppTango}/install-sh"/>
             </tarfileset>
-            <tarfileset dir="${builddir}/package">-->
+            <tarfileset dir="${builddir}/package">
                 <exclude name="tango-${cppTango}/configure"/>
                 <exclude name="tango-${cppTango}/missing"/>
                 <exclude name="tango-${cppTango}/mkinstalldirs"/>
