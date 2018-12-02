@@ -37,6 +37,34 @@ checkdatabaseds() {
 	fi
 }
 
+startproc() {
+    findproc $1
+	if [ "$pid" != "" ];
+	then
+		${ECHO} "$1 Server is already running"
+		'date' >> ${TANGO_LOG}
+		${ECHO} "$1 Server is already running" >> ${TANGO_LOG}
+	else
+		$2
+
+		${ECHO} "Starting Tango $1 Server"
+		'date' >> ${TANGO_LOG}
+		${ECHO} "Starting Tango $1 Server" >> ${TANGO_LOG}
+
+		# wait for a while before checking status
+		sleep 3
+		findproc $1
+		if [ "$pid" = "" ];
+		then
+			${ECHO} "Failed to start Tango $1 server"
+			'date' >> ${TANGO_LOG}
+			${ECHO} "Failed to start Tango $1 server" >> ${TANGO_LOG}
+			exit 1
+		fi
+		${ECHO} "$rc_done"
+	fi
+}
+
 killproc() {
 	pid=`$PS -e | $GREP "$1" | $SED -e 's/^  *//' -e 's/ .*//'`
 
@@ -52,8 +80,7 @@ OS=`uname -s`
 #
 # Settings common  to all platforms
 #
-DATABASEDSHOME=@prefix@/bin
-ACCESSCONTROLHOME=@prefix@/bin
+SERVERBINHOME=@prefix@/bin
 LD_LIBRARY_PATH=@prefix@/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH
 
@@ -122,65 +149,25 @@ case "$1" in
 		fi
 	fi
 	# Start the database device server if needed
-	findproc DataBase
-	if [ "$pid" != "" ];
-	then
-		${ECHO} "Database Server already running"
-		'date' >> ${TANGO_LOG}
-		${ECHO} "Database Server already running" >> ${TANGO_LOG}
-	else
-		${DATABASEDSHOME}/DataBaseds 2 -ORBendPoint giop:tcp::$TANGO_DB_PORT &
-		
-		${ECHO} "Starting TANGO Database Server"
-		'date' >> ${TANGO_LOG}
-		${ECHO} "Starting TANGO Database Server" >> ${TANGO_LOG}
+	startproc DataBase "${SERVERBINHOME}/DataBaseds 2 -ORBendPoint giop:tcp::$TANGO_DB_PORT &"
 
-		# wait for a while before checking status
-		sleep 3
-		findproc DataBase
-		if [ "$pid" = "" ];
-		then
-			${ECHO} "Failed to start Tango database server"
-			'date' >> ${TANGO_LOG}
-			${ECHO} "Failed to start Tango database server" >> ${TANGO_LOG}
-			exit 1
-		fi
-		${ECHO} "$rc_done"
-	fi
 	
 	# Start the tango control access server if needed
-	findproc TangogAccessC
-	if [ "$pid" != "" ];
-	then
-		${ECHO} "TangoAccessControl Server already running, exiting"
-		'date' >> ${TANGO_LOG}
-		${ECHO} "TangoAccessControl Server already running, exiting" >> ${TANGO_LOG}
-	else
-		export SUPER_TANGO=true
-		${ACCESSCONTROLHOME}/TangoAccessControl 1 &
-		
-		${ECHO} "Starting TANGO Control Access Server"
-		'date' >> ${TANGO_LOG}
-		${ECHO} "Starting TANGO Control Access Server" >> ${TANGO_LOG}
+	export SUPER_TANGO=true
+	startproc TangoAccessControl "${SERVERBINHOME}/TangoAccessControl 1 &"
 
-		# wait for a while before checking status
-		sleep 2
-		findproc TangoAccessControl
-		if [ "$pid" = "" ];
-		then
-			${ECHO} "Failed to start Tango access control server"
-			'date' >> ${TANGO_LOG}
-			${ECHO} "Failed to start Tango access control server" >> ${TANGO_LOG}
-			exit 1
-		fi
-		${ECHO} "$rc_done"
-	fi
+    startproc TangoRestServer "${SERVERBINHOME}/TangoRestServer rest &"
 
     ;;
     stop)
         ${ECHO} "Shutting down TANGO control system"
-		
-	# first shutdown the control access device server
+
+    # first shutdown the rest-server
+	'date' >> ${TANGO_LOG}
+    ${ECHO} "Stopping TangoRestServer" >> ${TANGO_LOG}
+    killproc TangoRestServer
+
+	# second shutdown the control access device server
 	'date' >> ${TANGO_LOG}
 	${ECHO} "Stopping TANGO Control Access Server" >> ${TANGO_LOG}
 	killproc TangoAccessControl
@@ -218,6 +205,14 @@ case "$1" in
 	else
 		${ECHO} "TANGO Access Control server : No process"
 	fi
+
+    findproc TangoRestServer
+    if [ "$pid" != "" ];
+    then
+        ${ECHO} "TangoRestServer server OK"
+    else
+        ${ECHO} "TangoRestServer server : No process"
+    fi
     ;;
     *)
     ${ECHO} "Usage: $0 {start|stop|status|restart}"

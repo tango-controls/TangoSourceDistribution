@@ -4,10 +4,10 @@ if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
 fi
 
 JAVALIB=@prefix@/share/java
-LOG_HOME=/var/log/TangoRestServer
+LOG_HOME=/tmp/log/TangoRestServer
 LOG_LEVEL=ERROR
 TANGO_REST_SERVER_JAR=$JAVALIB/RestServer.jar
 
-JAVA_OPTS="-mx2G -server -Xshare:off -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG_HOME/TangoRestServer.hprof -XX:-OmitStackTraceInFastThrow"
+JAVA_OPTS="-Xmx2G -server -Xshare:off -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG_HOME/TangoRestServer.hprof -XX:-OmitStackTraceInFastThrow"
 
-@JAVA@ $JAVA_OPTS -DTANGO_HOST=$TANGO_HOST -DLOG_HOME=$LOG_HOME -DLOG_LEVEL=$LOG_LEVEL -jar $TANGO_REST_SERVER_JAR rest org.tango.TangoRestServer rest $@
+@JAVA@ $JAVA_OPTS -Duser.dir=$LOG_HOME -DTANGO_HOST=$TANGO_HOST -DLOG_HOME=$LOG_HOME -DLOG_LEVEL=$LOG_LEVEL -jar $TANGO_REST_SERVER_JAR $* org.tango.TangoRestServer $* $@
