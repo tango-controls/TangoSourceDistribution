@@ -38,14 +38,14 @@ checkdatabaseds() {
 }
 
 startproc() {
-    findproc $1
+	findproc $1
 	if [ "$pid" != "" ];
 	then
 		${ECHO} "$1 Server is already running"
 		'date' >> ${TANGO_LOG}
 		${ECHO} "$1 Server is already running" >> ${TANGO_LOG}
 	else
-		$2
+		$2 &
 
 		${ECHO} "Starting Tango $1 Server"
 		'date' >> ${TANGO_LOG}
@@ -127,7 +127,7 @@ esac
 case "$1" in
     start)
 
-    ${ECHO} "Starting TANGO database"
+	${ECHO} "Starting TANGO database"
 
 	# first check the MySQL  server
 	checkmysql
@@ -149,28 +149,27 @@ case "$1" in
 		fi
 	fi
 	# Start the database device server if needed
-	startproc DataBase "${SERVERBINHOME}/DataBaseds 2 -ORBendPoint giop:tcp::$TANGO_DB_PORT &"
+	startproc DataBase "${SERVERBINHOME}/DataBaseds 2 -ORBendPoint giop:tcp::$TANGO_DB_PORT"
 
 	
 	# Start the tango control access server if needed
 	export SUPER_TANGO=true
-	startproc TangoAccessControl "${SERVERBINHOME}/TangoAccessControl 1 &"
+	startproc TangoAccessC "${SERVERBINHOME}/TangoAccessControl 1"
 
-    startproc TangoRestServer "${SERVERBINHOME}/TangoRestServer rest &"
-
+	startproc TangoRestSer "${SERVERBINHOME}/TangoRestServer rest"
     ;;
     stop)
         ${ECHO} "Shutting down TANGO control system"
 
     # first shutdown the rest-server
 	'date' >> ${TANGO_LOG}
-    ${ECHO} "Stopping TangoRestServer" >> ${TANGO_LOG}
-    killproc TangoRestServer
+	${ECHO} "Stopping TangoRestServer" >> ${TANGO_LOG}
+	killproc TangoRestSer
 
 	# second shutdown the control access device server
 	'date' >> ${TANGO_LOG}
 	${ECHO} "Stopping TANGO Control Access Server" >> ${TANGO_LOG}
-	killproc TangoAccessControl
+	killproc TangoAccessC
 	
 	# then shutdown the database device server
 	'date' >> ${TANGO_LOG}
@@ -206,13 +205,13 @@ case "$1" in
 		${ECHO} "TANGO Access Control server : No process"
 	fi
 
-    findproc TangoRestServer
-    if [ "$pid" != "" ];
-    then
-        ${ECHO} "TangoRestServer server OK"
-    else
-        ${ECHO} "TangoRestServer server : No process"
-    fi
+	findproc TangoRestSer
+	if [ "$pid" != "" ];
+	then
+        	${ECHO} "TangoRestServer server OK"
+	else
+        	${ECHO} "TangoRestServer server : No process"
+	fi
     ;;
     *)
     ${ECHO} "Usage: $0 {start|stop|status|restart}"
@@ -220,4 +219,3 @@ case "$1" in
 esac
 
 exit 0
-
