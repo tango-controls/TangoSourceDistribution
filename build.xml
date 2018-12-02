@@ -325,7 +325,7 @@
 
     <!-- rest-server -->
     <property name="rest-server-jar" value="rest-server-${rest-server-ver}.jar"/>
-    <property name="rest-server-url" value="${rest-server-root-repo}/tag/rest-server-${rest-server-ver}/${rest-server-jar}"/>
+    <property name="rest-server-url" value="${rest-server-root-repo}/download/rest-server-${rest-server-ver}/${rest-server-jar}"/>
 
     <target name="-fetch-rest-server">
         <get src="${rest-server-url}" dest="${workdir}/${rest-server-jar}" skipexisting="true"/>
