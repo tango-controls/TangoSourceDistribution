@@ -15,7 +15,8 @@ dist_java_DATA = \
    @JTANGO_JAR@ \
    @ATK_WIDGET_JAR@ \
    @DBBENCH_JAR@ \
-   @JSSH_TERMINAL_JAR@
+   @JSSH_TERMINAL_JAR@ \
+   @REST_SERVER_JAR@
 
 if TANGO_JAVA_ENABLED
 bin_SCRIPTS = \
@@ -31,6 +32,7 @@ bin_SCRIPTS = \
    atkmoni \
    tg_devtest \
    TangoVers \
+   TangoRestServer \
    cvstag
 
 edit = sed \
@@ -67,6 +69,7 @@ atkmoni: $(srcdir)/atkmoni.in
 cvstag: $(srcdir)/cvstag.in
 TangoVers: $(srcdir)/TangoVers.in
 tg_devtest: $(srcdir)/tg_devtest.in
+TangoRestServer: $(srcdir)/TangoRestServer.in
 
 distclean-local: distclean-local-check
 .PHONY: distclean-local-check
@@ -89,7 +92,8 @@ EXTRA_DIST = \
    atkmoni.in \
    cvstag.in \
    tg_devtest.in \
-   TangoVers.in
+   TangoVers.in \
+   TangoRestServer.in
 
 
 # Even though we do not want to compile anything in the

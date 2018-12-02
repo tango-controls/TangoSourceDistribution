@@ -54,6 +54,7 @@
                 <filter token="LOGVIEWER_JAR" value="${log-viewer-jar}"/>
                 <filter token="DBBENCH_JAR" value="${dbbench-jar}"/>
                 <filter token="JSSH_TERMINAL_JAR" value="${jssh-terminal-jar}"/>
+                <filter token="REST_SERVER_JAR" value="${rest-server-jar}"/>
             </filterset>
         </copy>
     </target>
@@ -321,6 +322,20 @@
     </target>
     <!-- Pogo -->
 
+
+    <!-- rest-server -->
+    <property name="rest-server-jar" value="rest-server-${rest-server-ver}.jar"/>
+    <property name="rest-server-url" value="${rest-server-root-repo}/tag/rest-server-${rest-server-ver}/${rest-server-jar}"/>
+
+    <target name="-fetch-rest-server">
+        <get src="${rest-server-url}" dest="${workdir}/${rest-server-jar}" skipexisting="true"/>
+    </target>
+
+    <target name="-move-rest-server" depends="-fetch-rest-server">
+        <move file="${workdir}/${rest-server-jar}" todir="${distrdir}/lib/java"/>
+    </target>
+    <!-- Pogo -->
+
     <target name="-fetch-tango-idl">
         <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
             <arg value="clone"/>
@@ -358,6 +373,7 @@
         <antcall target="-move-jssh-terminal"/>
         <antcall target="-move-log-viewer"/>
         <antcall target="-move-pogo"/>
+        <antcall target="-move-rest-server"/>
     </target>
 
     <target name="prepare-lib" depends="-mkdirs">
