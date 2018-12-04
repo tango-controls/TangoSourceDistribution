@@ -4,7 +4,7 @@
 
 ## How to build
 
-The following packages must be installed if one wants to build the package localy:
+The following packages must be installed if one wants to build the TangoSourceDistribution localy:
 
 `sudo apt-get install -y build-essential cmake autoconf libtool ant omniidl libomniorb4-dev libcos4-dev libomnithread3-dev libzmq3-dev`
 
@@ -26,7 +26,7 @@ package:
 $> 
 ```
 
-`ant build` creates _build_ where it performs all required manipulations to fetch, download and assemble all the components of Tango Source Distribution: c++ from githug repos; java from maven repos. Result is placed into _build/distr_
+`ant build` creates _build_ folder where it performs all required manipulations to fetch, download and assemble all the components of Tango Source Distribution: c++ from githug repos; java from maven repos. Result is placed into _build/distr_
 
 `ant package` creates tango-XXX.tar.gz file in _build_ directory where XXX is the name of the current branch or dev
 
