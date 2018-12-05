@@ -47,24 +47,6 @@ AM_SILENT_RULES([yes])
 AC_CONFIG_HEADERS(ac_config.h.tmp)
 
 
-# -version-info CURRENT[:REVISION[:AGE]]
-# From the libtool documentation (info libtool)
-# So, libtool library versions are described by three integers:
-
-# CURRENT
-#      The most recent interface number that this library implements.
-
-# REVISION
-#      The implementation number of the CURRENT interface.
-
-# AGE
-#      The difference between the newest and oldest interfaces that this
-#      library implements.  In other words, the library implements all the
-#      interface numbers in the range from number `CURRENT - AGE' to
-#      `CURRENT'.
-
-VERSION_INFO=11:5:2
-	
 # Checks for programs.
 
 AC_PROG_CXX
