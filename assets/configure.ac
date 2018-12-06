@@ -63,7 +63,7 @@ AC_CONFIG_HEADERS(ac_config.h.tmp)
 #      interface numbers in the range from number `CURRENT - AGE' to
 #      `CURRENT'.
 
-VERSION_INFO=11:5:2
+VERSION_INFO=@VERSION_INFO@
 	
 # Checks for programs.
 

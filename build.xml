@@ -28,6 +28,7 @@
             </fileset>
             <filterset>
                 <filter token="VERSION" value="${cppTango}"/>
+                <filter token="VERSION_INFO" value="${version-info}"/>
             </filterset>
         </copy>
         <copy todir="${distrdir}/doc" overwrite="true">
