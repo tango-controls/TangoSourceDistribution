@@ -20,7 +20,7 @@ libtango_la_LIBADD = ../server/libserver.la	\
 
 # We need to set the -version-info for libtool so that libtool will
 # generate the correct .so version
-libtango_la_LDFLAGS=-release $(VERSION)
+libtango_la_LDFLAGS=-version-info $(VERSION_INFO)
 
 AM_CXXFLAGS=-D_TANGO_LIB
 
