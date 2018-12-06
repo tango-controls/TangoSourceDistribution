@@ -1,4 +1,4 @@
 EXTRA_DIST = \
-        index.html \
-        default.css \
-        sflogo.png
+		index.html \
+		default.css \
+		sflogo.png
