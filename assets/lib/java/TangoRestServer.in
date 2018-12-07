@@ -4,7 +4,7 @@ if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
 fi
 
 JAVALIB=@prefix@/share/java
-LOG_HOME=/tmp/log/TangoRestServer
+LOG_HOME=/var/tmp/TangoRestServer
 LOG_LEVEL=ERROR
 TANGO_REST_SERVER_JAR=$JAVALIB/RestServer.jar
 
