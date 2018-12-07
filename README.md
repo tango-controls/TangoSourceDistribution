@@ -1,3 +1,5 @@
+[![logo](http://www.tango-controls.org/static/tango/img/logo_tangocontrols.png)](http://www.tango-controls.org)
+
 # TangoSourceDistribution
 
 [![Build Status](https://travis-ci.org/tango-controls/TangoSourceDistribution.svg?branch=master)](https://travis-ci.org/tango-controls/TangoSourceDistribution)
