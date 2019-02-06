@@ -1,4 +1,3 @@
-static const char *RcsId = "$Id: DevServ.cpp 13293 2009-04-07 10:53:56Z pascal_verdier $";
 //+=============================================================================
 //
 // file :         TemplateDevServ.cpp
