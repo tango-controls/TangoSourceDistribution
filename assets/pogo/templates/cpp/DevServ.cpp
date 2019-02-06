@@ -3,7 +3,7 @@ static const char *RcsId = "$Id: DevServ.cpp 13293 2009-04-07 10:53:56Z pascal_v
 //
 // file :         TemplateDevServ.cpp
 //
-// description :  C++ source for the TemplateDevServ and its commands. 
+// description :  C++ source for the TemplateDevServ and its commands.
 //                The class is derived from Device. It represents the
 //                CORBA servant object which will be accessed from the
 //                network. All commands which can be executed on the
@@ -75,11 +75,11 @@ namespace TemplateDevServ_ns
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::TemplateDevServ(string &s)
-// 
+//
 // description : 	constructor for simulated TemplateDevServ
 //
 // in : - cl : Pointer to the DeviceClass object
-//      - s : Device name 
+//      - s : Device name
 //
 //-----------------------------------------------------------------------------
 TemplateDevServ::TemplateDevServ(Tango::DeviceClass *cl,string &s)
@@ -102,7 +102,7 @@ TemplateDevServ::TemplateDevServ(Tango::DeviceClass *cl,const char *s,const char
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::delete_device()
-// 
+//
 // description : 	will be called at device destruction or at init command.
 //
 //-----------------------------------------------------------------------------
@@ -114,7 +114,7 @@ void TemplateDevServ::delete_device()
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::init_device()
-// 
+//
 // description : 	will be called at device initialization.
 //
 //-----------------------------------------------------------------------------
@@ -129,13 +129,13 @@ void TemplateDevServ::init_device()
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::always_executed_hook()
-// 
+//
 // description : 	method always executed before any command is executed
 //
 //-----------------------------------------------------------------------------
 void TemplateDevServ::always_executed_hook()
 {
-	
+
 }
 
 }	// namespace TemplateDevServ_ns

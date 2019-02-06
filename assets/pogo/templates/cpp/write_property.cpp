@@ -1,7 +1,7 @@
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::write_class_property
-// 
+//
 // description : 	Set class description as property in database
 //
 //-----------------------------------------------------------------------------
@@ -28,15 +28,15 @@ void TemplateDevServClass::write_class_property()
 	PogoClassDescription;
 	description << str_desc;
 	data.push_back(description);
-		
+
 	//	put cvs or svn location
 	string	filename(classname);
 	filename += "Class.cpp";
-	
+
 	// Create a string with the class ID to
 	// get the string into the binary
 	string	class_id(ClassId);
-	
+
 	// check for cvs information
 	string	src_path(CvsPath);
 	start = src_path.find("/");
@@ -72,7 +72,7 @@ void TemplateDevServClass::write_class_property()
 				header = "$HeadURL: ";
 				start = header.length();
 				string	strloc = src_path.substr(start, (end-start));
-				
+
 				Tango::DbDatum	svn_loc("svn_location");
 				svn_loc << strloc;
 				data.push_back(svn_loc);
@@ -81,13 +81,13 @@ void TemplateDevServClass::write_class_property()
 	}
 
 	//	Get CVS or SVN revision tag
-	
+
 	// CVS tag
 	string	tagname(TagName);
 	header = "$Name: ";
 	start = header.length();
 	string	endstr(" $");
-	
+
 	end   = tagname.find(endstr);
 	if (end!=string::npos && end>start)
 	{
@@ -96,17 +96,17 @@ void TemplateDevServClass::write_class_property()
 		cvs_tag << strtag;
 		data.push_back(cvs_tag);
 	}
-	
+
 	// SVN tag
 	string	svnpath(SvnPath);
 	header = "$HeadURL: ";
 	start = header.length();
-	
+
 	end   = svnpath.find(endstr);
 	if (end!=string::npos && end>start)
 	{
 		string	strloc = svnpath.substr(start, end-start);
-		
+
 		string tagstr ("/tags/");
 		start = strloc.find(tagstr);
 		if ( start!=string::npos )
@@ -114,7 +114,7 @@ void TemplateDevServClass::write_class_property()
 			start = start + tagstr.length();
 			end   = strloc.find(filename);
 			string	strtag = strloc.substr(start, end-start-1);
-			
+
 			Tango::DbDatum	svn_tag("svn_tag");
 			svn_tag << strtag;
 			data.push_back(svn_tag);

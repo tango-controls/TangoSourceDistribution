@@ -5,9 +5,9 @@
 // description :  Include for the TemplateDevServClass root class.
 //                This class is the singleton class for
 //                the TemplateDevServ device class.
-//                It contains all properties and methods which the 
+//                It contains all properties and methods which the
 //                TemplateDevServ requires only once e.g. the commands.
-//			
+//
 // project :      TANGO Device Server
 //
 // $Author: pascal_verdier $
@@ -76,7 +76,7 @@ class ATTRIBUTEAttrib: public Tango::Attr
 public:
 	ATTRIBUTEAttrib():Attr("ATTRIBUTE", DATA_TYPE, RW_TYPE) {};
 	~ATTRIBUTEAttrib() {};
-	
+
 	virtual void read(Tango::DeviceImpl *dev,Tango::Attribute &att)
 	{(static_cast<CLASS *>(dev))->read_ATTRIBUTE(att);}
 	virtual void write(Tango::DeviceImpl *dev,Tango::WAttribute &att)
@@ -105,7 +105,7 @@ public:
 				   Tango::CmdArgType out)
 	:Command(name,in,out)	{};
 	~DevTemplateCmd() {};
-	
+
 	virtual CORBA::Any *execute (Tango::DeviceImpl *dev, const CORBA::Any &any);
 	virtual bool is_allowed (Tango::DeviceImpl *dev, const CORBA::Any &any)
 	{return (static_cast<CLASS *>(dev))->is_COMMAND_allowed(any);}
@@ -138,7 +138,7 @@ public:
 	Tango::DbDatum	get_class_property(string &);
 	Tango::DbDatum	get_default_device_property(string &);
 	Tango::DbDatum	get_default_class_property(string &);
-	
+
 protected:
 	TemplateDevServClass(string &);
 	static TemplateDevServClass *_instance;

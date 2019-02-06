@@ -1,7 +1,7 @@
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::read_attr_hardware()
-// 
+//
 // description : 	Hardware acquisition for attributes.
 //
 //-----------------------------------------------------------------------------
@@ -9,7 +9,7 @@ void TemplateDevServ::read_attr_hardware(vector<long> &attr_list)
 {
 	DEBUG_STREAM << "In read_attr_hardware for " << attr_list.size()
 	             << " attribute(s)" << endl;
-	
+
 	//	Add your own code here
 	//---------------------------------
 }
@@ -17,7 +17,7 @@ void TemplateDevServ::read_attr_hardware(vector<long> &attr_list)
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::read_attr()
-// 
+//
 // description : 	Extract real attribute values from
 //					hardware acquisition result.
 //
@@ -36,7 +36,7 @@ void TemplateDevServ::read_attr(Tango::Attribute &attr)
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::write_attr_hardware()
-// 
+//
 // description : 	Write attribute values to hardware.
 //
 //-----------------------------------------------------------------------------
@@ -50,7 +50,7 @@ void TemplateDevServ::write_attr_hardware(vector<long> &attr_list)
 		Tango::WAttribute &att = dev_attr->get_w_attr_by_ind(attr_list[i]);
 		string attr_name = att.get_name();
 
-		DEBUG_STREAM << "Attribute name = " << attr_name;		
+		DEBUG_STREAM << "Attribute name = " << attr_name;
 
 		//	Switch on attribute name
 		//---------------------------------

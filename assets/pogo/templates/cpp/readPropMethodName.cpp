@@ -2,7 +2,7 @@
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::get_target_property()
-// 
+//
 // description : 	Read the target properties from database.
 //
 //-----------------------------------------------------------------------------

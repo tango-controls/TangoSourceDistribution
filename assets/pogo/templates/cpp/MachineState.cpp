@@ -3,7 +3,7 @@ static const char *RcsId = "$Id $";
 //
 // file :         TemplateDevServStateMachine.cpp
 //
-// description :  C++ source for the TemplateDevServ and its alowed 
+// description :  C++ source for the TemplateDevServ and its alowed
 //                methods for commands and attributes
 //
 // project :      TANGO Device Server
@@ -49,7 +49,7 @@ static const char *RcsId = "$Id $";
  *	This file contains the methods to allow commands and attributes
  * read or write execution.
  *
- * If you wand to add your own code, add it between 
+ * If you wand to add your own code, add it between
  * the "End/Re-Start of Generated Code" comments.
  *
  * If you want, you can also add your own methods.

@@ -2,7 +2,7 @@
 
 /**
  *	Read The device state.
- *	<Br>Command DevState 
+ *	<Br>Command DevState
  *
  * @return the device state read.
  */
@@ -11,7 +11,7 @@
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::state_cmd()
-// 
+//
 // description : 	command to read the device state
 //
 // out :		device state
@@ -21,7 +21,7 @@ Tango_DevState TemplateDevServ::state_cmd()
 {
 
 	DEBUG_STREAM << "In TemplateDevServ state command" << endl;
-	
+
 	return dev_state;
 }
 
@@ -39,7 +39,7 @@ Tango_DevState TemplateDevServ::state_cmd()
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServ::status_cmd()
-// 
+//
 // description : 	command to read the device status
 //
 // out :		device status

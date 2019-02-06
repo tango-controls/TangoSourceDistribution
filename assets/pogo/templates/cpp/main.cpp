@@ -50,7 +50,7 @@ int main(int argc,char *argv[])
 		//----------------------------------------
 		tg = Tango::Util::init(argc,argv);
 
-		// Create the device server singleton 
+		// Create the device server singleton
 		//	which will create everything
 		//----------------------------------------
 		tg->server_init(false);
@@ -68,7 +68,7 @@ int main(int argc,char *argv[])
 	catch (CORBA::Exception &e)
 	{
 		Tango::Except::print_exception(e);
-		
+
 		cout << "Received a CORBA_Exception" << endl;
 		cout << "Exiting" << endl;
 	}

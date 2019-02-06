@@ -67,7 +67,7 @@ public :
 
 
 	//	Here is the Start of the automatic code generation part
-	//-------------------------------------------------------------	
+	//-------------------------------------------------------------
 /**
  *	@name attributes
  *	Attribute member data.
@@ -114,7 +114,7 @@ public :
 //@{
 /**
  * The object destructor.
- */	
+ */
 	~TemplateDevServ() {delete_device();};
 /**
  *	will be called at device destruction or at init command.
@@ -122,7 +122,7 @@ public :
 	void delete_device();
 //@}
 
-	
+
 /**@name Miscellaneous methods */
 //@{
 /**
@@ -139,11 +139,11 @@ public :
 //@}
 
 	//	Here is the end of the automatic code generation part
-	//-------------------------------------------------------------	
+	//-------------------------------------------------------------
 
 
 
-protected :	
+protected :
 	//	Add your own data members here
 	//-----------------------------------------
 };

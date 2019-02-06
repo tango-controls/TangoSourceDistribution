@@ -99,9 +99,9 @@ TemplateBlock
 //+----------------------------------------------------------------------------
 //
 // method : 		DevTemplateCmd::execute()
-// 
+//
 // description : 	method to trigger the execution of the command.
-//                PLEASE DO NOT MODIFY this method core without pogo   
+//                PLEASE DO NOT MODIFY this method core without pogo
 //
 // in : - device : The device on which the command must be executed
 //		- in_any : The command input data
@@ -134,7 +134,7 @@ TemplateDevServClass *TemplateDevServClass::_instance = NULL;
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::TemplateDevServClass(string &s)
-// 
+//
 // description : 	constructor for the TemplateDevServClass
 //
 // in : - s : The class name
@@ -144,14 +144,14 @@ TemplateDevServClass::TemplateDevServClass(string &s):DeviceClass(s)
 {
 
 	cout2 << "Entering TemplateDevServClass constructor" << endl;
-	
+
 	cout2 << "Leaving TemplateDevServClass constructor" << endl;
 
 }
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::~TemplateDevServClass()
-// 
+//
 // description : 	destructor for the TemplateDevServClass
 //
 //-----------------------------------------------------------------------------
@@ -163,7 +163,7 @@ TemplateDevServClass::~TemplateDevServClass()
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::instance
-// 
+//
 // description : 	Create the object if not already done. Otherwise, just
 //			return a pointer to the object
 //
@@ -182,8 +182,8 @@ TemplateDevServClass *TemplateDevServClass::init(const char *name)
 		catch (bad_alloc)
 		{
 			throw;
-		}		
-	}		
+		}
+	}
 	return _instance;
 }
 
@@ -200,8 +200,8 @@ TemplateDevServClass *TemplateDevServClass::instance()
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::command_factory
-// 
-// description : 	Create the command object(s) and store them in the 
+//
+// description : 	Create the command object(s) and store them in the
 //			command list
 //
 //-----------------------------------------------------------------------------
@@ -217,7 +217,7 @@ void TemplateDevServClass::command_factory()
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::get_class_property
-// 
+//
 // description : 	Get the class property for specified name.
 //
 // in :		string	name : The property name
@@ -234,7 +234,7 @@ Tango::DbDatum TemplateDevServClass::get_class_property(string &prop_name)
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::get_default_device_property()
-// 
+//
 // description : 	Return the default value for device property.
 //
 //-----------------------------------------------------------------------------
@@ -250,7 +250,7 @@ Tango::DbDatum TemplateDevServClass::get_default_device_property(string &prop_na
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::get_default_class_property()
-// 
+//
 // description : 	Return the default value for class property.
 //
 //-----------------------------------------------------------------------------
@@ -265,8 +265,8 @@ Tango::DbDatum TemplateDevServClass::get_default_class_property(string &prop_nam
 //+----------------------------------------------------------------------------
 //
 // method : 		TemplateDevServClass::device_factory
-// 
-// description : 	Create the device object(s) and store them in the 
+//
+// description : 	Create the device object(s) and store them in the
 //			device list
 //
 // in :		Tango::DevVarStringArray *devlist_ptr : The device name list
@@ -280,10 +280,10 @@ void TemplateDevServClass::device_factory(const Tango::DevVarStringArray *devlis
 	for (unsigned long i=0 ; i < devlist_ptr->length() ; i++)
 	{
 		cout4 << "Device name : " << (*devlist_ptr)[i].in() << endl;
-						
+
 		// Create devices and add it into the device list
 		//----------------------------------------------------
-		device_list.push_back(new TemplateDevServ(this, (*devlist_ptr)[i]));							 
+		device_list.push_back(new TemplateDevServ(this, (*devlist_ptr)[i]));
 
 		// Export device to the outside world
 		// Check before if database used.
