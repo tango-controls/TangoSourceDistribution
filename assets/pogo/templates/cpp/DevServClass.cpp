@@ -70,7 +70,7 @@ TemplateBlock
 CORBA::Any *DevTemplateCmd::execute(Tango::DeviceImpl *device,const CORBA::Any &in_any)
 {
 
-	cout2 << "DevTemplateCmd::execute(): arrived" << endl;
+	cout2 << "DevTemplateCmd::execute(): arrived" << std::endl;
 
 	extract(in_any, argin);
 
@@ -91,19 +91,19 @@ TemplateDevServClass *TemplateDevServClass::_instance = NULL;
 
 //+----------------------------------------------------------------------------
 //
-// method : 		TemplateDevServClass::TemplateDevServClass(string &s)
+// method : 		TemplateDevServClass::TemplateDevServClass(std::string &s)
 //
 // description : 	constructor for the TemplateDevServClass
 //
 // in : - s : The class name
 //
 //-----------------------------------------------------------------------------
-TemplateDevServClass::TemplateDevServClass(string &s):DeviceClass(s)
+TemplateDevServClass::TemplateDevServClass(std::string &s):DeviceClass(s)
 {
 
-	cout2 << "Entering TemplateDevServClass constructor" << endl;
+	cout2 << "Entering TemplateDevServClass constructor" << std::endl;
 
-	cout2 << "Leaving TemplateDevServClass constructor" << endl;
+	cout2 << "Leaving TemplateDevServClass constructor" << std::endl;
 
 }
 //+----------------------------------------------------------------------------
@@ -134,10 +134,10 @@ TemplateDevServClass *TemplateDevServClass::init(const char *name)
 	{
 		try
 		{
-			string s(name);
+			std::string s(name);
 			_instance = new TemplateDevServClass(s);
 		}
-		catch (bad_alloc)
+		catch (std::bad_alloc)
 		{
 			throw;
 		}
@@ -149,7 +149,7 @@ TemplateDevServClass *TemplateDevServClass::instance()
 {
 	if (_instance == NULL)
 	{
-		cerr << "Class is not initialised !!" << endl;
+		std::cerr << "Class is not initialised !!" << std::endl;
 		exit(-1);
 	}
 	return _instance;
@@ -178,10 +178,10 @@ void TemplateDevServClass::command_factory()
 //
 // description : 	Get the class property for specified name.
 //
-// in :		string	name : The property name
+// in :		std::string	name : The property name
 //
 //+----------------------------------------------------------------------------
-Tango::DbDatum TemplateDevServClass::get_class_property(string &prop_name)
+Tango::DbDatum TemplateDevServClass::get_class_property(std::string &prop_name)
 {
 	for (unsigned int i=0 ; i<cl_prop.size() ; i++)
 		if (cl_prop[i].name == prop_name)
@@ -196,7 +196,7 @@ Tango::DbDatum TemplateDevServClass::get_class_property(string &prop_name)
 // description : 	Return the default value for device property.
 //
 //-----------------------------------------------------------------------------
-Tango::DbDatum TemplateDevServClass::get_default_device_property(string &prop_name)
+Tango::DbDatum TemplateDevServClass::get_default_device_property(std::string &prop_name)
 {
 	for (unsigned int i=0 ; i<dev_def_prop.size() ; i++)
 		if (dev_def_prop[i].name == prop_name)
@@ -212,7 +212,7 @@ Tango::DbDatum TemplateDevServClass::get_default_device_property(string &prop_na
 // description : 	Return the default value for class property.
 //
 //-----------------------------------------------------------------------------
-Tango::DbDatum TemplateDevServClass::get_default_class_property(string &prop_name)
+Tango::DbDatum TemplateDevServClass::get_default_class_property(std::string &prop_name)
 {
 	for (unsigned int i=0 ; i<cl_def_prop.size() ; i++)
 		if (cl_def_prop[i].name == prop_name)
@@ -237,7 +237,7 @@ void TemplateDevServClass::device_factory(const Tango::DevVarStringArray *devlis
 	//-------------------------------------------------------------
 	for (unsigned long i=0 ; i < devlist_ptr->length() ; i++)
 	{
-		cout4 << "Device name : " << (*devlist_ptr)[i].in() << endl;
+		cout4 << "Device name : " << (*devlist_ptr)[i].in() << std::endl;
 
 		// Create devices and add it into the device list
 		//----------------------------------------------------

@@ -20,7 +20,7 @@
 Tango_DevState TemplateDevServ::state_cmd()
 {
 
-	DEBUG_STREAM << "In TemplateDevServ state command" << endl;
+	DEBUG_STREAM << "In TemplateDevServ state command" << std::endl;
 
 	return dev_state;
 }
@@ -34,7 +34,7 @@ Tango_DevState TemplateDevServ::state_cmd()
  *
  * @return A String containing the device state read.
  */
-	virtual string &status_cmd();
+	virtual std::string &status_cmd();
 
 //+----------------------------------------------------------------------------
 //
@@ -45,10 +45,10 @@ Tango_DevState TemplateDevServ::state_cmd()
 // out :		device status
 //
 //-----------------------------------------------------------------------------
-string &TemplateDevServ::status_cmd()
+std::string &TemplateDevServ::status_cmd()
 {
 
-	DEBUG_STREAM << "In TemplateDevServ status command" << endl;
+	DEBUG_STREAM << "In TemplateDevServ status command" << std::endl;
 
 	return dev_status;
 }

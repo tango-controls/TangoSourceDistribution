@@ -99,18 +99,18 @@ public:
 	static TemplateDevServClass *init(const char *);
 	static TemplateDevServClass *instance();
 	~TemplateDevServClass();
-	Tango::DbDatum	get_class_property(string &);
-	Tango::DbDatum	get_default_device_property(string &);
-	Tango::DbDatum	get_default_class_property(string &);
+	Tango::DbDatum	get_class_property(std::string &);
+	Tango::DbDatum	get_default_device_property(std::string &);
+	Tango::DbDatum	get_default_class_property(std::string &);
 
 protected:
-	TemplateDevServClass(string &);
+	TemplateDevServClass(std::string &);
 	static TemplateDevServClass *_instance;
 	void command_factory();
 	void write_class_property();
 	void set_default_property();
-	string get_cvstag();
-	string get_cvsroot();
+	std::string get_cvstag();
+	std::string get_cvsroot();
 
 private:
 	void device_factory(const Tango::DevVarStringArray *);

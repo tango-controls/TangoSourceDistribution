@@ -62,7 +62,7 @@ public :
  *	@param cl	Class.
  *	@param s 	Device Name
  */
-	TemplateDevServ(Tango::DeviceClass *cl,string &s);
+	TemplateDevServ(Tango::DeviceClass *cl,std::string &s);
 /**
  * Constructs a newly allocated Command object.
  *

@@ -44,7 +44,7 @@ namespace TemplateDevServ_ns
 
 //+----------------------------------------------------------------------------
 //
-// method : 		TemplateDevServ::TemplateDevServ(string &s)
+// method : 		TemplateDevServ::TemplateDevServ(std::string &s)
 //
 // description : 	constructor for simulated TemplateDevServ
 //
@@ -52,7 +52,7 @@ namespace TemplateDevServ_ns
 //      - s : Device name
 //
 //-----------------------------------------------------------------------------
-TemplateDevServ::TemplateDevServ(Tango::DeviceClass *cl,string &s)
+TemplateDevServ::TemplateDevServ(Tango::DeviceClass *cl,std::string &s)
 :Tango::Device_4Impl(cl,s.c_str())
 {
 	init_device();
@@ -90,7 +90,7 @@ void TemplateDevServ::delete_device()
 //-----------------------------------------------------------------------------
 void TemplateDevServ::init_device()
 {
-	INFO_STREAM << "TemplateDevServ::TemplateDevServ() create device " << device_name << endl;
+	INFO_STREAM << "TemplateDevServ::TemplateDevServ() create device " << device_name << std::endl;
 
 	// Initialise variables to default values
 	//--------------------------------------------

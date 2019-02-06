@@ -11,8 +11,8 @@
 //-----------------------------------------------------------------------------
 void TemplateDevServClass::set_default_property()
 {
-	string	prop_name;
-	string	prop_desc;
-	string	prop_def;
+	std::string	prop_name;
+	std::string	prop_desc;
+	std::string	prop_def;
 
 }
