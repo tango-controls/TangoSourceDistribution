@@ -6,11 +6,6 @@
 #
 # project :     Makefile to generate a Tango server
 #
-# $Author:  $
-#
-# $Revision: $
-#
-#
 # copyleft :    European Synchrotron Radiation Facility
 #               BP 220, Grenoble 38043
 #               FRANCE

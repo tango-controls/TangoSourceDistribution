@@ -10,42 +10,6 @@
 //
 // project :      TANGO Device Server
 //
-// $Author: pascal_verdier $
-//
-// $Revision: 14110 $
-// $Date: 2010-02-10 08:47:17 +0100 (Wed, 10 Feb 2010) $
-//
-// SVN only:
-// $HeadURL: $
-//
-// CVS only:
-// $Source$
-// $Log$
-// Revision 3.8  2009/04/07 10:53:56  pascal_verdier
-// Tango-7 release.
-// SVN tags added
-//
-// Revision 3.7  2008/04/07 12:01:57  pascal_verdier
-// CVS put property modified.
-//
-// Revision 3.6  2007/10/23 14:04:30  pascal_verdier
-// Spelling mistakes correction
-//
-// Revision 3.5  2007/09/14 14:36:08  pascal_verdier
-// Add an ifdef WIN32 for dll generation
-//
-// Revision 3.4  2005/09/08 08:45:23  pascal_verdier
-// For Pogo-4.4.0 and above.
-//
-// Revision 3.3  2005/03/02 14:06:15  pascal_verdier
-// namespace is different than class name.
-//
-// Revision 3.2  2004/11/08 11:33:16  pascal_verdier
-// if device property not found in database, it takes class property value if exists.
-//
-// Revision 3.1  2004/09/06 09:27:05  pascal_verdier
-// Modified for Tango 5 compatibility.
-//
 //
 // copyleft :     European Synchrotron Radiation Facility
 //                BP 220, Grenoble 38043

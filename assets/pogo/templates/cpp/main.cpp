@@ -9,21 +9,6 @@
 //
 // project :     TANGO Device Server
 //
-// $Author: pascal_verdier $
-//
-// $Revision: 13293 $ $
-// $Date: 2009-04-07 12:53:56 +0200 (Tue, 07 Apr 2009) $
-//
-// SVN only:
-// $HeadURL: $
-//
-// CVS only:
-// $Source$
-// $Log$
-// Revision 3.2  2004/09/06 09:27:05  pascal_verdier
-// Modified for Tango 5 compatibility.
-//
-//
 // copyleft :    European Synchrotron Radiation Facility
 //               BP 220, Grenoble 38043
 //               FRANCE

@@ -14,48 +14,6 @@ static const char *HttpServer = "http://www.esrf.fr/computing/cs/tango/tango_doc
 //
 // project :     TANGO Device Server
 //
-// $Author: pascal_verdier $
-//
-// $Revision: 13293 $
-//
-// $Log$
-// Revision 3.11  2007/10/23 14:04:30  pascal_verdier
-// Spelling mistakes correction
-//
-// Revision 3.10  2006/11/15 14:17:10  pascal_verdier
-// Remove warnings from compiler.
-//
-// Revision 3.9  2006/06/26 09:31:03  pascal_verdier
-// Tango-5.5 compatiblity.
-// extern C method added to be used as shared library.
-// VCC 6 project file generated if running on Win32.
-// .obj, .so, executable files generated in separated directories.
-//
-// Revision 3.8  2005/09/08 08:45:23  pascal_verdier
-// For Pogo-4.4.0 and above.
-//
-// Revision 3.7  2005/06/17 08:53:21  pascal_verdier
-// CVS tags management added.
-//
-// Revision 3.6  2005/05/19 13:11:18  pascal_verdier
-// *** empty log message ***
-//
-// Revision 3.5  2005/03/02 14:06:15  pascal_verdier
-// namespace is different than class name.
-//
-// Revision 3.4  2004/12/10 13:23:27  pascal_verdier
-// Pogo-4.0.0 (Ready for Tango5).
-//
-// Revision 3.3  2004/11/08 14:27:21  pascal_verdier
-// *** empty log message ***
-//
-// Revision 3.2  2004/11/08 11:33:16  pascal_verdier
-// if device property not found in database, it takes class property value if exists.
-//
-// Revision 3.1  2004/09/06 09:27:05  pascal_verdier
-// Modified for Tango 5 compatibility.
-//
-//
 // copyleft :   European Synchrotron Radiation Facility
 //              BP 220, Grenoble 38043
 //              FRANCE

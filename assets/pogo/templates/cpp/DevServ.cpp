@@ -10,35 +10,6 @@
 //
 // project :      TANGO Device Server
 //
-// $Author: pascal_verdier $
-//
-// $Revision: 13293 $
-//
-// $Revision: 13293 $
-// $Date: 2009-04-07 12:53:56 +0200 (Tue, 07 Apr 2009) $
-//
-// SVN only:
-// $HeadURL: $
-//
-// CVS only:
-// $Source$
-// $Log$
-// Revision 3.5  2007/10/24 12:07:35  pascal_verdier
-// Another spelling mistake correction
-//
-// Revision 3.4  2007/10/23 14:04:30  pascal_verdier
-// Spelling mistakes correction
-//
-// Revision 3.3  2005/03/02 14:06:15  pascal_verdier
-// namespace is different than class name.
-//
-// Revision 3.2  2004/11/08 11:33:16  pascal_verdier
-// if device property not found in database, it takes class property value if exists.
-//
-// Revision 3.1  2004/09/06 09:27:05  pascal_verdier
-// Modified for Tango 5 compatibility.
-//
-//
 // copyleft :     European Synchrotron Radiation Facility
 //                BP 220, Grenoble 38043
 //                FRANCE

@@ -7,15 +7,6 @@
 //
 // project :      TANGO Device Server
 //
-// $Author: pascal_verdier $
-//
-// $Revision: 10062 $
-//
-// $Log$
-// Revision 1.1  2004/09/06 08:22:57  pascal_verdier
-// *** empty log message ***
-//
-//
 // copyleft :     European Synchrotron Radiation Facility
 //                BP 220, Grenoble 38043
 //                FRANCE
