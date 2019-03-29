@@ -2,7 +2,7 @@
 //
 // file :         TemplateDevServStateMachine.cpp
 //
-// description :  C++ source for the TemplateDevServ and its alowed
+// description :  C++ source for the TemplateDevServ and its allowed
 //                methods for commands and attributes
 //
 // project :      TANGO Device Server

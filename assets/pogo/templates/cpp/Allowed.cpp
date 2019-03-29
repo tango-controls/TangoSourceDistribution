@@ -2,8 +2,8 @@
 //
 // file :         TemplateDevServ.cpp
 //
-// description :  C++ source for the TemplateDevServ and its alowed.
-//                method for commands and attributes
+// description :  C++ source for the TemplateDevServ and its allowed
+//                methods for commands and attributes
 //
 // project :      TANGO Device Server
 //
