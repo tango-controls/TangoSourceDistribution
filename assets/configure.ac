@@ -502,9 +502,7 @@ AC_OUTPUT(Makefile
   	  doc/Makefile
 	  doc/man/Makefile
 	  pogo/Makefile
-	  pogo/templates/Makefile
-	  pogo/preferences/Makefile
-	  pogo/templates/cpp/Makefile)
+	  pogo/preferences/Makefile)
 
 
 AC_MSG_RESULT([
