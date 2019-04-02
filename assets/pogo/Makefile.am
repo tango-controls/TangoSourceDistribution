@@ -1,2 +1,2 @@
 
-SUBDIRS = templates preferences
+SUBDIRS = preferences
