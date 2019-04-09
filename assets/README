@@ -545,6 +545,7 @@ Changes between Tango distribution 9.2.5a and 9.3.3
 - Updated TangoAccessControl to                 Release 2.14
 - Updated Starter to                            Release 7.0
 - Updated tango_admin to                        Release 1.14
+- Removed Pogo 6
 
 Changes between Tango distribution 9.2.5 and 9.2.5a
 --------------------------------------------------
