@@ -11,7 +11,7 @@ fi
 JAVALIB=@prefix@/share/java;
 JAVABIN=@prefix@/share/java;
 
-ATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar:$JAVABIN/atkpanel.jar
+ATK=$JAVALIB/ATKCore.jar:$JAVALIB/ATKWidget.jar:$JAVABIN/ATKPanel.jar
 LOGVIEWER=$JAVALIB/LogViewer.jar
 ASTOR=$JAVALIB/Astor.jar:$JAVALIB/tools_panel.jar
 LOG4J=$JAVALIB/log4j.jar

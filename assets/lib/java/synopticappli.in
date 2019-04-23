@@ -18,7 +18,7 @@ APP_DIR=@prefix@/share/java;	    export APP_DIR
 TANGO=$LIB_DIR/JTango.jar
 
 TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar
-ATKPANEL=$APP_DIR/atkpanel.jar
+ATKPANEL=$APP_DIR/ATKPanel.jar
 
 APPLI_PACKAGE=fr.esrf.tangoatk.widget.jdraw;	export APPLI_PACKAGE
 APPLI_MAIN_CLASS=SimpleSynopticAppli; export APPLI_MAIN_CLASS
