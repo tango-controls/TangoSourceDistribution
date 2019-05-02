@@ -4,6 +4,7 @@
 # the link instead of keeping them as links
 
 javadir = $(datadir)/java
+
 dist_java_DATA = \
    @ASTOR_JAR@ \
    @ATK_CORE_JAR@ \
@@ -17,6 +18,12 @@ dist_java_DATA = \
    @DBBENCH_JAR@ \
    @JSSH_TERMINAL_JAR@ \
    @REST_SERVER_JAR@
+
+javaresourcesdir = $(datadir)/tango
+
+dist_javaresources_DATA = \
+   logback.xml \
+   logback-server.xml
 
 if TANGO_JAVA_ENABLED
 bin_SCRIPTS = \
@@ -52,7 +59,6 @@ $(bin_SCRIPTS): Makefile
 	chmod +x $@.tmp
 	chmod a-w $@.tmp
 	mv $@.tmp $@
-
 
 astor: $(srcdir)/astor.in
 jive: $(srcdir)/jive.in

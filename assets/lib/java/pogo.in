@@ -59,6 +59,8 @@ POGO_CLASS=$APP_DIR/Pogo.jar;		export POGO_CLASS
 
 CLASSPATH=$PREF_DIR:$POGO_CLASS;    export CLASSPATH
 
+LOGBACK=${TANGO_LOGBACK:-@prefix@/share/tango/logback.xml}
+
 #---------------------------------------------------------
 #	Start the Pogo process
 #---------------------------------------------------------
@@ -70,4 +72,6 @@ echo "Starting Pogo Appli under $MY_OS.  "
 		-DIN_LANG=$POGO_LANG		\
 		-DEDITOR=$POGO_EDITOR 		\
 		-Dfile.encoding=ISO-8859-1 	\
-		org.tango.pogo.pogo_gui.Pogo $*
+		-Dlogback.configurationFile="$LOGBACK" \
+		org.tango.pogo.pogo_gui.Pogo \
+		"$@"
