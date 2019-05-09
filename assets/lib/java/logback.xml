@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+  <jmxConfigurator />
+
+  <property name="layoutPattern" value="%p %d [%t - %X{deviceName} - %C{1}] %logger{36}.%M:%L - %m%n"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${layoutPattern}</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="org.jacorb" level="ERROR" />
+  <logger name="org.tango" level="INFO" />
+
+  <root level="ERROR">
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>

@@ -27,10 +27,16 @@ CLASSPATH=$TACO:$TANGO:$TANGOATK:$ATKPANEL
 export CLASSPATH
 echo "CLASSPATH=$CLASSPATH"
 
+LOGBACK=${TANGO_LOGBACK:-@prefix@/share/tango/logback.xml}
+
 #---------------------------------------------------------
 #       Start the synoptic appli process
 #---------------------------------------------------------
 #
 
-@JAVA@ -mx128m -DTANGO_HOST=$TANGO_HOST $APPLI_PACKAGE.$APPLI_MAIN_CLASS $*
-
+@JAVA@ \
+    -mx128m \
+    -DTANGO_HOST=$TANGO_HOST \
+    -Dlogback.configurationFile="$LOGBACK" \
+    $APPLI_PACKAGE.$APPLI_MAIN_CLASS \
+    "$@"

@@ -5,7 +5,10 @@
 LIB_DIR=@prefix@/share/java;	 export LIB_DIR
 CLASSPATH=$LIB_DIR/JTango.jar:$LIB_DIR/Astor.jar
 export CLASSPATH
+LOGBACK=${TANGO_LOGBACK:-@prefix@/share/tango/logback.xml}
 #
 #	Start the java virtual machine
 #
-@JAVA@ admin.astor.tango_release.JTangoVersion
+@JAVA@ \
+    -Dlogback.configurationFile="$LOGBACK" \
+    admin.astor.tango_release.JTangoVersion
