@@ -1,4 +1,4 @@
-lib_LTLIBRARIES = liblog4tango.la
+noinst_LTLIBRARIES = liblog4tango.la
 
 INCLUDES = -I../include -I$(top_srcdir)/include
 
