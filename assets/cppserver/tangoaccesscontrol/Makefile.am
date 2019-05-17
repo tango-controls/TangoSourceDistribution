@@ -21,6 +21,5 @@ TangoAccessControl_SOURCES=ClassFactory.cpp     		\
 
 
 TangoAccessControl_LDADD = -L$(top_builddir)/lib/cpp/client -ltango \
-        					-L$(top_builddir)/lib/cpp/log4tango/src -llog4tango \
 							$(DB_LDFLAGS) $(DB_LDLIBS) $(LIBZMQ_LIBS) \
 							../AbstractClass/AccessControl/libaccesscontrol.la
