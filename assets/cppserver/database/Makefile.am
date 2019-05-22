@@ -31,7 +31,7 @@ DataBaseds_SOURCES=ClassFactory.cpp          \
 if TANGO_DB_CREATE_ENABLED
 
 dbdir=${pkgdatadir}/db
-db_DATA=create_db.sh create_db.sql my.cnf create_db_tables.sql stored_proc.sql update_db.sh update_db.sql update_db8.sql update_db7.sql rem_history.sql
+db_DATA=create_db.sh create_db.sql create_db_tables.sql stored_proc.sql update_db.sh update_db.sql update_db8.sql update_db7.sql rem_history.sql
 
 ## This is to make sure that the create-db script is run on each make all.
 ## See create_db.sh for more information.
@@ -40,7 +40,7 @@ all-local: .force
 
 endif
 
-EXTRA_DIST    = create_db.sh.in create_db.sql.in my.cnf.in create_db_tables.sql.in stored_proc.sql.in \
+EXTRA_DIST    = create_db.sh.in create_db.sql.in create_db_tables.sql.in stored_proc.sql.in \
                 update_db.sh.in update_db8.sql.in update_db7.sql.in update_db.sql.in rem_history.sql.in
 
 .force:
