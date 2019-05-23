@@ -7,10 +7,12 @@ edit = sed \
 
 preferencesdir   		= $(datadir)/pogo/preferences
 
-dist_preferences_DATA 	= common_target.opt 
+dist_preferences_DATA = common_target.opt \
+                        cmake_common_target.opt
 
 nodist_preferences_DATA   = Pogo.site_properties \
-				 tango.opt
+                            tango.opt \
+                            cmake_tango.opt
 
 
 $(nodist_preferences_DATA): Makefile
@@ -24,7 +26,9 @@ $(nodist_preferences_DATA): Makefile
 CLEANFILES = $(nodist_preferences_DATA)
 Pogo.site_properties: $(srcdir)/Pogo.site_properties.in
 tango.opt: $(srcdir)/tango.opt.in
+cmake_tango.opt: $(srcdir)/cmake_tango.opt.in
 
 EXTRA_DIST = \
    Pogo.site_properties.in \
-   tango.opt.in
+   tango.opt.in \
+   cmake_tango.opt.in
