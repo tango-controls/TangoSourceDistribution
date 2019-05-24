@@ -62,7 +62,7 @@ This source code release contains :
 
 (1) Tango C++ library source files and java library and application jar files
 
-(2) The Tango database device server source files and the database configuration files (.my.cnf).
+(2) The Tango database device server source files.
 
 (3) The Jive application. 
 
@@ -264,6 +264,14 @@ The configure options "--with-mysql-admin" and "--with-mysql-admin-passwd"
 allow you to select which database user configure will use.
 You can also use the user and password entries of the my.cnf file
 to set-up your connection to the database.
+
+Note: It is recommended to setup the database to use latin1 character set.
+Especially, any other character set with characters longer than 3 bytes
+will not work. Character set can be specified in my.cnf configuration file:
+
+[mysqld]
+character_set_server=latin1
+collation_server=latin1_swedish_ci
 
 To disable any access to the database use the --disable-dbcreate option.
 
