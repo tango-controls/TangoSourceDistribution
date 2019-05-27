@@ -546,7 +546,7 @@ Changes between Tango distribution 9.2.5a and 9.3.3
 - Updated Astor to                              Release 7.2.5
 - Updated JSSHTerminal to                       Release 1.13
 - Updated LogViewer to                          Release 2.0.5
-- Updated Pogo to                               Release 9.6.19
+- Updated Pogo to                               Release 9.6.23
 - Added rest-server                             Release 1.14
 - Updated TangoTest to                          Release 2.1
 - Updated TangoDatabase to                      Release 5.11
