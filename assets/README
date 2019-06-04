@@ -538,7 +538,7 @@ Changes between Tango distribution 9.2.5a and 9.3.3
 --------------------------------------------------
 
 - Updated C++ library to                        Release 9.3.3
-- Updated JTango to                             Release 9.5.13
+- Updated JTango to                             Release 9.5.14
 - Updated Jive to                               Release 7.22
 - Updated ATK to                                Release 9.3.6
 - Updated AtkPanel to                           Release 5.8
