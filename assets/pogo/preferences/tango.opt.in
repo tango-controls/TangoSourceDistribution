@@ -4,17 +4,22 @@
 #-- gcc version
 #------------------------------------------------------------------------------
 GCC_MAJOR_VERSION_GT4 := $(shell expr `c++ -dumpversion | cut -f1 -d.` \> 4)
+GCC_MAJOR_VERSION_LT6 := $(shell expr `c++ -dumpversion | cut -f1 -d.` \< 6)
 GCC_MAJOR_VERSION_EQ4 := $(shell expr `c++ -dumpversion | cut -f1 -d.` \== 4)
+GCC_MAJOR_VERSION_EQ6 := $(shell expr `c++ -dumpversion | cut -f1 -d.` \== 6)
 GCC_MINOR_VERSION_GTEQ3 := $(shell expr `c++ -dumpversion | cut -f2 -d.` \>= 3)
-ifeq ($(GCC_MAJOR_VERSION_GT4),1)
+GCC_MINOR_VERSION_LT1 := $(shell expr `c++ -dumpversion | cut -f2 -d.` \< 1)
+
+ifeq ($(GCC_MAJOR_VERSION_LT6),1)
     CXX11 = -std=c++0x
 else
-    ifeq ($(GCC_MAJOR_VERSION_EQ4),1)
-        ifeq ($(GCC_MINOR_VERSION_GTEQ3),1)
+    ifeq ($(GCC_MAJOR_VERSION_EQ6),1)
+        ifeq ($(GCC_MINOR_VERSION_LT1),1)
             CXX11 = -std=c++0x
         endif
     endif
 endif
+
 #------------------------------------------------------------------------------
 #-- TANGO_HOME
 #------------------------------------------------------------------------------
@@ -159,7 +164,7 @@ ifdef CXXFLAGS_USR
 	CXXFLAGS_USER = $(CXXFLAGS_USR)
 endif
 
-CXXFLAGS += -D_REENTRANT -W $(INCLUDE_DIRS) $(CXXFLAGS_USER) $(CXX11)  -Dlinux
+CXXFLAGS += -D_REENTRANT -W $(INCLUDE_DIRS) $(CXXFLAGS_USER) $(CXX11) -Dlinux
 
 #------------------------------------------------------------------------------
 #-- CFLAGS
