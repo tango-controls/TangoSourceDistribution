@@ -1,4 +1,4 @@
-		TANGO source code release version 9.2.5a - README (01/2017)
+		TANGO source code release version 9.3.3 - README (03/2019)
 		==========================================================
 
 
@@ -62,7 +62,7 @@ This source code release contains :
 
 (1) Tango C++ library source files and java library and application jar files
 
-(2) The Tango database device server source files and the database configuration files (.my.cnf).
+(2) The Tango database device server source files.
 
 (3) The Jive application. 
 
@@ -264,6 +264,14 @@ The configure options "--with-mysql-admin" and "--with-mysql-admin-passwd"
 allow you to select which database user configure will use.
 You can also use the user and password entries of the my.cnf file
 to set-up your connection to the database.
+
+Note: It is recommended to setup the database to use latin1 character set.
+Especially, any other character set with characters longer than 3 bytes
+will not work. Character set can be specified in my.cnf configuration file:
+
+[mysqld]
+character_set_server=latin1
+collation_server=latin1_swedish_ci
 
 To disable any access to the database use the --disable-dbcreate option.
 
@@ -525,6 +533,27 @@ documentation, news and to download add-on packages.
 
 See the file TANGO_CHANGES to get an overview of all modification
 between the different Tango library versions.
+
+Changes between Tango distribution 9.2.5a and 9.3.3
+--------------------------------------------------
+
+- Updated C++ library to                        Release 9.3.3
+- Updated JTango to                             Release 9.5.14
+- Updated Jive to                               Release 7.22
+- Updated ATK to                                Release 9.3.6
+- Updated AtkPanel to                           Release 5.8
+- Updated atktuning to                          Release 4.7
+- Updated Astor to                              Release 7.2.5
+- Updated JSSHTerminal to                       Release 1.13
+- Updated LogViewer to                          Release 2.0.5
+- Updated Pogo to                               Release 9.6.23
+- Added rest-server                             Release 1.14
+- Updated TangoTest to                          Release 2.1
+- Updated TangoDatabase to                      Release 5.11
+- Updated TangoAccessControl to                 Release 2.14
+- Updated Starter to                            Release 7.0
+- Updated tango_admin to                        Release 1.14
+- Removed Pogo 6
 
 Changes between Tango distribution 9.2.5 and 9.2.5a
 --------------------------------------------------

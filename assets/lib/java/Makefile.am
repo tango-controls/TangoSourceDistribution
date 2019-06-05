@@ -4,6 +4,7 @@
 # the link instead of keeping them as links
 
 javadir = $(datadir)/java
+
 dist_java_DATA = \
    @ASTOR_JAR@ \
    @ATK_CORE_JAR@ \
@@ -18,12 +19,17 @@ dist_java_DATA = \
    @JSSH_TERMINAL_JAR@ \
    @REST_SERVER_JAR@
 
+javaresourcesdir = $(datadir)/tango
+
+dist_javaresources_DATA = \
+   logback.xml \
+   logback-server.xml
+
 if TANGO_JAVA_ENABLED
 bin_SCRIPTS = \
    astor \
    jive \
    pogo \
-   pogo-6 \
    atkpanel \
    logviewer \
    atktuning \
@@ -43,7 +49,7 @@ edit = sed \
 		-e 's|@libdir[@]|$(libdir)|g' \
 		-e 's|@prefix[@]|$(prefix)|g'
      
-#astor jive pogo pogo-6 devicetree atkpanel logviewer atktuning jdraw synopticappli atkmoni cvstag TangoVers tg_devtest: Makefile
+#astor jive pogo devicetree atkpanel logviewer atktuning jdraw synopticappli atkmoni cvstag TangoVers tg_devtest: Makefile
 $(bin_SCRIPTS): Makefile
 	rm -f $@ $@.tmp
 	srcdir=''; \
@@ -54,11 +60,9 @@ $(bin_SCRIPTS): Makefile
 	chmod a-w $@.tmp
 	mv $@.tmp $@
 
-
 astor: $(srcdir)/astor.in
 jive: $(srcdir)/jive.in
 pogo: $(srcdir)/pogo.in
-pogo-6: $(srcdir)/pogo-6.in
 devicetree: $(srcdir)/devicetree.in
 atkpanel: $(srcdir)/atkpanel.in
 logviewer: $(srcdir)/logviewer.in
@@ -82,7 +86,6 @@ EXTRA_DIST = \
    astor.in \
    jive.in \
    pogo.in \
-   pogo-6.in \
    devicetree.in \
    atkpanel.in \
    logviewer.in \

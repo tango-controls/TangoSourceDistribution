@@ -481,7 +481,6 @@ AC_OUTPUT(Makefile
 	  cppserver/database/Makefile
 	  cppserver/database/create_db.sql	
 	  cppserver/database/create_db.sh
-	  cppserver/database/my.cnf
 	  cppserver/database/stored_proc.sql
 	  cppserver/database/create_db_tables.sql
 	  cppserver/database/update_db.sh
@@ -502,9 +501,7 @@ AC_OUTPUT(Makefile
   	  doc/Makefile
 	  doc/man/Makefile
 	  pogo/Makefile
-	  pogo/templates/Makefile
-	  pogo/preferences/Makefile
-	  pogo/templates/cpp/Makefile)
+	  pogo/preferences/Makefile)
 
 
 AC_MSG_RESULT([

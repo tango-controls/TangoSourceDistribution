@@ -15,7 +15,7 @@ libtango_la_LIBADD = ../server/libserver.la	\
              ../server/idl/libidl.la \
 		     ../server/jpeg/libjpeg.la \
 		     ../server/jpeg_mmx/libjpeg_mmx.la \
-		     ../log4tango/src/liblog4tango.la \
+		     ../log4tango/src/liblog4tangointernal.la \
 		     $(LIBZMQ_LIBS)
 
 # We need to set the -version-info for libtool so that libtool will
@@ -87,5 +87,4 @@ tangoinclude_HEADERS = accessproxy.h        \
                        devapi_attr.tpp      \
                        devapi_utils.tpp     \
                        api_util.tpp         \
-                       devapi_pipe.tpp      \
-                       zmq.hpp
+                       devapi_pipe.tpp

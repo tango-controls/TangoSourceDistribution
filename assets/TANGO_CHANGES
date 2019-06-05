@@ -1,5 +1,15 @@
 TANGO history file
 
+03/2019        *******************************************************
+               *                                                     *
+               *  Tango release 9.3.3 : Changes since version 9.2.5a *
+               *                                                     *
+               *******************************************************
+
+- Please refer to the release notes and changelog files of the different 
+[tango-controls Github repositories](https://github.com/tango-controls) 
+to get a detailed list of changes and bug fixes.
+
 01/2016        *******************************************************
                *                                                     *
                *  Tango release 9.2.5a : Changes since version 9.2.5 *

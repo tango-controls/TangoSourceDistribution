@@ -1,10 +1,10 @@
-lib_LTLIBRARIES = liblog4tango.la
+noinst_LTLIBRARIES = liblog4tangointernal.la
 
 INCLUDES = -I../include -I$(top_srcdir)/include
 
 noinst_HEADERS = snprintf.c
 
-liblog4tango_la_SOURCES = \
+liblog4tangointernal_la_SOURCES = \
   Appender.cpp \
   AppenderAttachable.cpp \
   LayoutAppender.cpp \
@@ -31,4 +31,8 @@ liblog4tango_la_SOURCES = \
   PortabilityImpl.hh \
   PortabilityImpl.cpp
 
+liblog4tangointernal_la_LDFLAGS = -version-info @LT_VERSION@
+
+lib_LTLIBRARIES = liblog4tango.la
 liblog4tango_la_LDFLAGS = -version-info @LT_VERSION@
+liblog4tango_la_SOURCES =

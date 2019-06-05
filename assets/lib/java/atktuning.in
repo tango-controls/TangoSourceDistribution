@@ -18,9 +18,14 @@ ATKPANEL=$LIB_DIR/ATKTuning.jar
 
 CLASSPATH=$ATKPANEL:$TANGOATK:$TANGO
 export CLASSPATH
+LOGBACK=${TANGO_LOGBACK:-@prefix@/share/tango/logback.xml}
 
 #---------------------------------------------------------
 #	Start the atktuning process
 #---------------------------------------------------------
 
-@JAVA@ -DTANGO_HOST=$TANGO_HOST atktuning.MainPanel $*
+@JAVA@ \
+    -DTANGO_HOST=$TANGO_HOST \
+    -Dlogback.configurationFile="$LOGBACK" \
+    atktuning.MainPanel \
+    "$@"

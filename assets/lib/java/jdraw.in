@@ -12,7 +12,7 @@ APP_DIR=@prefix@/share/java;	    export APP_DIR
 
 
 TANGO=$LIB_DIR/JTango.jar
-TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar:$LIB_DIR/atkpanel.jar
+TANGOATK=$LIB_DIR/ATKCore.jar:$LIB_DIR/ATKWidget.jar:$LIB_DIR/ATKPanel.jar
 
 APPLI_PACKAGE=fr.esrf.tangoatk.widget.util.jdraw;	export APPLI_PACKAGE
 APPLI_MAIN_CLASS=JDrawEditorFrame; export APPLI_MAIN_CLASS
@@ -20,6 +20,7 @@ APPLI_MAIN_CLASS=JDrawEditorFrame; export APPLI_MAIN_CLASS
 CLASSPATH=$TANGOATK:$TANGO
 export CLASSPATH
 echo "CLASSPATH=$CLASSPATH"
+LOGBACK=${TANGO_LOGBACK:-@prefix@/share/tango/logback.xml}
 
 echo Running Jdraw ...
 
@@ -28,5 +29,7 @@ echo Running Jdraw ...
 #---------------------------------------------------------
 #
 
-@JAVA@ $APPLI_PACKAGE.$APPLI_MAIN_CLASS $@
-
+@JAVA@ \
+    -Dlogback.configurationFile="$LOGBACK" \
+    $APPLI_PACKAGE.$APPLI_MAIN_CLASS \
+    "$@"

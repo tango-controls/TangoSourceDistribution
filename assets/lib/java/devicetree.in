@@ -6,8 +6,13 @@ fi
 
 JAVALIB=@prefix@/share/java;
 JAVABIN=@prefix@/share/java;
-CLASSPATH=$JAVALIB/JTango.jar:$JAVALIB/ATKWidget.jar:$JAVALIB/ATKCore.jar:$JAVABIN/Jive.jar:$JAVABIN/atkpanel.jar:$JAVABIN/DeviceTree.jar
+CLASSPATH=$JAVALIB/JTango.jar:$JAVALIB/ATKWidget.jar:$JAVALIB/ATKCore.jar:$JAVABIN/Jive.jar:$JAVABIN/ATKPanel.jar:$JAVABIN/DeviceTree.jar
 export CLASSPATH
+LOGBACK=${TANGO_LOGBACK:-@prefix@/share/tango/logback.xml}
 
 echo  Running Device Tree...
-@JAVA@ -DTANGO_HOST=$TANGO_HOST explorer.Main $@
+@JAVA@ \
+    -DTANGO_HOST=$TANGO_HOST \
+    -Dlogback.configurationFile="$LOGBACK" \
+    explorer.Main \
+    "$@"

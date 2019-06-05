@@ -16,8 +16,13 @@ POGO_CLASS=$APP_DIR/Pogo.jar;			export POGO_CLASS
 
 CLASSPATH=$POGO_CLASS:$TANGO_CLASS;    export CLASSPATH
 
+LOGBACK=${TANGO_LOGBACK:-@prefix@/share/tango/logback.xml}
+
 #---------------------------------------------------------
 #	Execute java class
 #---------------------------------------------------------
 
-@JAVA@  pogo.make_util.TagModule $@
+@JAVA@ \
+    -Dlogback.configurationFile="$LOGBACK" \
+    pogo.make_util.TagModule \
+    "$@"

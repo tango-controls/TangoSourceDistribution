@@ -1,13 +1,34 @@
 #!@SHELL@
+
+if [ $# -lt 1 ]; then
+    echo "usage: $0 <instance> [args...]"
+    exit 1
+fi
+
 if [ ! $TANGO_HOST ] && [ -f @TANGO_RC_FILE@ ]; then
-   . @TANGO_RC_FILE@
+    . @TANGO_RC_FILE@
 fi
 
 JAVALIB=@prefix@/share/java
 LOG_HOME=/var/tmp/TangoRestServer
 LOG_LEVEL=ERROR
 TANGO_REST_SERVER_JAR=$JAVALIB/RestServer.jar
+LOGBACK=${TANGO_LOGBACK_SERVER:-@prefix@/share/tango/logback-server.xml}
 
 JAVA_OPTS="-Xmx2G -server -Xshare:off -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG_HOME/TangoRestServer.hprof -XX:-OmitStackTraceInFastThrow"
 
-@JAVA@ $JAVA_OPTS -Duser.dir=$LOG_HOME -DTANGO_HOST=$TANGO_HOST -DLOG_HOME=$LOG_HOME -DLOG_LEVEL=$LOG_LEVEL -jar $TANGO_REST_SERVER_JAR $* org.tango.TangoRestServer $* $@
+INSTANCE="$1"
+shift
+
+@JAVA@ \
+    $JAVA_OPTS \
+    -Duser.dir=$LOG_HOME \
+    -DTANGO_HOST=$TANGO_HOST \
+    -DLOG_HOME=$LOG_HOME \
+    -DLOG_LEVEL=$LOG_LEVEL \
+    -Dlogback.configurationFile="$LOGBACK" \
+    -jar $TANGO_REST_SERVER_JAR \
+    "$INSTANCE" \
+    org.tango.TangoRestServer \
+    "$INSTANCE" \
+    "$@"
