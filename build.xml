@@ -398,11 +398,32 @@
     <target name="-move-docs" depends="-fetch-docs">
         <move file="${workdir}/tango-${docs-ver}.pdf" todir="${distrdir}/doc"/>
     </target>
+
+    <target name="-fetch-docs-source">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="--depth 1"/>
+            <arg line="-b ${tango-doc}"/>
+            <arg value="${src-root-repo}/tango-doc"/>
+            <arg value="tango-doc"/>
+        </exec>
+    </target>
+
+    <target name="-copy-docs-source" depends="-fetch-docs-source">
+        <copy todir="${distrdir}/doc/src/source">
+            <fileset dir="${workdir}/tango-doc/source"/>
+        </copy>
+        <copy todir="${distrdir}/doc/src">
+            <fileset file="${workdir}/tango-doc/Makefile"/>
+            <fileset file="${workdir}/tango-doc/requirements.txt"/>
+        </copy>
+    </target>
     <!-- Doc -->
 
 
     <target name="prepare-doc" depends="-mkdirs">
         <antcall target="-move-docs"/>
+        <antcall target="-copy-docs-source"/>
     </target>
 
     <target name="-fetch-tango_admin">
