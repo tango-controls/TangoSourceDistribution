@@ -35,9 +35,6 @@
             <fileset dir="${basedir}/assets/doc">
                 <include name="Makefile.am"/>
             </fileset>
-            <filterset>
-                <filter token="DOCS_VER" value="${docs-ver}"/>
-            </filterset>
         </copy>
         <copy todir="${distrdir}/lib/java" overwrite="true">
             <fileset dir="${basedir}/assets/lib/java">
@@ -391,14 +388,6 @@
     </target>
 
     <!-- Doc -->
-    <target name="-fetch-docs">
-        <get src="${docs-root-repo}/${docs-ver}" dest="${workdir}/tango-${docs-ver}.pdf" skipexisting="true"/>
-    </target>
-
-    <target name="-move-docs" depends="-fetch-docs">
-        <move file="${workdir}/tango-${docs-ver}.pdf" todir="${distrdir}/doc"/>
-    </target>
-
     <target name="-fetch-docs-source">
         <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
             <arg value="clone"/>
@@ -418,13 +407,21 @@
             <fileset file="${workdir}/tango-doc/requirements.txt"/>
         </copy>
     </target>
+
+    <target name="-build-docs" depends="-fetch-docs-source">
+        <exec executable="make" dir="${workdir}/tango-doc" failonerror="true" failifexecutionfails="true">
+            <arg value="singlehtml"/>
+        </exec>
+    </target>
+
+    <target name="-copy-docs" depends="-build-docs">
+        <copy todir="${distrdir}/doc/html">
+            <fileset dir="${workdir}/tango-doc/build/singlehtml"/>
+        </copy>
+    </target>
     <!-- Doc -->
 
-
-    <target name="prepare-doc" depends="-mkdirs">
-        <antcall target="-move-docs"/>
-        <antcall target="-copy-docs-source"/>
-    </target>
+    <target name="prepare-doc" depends="-mkdirs,-copy-docs-source,-copy-docs"/>
 
     <target name="-fetch-tango_admin">
         <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
@@ -483,7 +480,7 @@
         <copy todir="${builddir}/package/tango-${cppTango}">
           <fileset dir="${builddir}/distr"/>
         </copy>
-        <tar compression="gzip" destfile="${builddir}/tango-${build}.tar.gz">
+        <tar compression="gzip" longfile="posix" destfile="${builddir}/tango-${build}.tar.gz">
             <tarfileset dir="${builddir}/package" filemode="755">
                 <include name="tango-${cppTango}/configure"/>
                 <include name="tango-${cppTango}/missing"/>

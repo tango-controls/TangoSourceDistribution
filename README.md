@@ -10,6 +10,13 @@ The following packages must be installed if one wants to build the TangoSourceDi
 
 `sudo apt-get install -y build-essential cmake autoconf libtool ant omniidl libomniorb4-dev libcos4-dev libomnithread3-dev libzmq3-dev`
 
+To build the documentation, additional dependencies must be installed:
+
+```
+sudo apt install -y python python-pip
+pip install Sphinx ipython
+```
+
 Once the above requirements are satisified, do `ant build package`
 
 The good output looks like this:
