@@ -477,7 +477,10 @@ e - Restart your database server(s)
 8 - DOCUMENTATION
 -----------------
 
-Don't forget to READ THE MANUAL (in doc/tango.pdf) !
+The full documentation for Tango is available at https://tango-controls.readthedocs.io
+If Tango is properly installed at your site, a copy of the documentation should be available in
+<install_prefix>/share/doc/tango
+You can also look at the Tango web site at https://www.tango-controls.org
 
 9 - REMARKS
 -----------
