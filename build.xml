@@ -35,9 +35,6 @@
             <fileset dir="${basedir}/assets/doc">
                 <include name="Makefile.am"/>
             </fileset>
-            <filterset>
-                <filter token="DOCS_VER" value="${docs-ver}"/>
-            </filterset>
         </copy>
         <copy todir="${distrdir}/lib/java" overwrite="true">
             <fileset dir="${basedir}/assets/lib/java">
@@ -391,19 +388,47 @@
     </target>
 
     <!-- Doc -->
-    <target name="-fetch-docs">
-        <get src="${docs-root-repo}/${docs-ver}" dest="${workdir}/tango-${docs-ver}.pdf" skipexisting="true"/>
+    <target name="-fetch-docs-source">
+        <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
+            <arg value="clone"/>
+            <arg line="--depth 1"/>
+            <arg line="-b ${tango-doc}"/>
+            <arg value="${src-root-repo}/tango-doc"/>
+            <arg value="tango-doc"/>
+        </exec>
+        <delete>
+            <fileset dir="${workdir}/tango-doc/source">
+                <include name="**/*.pdf"/>
+                <include name="**/*.doc"/>
+                <include name="**/*.class"/>
+            </fileset>
+        </delete>
     </target>
 
-    <target name="-move-docs" depends="-fetch-docs">
-        <move file="${workdir}/tango-${docs-ver}.pdf" todir="${distrdir}/doc"/>
+    <target name="-copy-docs-source" depends="-fetch-docs-source">
+        <copy todir="${distrdir}/doc/src/source">
+            <fileset dir="${workdir}/tango-doc/source"/>
+        </copy>
+        <copy todir="${distrdir}/doc/src">
+            <fileset file="${workdir}/tango-doc/Makefile"/>
+            <fileset file="${workdir}/tango-doc/requirements.txt"/>
+        </copy>
+    </target>
+
+    <target name="-build-docs" depends="-fetch-docs-source">
+        <exec executable="make" dir="${workdir}/tango-doc" failonerror="true" failifexecutionfails="true">
+            <arg value="singlehtml"/>
+        </exec>
+    </target>
+
+    <target name="-copy-docs" depends="-build-docs">
+        <copy todir="${distrdir}/doc/html">
+            <fileset dir="${workdir}/tango-doc/build/singlehtml"/>
+        </copy>
     </target>
     <!-- Doc -->
 
-
-    <target name="prepare-doc" depends="-mkdirs">
-        <antcall target="-move-docs"/>
-    </target>
+    <target name="prepare-doc" depends="-mkdirs,-copy-docs-source,-copy-docs"/>
 
     <target name="-fetch-tango_admin">
         <exec executable="git" dir="${workdir}" failonerror="true" failifexecutionfails="true">
@@ -462,7 +487,7 @@
         <copy todir="${builddir}/package/tango-${cppTango}">
           <fileset dir="${builddir}/distr"/>
         </copy>
-        <tar compression="gzip" destfile="${builddir}/tango-${build}.tar.gz">
+        <tar compression="gzip" longfile="posix" destfile="${builddir}/tango-${build}.tar.gz">
             <tarfileset dir="${builddir}/package" filemode="755">
                 <include name="tango-${cppTango}/configure"/>
                 <include name="tango-${cppTango}/missing"/>

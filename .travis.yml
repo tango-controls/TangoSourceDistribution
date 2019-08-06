@@ -11,7 +11,8 @@ before_script:
       libzmq3-dev
       libmysqlclient-dev
       ant
-
+  - sudo apt install -y python python-pip
+  - pip install --user Sphinx~=1.0 ipython~=5.0
 script:
   - ant build package
 
