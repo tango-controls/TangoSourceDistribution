@@ -412,6 +412,28 @@ The "make install" command will create these database related scripts in
 done at configure time is successfull ("database schema create" reported
 as yes at the end of the configure script execution)
 
+
+7-1 - UPDATING FROM A TANGO 9.2.5 DATABASE
+--------------------------------------
+
+Tango 9.3.3 includes an update of the database:
+(1) new DServer always allowed command: EventConfirmSubscription,
+(2) new entry for TangoRestServer in device table.
+
+To update your database, follow these instructions:
+
+a - Stop your control system and your database server(s)
+
+b - Backup your database (Recommended, not mandatory)
+
+c - Cd to the <install_dir>/share/tango/db directory
+
+d - Run the update script:
+	mysql -u[user] -p[password] < ./update_db_from_9.2.5_to_9.3.3.sql
+
+e - Restart your database server(s)
+
+
 7-2 - UPDATING FROM A TANGO 9 DATABASE
 --------------------------------------
 
@@ -431,7 +453,7 @@ d - Run the update script:
 	
 e - Restart your database server(s)
 
-7-2 - UPDATING FROM A TANGO 8 DATABASE
+7-3 - UPDATING FROM A TANGO 8 DATABASE
 --------------------------------------
 
 Tango 9.1 requires an update of the database. This is one update of
@@ -448,12 +470,12 @@ b - Backup your database (Recommended, not mandatory)
 c - Cd to the <install_dir>/share/tango/db directory
 
 d - Run the update script:
-	mysql -u[user] -p[password] < ./update_db8.sql
+	mysql -u[user] -p[password] < ./update_db_from_8_to_9.3.3.sql
 	
 e - Restart your database server(s)
 
 
-7-2 - UPDATING FROM A TANGO 7 DATABASE
+7-4 - UPDATING FROM A TANGO 7 DATABASE
 --------------------------------------
 
 Tango 9.1 needs an update of the data in the database. This is one
@@ -469,7 +491,7 @@ b - Backup your database (Recommended, not mandatory)
 c - Cd to the <install_dir>/share/tango/db directory
 
 d - Run the update script:
-	mysql -u[user] -p[password] < ./update_db7.sql
+	mysql -u[user] -p[password] < ./update_db_from_7_to_9.3.3.sql
 	
 e - Restart your database server(s)
 
