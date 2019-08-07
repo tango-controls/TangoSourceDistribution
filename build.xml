@@ -78,6 +78,9 @@
             <arg value="1s/5\.0\.1/5.0.2/;18s/5:1:0/5:2:0/"/>
             <arg value="${workdir}/cpp/log4tango/configure.in"/>
         </exec>
+        <exec executable="/bin/bash" dir="${workdir}/cpp/log4tango" failonerror="true" failifexecutionfails="true">
+            <arg value="${basedir}/bootstrap"/>
+        </exec>
         <exec executable="autoconf" dir="${workdir}/cpp/log4tango" failonerror="true" failifexecutionfails="true">
         </exec>
     </target>
