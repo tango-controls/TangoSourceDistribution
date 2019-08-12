@@ -81,8 +81,6 @@
         <exec executable="/bin/bash" dir="${workdir}/cpp/log4tango" failonerror="true" failifexecutionfails="true">
             <arg value="${basedir}/bootstrap"/>
         </exec>
-        <exec executable="autoconf" dir="${workdir}/cpp/log4tango" failonerror="true" failifexecutionfails="true">
-        </exec>
     </target>
 
     <target name="-copy-cppTango" depends="-pre-copy-cppTango">
