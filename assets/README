@@ -361,6 +361,19 @@ make all
 
 make install
 
+If you get some compilation errors like:
+error: cannot convert ‘zmq::socket_t’ to ‘void*’ in assignment
+this is due to an incompatible zmq.hpp file (probably provided with your Linux distribution).
+As a work-around, you will need to install cppzmq via:
+
+git clone https://github.com/zeromq/cppzmq
+cd cppzmq
+mkdir build
+cd build
+cmake -DENABLE_DRAFTS=OFF -DCPPZMQ_BUILD_TESTS=OFF ..
+sudo make install
+
+and recompile Tango again.
 
 6 - RUNNING
 -----------
