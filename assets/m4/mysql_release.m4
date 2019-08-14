@@ -19,7 +19,7 @@ AC_DEFUN([mysql_AC_HAVE_MYSQL_VERSION],
 			 		MYSQL_MICRO=`echo $VERS | cut -d '.' -f 3`
 					MARIA=`echo $MYSQL_MICRO | cut -d '-' -f 2`
 
-					if [[ "$MARIA" == *aria* ]]; then
+					if [[[ "$MARIA" == *aria* ]]]; then
 						MYSQL_VERSION=not_found
 						ac_cv_mysql_version_$2_$3=no
 					else
