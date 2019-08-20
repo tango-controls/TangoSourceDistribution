@@ -44,7 +44,7 @@ AC_ARG_WITH(mariadbclient-lib,AC_HELP_STRING([--with-mariadbclient-lib=LIB],[Dir
 			fi
 		done
 
-		for iloc in include/mariadb include; do
+		for iloc in include/mariadb include include/mysql; do
 			if test -f "$tryprefix/$iloc/mysql.h"; then
                 MARIADBCLIENT_CFLAGS="-I$tryprefix/$iloc"
             fi
