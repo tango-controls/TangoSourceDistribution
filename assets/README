@@ -1,4 +1,4 @@
-		TANGO source code release version 9.3.3 - README (03/2019)
+		TANGO source code release version 9.3.3 - README (08/2019)
 		==========================================================
 
 
@@ -26,15 +26,17 @@ This is the README for the TANGO source code release. TANGO is a
 toolkit for building object oriented control systems based on CORBA ans ZMQ. 
 TANGO is a joint effort of the several European research institutes.
 
-This source code release is based on the latest version of TANGO 9 (9.2.5a)
+This source code release is based on the latest version of TANGO 9 (9.3.3)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
 
 Tango 9 and above is compliant to the 64 bit architecture.
 
-This package is foreseen (and was tested) to run with omniORB4.2.1 even if it 
-works as well with omniORB 4.1.6, 4.1.7 and 4.2.0, zmq 4.0.5 and Java 1.7
+This package is foreseen (and was tested) to run with :
+- omniORB4.2.1 patched (even if it should work as well with omniORB 4.1.6, 4.1.7, 4.2.0, 4.2.2, 4.2.3)
+- zmq 4.0.5 (it should work with more recent zmq versions too)
+- Java 1.8
 
 The default Pogo application in this package can generate source code
 for C++, Python and Java device servers.
@@ -92,25 +94,27 @@ This source code release contains :
 
 (16) The Tango controlled access device server source file
      It is used if you want to run Tango with its controlled access feature
+     
+(17) A Tango Rest server implementation
 
 The Jive application is a Tango database browsing tool written in Java. It also
 allows device testing. Its documentation is at
 
-	http://www.esrf.eu/computing/cs/tango/tango_doc/tools_doc/jive_doc/index.html
+	https://jive.readthedocs.io
 	
 The Astor application is also a Java application. With the help of the Tango
 starter device server, it allows full remote Tango control system administration.
 Its documentation is at :
 
-	http://www.esrf.eu/computing/cs/tango/tango_doc/tools_doc/astor_doc/index.html
+	https://tango-controls.readthedocs.io/en/latest/tools-and-extensions/built-in/astor/index.html
 	
 The Pogo application is a graphical Tango device server code generator.
 Its documentation is at :
 
-	http://www.esrf.eu/computing/cs/tango/tango_doc/tools_doc/pogo_doc/index.html
+	https://tango-controls.github.io/pogo
 	
-tg_devtest is a device testing application for device server which do not
-use the database. It is a sub-part of Jive. 
+tg_devtest is a device testing application for device server. 
+It is a sub-part of Jive. 
 
 3 - PREREQUISITES
 -----------------
@@ -118,7 +122,12 @@ use the database. It is a sub-part of Jive.
 Before compiling and installing TANGO you need to install :
 
 (1) omniORB available from http://sourceforge.net/projects/omniorb 
-    (Preferably version 4.2.1 but 4.2.0/4.1.7/4.1.6 is fine).
+    (Preferably version 4.2.2 or 4.2.3 but older versions 
+    4.2.1/4.2.0/4.1.7/4.1.6 are fine). 
+    A patch is necessary for versions 4.2.0 and 4.2.1.
+    Please refer to:
+    https://tango-controls.readthedocs.io/en/latest/installation/patches.html#version-9-3-3-and-9-2-5-source-patches
+    to get the patch and informations on how to apply it.
 	 OmniORB is mandatory to build the Tango libraries and the delivered Tango 
 	 device servers.
 
@@ -133,9 +142,9 @@ Before compiling and installing TANGO you need to install :
 (4) doxygen available from http://www.doxygen.org
 
     Remark : doxygen is not mandatory to run Tango. It is just used by our code
-             generator (called Pogo) to automatically generates some part of 
+             generator (called Pogo) to automatically generate some parts of 
 	     the Tango device server documentation. If you don't install it,
-	     this part of the documenetaion will simply not be generated.
+	     this part of the documentation will simply not be generated.
 	     But in all cases, some HTML pages documenting Tango device server
 	     will allways be generated.
 
@@ -144,9 +153,9 @@ Also check the tools you are using
 (1) If you are using gcc, you need to have gcc release 3.2.0 or above. You can
     download gcc from http://gcc/gnu.org
 
-(2) Only java release 1.7.0 or above is supported, you can download java from
+(2) Only java release 1.8.0 or above is supported, you can download java from
     http://java.sun.com/j2se.
-	 Java is mandatory to install and run the Tango tools.
+	Java is mandatory to install and run Tango tools like Pogo, Astor and Jive for instance.
 
 
 4 - INSTALLING
@@ -197,7 +206,16 @@ The main options for configure are:
 --with-mysql-admin-passwd
                         super user password of your database (mysql or mariadb) (default:
                         <blank>)
-								
+
+						  --with-mariadbclient-prefix=PFX
+                          Prefix where mariadbclient is installed
+--with-mariadbclient-include=DIR
+                        Directory pointing to mariadbclient include files
+--with-mariadbclient-lib=LIB
+                        Directory pointing to mariadbclient library (Note:
+                        -include and -lib do override paths found with
+                        -prefix)
+		
 The last three options can be replaced with a .my.cnf file in your home 
 directory with the following content:
 
@@ -212,7 +230,7 @@ ready to be installed.
 Example (using mysql):								
         
 		Source code location:   ../..
-        Version:                9.2.5a
+        Version:                9.3.3
         Compiler:               gcc,g++
 
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.1/ubuntu1404
@@ -222,7 +240,7 @@ Example (using mysql):
         ZMQ VERSION:            4.0.5
 
         JAVA PATH:              /usr/bin/java
-        JAVA VERSION:           1.7.0_79
+        JAVA VERSION:           1.8.0_222
 
         MYSQL CLIENT LIB:       -L/usr/local/mysql/lib/mysql -lmysqlclient
         MYSQL VERSION:          5.7.13
@@ -293,16 +311,8 @@ to define a path to the java interpreter.
 
 It is not mandatory to find the java interpreter in your PATH. You can use 
 the "--disable-java" configure option to build Tango. 
-When java was not found, disabled, or found with un unsufficient version, 
+When java was not found, disabled, or found with an unsufficient version, 
 the installation of the java applications is disabled.
-
-lyx
----
-LyX is a document processor used to generate the tango manual documentation.
-One already generated manual is provided in this distribution. Nevertheless,
-if you want to re-generate it, you can use the command "make pdf" but this
-requires LyX to be installed on your host. You can used the "--with-lyx=xxx"
-configure command line to define a path to the LyX utility on your host.
 
 doxygen
 -------
@@ -351,6 +361,19 @@ make all
 
 make install
 
+If you get some compilation errors like:
+error: cannot convert ‘zmq::socket_t’ to ‘void*’ in assignment
+this is due to an incompatible zmq.hpp file (probably provided with your Linux distribution).
+As a work-around, you will need to install cppzmq via:
+
+git clone https://github.com/zeromq/cppzmq
+cd cppzmq
+mkdir build
+cd build
+cmake -DENABLE_DRAFTS=OFF -DCPPZMQ_BUILD_TESTS=OFF ..
+sudo make install
+
+and recompile Tango again.
 
 6 - RUNNING
 -----------
@@ -434,11 +457,13 @@ d - Run the update script:
 e - Restart your database server(s)
 
 
-7-2 - UPDATING FROM A TANGO 9 DATABASE
+7-2 - UPDATING FROM A TANGO 9 (< 9.2.5) DATABASE
 --------------------------------------
 
-Tango 9.2 includes an update of the database. This is one update of
-the stored procedure (release 1.12).
+Tango 9.3.3 includes an update of the database:
+(1) new DServer always allowed command: EventConfirmSubscription,
+(2) new entry for TangoRestServer in device table.
+(3) update of the stored procedure (release 1.13).
 
 To update your database, follow these instructions:
 
@@ -448,18 +473,23 @@ b - Backup your database (Recommended, not mandatory)
 
 c - Cd to the <install_dir>/share/tango/db directory
 
-d - Run the update script:
+d - Run the update script to update the stored procedure:
 	./update_db.sh
 	
-e - Restart your database server(s)
+e - Run the update script for the new entries (1) and (2) in the DB:
+	mysql -u[user] -p[password] < ./update_db_from_9.2.5_to_9.3.3.sql
+	
+f - Restart your database server(s)
 
 7-3 - UPDATING FROM A TANGO 8 DATABASE
 --------------------------------------
 
-Tango 9.1 requires an update of the database. This is one update of
-the stored procedure (release 1.11), some new commands in the list of allowed 
-commands for the Database class (for Tango Access Control system) and
-some new tables related to the new pipe feature.
+Tango 9.3.3 includes an update of the database:
+(1) new DServer always allowed command: EventConfirmSubscription.
+(2) new entry for TangoRestServer in device table.
+(3) update of the stored procedure (release 1.13).
+(4) some new commands in the list of allowed commands for the Database class (for Tango Access Control system)
+(5) some new tables related to the new pipe feature.
 
 To update your database, follow these instructions:
 
@@ -478,9 +508,12 @@ e - Restart your database server(s)
 7-4 - UPDATING FROM A TANGO 7 DATABASE
 --------------------------------------
 
-Tango 9.1 needs an update of the data in the database. This is one
-update of the stored procedure (release 1.9), some more
-commands definition for the Tango control access and new tables dedicated to pipe.
+Tango 9.3.3 includes an update of the database:
+(1) new DServer always allowed command: EventConfirmSubscription.
+(2) new entry for TangoRestServer in device table.
+(3) update of the stored procedure (release 1.13).
+(4) some new commands in the list of allowed commands for the Database class (for Tango Access Control system)
+(5) some new tables related to the new pipe feature.
 
 To update your database, follow these instructions:
 
@@ -503,6 +536,15 @@ The full documentation for Tango is available at https://tango-controls.readthed
 If Tango is properly installed at your site, a copy of the documentation should be available in
 <install_prefix>/share/doc/tango
 You can also look at the Tango web site at https://www.tango-controls.org
+
+Sphinx is used to generate the tango documentation html pages.
+Nevertheless, if you want to re-generate the documentation, you can use 
+the command "make html" in doc/src directory.
+This requires Sphinx and IPython to be installed on your host.
+On a Debian-like system, you can install these tools using the following 
+commands:
+sudo apt install -y python python-pip
+pip install sphinx ipython
 
 9 - REMARKS
 -----------
