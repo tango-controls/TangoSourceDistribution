@@ -41,7 +41,7 @@
                 <include name="Makefile.am"/>
             </fileset>
             <filterset>
-                <filter token="JTANGO_JAR" value="${JTango}.jar"/>
+                <filter token="JTANGO_JAR" value="${JTango-jar}"/>
                 <filter token="ASTOR_JAR" value="${astor-jar}"/>
                 <filter token="ATK_CORE_JAR" value="${atk-core-jar}"/>
                 <filter token="ATK_WIDGET_JAR" value="${atk-widget-jar}"/>
@@ -190,12 +190,14 @@
         <mkdir dir="${distrdir}/utils"/>
     </target>
 
+    <property name="JTango-jar" value="JTango-${JTango-ver}.jar"/>
+    
     <target name="-fetch-JTango">
-        <get src="${jtango-root-repo}/${JTango-ver}/${JTango}.jar" dest="${workdir}/${JTango}.jar" skipexisting="true"/>
+        <get src="${jtango-root-repo}/${JTango-ver}/${JTango-jar}" dest="${workdir}/${JTango-jar}" skipexisting="true"/>
     </target>
 
     <target name="-move-JTango" depends="-fetch-JTango">
-        <move file="${workdir}/${JTango}.jar" todir="${distrdir}/lib/java"/>
+        <move file="${workdir}/${JTango-jar}" todir="${distrdir}/lib/java"/>
     </target>
 
     <!-- Jive -->
