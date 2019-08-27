@@ -191,7 +191,7 @@
     </target>
 
     <target name="-fetch-JTango">
-        <get src="${jtango-root-repo}=${JTango}.jar" dest="${workdir}/${JTango}.jar" skipexisting="true"/>
+        <get src="${jtango-root-repo}/${JTango-ver}/${JTango}.jar" dest="${workdir}/${JTango}.jar" skipexisting="true"/>
     </target>
 
     <target name="-move-JTango" depends="-fetch-JTango">
