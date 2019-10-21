@@ -38,9 +38,9 @@ db_DATA = \
     stored_proc.sql \
     update_db.sh \
     update_db.sql \
-    update_db_from_8_to_9.3.3.sql \
-    update_db_from_7_to_9.3.3.sql \
-    update_db_from_9.2.5_to_9.3.3.sql \
+    update_db_from_8_to_9.3.4.sql \
+    update_db_from_7_to_9.3.4.sql \
+    update_db_from_9.2.5_to_9.3.4.sql \
     rem_history.sql
 
 ## This is to make sure that the create-db script is run on each make all.
@@ -56,9 +56,9 @@ EXTRA_DIST = \
     create_db_tables.sql.in \
     stored_proc.sql.in \
     update_db.sh.in \
-    update_db_from_8_to_9.3.3.sql.in \
-    update_db_from_7_to_9.3.3.sql.in \
-    update_db_from_9.2.5_to_9.3.3.sql.in \
+    update_db_from_8_to_9.3.4.sql.in \
+    update_db_from_7_to_9.3.4.sql.in \
+    update_db_from_9.2.5_to_9.3.4.sql.in \
     update_db.sql.in \
     rem_history.sql.in
 
