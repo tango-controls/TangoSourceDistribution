@@ -196,6 +196,22 @@ ZMQ_VERSION=`eval pkg-config --modversion libzmq`
 ZMQ_ROOT=`eval pkg-config --variable=prefix libzmq`
 AC_SUBST(ZMQ_PREFIX)
 
+AC_LANG_SAVE
+AC_LANG_CPLUSPLUS
+SAVE_CXXFLAGS="$CXXFLAGS"
+CXXFLAGS="$CXXFLAGS -I $ZMQ_PREFIX/include"
+AC_CHECK_HEADERS(zmq.hpp, [], [AC_MSG_ERROR([Couldn't find a compatible zmq.hpp])],
+[#include <zmq.hpp>
+
+int main(int, char**)
+{
+  zmq::context_t c;
+  zmq::socket_t s(c, ZMQ_REQ);
+  s.disconnect("some endpoint");
+}])
+CXXFLAGS="$SAVE_CXXFLAGS"
+AC_LANG_RESTORE
+
 # We need to define some stuff for threads and stubs
 
 case $build_os in
