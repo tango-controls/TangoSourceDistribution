@@ -205,7 +205,7 @@ AC_CHECK_HEADERS(zmq.hpp, [], [AC_MSG_ERROR([Couldn't find a compatible zmq.hpp]
 
 int main(int, char**)
 {
-  zmq::context_t c;
+  zmq::context_t c(1);
   zmq::socket_t s(c, ZMQ_REQ);
   s.disconnect("some endpoint");
 }])
