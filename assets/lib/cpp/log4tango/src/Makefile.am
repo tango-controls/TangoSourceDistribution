@@ -1,6 +1,6 @@
 noinst_LTLIBRARIES = liblog4tangointernal.la
 
-INCLUDES = -I../include -I$(top_srcdir)/include
+AM_CPPFLAGS = -I../include -I$(top_srcdir)/include
 
 noinst_HEADERS = snprintf.c
 

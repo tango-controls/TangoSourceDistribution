@@ -8,7 +8,7 @@ check_PROGRAMS = $(TESTS)
 
 #noinst_PROGRAMS =
 
-INCLUDES = -I$(top_srcdir)/include -I$(top_srcdir)/src
+AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src
 
 test_log4tango_SOURCES = test_log4tango.cpp
 test_log4tango_LDADD = $(top_builddir)/src/liblog4tango.la
