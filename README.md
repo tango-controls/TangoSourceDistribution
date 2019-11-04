@@ -32,7 +32,7 @@ package:
   [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
   [copydir] Copying 710 files to /home/travis/build/tango-controls/TangoSourceDistribution/build/package/tango-9.3.2
       [tar] Building tar: /home/travis/build/tango-controls/TangoSourceDistribution/build/tango-master.tar.gz
-$> 
+$>
 ```
 
 `ant build` creates _build_ folder where it performs all required manipulations to fetch, download and assemble all the components of Tango Source Distribution: c++ from githug repos; java from maven repos. Result is placed into _build/distr_

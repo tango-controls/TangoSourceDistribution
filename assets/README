@@ -1,4 +1,4 @@
-		TANGO source code release version 9.3.3 - README (08/2019)
+		TANGO source code release version 9.3.4 - README (11/2019)
 		==========================================================
 
 
@@ -26,7 +26,7 @@ This is the README for the TANGO source code release. TANGO is a
 toolkit for building object oriented control systems based on CORBA ans ZMQ. 
 TANGO is a joint effort of the several European research institutes.
 
-This source code release is based on the latest version of TANGO 9 (9.3.3)
+This source code release is based on the latest version of TANGO 9 (9.3.4)
 and is intended for Unix platforms. A binary version for Windows of TANGO 
 is available. The source code contained in this package 
 runs on Windows but the Makefile don't.
@@ -230,7 +230,7 @@ ready to be installed.
 Example (using mysql):								
         
 		Source code location:   ../..
-        Version:                9.3.3
+        Version:                9.3.4
         Compiler:               gcc,g++
 
         OMNIORB PATH:           /segfs/tango/ORB/omniORB4.2.1/ubuntu1404
@@ -439,7 +439,7 @@ as yes at the end of the configure script execution)
 7-1 - UPDATING FROM A TANGO 9.2.5 DATABASE
 --------------------------------------
 
-Tango 9.3.3 includes an update of the database:
+Tango 9.3.4 includes an update of the database:
 (1) new DServer always allowed command: EventConfirmSubscription,
 (2) new entry for TangoRestServer in device table.
 
@@ -452,7 +452,7 @@ b - Backup your database (Recommended, not mandatory)
 c - Cd to the <install_dir>/share/tango/db directory
 
 d - Run the update script:
-	mysql -u[user] -p[password] < ./update_db_from_9.2.5_to_9.3.3.sql
+	mysql -u[user] -p[password] < ./update_db_from_9.2.5_to_9.3.4.sql
 
 e - Restart your database server(s)
 
@@ -460,7 +460,7 @@ e - Restart your database server(s)
 7-2 - UPDATING FROM A TANGO 9 (< 9.2.5) DATABASE
 --------------------------------------
 
-Tango 9.3.3 includes an update of the database:
+Tango 9.3.4 includes an update of the database:
 (1) new DServer always allowed command: EventConfirmSubscription,
 (2) new entry for TangoRestServer in device table.
 (3) update of the stored procedure (release 1.13).
@@ -477,14 +477,14 @@ d - Run the update script to update the stored procedure:
 	./update_db.sh
 	
 e - Run the update script for the new entries (1) and (2) in the DB:
-	mysql -u[user] -p[password] < ./update_db_from_9.2.5_to_9.3.3.sql
+	mysql -u[user] -p[password] < ./update_db_from_9.2.5_to_9.3.4.sql
 	
 f - Restart your database server(s)
 
 7-3 - UPDATING FROM A TANGO 8 DATABASE
 --------------------------------------
 
-Tango 9.3.3 includes an update of the database:
+Tango 9.3.4 includes an update of the database:
 (1) new DServer always allowed command: EventConfirmSubscription.
 (2) new entry for TangoRestServer in device table.
 (3) update of the stored procedure (release 1.13).
@@ -500,7 +500,7 @@ b - Backup your database (Recommended, not mandatory)
 c - Cd to the <install_dir>/share/tango/db directory
 
 d - Run the update script:
-	mysql -u[user] -p[password] < ./update_db_from_8_to_9.3.3.sql
+	mysql -u[user] -p[password] < ./update_db_from_8_to_9.3.4.sql
 	
 e - Restart your database server(s)
 
@@ -524,7 +524,7 @@ b - Backup your database (Recommended, not mandatory)
 c - Cd to the <install_dir>/share/tango/db directory
 
 d - Run the update script:
-	mysql -u[user] -p[password] < ./update_db_from_7_to_9.3.3.sql
+	mysql -u[user] -p[password] < ./update_db_from_7_to_9.3.4.sql
 	
 e - Restart your database server(s)
 

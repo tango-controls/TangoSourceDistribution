@@ -501,9 +501,9 @@ AC_OUTPUT(Makefile
 	  cppserver/database/create_db_tables.sql
 	  cppserver/database/update_db.sh
 	  cppserver/database/update_db.sql
-	  cppserver/database/update_db_from_8_to_9.3.3.sql
-	  cppserver/database/update_db_from_7_to_9.3.3.sql
-	  cppserver/database/update_db_from_9.2.5_to_9.3.3.sql
+	  cppserver/database/update_db_from_8_to_9.3.4.sql
+	  cppserver/database/update_db_from_7_to_9.3.4.sql
+	  cppserver/database/update_db_from_9.2.5_to_9.3.4.sql
       cppserver/database/rem_history.sql
 	  cppserver/starter/Makefile
   	  cppserver/tangotest/Makefile
