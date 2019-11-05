@@ -178,7 +178,7 @@ AM_CONDITIONAL(TANGO_DOC_ENABLED, test x"$LYX" != x"false" && test x"$FIG2DEV" !
 LT_INIT()
 	
 # check for the presence of zlib
-CHECK_ZLIB
+PKG_CHECK_MODULES([ZLIB], [zlib >= 1])
 
 # This macro checks for omniorb and sets various defines, please
 # consult config/RSSH_CHECK_OMNIORB for more details
