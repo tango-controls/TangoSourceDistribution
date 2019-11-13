@@ -28,7 +28,6 @@ AUX_DIST_EXTRA = m4/ac_cxx_have_strstream.m4       \
                  m4/RSSH_ENABLE_PTHREADS.m4        \
                  m4/ac_path_mysqlclient.m4         \
                  m4/ac_prog_mysql.m4               \
-                 m4/check_zlib.m4                  \
                  m4/gcc_release.m4                 \
                  m4/java_release.m4	               \
                  m4/mysql_release.m4               \
