@@ -606,7 +606,7 @@ Changes between Tango distribution 9.2.5a and 9.3.4
 
 - Updated C++ library to                        Release 9.3.4
 - Updated JTango to                             Release 9.5.18
-- Updated Jive to                               Release 7.22
+- Updated Jive to                               Release 7.23
 - Updated ATK to                                Release 9.3.14
 - Updated AtkPanel to                           Release 5.8
 - Updated atktuning to                          Release 4.7
@@ -614,8 +614,8 @@ Changes between Tango distribution 9.2.5a and 9.3.4
 - Added dbbench                                 Release 1.3
 - Updated JSSHTerminal to                       Release 1.16
 - Updated LogViewer to                          Release 2.0.5
-- Updated Pogo to                               Release 9.6.25
-- Added rest-server                             Release 1.14
+- Updated Pogo to                               Release 9.6.26
+- Added rest-server                             Release 1.17
 - Updated TangoTest to                          Release 2.1
 - Updated TangoDatabase to                      Release 5.14
 - Updated TangoAccessControl to                 Release 2.14
