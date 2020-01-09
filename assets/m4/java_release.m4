@@ -13,12 +13,11 @@ AC_DEFUN([java_AC_HAVE_JAVA_VERSION],
 	                  ac_cv_java_version_$2_$3,
           [
 			if test -x $1 -a -f $1; then
-				VERS=`$1 -version 2>&1 | grep version | cut -d '"' -f 2`
-				JAVA_VERSION=$VERS
+				JAVA_VERSION=`$1 -version 2>&1 | grep version | cut -d '"' -f 2`
 
-				JAVA_MAJOR=`echo $VERS | cut -d '.' -f 1`
-				JAVA_MINOR=`echo $VERS | cut -d '.' -f 2`
-				JAVA_MICRO=`echo $VERS | cut -d '.' -f 3`
+				JAVA_MAJOR=`echo $JAVA_VERSION | cut -d '.' -f 1`
+				JAVA_MINOR=`echo $JAVA_VERSION | cut -d '.' -f 2`
+				JAVA_MICRO=`echo $JAVA_VERSION | cut -d '.' -f 3`
 
 dnl			echo "JAVA MAJOR = $JAVA_MAJOR"
 dnl			echo "JAVA MINOR = $JAVA_MINOR"
