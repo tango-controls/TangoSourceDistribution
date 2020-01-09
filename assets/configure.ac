@@ -112,9 +112,9 @@ if test "x$enable_java" = "xyes" ; then
         	AC_PATH_PROG(JAVA,java,"notfound")
 		fi
 		if test "x$JAVA" != "xnotfound"; then 
-      		java_AC_HAVE_JAVA_VERSION($JAVA,1,7)
-			if test "x$ac_cv_java_version_1_7" = "xno"; then
-           		AC_MSG_WARN([Not supported java release. Should be 1.7.x or above. Java will be disabled for this build!])
+			java_AC_HAVE_JAVA_VERSION($JAVA,1,8)
+			if test "x$ac_cv_java_version_1_8" = "xno"; then
+				AC_MSG_WARN([Not supported java release. Should be 1.8.x exactly. Java will be disabled for this build!])
 				with_java=
 				enable_java=no
 			else
