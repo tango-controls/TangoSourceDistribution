@@ -14,13 +14,13 @@ AC_REQUIRE([AC_PROG_CXXCPP])
 
 
 AC_ARG_WITH(omni, AC_HELP_STRING([--with-omni],[prefix to omniORB installation (default: $OMNI_ROOT)]) ,\
-            OMNI_PREFIX=${with_omni} , OMNI_PREFIX=/usr/local )
+            OMNI_PREFIX=${with_omni} , OMNI_PREFIX=/usr )
 
 if test "x$OMNI_ROOT" = "x"
 then
  if test "x$OMNI_PREFIX" = "x"
  then
-   OMNI_ROOT="/usr/local"
+   OMNI_ROOT="/usr"
  else
    OMNI_ROOT="$OMNI_PREFIX"
  fi

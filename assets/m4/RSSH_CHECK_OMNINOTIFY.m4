@@ -15,13 +15,13 @@ AC_REQUIRE([RSSH_CHECK_OMNIORB])dnl
 
 
 AC_ARG_WITH(omninotify, AC_HELP_STRING([--with-omniNotify],[prefix to omniNotify installation (default: $OMNI_ROOT)]) ,\
-            OMNINOTIFY_PREFIX=${with_omninotify} , OMNINOTIFY_PREFIX=/usr/local )
+            OMNINOTIFY_PREFIX=${with_omninotify} , OMNINOTIFY_PREFIX=/usr )
 
 if test "x$OMNI_ROOT" = "x"
 then
  if test "x$OMNINOTIFY_PREFIX" = "x"
  then
-   OMNI_ROOT="/usr/local"
+   OMNI_ROOT="/usr"
  else
    OMNI_ROOT="$OMNINOTIFY_PREFIX"
  fi
