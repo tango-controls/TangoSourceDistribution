@@ -29,7 +29,7 @@ fi
 
 if  test "x$OMNINOTIFY_PREFIX" = "xno"
 then
-dnl OMNINOTIFY NOT SET 
+dnl OMNINOTIFY NOT SET
   AC_MSG_RESULT(omniNotify is disabled)
   omninotify=no
 else
@@ -81,14 +81,14 @@ CXXCPPFLAGS="$CXXCPPFLAGS $IDLCXXFLAGS"
 
 AC_CHECK_HEADER( omniNotify/omniNotify.h, omninotify=yes , omninotify=no, )
 
-if test "x$omninotify" = "xyes" 
+if test "x$omninotify" = "xyes"
 then
   OMNI_LIBDIR="$OMNI_ROOT/lib"
   if test ! -r "$ORB_LIBDIR/libCOSNotify4.so"
   then
     for i in $OMNI_ROOT/lib/*/lib*.so
     do
-      OMNI_LIBDIR=`dirname $i` 
+      OMNI_LIBDIR=`dirname $i`
       break;
     done
   fi

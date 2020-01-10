@@ -1,4 +1,4 @@
-dnl@synposis RSSH_CHECK_CORBA_ORB 
+dnl@synposis RSSH_CHECK_CORBA_ORB
 dnl
 dnl set CORBA support for omniORB v3-pr2 or highter
 dnl    ( http://www.uk.research.att.com/omniORB/omniORB.html)
@@ -28,7 +28,7 @@ fi
 
 if  test "x$OMNI_PREFIX" = "xno"
 then
-dnl OMNI NOT SET 
+dnl OMNI NOT SET
   AC_MSG_RESULT(omniORB is disabled)
   omni=no
 else
@@ -66,7 +66,7 @@ case $build_os in
     AC_DEFINE(__darwin__,1,If we're running on darwin/MacOsX)
     IDLCXXFLAGS="$IDLCXXFLAGS -D__darwin__"
 	 SL_SUFFIX=dylib
-	 ;;	 
+	 ;;
  solaris*)
     AC_DEFINE(__sunos__,1,If we're running on solaris)
     IDLCXXFLAGS="$IDLCXXFLAGS -D__sunos__"
@@ -94,14 +94,14 @@ CXXCPPFLAGS="$CXXCPPFLAGS $IDLCXXFLAGS"
 
 AC_CHECK_HEADER( omniORB4/CORBA.h, omni=yes , omni=no, )
 
-if test "x$omni" = "xyes" 
+if test "x$omni" = "xyes"
 then
   ORB_LIBDIR="$OMNI_ROOT/lib"
   if test ! -r "$ORB_LIBDIR/libomniORB4.$SL_SUFFIX"
   then
     for i in $OMNI_ROOT/lib/*/lib*.$SL_SUFFIX
     do
-      ORB_LIBDIR=`dirname $i` 
+      ORB_LIBDIR=`dirname $i`
       break;
     done
   fi
@@ -197,7 +197,7 @@ then
   ORB=unknown
   omni=no
   eval "$rssh_rollback"
-  rssh_rollback=$svRSSH_ROLLBACK 
+  rssh_rollback=$svRSSH_ROLLBACK
 else
   AC_SUBST(CORBA_INCLUDES)
 
@@ -219,7 +219,7 @@ else
         IDL=$i
         break
       fi
-    done 
+    done
   fi
   AC_SUBST(IDL)
   IDLCXX=$IDL
@@ -251,8 +251,8 @@ else
   AC_SUBST(IDL_CLN_CPP_SUFFIX,$IDL_CLN_CPP_SUFFIX)
   AC_DEFINE_UNQUOTED(IDL_CLN_CPP_SUFFIX,$IDL_CLN_CPP,1,"")
 
-  IDL_CLN_O=SK.o 
-  IDL_CLN_OBJ_SUFFIX=SK.o 
+  IDL_CLN_O=SK.o
+  IDL_CLN_OBJ_SUFFIX=SK.o
   AC_SUBST(IDL_CLN_O,$IDL_CLN_O)
   AC_SUBST(IDL_CLN_OBJ_SUFFIX,$IDL_CLN_OBJ_SUFFIX)
 
@@ -288,7 +288,7 @@ else
   COSNAMING_H='omniORB4/Naming.hh'
   AC_DEFINE_UNQUOTED(COSNAMING_H,<$COSNAMING_H>, "")
 
-  ORB_COSNAMING_LIB= 
+  ORB_COSNAMING_LIB=
   AC_SUBST(ORB_COSNAMING_LIB)
 
 dnl i. e. it's build into ORB lib
@@ -310,13 +310,13 @@ return 0;
 ], rssh_cv_corba_namespaces=yes, rssh_cv_corba_namespaces=no)
   )
 
-  if test "$rssh_cv_corba_namespaces" = "yes" 
+  if test "$rssh_cv_corba_namespaces" = "yes"
   then
     AC_DEFINE(CORBA_MODULE_NAMESPACE_MAPPING,1, "")
   else
     AC_DEFINE(CORBA_MODULE_CLASS_MAPPING,1,"")
   fi
-  
+
   AC_DEFINE(OMNIORB,1,"if we're working with omniorb")
 
   CORBA_HAVE_POA=1
