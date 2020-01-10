@@ -56,7 +56,7 @@ else
 
 	AC_MSG_CHECKING([if mysql works])
 
-	if echo 'SELECT * FROM user' | $MYSQL $user_switch $passwd_switch $host_switch mysql> /dev/null; then
+	if echo 'SELECT * FROM ENGINES;' | $MYSQL $user_switch $passwd_switch $host_switch information_schema> /dev/null; then
             AC_MSG_RESULT([yes])
  		AC_SUBST(MYSQL_ADMIN)
  		AC_SUBST(MYSQL_ADMIN_PASSWD)
