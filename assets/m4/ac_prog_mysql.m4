@@ -19,7 +19,7 @@ dnl     MYSQL = which mysql
 dnl
 dnl @version $Id: ac_prog_mysql.m4,v 1.2 2002/04/11 14:20:17 simons Exp $
 dnl @author Gleen Salmon <gleensalmon@yahoo.com>
-dnl 
+dnl
 AC_DEFUN([AC_PROG_MYSQL],[
 
 AC_REQUIRE([AC_EXEEXT])dnl
@@ -56,17 +56,17 @@ else
 
 	AC_MSG_CHECKING([if mysql works])
 
-	if echo 'SELECT * FROM user' | $MYSQL $user_switch $passwd_switch $host_switch mysql> /dev/null; then
+	if echo 'SELECT * FROM ENGINES;' | $MYSQL $user_switch $passwd_switch $host_switch information_schema> /dev/null; then
             AC_MSG_RESULT([yes])
  		AC_SUBST(MYSQL_ADMIN)
  		AC_SUBST(MYSQL_ADMIN_PASSWD)
  		AC_SUBST(MYSQL)
  		AC_SUBST(MYSQL_HOST)
-		
+
 		MYSQL_CONNECTION=OK
 
  	else
- 
+
 			AC_MSG_WARN([mysql cannot execute SELECT with user=$MYSQL_ADMIN, passwd=$MYSQL_ADMIN_PASSWD, and  host=$MYSQL_HOST. Please check your my.cnf file or configure options!])
 			MYSQL_CONNECTION=failed
 			enable_db_schema_create=no
