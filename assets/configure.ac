@@ -525,29 +525,30 @@ AC_OUTPUT(Makefile
 AC_MSG_RESULT([
 Configuration ($PACKAGE):
 
-	Source code location:   ${srcdir}
-	Version:                ${VERSION}
-	Compiler:               ${ac_ct_CC},${ac_ct_CXX}
+	Source code location:       ${srcdir}
+	Version:                    ${VERSION}
+	Compiler:                   ${ac_ct_CC},${ac_ct_CXX}
 
-	OMNIORB PATH:           ${OMNI_ROOT}
-	OMNIORB VERSION:        ${OMNI_VERSION}
+	OMNIORB PATH:               ${OMNI_ROOT}
+	OMNIORB VERSION:            ${OMNI_VERSION}
 
-	ZMQ PATH:               ${ZMQ_ROOT}
-	ZMQ VERSION:            ${ZMQ_VERSION}
+	ZMQ PATH:                   ${ZMQ_ROOT}
+	ZMQ VERSION:                ${ZMQ_VERSION}
 
-	JAVA PATH:              ${with_java}
-	JAVA VERSION:           ${JAVA_VERSION}
+	JAVA PATH:                  ${with_java}
+	JAVA VERSION:               ${JAVA_VERSION}
 
-	${DB_NAME} CLIENT LIB:  ${DB_LDFLAGS} ${DB_LDLIBS}
-	${DB_NAME} VERSION:     ${DB_VERSION}
-	${DB_NAME} CONNECTION:  ${MYSQL_CONNECTION}
+	Database ${DB_NAME}
+	  CLIENT LIB:              ${DB_LDFLAGS} ${DB_LDLIBS}
+	  VERSION:                  ${DB_VERSION}
+	  CONNECTION:               ${MYSQL_CONNECTION}
 
 build:
-	libraries:              ${enable_lib}
-	java application:       ${enable_java}
-	access control server:	${enable_dbserver}
-	database server:        ${enable_dbserver}
-	database schema create: ${enable_db_schema_create}
+	libraries:                  ${enable_lib}
+	java application:           ${enable_java}
+	access control server:      ${enable_dbserver}
+	database server:            ${enable_dbserver}
+	database schema create:     ${enable_db_schema_create}
 
 Please check whether the configuration I detected matches what you
 would like to have.
