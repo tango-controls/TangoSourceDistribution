@@ -413,6 +413,14 @@ else
 	if test "x$MARIADB_VERSION" != "xnot_found"; then
 		DB_SERVER_VERSION=${MARIADB_VERSION}
 	fi
+	if test "x$MARIADBCLIENT_VERSION" != "x"; then
+		DB_CLIENT_VERSION=${MARIADBCLIENT_VERSION}
+		MARIADBCLIENT_VERSION_MAJOR=$(echo ${MARIADBCLIENT_VERSION} | cut -f 1 -d ".")
+
+		if test "x$MARIADBCLIENT_VERSION_MAJOR" = "x2"; then
+			DB_CLIENT_VERSION_MSG="(Warning! potentially buggy version)"
+		fi
+	fi
 fi
 
 
@@ -540,7 +548,7 @@ Configuration ($PACKAGE):
 
 	Database ${DB_NAME}
 	  CLIENT LIB:              ${DB_LDFLAGS} ${DB_LDLIBS}
-	  CLIENT VERSION:           ${DB_CLIENT_VERSION}
+	  CLIENT VERSION:           ${DB_CLIENT_VERSION} ${DB_CLIENT_VERSION_MSG}
 	  VERSION:                  ${DB_SERVER_VERSION}
 	  CONNECTION:               ${MYSQL_CONNECTION}
 
