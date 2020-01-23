@@ -92,15 +92,25 @@ AC_ARG_WITH(mariadbclient-lib,AC_HELP_STRING([--with-mariadbclient-lib=LIB],[Dir
     LIBS="$LIBS $MARIADBCLIENT_LIBS"
     dnl if no minimum version is given, just try to compile
     dnl else try to compile AND run
-        AC_TRY_LINK([
+        AC_LINK_IFELSE([AC_LANG_SOURCE([
             #include <mysql.h>
             #include <mysql_version.h>
-        ],[
-            mysql_init( 0 );
-        ], [AC_MSG_RESULT(yes $MARIADBCLIENT_CFLAGS $MARIADBCLIENT_LDFLAGS)
+            #include <stdio.h>
+
+            int main(int argc, char** argv)
+            {
+              #ifdef MARIADB_PACKAGE_VERSION
+                printf("%s\n", MARIADB_PACKAGE_VERSION);
+              #endif
+
+              mysql_init(0);
+              return 0;
+            }
+        ])], [AC_MSG_RESULT(yes $MARIADBCLIENT_CFLAGS $MARIADBCLIENT_LDFLAGS)
            CFLAGS="$ac_save_CFLAGS"
            LDFLAGS="$ac_save_LDFLAGS"
            LIBS="$ac_save_LIBS"
+           MARIADBCLIENT_VERSION="`./conftest$EXEEXT`"
            ifelse([$2], ,:,[$2])
         ],[
             echo "no"
@@ -132,4 +142,5 @@ AC_ARG_WITH(mariadbclient-lib,AC_HELP_STRING([--with-mariadbclient-lib=LIB],[Dir
     AC_SUBST(MARIADBCLIENT_LDFLAGS)
     AC_SUBST(MARIADBCLIENT_CFLAGS)
     AC_SUBST(MARIADBCLIENT_LIBS)
+    AC_SUBST(MARIADBCLIENT_VERSION)
 ])
