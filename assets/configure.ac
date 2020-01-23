@@ -506,9 +506,9 @@ AC_OUTPUT(Makefile
 	  cppserver/database/update_db_from_8_to_9.3.4.sql
 	  cppserver/database/update_db_from_7_to_9.3.4.sql
 	  cppserver/database/update_db_from_9.2.5_to_9.3.4.sql
-      cppserver/database/rem_history.sql
+	  cppserver/database/rem_history.sql
 	  cppserver/starter/Makefile
-  	  cppserver/tangotest/Makefile
+	  cppserver/tangotest/Makefile
 	  cppserver/AbstractClass/Makefile
 	  cppserver/AbstractClass/AccessControl/Makefile
 	  cppserver/tangoaccesscontrol/Makefile
@@ -517,11 +517,10 @@ AC_OUTPUT(Makefile
 	  scripts/Makefile
 	  scripts/tango
 	  scripts/tango_wca
-  	  doc/Makefile
+	  doc/Makefile
 	  doc/man/Makefile
 	  pogo/Makefile
 	  pogo/preferences/Makefile)
-
 
 AC_MSG_RESULT([
 Configuration ($PACKAGE):
@@ -552,5 +551,4 @@ build:
 
 Please check whether the configuration I detected matches what you
 would like to have.
-
 ])
