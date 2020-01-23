@@ -4,18 +4,18 @@
 #
 # written from scratch
 
-dnl Test for libmariadbclient and 
+dnl Test for libmariadbclient and
 dnl define MARIADBCLIENT_CFLAGS, MARIADBCLIENT_LDFLAGS and MARIADBCLIENT_LIBS
 dnl usage:
 dnl AM_PATH_MARIADBCLIENT(
-dnl 	[MINIMUM-VERSION, 
-dnl 	[ACTION-IF-FOUND [, 
+dnl 	[MINIMUM-VERSION,
+dnl 	[ACTION-IF-FOUND [,
 dnl 	ACTION-IF-NOT-FOUND ]]])
 dnl
 
 AC_DEFUN([AM_PATH_MARIADBCLIENT],
 [
-AC_ARG_WITH(mariadbclient-prefix, 
+AC_ARG_WITH(mariadbclient-prefix,
 		AC_HELP_STRING([--with-mariadbclient-prefix=PFX],[Prefix where mariadbclient is installed]),
             mariadbclient_prefix="$withval",
             mariadbclient_prefix="")
@@ -103,9 +103,9 @@ AC_ARG_WITH(mariadbclient-lib,AC_HELP_STRING([--with-mariadbclient-lib=LIB],[Dir
            LIBS="$ac_save_LIBS"
            ifelse([$2], ,:,[$2])
         ],[
-			echo "no"
-			echo "can't compile a simple app with mysql_connnect in it. bad."
-          mariadbclient_fail="yes"
+            echo "no"
+            echo "can't compile a simple app with mysql_connnect in it. bad."
+            mariadbclient_fail="yes"
         ])
 
     if test "x$mariadbclient_fail" != "x" ; then
@@ -121,8 +121,8 @@ AC_ARG_WITH(mariadbclient-lib,AC_HELP_STRING([--with-mariadbclient-lib=LIB],[Dir
             CFLAGS="$ac_save_CFLAGS"
             LDFLAGS="$ac_save_LDFLAGS"
             LIBS="$ac_save_LIBS"
-			MARIADBCLIENT_LIBS=""
-			MARIADBCLIENT_CFLAGS=""
+            MARIADBCLIENT_LIBS=""
+            MARIADBCLIENT_CFLAGS=""
             ifelse([$3], ,:,[$3])
     fi
 
