@@ -6,7 +6,7 @@
 
 # For extensive help on autoconf, automake, and libtool, please
 # consult the infofiles by running the `info' program, or by typing
-# M-x info in your favourite editor (emacs)   
+# M-x info in your favourite editor (emacs)
 
 # For information on how to build and use an autoconfiscated
 # project, please consult
@@ -19,7 +19,7 @@
 # AC_INIT initializes autoconf, The first argument is the
 # packagename, the second is the version used for the tar file,
 # the third is an email address for bug reports (shouldn't be necessary),
-# and the fourth argument is                
+# and the fourth argument is
 AC_INIT(Tango,@VERSION@,info@tango-controls.org,tango)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
@@ -33,7 +33,7 @@ AC_CANONICAL_HOST()
 
 # Lets the revision tag from cvs or rcs propagate into the
 # configure script, handy for debugging.
-AC_REVISION($Revision$)	
+AC_REVISION($Revision$)
 
 # AM_INIT_AUTOMAKE sets up automake which is used to generate
 # Makefile.in from Makefile.am
@@ -42,7 +42,7 @@ AM_SILENT_RULES([yes])
 
 # Tells automake to use `ac_config.h.tmp' to stash all the #defines
 # that result from a run of configure.
-# The name is .tmp since I must change the PACKAGE_ definitions because    
+# The name is .tmp since I must change the PACKAGE_ definitions because
 # of omniORBS installation of their version of this file.
 AC_CONFIG_HEADERS(ac_config.h.tmp)
 
@@ -64,13 +64,13 @@ AC_CONFIG_HEADERS(ac_config.h.tmp)
 #      `CURRENT'.
 
 VERSION_INFO=@VERSION_INFO@
-	
+
 # Checks for programs.
 
 AC_PROG_CXX
 AC_PROG_CXXCPP
 AC_PROG_CPP
-AC_PROG_AWK 
+AC_PROG_AWK
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
@@ -78,7 +78,7 @@ AC_PROG_MAKE_SET
 AM_PROG_AR
 
 # Check gcc release
-	 
+
  if test "$CXX" = "c++" -o "$CXX" = "g++"
  then
      gcc_AC_HAVE_GCC_VERSION(3,2,0)
@@ -99,10 +99,10 @@ AC_ARG_ENABLE([java],AC_HELP_STRING([--enable-java],[enable installation of Java
 AC_ARG_ENABLE([mariadb],AC_HELP_STRING([--enable-mariadb],[enable mariadb instead of mysql]),
 [enable_mariadb=yes],[enable_mariadb=no])
 
-AC_ARG_WITH([java], 
+AC_ARG_WITH([java],
 	AC_HELP_STRING([--with-java],[path to java interpreter]),
 	[JAVA=${with_java}], [with_java=yes])
-	
+
 if test "x$enable_java" = "xyes" ; then
    if test "x$with_java" = "xno" -o -z "$with_java"; then
 		with_java=
@@ -111,7 +111,7 @@ if test "x$enable_java" = "xyes" ; then
 		if test "x$with_java" = "xyes"; then
         	AC_PATH_PROG(JAVA,java,"notfound")
 		fi
-		if test "x$JAVA" != "xnotfound"; then 
+		if test "x$JAVA" != "xnotfound"; then
 			java_AC_HAVE_JAVA_VERSION($JAVA,1,8)
 			if test "x$ac_cv_java_version_1_8" = "xno"; then
 				AC_MSG_WARN([Not supported java release. Should be 1.8.x exactly. Java will be disabled for this build!])
@@ -132,23 +132,23 @@ fi
 # Define a conditional variable to enable or disable installation
 # of java applications. The variable is used in the Makefiles.
 #
- 
+
 AM_CONDITIONAL(TANGO_JAVA_ENABLED, test x"$enable_java" != x"no")
 
 # Check if doxygen is there
 
-AC_ARG_WITH([doxygen], 
+AC_ARG_WITH([doxygen],
 	AC_HELP_STRING([--with-doxygen],[path to doxygen utility]),
 	[DOXYGEN=${with_doxygen}],
 	[AC_PATH_PROG(DOXYGEN,doxygen)])
-	
+
 if test -z "$DOXYGEN"; then
 	DOXYGEN=NOT_INSTALLED
 fi
-      
+
 # Check if lyx is there
-	
-AC_ARG_WITH([lyx], 
+
+AC_ARG_WITH([lyx],
 	AC_HELP_STRING([--with-lyx],[path to LyX utility]),
 	[LYX=${with_lyx}],
 	[AC_PATH_PROG(LYX,lyx)])
@@ -160,8 +160,8 @@ fi
 AM_CONDITIONAL(TANGO_LYX_ENABLED, test x"$LYX" != x"false")
 
 # Check if fig2dev is there
-	
-AC_ARG_WITH([fig2dev], 
+
+AC_ARG_WITH([fig2dev],
 	AC_HELP_STRING([--with-fig2dev],[path to fig2dev utility]),
 	[FIG2DEV=${with_fig2dev}],
 	[AC_PATH_PROG(FIG2DEV,fig2dev)])
@@ -176,14 +176,14 @@ AM_CONDITIONAL(TANGO_DOC_ENABLED, test x"$LYX" != x"false" && test x"$FIG2DEV" !
 
 # Use libtool which facilitates the creation of shared libraries
 LT_INIT()
-	
+
 # check for the presence of zlib
 PKG_CHECK_MODULES([ZLIB], [zlib >= 1])
 
 # This macro checks for omniorb and sets various defines, please
 # consult config/RSSH_CHECK_OMNIORB for more details
-        
-RSSH_CHECK_OMNIORB  
+
+RSSH_CHECK_OMNIORB
 enable_lib=yes
 
 # ZMQ dependency
@@ -225,14 +225,14 @@ case $build_os in
 	AC_DEFINE(_REENTRANT,1,"Needed for threads on darwin")
 	CXXFLAGS="$CXXFLAGS -D_REENTRANT -D__darwin__"
 	DARWIN=yes
-esac	
+esac
 
 # condition used in the Makefile of the Tango library
 AM_CONDITIONAL(DARWIN_ENABLED,test x"$DARWIN" = x"yes" )
 
 
 # we want to include the omniORB stubs into the tango library
-CXXFLAGS="$CXXFLAGS -DOMNI_UNLOADABLE_STUBS"	   	
+CXXFLAGS="$CXXFLAGS -DOMNI_UNLOADABLE_STUBS"
 
 
 # checks for libdl
@@ -250,26 +250,26 @@ AC_CHECK_LIB(socket, getprotobyname)
 AC_HEADER_STDC
 AC_CHECK_HEADERS(fcntl.h strings.h sys/time.h unistd.h)
 
-# Some hack for testing if we have sstream or not.			 
+# Some hack for testing if we have sstream or not.
 use_sstream=yes;
-				 
+
 if test "x$GCC" = "xyes"; then
         case `$CC --version 2>/dev/null` in
         [[12]].*) use_sstream=no ;;
         *)        use_sstream=yes ;;
         esac
-fi 			 
-if test "x$use_sstream" = "xyes"; then 
+fi
+if test "x$use_sstream" = "xyes"; then
 AC_CXX_HAVE_SSTREAM
 fi
 # This needs to be worked on!!
 
-if test "x$use_sstream" = "xno"; then 
+if test "x$use_sstream" = "xno"; then
   AC_LANG_SAVE
   AC_LANG_CPLUSPLUS
   AC_CHECK_HEADER(strstream, AC_DEFINE(HAVE_STRSTREAM,1,""))
   AC_LANG_RESTORE
-fi  		
+fi
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_C_INLINE
@@ -301,15 +301,15 @@ AC_SUBST(TANGO_RC_FILE)
 # database. I havent found any other way to provide these arguments.
 AC_ARG_WITH(tango-db-name, AC_HELP_STRING([--with-tango-db-name],[the name of the tango database (default tango)]), TANGO_DB_NAME=${with_tango_db_name}, TANGO_DB_NAME=tango)
 
-# Here we define these constants so that they're reachable from c programs  
+# Here we define these constants so that they're reachable from c programs
 AC_DEFINE_UNQUOTED(TANGO_DB_NAME, "$TANGO_DB_NAME", The tango database name)
-			
+
 # Here we propagate the constants into the makefiles.
-AC_SUBST(TANGO_DB_NAME)			
+AC_SUBST(TANGO_DB_NAME)
 
 if test "x$enable_mariadb" != "xyes" ; then
 	DB_NAME=MYSQL
-	AS_IF([test "x$enable_dbserver" = "xyes"], [ 
+	AS_IF([test "x$enable_dbserver" = "xyes"], [
 
 	# We need libmysqlclient to compile
 	# finds it for us. Abort if no mysqlclientlibs are found
@@ -324,10 +324,10 @@ if test "x$enable_mariadb" != "xyes" ; then
 		DB_LDFLAGS=${MYSQLCLIENT_LDFLAGS}
 		DB_LDLIBS=${MYSQLCLIENT_LIBS}
 		DB_CFLAGS=${MYSQLCLIENT_CFLAGS}
-	
+
 		AC_PATH_PROG(MYSQL, mysql, nocommand)
 		MYSQL_VERSION=not_found
-	
+
 		if test "x$MYSQL" != "xnocommand"; then
 			mysql_AC_HAVE_MYSQL_VERSION($MYSQL,5,5)
 			if test "x$ac_cv_mysql_version_5_5" = "xno"; then
@@ -340,18 +340,18 @@ if test "x$enable_mariadb" != "xyes" ; then
 		else
 			enable_db_schema_create=no
 		fi
- 	
+
 
 		# check for a database schema update
-	
+
 		AS_IF([test "x$enable_db_schema_create" = "xyes"], [
-	
+
 			AC_ARG_ENABLE([dbcreate],AC_HELP_STRING([--enable-dbcreate],[enable an creation of the Tango database schema]),
 		             		[],[enable_dbcreate=yes])
 			enable_db_schema_create=$enable_dbcreate
-			 			  
-			AS_IF([test "x$enable_db_schema_create" = "xyes"], [  
-	
+
+			AS_IF([test "x$enable_db_schema_create" = "xyes"], [
+
 				AC_PROG_MYSQL
 
 			])
@@ -362,7 +362,7 @@ if test "x$enable_mariadb" != "xyes" ; then
 	fi
 else
 	DB_NAME=MARIADB
-	AS_IF([test "x$enable_dbserver" = "xyes"], [ 
+	AS_IF([test "x$enable_dbserver" = "xyes"], [
 
 		# We need libmysqlclient to compile
 		# finds it for us. Abort if no mysqlclientlibs are found
@@ -377,10 +377,10 @@ else
 		DB_LDFLAGS=${MARIADBCLIENT_LDFLAGS}
 		DB_LDLIBS=${MARIADBCLIENT_LIBS}
 		DB_CFLAGS=${MARIADBCLIENT_CFLAGS}
-	
+
 		AC_PATH_PROG(MYSQL, mysql, nocommand)
 		MARIADB_VERSION=not_found
-	
+
 		if test "x$MYSQL" != "xnocommand"; then
 			mariadb_AC_HAVE_MARIADB_VERSION($MYSQL,10,0)
 			if test "x$ac_cv_mariadb_version_10_0" = "xno"; then
@@ -393,18 +393,18 @@ else
 		else
 			enable_db_schema_create=no
 		fi
-	 	
+
 
 		# check for a database schema update
 
 		AS_IF([test "x$enable_db_schema_create" = "xyes"], [
-	
+
 			AC_ARG_ENABLE([dbcreate],AC_HELP_STRING([--enable-dbcreate],[enable an creation of the Tango database schema]),
 		             		[],[enable_dbcreate=yes])
 			enable_db_schema_create=$enable_dbcreate
-			 			  
-			AS_IF([test "x$enable_db_schema_create" = "xyes"], [  
-	
+
+			AS_IF([test "x$enable_db_schema_create" = "xyes"], [
+
 				AC_PROG_MYSQL
 
 			])
@@ -444,16 +444,16 @@ AC_SUBST(JPEG_LIB_CXXFLAGS)
 AC_SUBST(JPEG_MMX_LIB_CXXFLAGS)
 
 # Define a conditional variables to enable or disable installation
-# of the database server and the database schema creation. 
+# of the database server and the database schema creation.
 # The variables are used in the Makefiles.
 #
 
 AM_CONDITIONAL(TANGO_DB_SERVER_ENABLED, test x"$enable_dbserver" = x"yes")
 AM_CONDITIONAL(TANGO_DB_CREATE_ENABLED, test x"$enable_db_schema_create" = x"yes")
-	
-	
-						   	
-AC_SUBST(ac_aux_dir)	
+
+
+
+AC_SUBST(ac_aux_dir)
 AC_SUBST(VERSION_INFO)
 
 DATADIR=`eval echo $datadir`
@@ -497,7 +497,7 @@ AC_OUTPUT(Makefile
 	  lib/java/Makefile
 	  cppserver/Makefile
 	  cppserver/database/Makefile
-	  cppserver/database/create_db.sql	
+	  cppserver/database/create_db.sql
 	  cppserver/database/create_db.sh
 	  cppserver/database/stored_proc.sql
 	  cppserver/database/create_db_tables.sql
@@ -530,26 +530,26 @@ Configuration ($PACKAGE):
 	Version:                ${VERSION}
 	Compiler:               ${ac_ct_CC},${ac_ct_CXX}
 
-	OMNIORB PATH:           ${OMNI_ROOT} 
+	OMNIORB PATH:           ${OMNI_ROOT}
 	OMNIORB VERSION:        ${OMNI_VERSION}
 
 	ZMQ PATH:               ${ZMQ_ROOT}
 	ZMQ VERSION:            ${ZMQ_VERSION}
-	
+
 	JAVA PATH:              ${with_java}
 	JAVA VERSION:           ${JAVA_VERSION}
-		
+
 	${DB_NAME} CLIENT LIB:  ${DB_LDFLAGS} ${DB_LDLIBS}
 	${DB_NAME} VERSION:     ${DB_VERSION}
 	${DB_NAME} CONNECTION:  ${MYSQL_CONNECTION}
-		
+
 build:
 	libraries:              ${enable_lib}
 	java application:       ${enable_java}
 	access control server:	${enable_dbserver}
 	database server:        ${enable_dbserver}
 	database schema create: ${enable_db_schema_create}
-	
+
 Please check whether the configuration I detected matches what you
 would like to have.
 
