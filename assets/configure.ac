@@ -358,7 +358,7 @@ if test "x$enable_mariadb" != "xyes" ; then
 		])
 	])
 	if test "x$MYSQL_VERSION" != "xnot_found"; then
-		DB_VERSION=${MYSQL_VERSION}
+		DB_SERVER_VERSION=${MYSQL_VERSION}
 	fi
 else
 	DB_NAME=MARIADB
@@ -411,7 +411,7 @@ else
 		])
 	])
 	if test "x$MARIADB_VERSION" != "xnot_found"; then
-		DB_VERSION=${MARIADB_VERSION}
+		DB_SERVER_VERSION=${MARIADB_VERSION}
 	fi
 fi
 
@@ -540,7 +540,8 @@ Configuration ($PACKAGE):
 
 	Database ${DB_NAME}
 	  CLIENT LIB:              ${DB_LDFLAGS} ${DB_LDLIBS}
-	  VERSION:                  ${DB_VERSION}
+	  CLIENT VERSION:           ${DB_CLIENT_VERSION}
+	  VERSION:                  ${DB_SERVER_VERSION}
 	  CONNECTION:               ${MYSQL_CONNECTION}
 
 build:
