@@ -12,7 +12,7 @@ before_script:
       libmysqlclient-dev
       ant
   - sudo apt install -y python python-pip
-  - pip install --user Sphinx~=1.0 ipython~=5.0
+  - pip install -r https://raw.githubusercontent.com/tango-controls/tango-doc/9.3.4/requirements.txt
 script:
   - ant build package
 
