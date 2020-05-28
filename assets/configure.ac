@@ -77,6 +77,8 @@ AC_PROG_MAKE_SET
 
 AM_PROG_AR
 
+AC_PROG_SED
+
 # Check gcc release
 
  if test "$CXX" = "c++" -o "$CXX" = "g++"
