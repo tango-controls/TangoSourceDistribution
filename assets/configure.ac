@@ -77,6 +77,13 @@ AC_PROG_MAKE_SET
 
 AM_PROG_AR
 
+AC_PROG_SED
+
+SED_AC_WORKING($SED)
+if test "x$ac_cv_sed" = "xno"; then
+  AC_MSG_ERROR([Your sed is not working, please install GNU sed.])
+fi
+
 # Check gcc release
 
  if test "$CXX" = "c++" -o "$CXX" = "g++"
