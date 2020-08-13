@@ -5,23 +5,6 @@
 
 TANGO_DB_PORT=10000
 
-#
-# Internal functions
-#
-checkmysql() {
-        NB=`$PS -ef | $GREP mysqld| $GREP -v $GREP | wc -l`
-	export NB
-
-	if [ $NB = 0 ] 
-	then
-		return=1
-		export return
-	else
-		return=0
-		export return
-	fi
-}
-
 findproc() {
 	pid=`$PS -e | $GREP "$1" | $SED -e 's/^  *//' -e 's/ .*//'`
 }
@@ -101,25 +84,6 @@ case "$1" in
 
     ${ECHO} "Starting TANGO database"
 
-	# first check the MySQL  server
-	checkmysql
-	export return
-	if [ ${return} = 1 ]
-	then
-		sleep 3
-		checkmysql
-
-		if [ ${return} = 1 ]
-		then
-			# MySQL is not there, we can't start Tango db
-			${ECHO} "PLEASE Start MySQL server\n"
-			'date' >> ${TANGO_LOG}
-			${ECHO} "Failed to start Tango database server" >> ${TANGO_LOG}
-			${ECHO} "MySQL is not running !!!" >> ${TANGO_LOG}
-	        	${ECHO} "$rc_failed"
-			exit 1
-		fi
-	fi
 	# Start the database device server if needed
 	findproc DataBase
 	if [ "$pid" != "" ];
@@ -161,13 +125,6 @@ case "$1" in
         $0 stop  && sleep 3 &&  $0 start 
     ;;
     status)
-	checkmysql
-	if [ ${return} = 0 ]
-	then
-		${ECHO} "MySQL OK"
-	else
-		${ECHO} "MySQL : No process"
-	fi
 
 	findproc DataBase
 	if [ "$pid" != "" ];
