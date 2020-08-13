@@ -1,5 +1,7 @@
 #!@SHELL@
 #
+# vim: set filetype=sh :
+#
 # script to start TANGO database 
 #
 
