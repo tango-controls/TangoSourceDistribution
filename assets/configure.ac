@@ -184,8 +184,12 @@ AM_CONDITIONAL(TANGO_DOC_ENABLED, test x"$LYX" != x"false" && test x"$FIG2DEV" !
 # Use libtool which facilitates the creation of shared libraries
 LT_INIT()
 
-# check for the presence of zlib
-PKG_CHECK_MODULES([ZLIB], [zlib >= 1])
+AC_ARG_WITH([zlib], [AS_HELP_STRING([--with-zlib],[use zlib compression])],
+            [enable_zlib=$withval], [enable_zlib=yes])
+
+AS_IF([test "x$enable_zlib" != xno], [
+  PKG_CHECK_MODULES([ZLIB], [zlib >= 1])
+])
 
 # This macro checks for omniorb and sets various defines, please
 # consult config/RSSH_CHECK_OMNIORB for more details

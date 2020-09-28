@@ -178,7 +178,7 @@ if test $pkg_failed = yes; then
         _PKG_SHORT_ERRORS_SUPPORTED
         if test $_pkg_short_errors_supported = yes; then
 	        $1[]_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "$2" 2>&1`
-        else 
+        else
 	        $1[]_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "$2" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
@@ -1473,7 +1473,6 @@ m4_include([m4/ac_path_mariadb.m4])
 m4_include([m4/ac_path_mysqlclient.m4])
 m4_include([m4/ac_prog_mysql.m4])
 m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
-m4_include([m4/check_zlib.m4])
 m4_include([m4/gcc_release.m4])
 m4_include([m4/java_release.m4])
 m4_include([m4/libtool.m4])
