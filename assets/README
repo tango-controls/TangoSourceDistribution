@@ -314,6 +314,11 @@ the "--disable-java" configure option to build Tango.
 When java was not found, disabled, or found with an unsufficient version, 
 the installation of the java applications is disabled.
 
+For use with HiDPI, also called Retina or 4k/5k/6k displays, the JAVA user
+interfaces can be too small. One can override the window scaling by setting the
+environment variable `GDK_SCALE` to an integer larger than 1, e.g. on Linux `export
+GDK_SCALE=2`. See also https://developer.gnome.org/gtk3/stable/gtk-x11.html.
+
 doxygen
 -------
 Doxygen is a documentation generator from C++ source files. It is used by the
