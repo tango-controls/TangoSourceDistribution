@@ -1,0 +1,85 @@
+name: Build
+
+on: [pull_request, push]
+
+env:
+  ARTIFACT_PUBLISHED_NAME: tango-tsd
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v1
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Fetching deb packages
+        run: |
+          sudo apt install -y  \
+            build-essential    \
+            libcos4-dev        \
+            libmysqlclient-dev \
+            libomniorb4-dev    \
+            libomnithread4-dev \
+            libzmq3-dev        \
+            omniidl
+
+      - name: Fetching pip packages
+        run: |
+          pip install -r https://raw.githubusercontent.com/tango-controls/tango-doc/9.3.4/requirements.txt
+
+      - name: Building
+        run: |
+          ant build package
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_PUBLISHED_NAME }}
+          path: build/tango-*.tar.gz
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Downloading artifact
+        uses: actions/download-artifact@v2
+        with:
+          path: build
+
+      - name: Gathering release name
+        working-directory: build
+        run: echo "ARTIFACT_NAME=$(ls *)" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: FIXME
+          draft: true
+          prerelease: true
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          # see https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./build/${{ env.ARTIFACT_PUBLISHED_NAME }}/${{ env.ARTIFACT_NAME }}
+          asset_name: ${{ env.ARTIFACT_NAME }}
+          asset_content_type: application/gzip
