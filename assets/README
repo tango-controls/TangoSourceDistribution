@@ -354,6 +354,12 @@ your my.cnf (database configuration file) or use the configure options
                --with-mysql-admin-passwd
                --with-mysql-ho
 to specify the access to the database.
+
+Systemd integration
+------------------
+
+For integrating tango with systemd see the documentation at
+https://tango-controls.readthedocs.io/en/latest/tutorials-and-howtos/how-tos/how-to-integrate-with-systemd.html.
 	
 
 5 - COMPILING
