@@ -5,8 +5,8 @@
     <property name="builddir" value="${basedir}/build"/>
     <property name="workdir" value="${builddir}/tmp"/>
     <property name="distrdir" value="${builddir}/distr"/>
-    <condition property="build" value="${env.TRAVIS_BRANCH}" else="dev">
-        <isset property="env.TRAVIS_BRANCH" />
+    <condition property="build" value="${env.CI_COMMIT_TAG}" else="dev">
+        <isset property="env.CI_COMMIT_TAG" />
     </condition>
 
     <target name="clean">

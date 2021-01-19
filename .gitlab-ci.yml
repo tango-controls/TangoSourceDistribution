@@ -1,0 +1,30 @@
+# See https://docs.gitlab.com/ce/ci/yaml/README.html for the documentation
+
+package:
+  image: debian:10
+  stage: build
+  before_script:
+    - apt-get update
+    - >
+        apt-get install --yes
+        ant
+        automake
+        build-essential
+        cmake
+        git
+        libcos4-dev
+        libmariadb-dev
+        libomniorb4-dev
+        libomnithread4-dev
+        libzmq3-dev
+        omniidl
+        python2
+        python3-pip
+    - pip3 install -r https://raw.githubusercontent.com/tango-controls/tango-doc/9.3.4/requirements.txt
+    - git config --global advice.detachedHead false
+  script:
+    - ant build package
+  artifacts:
+    when: on_success
+    paths:
+      - build/tango-*.tar.gz
